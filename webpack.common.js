@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin')
 module.exports = {
   entry: {
     app: './src/index.js',
+    vendor: ['react', 'react-dom']
   },
   plugins: [
     new CleanWebpackPlugin(['dist']),
@@ -31,5 +32,18 @@ module.exports = {
         exclude: /node_modules/
       },
     ]
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: 'initial',
+          name: 'vendor',
+          test: 'vendor',
+          enforce: true
+        }
+      }
+    },
+    runtimeChunk: true
   }
 }
