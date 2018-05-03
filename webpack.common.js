@@ -35,12 +35,24 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
       cacheGroups: {
-        vendor: {
+        vendors: {
           chunks: 'initial',
           name: 'vendor',
           test: 'vendor',
           enforce: true
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
     },
