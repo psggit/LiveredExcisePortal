@@ -1,6 +1,6 @@
 // import _ from 'lodash'
 // import printMe from './print'
-import './style.css'
+import './style.scss'
 import { cube } from './math.js'
 // import imgSrc from './../images/bg.jpg'
 
