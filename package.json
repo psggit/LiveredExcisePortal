@@ -1,7 +1,7 @@
 {
   "name": "spa-react-boilerplate",
   "version": "1.0.0",
-  "description": "",
+  "description": "Minimal webpack boilerplate for kickstarting SPAs",
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +11,7 @@
     "dev-server": "NODE_ENV=production node server.js",
     "start": "NODE_ENV=production node server.js"
   },
-  "author": "",
+  "author": "Madhur Garg (madhur@hipbar.com)",
   "license": "ISC",
   "devDependencies": {
     "babel-loader": "^7.1.4",
