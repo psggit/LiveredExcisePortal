@@ -1,0 +1,33 @@
+{
+  "name": "spa-react-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "watch": "webpack --watch",
+    "start:dev": "NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+    "dev-server": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-dev-server": "^3.1.3",
+    "webpack-hot-middleware": "^2.22.1",
+    "webpack-merge": "^4.1.2"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "lodash": "^4.17.10"
+  }
+}
