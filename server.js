@@ -9,7 +9,7 @@ if (env === 'production') {
   app.get('*.js', (req, res, next) => {
     const vendorUrlRegex = /vendor.*.js/
     if (vendorUrlRegex.test(req.url)) {
-      res.setHeader('Cache-Control', 'public, max-age=31536000')
+      res.setHeader('Cache-Control', 'private, max-age=31536000')
     }
     next()
   })
