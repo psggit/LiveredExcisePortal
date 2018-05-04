@@ -11,4 +11,4 @@ Make sure you've got NodeJS and NPM installed on your machine. Recommended versi
    - Production environment: `npm run build`
 1. Start
    - Development Environment: `npm run start:dev`
-   - Production EnvironementL: `npm run start` (dont forget to build) :tada:
+   - Production EnvironementL: `npm run start`:tada:
