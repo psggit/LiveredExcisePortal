@@ -41,6 +41,8 @@
     "express": "^4.16.3",
     "lodash": "^4.17.10",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2"
   }
 }
