@@ -6,9 +6,12 @@ import {
   Link
 } from 'react-router-dom'
 
-import makeAsyncComponent from './asyncComponent'
-const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
-const Dashboard = makeAsyncComponent(() => import("./dashboard").then(module => module.default), { name: "Page 1" })
+import Login from './login'
+import Dashboard from './dashboard'
+
+// import makeAsyncComponent from './makeAsyncComponent'
+// const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
+// const Dashboard = makeAsyncComponent(() => import("./dashboard").then(module => module.default), { name: "Page 1" })
 
 class App extends React.Component {
   render() {
