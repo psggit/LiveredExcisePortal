@@ -11,7 +11,7 @@
     "dev-server": "NODE_ENV=production node server.js",
     "start": "NODE_ENV=production node server.js"
   },
-  "author": "Madhur Garg (madhur@hipbar.com)",
+  "author": "Madhur Garg <madhur@hipbar.com>",
   "license": "ISC",
   "devDependencies": {
     "babel-loader": "^7.1.4",
