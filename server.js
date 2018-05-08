@@ -8,6 +8,7 @@ const env = process.env.NODE_ENV
 if (env === 'production') {
   app.get('*.js', (req, res, next) => {
     const vendorUrlRegex = /vendor.*.js/
+    console.log(req.url)
     if (vendorUrlRegex.test(req.url)) {
       res.setHeader('Cache-Control', 'private, max-age=31536000')
     }
