@@ -41,10 +41,11 @@ const getAttributes = (props) => {
 
 const Button = ({ children, ...props }) => {
   console.log(children, props)
-  return <Button.Element {...props}>{children}</Button.Element>
+  // return <button>{children}</button>
+  return <ButtonElement {...props}>{children}</ButtonElement>
 }
 
-Button.Element = styled.button`
+const ButtonElement = styled.button`
   cursor: pointer;
   border-radius: 2px;
   text-transform: uppercase;
@@ -58,6 +59,9 @@ Button.Element = styled.button`
   &:hover {
     color: ${props => getAttributes(props).hoverColor};
     background: ${props => getAttributes(props).hoverBackground};
+  }
+  &:focus {
+    outline: unset;
   }
 `
 

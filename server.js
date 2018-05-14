@@ -1,14 +1,16 @@
-const express = require('express')
-const path = require('path')
+import express from 'express'
+import path from 'path'
+import React from 'react'
+import { renderToNodeStream } from 'react-dom/server'
+import { ServerStyleSheet } from 'styled-components'
+import App from './src/react-apps/login'
 
 const app = express()
 
 const env = process.env.NODE_ENV
-
 if (env === 'production') {
   app.get('*.js', (req, res, next) => {
     const vendorUrlRegex = /vendor.*.js/
-    console.log(req.url)
     if (vendorUrlRegex.test(req.url)) {
       res.setHeader('Cache-Control', 'private, max-age=31536000')
     }
@@ -19,11 +21,15 @@ if (env === 'production') {
 app.use(express.static(path.join(__dirname, 'dist')))
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
+  const sheet = new ServerStyleSheet()
+  const jsx = sheet.collectStyles(<App />)
+  const stream = sheet.interleaveWithNodeStream(renderToNodeStream(jsx))
+  stream.pipe(res).on('end', () => res.end())
+  // res.sendFile(path.join(__dirname, 'dist/index.html'), (err) => {
+  //   if (err) {
+  //     res.status(500).send(err)
+  //   }
+  // })
 })
 app.listen(8080)
 console.log('Server is running on port 8080')
