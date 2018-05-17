@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './../../components/button'
 import ModalBox from './../../components/modal'
-import './login.css'
+// import './login.css'
 
 const Login = () => (
   <div>

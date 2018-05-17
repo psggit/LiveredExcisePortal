@@ -9,6 +9,12 @@ const app = express()
 
 const env = process.env.NODE_ENV
 if (env === 'production') {
+  app.get('*.css', (req, res, next) => {
+    req.url += '.gz'
+    res.set('Content-Encoding', 'gzip')
+    next()
+  })
+
   app.get('*.js', (req, res, next) => {
     const vendorUrlRegex = /vendor.*.js/
     req.url += '.gz'
