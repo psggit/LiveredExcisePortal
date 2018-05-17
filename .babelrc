@@ -1,4 +1,4 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": ["syntax-dynamic-import", "syntax-object-rest-spread"]
+  "plugins": ["syntax-dynamic-import", "syntax-object-rest-spread",  ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }]]
 }
