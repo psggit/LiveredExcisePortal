@@ -3,7 +3,6 @@
   "plugins": [
     "syntax-dynamic-import",
     "syntax-object-rest-spread",
-    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
     "transform-class-properties"
   ]
 }
