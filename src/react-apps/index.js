@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import Login from './login'
-import Dashboard from './dashboard'
+import Home from './home'
 
 // import makeAsyncComponent from './makeAsyncComponent'
 // const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
@@ -18,13 +18,8 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <ul>
-            <li><Link to="/">Login</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-          </ul>
-          <hr />
           <Route exact path="/" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
+          <Route path="/home" component={Home} />
         </div>
       </Router>
     )
