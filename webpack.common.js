@@ -28,6 +28,11 @@ module.exports = {
       /^@sass/,
       path.resolve('./src/sass')
     ),
+
+    new AbsolutePathProviderPlugin(
+      /^@components/,
+      path.resolve('./src/components')
+    ),
   ],
   output: {
     filename: '[name].[chunkhash].js',
