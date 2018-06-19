@@ -4,10 +4,10 @@ import styled from 'styled-components'
 const appearances = {
   default: {
     color: '#333',
-    background: '#fff',
-    border: '#333',
-    hoverColor: '#fff',
-    hoverBackground: '#333'
+    background: '#eaeaea',
+    border: '#eaeaea',
+    hoverColor: '#333',
+    hoverBackground: '#ddd'
   },
 
   primary: {
@@ -40,16 +40,16 @@ const getAttributes = (props) => {
 }
 
 const Button = ({ children, ...props }) => {
-  console.log(children, props)
-  // return <button>{children}</button>
-  return <ButtonElement {...props}>{children}</ButtonElement>
+  return <Button.Element {...props}>{children}</Button.Element>
 }
 
-const ButtonElement = styled.button`
+Button.Element = styled.button`
   cursor: pointer;
   border-radius: 2px;
   text-transform: uppercase;
   border: 1px solid;
+  letter-spacing: 1px;
+  font-weight: bold;
   border-color: ${props => getAttributes(props).border};
   width: ${props => getAttributes(props).width};
   height: ${props => getAttributes(props).height};

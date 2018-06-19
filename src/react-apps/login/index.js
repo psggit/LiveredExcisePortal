@@ -1,23 +1,34 @@
 import React from 'react'
 import Button from './../../components/button'
-import ModalBox from './../../components/modal'
-// import './login.css'
+import Dialog from './../../components/modal'
 
 class Login extends React.Component {
   state = {
-    isToggleOn: false
+    shouldMountDialog: false
   }
-  handleClick = (e) => {
-    this.setState(prevState => ({
-      isToggleOn: !prevState.isToggleOn
-    }));
+
+  mountDialog = () => {
+    this.setState({ shouldMountDialog: true })
+  }
+
+  unmountDialog = () => {
+    this.setState({ shouldMountDialog: false })
   }
 
   render() {
+    const { shouldMountDialog } = this.state
     return (
-      <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-      </button>
+      <div>
+        <h3>Login</h3>
+        <Button onClick={this.mountDialog} appearance="primary">add</Button>
+        <Dialog open={shouldMountDialog} onClose={this.unmountDialog} title="Modal title">
+          <p>
+            Good design is good business. Good design is good business.
+            Good design is good business. Good design is good business.
+            Good design is good business. Good design is good business.
+          </p>
+        </Dialog>
+      </div>
     )
   }
 }

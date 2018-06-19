@@ -8,7 +8,6 @@ import {
 
 import Login from './login'
 import Dashboard from './dashboard'
-import 'antd/dist/antd.css'
 
 // import makeAsyncComponent from './makeAsyncComponent'
 // const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
