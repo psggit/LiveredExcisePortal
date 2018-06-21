@@ -3,7 +3,6 @@ import './navbar.scss'
 
 class Navbar extends React.Component {
   checkActiveClass(value) {
-    console.log(value, this.props.currentRoute);
     if (this.props.currentRoute === value) {
       return 'active'
     }

@@ -17,22 +17,10 @@ class App extends React.Component {
     super()
     this.state = {
       currentRoute: location.pathname.split('/')[2] || 'live-orders',
-      isFilters: true,
-      filterTypes: []
+      isFilters: true
     }
 
     this.mountFilters = this.mountFilters.bind(this)
-  }
-
-  setFilterTypes(route) {
-    const filterTypes = []
-    if (route === 'live-orders') {
-      filterTypes.push('status')
-    } else {
-      filterTypes.push('status', 'date')
-    }
-
-    this.setState({ filterTypes })
   }
 
   mountFilters(route) {
@@ -40,8 +28,6 @@ class App extends React.Component {
       this.setState({ isFilters: false })
     } else {
       this.setState({ isFilters: true })
-      // set types of filter here
-      this.setFilterTypes(route)
     }
   }
 
@@ -73,7 +59,7 @@ class App extends React.Component {
         <div style={{ marginTop: '62px' }}>
           {
             this.state.isFilters &&
-            <Filter currentRoute={this.state.currentRoute} filterTypes={this.state.filterTypes} />
+            <Filter currentRoute={this.state.currentRoute} />
           }
           <div style={{ marginTop: '20px' }}>
             <Router history={history}>

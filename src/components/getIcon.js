@@ -17,8 +17,8 @@ function getIcon(name) {
     case 'calendar':
       return (
         <svg width="15px" height="16px" viewBox="0 0 15 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-            <g id="Excise-DB---V0.2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="01-Excise---Order-History-V3---Filter-Expanded" transform="translate(-253.000000, -181.000000)" fill="#6B7891" fill-rule="nonzero">
+            <g id="Excise-DB---V0.2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                <g id="01-Excise---Order-History-V3---Filter-Expanded" transform="translate(-253.000000, -181.000000)" fill="#6B7891" fillRule="nonzero">
                     <g id="Filter-Box" transform="translate(21.000000, 82.000000)">
                         <g id="Filter-Fields" transform="translate(15.000000, 54.000000)">
                             <g id="Text-Box" transform="translate(0.000000, 11.000000)">
