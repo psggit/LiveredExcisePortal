@@ -1,0 +1,58 @@
+table {
+  font-family: 'Open Sans', sans-serif;
+  border: 1px solid #D6DAE3;
+  border-radius: 6px;
+  overflow: hidden;
+  border-collapse: collapse;
+  width: 100%;
+  thead {
+    background-color: #EEF1F7;
+    font-size: 12px;
+    td {
+      color: #49587D;
+      text-transform: uppercase;
+    }
+  }
+
+  tbody {
+    font-size: 12px;
+    background-color: #fff;
+    td {
+      color: #6B7891;
+    }
+  }
+
+  td {
+    padding: 12px;
+    border: 1px solid #D6DAE3;
+  }
+}
+
+input, select {
+  height: 33px;
+  width: 247px;
+  border: 1px solid #CCD0D8;
+  border-radius: 4px;
+  background-color: #FCFDFE;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  color: #465880;
+
+  &:focus {
+    outline: 0;
+    transition: all 0.2s ease;
+    border-color: #49587D;
+  }
+}
+
+input {
+  padding: 0 15px;
+}
+
+label {
+  display: block;
+  font-weight: 300;
+  color: #6B7891;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
