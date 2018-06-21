@@ -7,6 +7,7 @@
   top: 0;
   left: 0;
 	height: 62px;
+  z-index: 1;
 	width: 100%;
   font-size: 0;
   padding: 15px 20px;
@@ -33,14 +34,17 @@
       cursor: pointer;
       height: 32px;
       line-height: 32px;
-      font-size: 12px;
+      font-size: 14px;
+      // font-weight: 300;
       padding: 0 30px;
       border-radius: 32px;
       color: #fff;
-      transition: all 0.2s ease;
+      transition: background 0.2s ease;
       &.active, &:hover {
         color: #364760;
         background-color: #fff;
+        // font-weight: 400;
+        transition: background 0.2s ease;
       }
       text-decoration: none;
     }
