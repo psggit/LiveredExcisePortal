@@ -33,6 +33,11 @@ module.exports = {
       /^@components/,
       path.resolve('./src/components')
     ),
+
+    new AbsolutePathProviderPlugin(
+      /^@utils/,
+      path.resolve('./src/utils')
+    )
   ],
   output: {
     filename: '[name].[chunkhash].js',
