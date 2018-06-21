@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import React from 'react'
 import { render } from 'react-dom'
 import {
@@ -7,7 +8,7 @@ import {
 } from 'react-router-dom'
 
 import Login from './login'
-import Home from './home'
+import Home from './home/container/Root'
 
 // import makeAsyncComponent from './makeAsyncComponent'
 // const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
