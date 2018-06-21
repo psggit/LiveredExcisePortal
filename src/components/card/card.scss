@@ -1,0 +1,30 @@
+.card {
+  border: 1px solid #D0D6E2;
+  border-radius: 6px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.card__header {
+  height: 40px;
+  border-radius: 6px 6px 0 0;
+  border-bottom: 1px solid #D0D6E2;
+  background-color: #EEF1F7;
+  padding: 0 15px;
+  p {
+    color: #49587D;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 40px;
+    letter-spacing: 1px;
+  }
+}
+
+.card__body {
+  background-color: #fff;
+  border-radius: 0 0 6px 6px;
+  padding: 20px;
+  p {
+    color: #49587D;
+    font-size: 12px;
+  }
+}
