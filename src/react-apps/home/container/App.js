@@ -3,10 +3,10 @@ import createHistory from 'history/createBrowserHistory'
 import { Route, Switch } from 'react-router-dom'
 import { Router } from 'react-router'
 import Navbar from '@components/navbar'
-import Filter from '@components/filter'
 import { menuItemsMap, menuItems } from './../constants/navbar-items'
 import LiveOrdersList from './../components/live-orders-list'
 import HistoryOrdersList from './../components/history-orders-list'
+import WithFilters from './../components/with-filters'
 import '@sass/app.scss'
 
 const history = createHistory()
@@ -55,34 +55,43 @@ class App extends React.Component {
           menuItemsMap={menuItemsMap}
           currentRoute={this.state.currentRoute}
         />
+        <Router history={history}>
+          <Switch>
+            <Route
+              exact
+              path='/home/live-orders'
+              render={
+                props => (
+                  <WithFilters currentRoute={this.state.currentRoute}>
+                    <LiveOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
+                  </WithFilters>
+                )
+              }
+            />
 
-        <div style={{ marginTop: '62px' }}>
-          {
-            this.state.isFilters &&
-            <Filter currentRoute={this.state.currentRoute} />
-          }
-          <div style={{ marginTop: '20px' }}>
-            <Router history={history}>
-              <Switch>
-                <Route
-                  exact
-                  path='/home/live-orders'
-                  render={
-                    props => <LiveOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
-                  }
-                />
+            <Route
+              exact
+              path='/home/history-orders'
+              render={
+                props => (
+                  <WithFilters currentRoute={this.state.currentRoute}>
+                    <HistoryOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
+                  </WithFilters>
+                )
+              }
+            />
 
-                <Route
-                  exact
-                  path='/home/history-orders'
-                  render={
-                    props => <HistoryOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
-                  }
-                />
-              </Switch>
-            </Router>
-          </div>
-        </div>
+            <Route
+              exact
+              path='/home/user-management'
+              render={
+                props => (
+                  <HistoryOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
+                )
+              }
+            />
+          </Switch>
+        </Router>
       </div>
     )
   }
