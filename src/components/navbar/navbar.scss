@@ -55,10 +55,16 @@
   }
 
   .logout {
+    cursor: pointer;
     text-align: right;
     width: 25%;
+    font-size: 14px;
+    span:first-child {
+      vertical-align: middle;
+    }
     span:last-child {
       color: #fff;
+      margin-left: 8px;
     }
   }
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import getIcon from './../getIcon'
 import './navbar.scss'
 
 class Navbar extends React.Component {
@@ -40,7 +41,7 @@ class Navbar extends React.Component {
         </div>
 
         <div className="col logout">
-          <span></span>
+          <span>{ getIcon('logout') }</span>
           <span>Logout</span>
         </div>
       </div>
