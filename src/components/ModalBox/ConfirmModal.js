@@ -4,6 +4,7 @@ import ModalFooter from './ModalFooter'
 import ModalBody from './ModalBody'
 import ModalBox from './'
 import { unMountModal } from './utils'
+import Button from '@components/Button/index.js'
 
 export default function confirmModal (data) {
   return class confirmModal extends React.Component {
@@ -14,10 +15,10 @@ export default function confirmModal (data) {
       return (
         <ModalBox>
           <ModalHeader>{ data.heading }</ModalHeader>
-            <ModalBody>{ data.confirmMessage }</ModalBody>
+            <ModalBody><p>{ data.confirmMessage }</p></ModalBody>
           <ModalFooter>
-            <button className='btn btn-secondary' onClick={unMountModal}>Cancel</button>
-            <button className='btn btn-primary' onClick={data.handleConfirm}>Confirm</button>
+            <Button primary onClick={data.handleConfirm}>{ data.cancelTitle || 'Confirm' }</Button>
+            <Button secondary onClick={unMountModal}>Cancel</Button>
           </ModalFooter>
         </ModalBox>
       )
