@@ -1,26 +1,51 @@
 import * as ActionTypes from './../constants/actions'
 
 const initialState = {
-  loadingLiveOrders: true,
-  loadingHistoryOrders: true,
-  liveOrdersData: [],
-  historyOrdersData: []
+  loadingInProgressOTTP: true,
+  loadingHistoryOTTP: true,
+  loadingOTTPDetail: true,
+  loadingSquadMembers: true,
+  inProgressOTTP: [],
+  historyOTTPData: [],
+  squadMembersData: [],
+  OTTPDetailData: {}
 }
 
 const actionsMap = {
-  [ActionTypes.SUCCESS_FETCH_LIVE_ORDERS]: (state, action) => {
+  [ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP]: (state, action) => {
     return Object.assign({}, state, {
-      loadingLiveOrders: false,
-      liveOrdersData: action.data.orders,
-      liveOrdersCount: action.data.count
+      loadingInProgressOTTP: false,
+      inProgressOTTP: action.data.data,
+      inProgressCount: action.data.count
     })
   },
 
-  [ActionTypes.SUCCESS_FETCH_HISTORY_ORDERS]: (state, action) => {
+  [ActionTypes.SUCCESS_FETCH_HISTORY_OTTP]: (state, action) => {
     return Object.assign({}, state, {
-      loadingHistoryOrders: false,
-      historyOrdersData: action.data.orders,
-      historyOrdersCount: action.data.count
+      loadingHistoryOTTP: false,
+      historyOTTPData: action.data.data,
+      historyOTTPCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_OTTP_DETAIL]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingOTTPDetail: false,
+      OTTPDetailData: action.data.data
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingSquadMembers: false,
+      squadMembersData: action.data.data
+    })
+  },
+
+  [ActionTypes.SUCCESS_UPDATE_SQUAD_MEMBER]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingOrderDetail: false,
+      orderDetailData: action.data.orderStatus
     })
   }
 }
