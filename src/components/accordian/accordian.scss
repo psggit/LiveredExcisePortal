@@ -1,0 +1,62 @@
+.accordian {
+  width: 100%;
+  font-family: "Open Sans";
+}
+
+.accordian-item {
+  &.active {
+    .accordian-item__body {
+      max-height: 500px;
+      padding: 20px;
+      transition: all 0.2s ease-in;
+    }
+  }
+  .accordian-item__body {
+    max-height: 0;
+    padding: 0 20px;
+    overflow: hidden;
+    transition: all 0.2s ease-out;
+  }
+  &:first-child {
+    .accordian-item__header {
+      border-radius: 6px 6px 0 0;
+    }
+  }
+  &:last-child {
+    .accordian-item__header {
+      border-radius: 0 0 6px 6px;
+    }
+  }
+  &.active {
+    &:last-child {
+      .accordian-item__header {
+        border-radius: 0;
+      }
+
+      .accordian-item__body {
+        border-radius: 0 0 6px 6px;
+      }
+    }
+  }
+}
+
+.accordian-item__header {
+  cursor: pointer;
+  width: 100%;
+  height: 50px;
+  border: 1px solid #D0D6E2;
+  border-left: 0;
+  border-right: 0;
+  background-color: #EEF1F7;
+  padding: 0 20px;
+  p {
+    pointer-events: none;
+    color: #6D788F;
+    font-size: 16px;
+    line-height: 50px;
+  }
+}
+
+.accordian-item__body {
+  background-color: #fff;
+}
