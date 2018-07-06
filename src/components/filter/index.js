@@ -77,6 +77,8 @@ class Filter extends React.Component {
     this.setState({
       filters: Object.assign({}, this.defaultFilters)
     })
+
+    this.props.setFilters(this.defaultFilters)
   }
 
   handleCollapseFilter() {
@@ -161,9 +163,11 @@ class Filter extends React.Component {
               <div className="filter-item">
                 <label>OTTP Status</label>
                 <select value={filters.statusFilter} onChange={this.handleSetOTTPStatus}>
-                  <option value="all">-All-</option>
-                  <option value="delivered">Delivered</option>
-                  <option value="cancelled">Cancelled</option>
+                  {
+                    this.props.statusFilters.map(item => (
+                      <option value={item.value}>{ item.label }</option>
+                    ))
+                  }
                 </select>
               </div>
             }
