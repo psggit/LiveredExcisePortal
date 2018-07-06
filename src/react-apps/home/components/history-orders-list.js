@@ -18,24 +18,51 @@ class HistoryOrdersList extends React.Component {
   }
 
   handleClick(orderId) {
-    this.props.mountOrderDetail(orderId)
+    this.props.history.push(`/home/history-ottp/${orderId}`)
   }
 
   handlePageChange(pageNumber) {
-    let offset = this.pagesLimit * (pageNumber - 1)
+    const offset = this.pagesLimit * (pageNumber - 1)
+    const { filters } = this.props
     this.setState({ activePage: pageNumber, pageOffset: offset })
-    this.props.actions.fetchHistoryOrders({
+    this.props.actions.fetchHistoryOTTP({
       limit: this.pagesLimit,
-      offset
+      offset,
+      from_date: filters.from,
+      to_date: filters.to,
+      status: filters.status === 'all' ? undefined : filters.status
     })
   }
 
   componentDidMount() {
-    this.props.actions.fetchHistoryOrders({
+    const today = new Date()
+    today.setUTCHours(0, 0, 0, 0)
+    const tommorrow = new Date(today.getTime())
+    tommorrow.setDate(tommorrow.getDate() + 1)
+    tommorrow.setUTCHours(0, 0, 0, 0)
+
+    this.props.actions.fetchHistoryOTTP({
       limit: 40,
-      offset: 0
+      offset: 0,
+      from_date: today,
+      to_date: tommorrow,
+      status: 'all'
     })
   }
+
+  componentDidUpdate(prevProps) {
+    const { filters } = this.props
+    if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
+      this.props.actions.fetchHistoryOTTP({
+        limit: 40,
+        offset: 0,
+        from_date: filters.from,
+        to_date: filters.to,
+        status: filters.status === 'all' ? undefined : filters.status
+      })
+    }
+  }
+
   render() {
     return (
       <Fragment>
@@ -43,19 +70,19 @@ class HistoryOrdersList extends React.Component {
           <table>
             <thead>
               <tr>
-                <td></td>
-                <td>OTTP Id</td>
-                <td>OTTP Generated at</td>
-                <td>OTTP Status</td>
-                <td>Agent name</td>
-                <td>Vehicle number</td>
-                <td>Retailer</td>
+                <th></th>
+                <th>OTTP Id</th>
+                <th>OTTP Generated at</th>
+                <th>OTTP Status</th>
+                <th>Agent name</th>
+                <th>Vehicle number</th>
+                <th>Retailer</th>
               </tr>
             </thead>
             <tbody>
               {
-                !this.props.loadingHistoryOrders
-                ? this.props.historyOrdersData.map(item => (
+                !this.props.loadingHistoryOTTP
+                ? this.props.historyOTTPData.map(item => (
                   <HistoryOrdersListItem
                     handleClick={this.handleClick}
                     key={item.order_id}

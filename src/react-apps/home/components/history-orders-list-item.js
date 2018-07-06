@@ -36,14 +36,14 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
   const article = orderStatusArr[2] || ''
   const orderStatus = `${status}${time}${article}`
   return (
-    <tr onClick={(e) => {handleClick(data.order_id, e)} }>
-      <td>{ data.order_id }</td>
-      <td>{ orderStatus }</td>
-      <td>{ data.consumer_id }</td>
-      <td>{ data.consumer_name }</td>
-      <td>{ data.consumer_phone }</td>
-      <td>{ data.dp_name }</td>
-      <td>{ data.assigned_to_id }</td>
+    <tr onClick={(e) => {handleClick(data.ottp_id, e)} }>
+      <td></td>
+      <td className="clickable">{ data.ottp_id }</td>
+      <td>{ data.ottp_issued_time }</td>
+      <td>{ data.ottp_status }</td>
+      <td>{ data.agent_name }</td>
+      <td>{ data.vehicle_number }</td>
+      <td>{ data.retailer_name }</td>
     </tr>
   )
 }
