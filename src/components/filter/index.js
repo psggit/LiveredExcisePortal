@@ -47,6 +47,16 @@ class Filter extends React.Component {
     })
   }
 
+  componentDidMount() {
+    this.props.setFilters(this.state.filters)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentRoute !== prevProps.currentRoute) {
+      this.resetFilters()
+    }
+  }
+
   mountDate() {
     mountModal(DatePicker({
       setDate: this.setDateFilter
@@ -75,7 +85,7 @@ class Filter extends React.Component {
   }
 
   handleApplyFilter() {
-    console.log(this.filters);
+    this.props.setFilters(this.state.filters)
     this.setState({ isCollapsed: true })
   }
 
@@ -129,7 +139,7 @@ class Filter extends React.Component {
           <div className="filter-items">
 
             {
-              ['history-orders'].indexOf(currentRoute) > -1 &&
+              this.props.filters.indexOf('date') > -1 &&
               <div className="filter-item">
                 <label>OTTP Date Range</label>
                 <div className="date-filter">
@@ -147,7 +157,7 @@ class Filter extends React.Component {
             }
 
             {
-              ['live-orders', 'history-orders'].indexOf(currentRoute) > -1 &&
+              this.props.filters.indexOf('status') > -1 &&
               <div className="filter-item">
                 <label>OTTP Status</label>
                 <select value={filters.statusFilter} onChange={this.handleSetOTTPStatus}>
