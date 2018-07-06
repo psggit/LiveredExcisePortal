@@ -45,8 +45,7 @@ class HistoryOrdersList extends React.Component {
       limit: 40,
       offset: 0,
       from_date: today,
-      to_date: tommorrow,
-      status: 'all'
+      to_date: tommorrow
     })
   }
 
