@@ -1,6 +1,6 @@
 export const menuItems = [
-  { value: 'live-orders', label: 'In Progress OTTP' },
-  { value: 'history-orders', label: 'OTTP History' },
+  { value: 'live-ottp', label: 'In Progress OTTP' },
+  { value: 'history-ottp', label: 'OTTP History' },
   { value: 'user-management', label: 'User Management' },
   // { value: 'all', label: 'All orders' }
 ]
