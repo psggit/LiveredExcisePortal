@@ -11,7 +11,8 @@ function getAPIObj() {
       catman: scheme + '://catman' + baseHost,
       ordermanUrl: scheme + '://orderman' + baseHost,
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
-      socketUrl: 'https://livered' + baseHost
+      socketUrl: 'https://livered' + baseHost,
+      agamotto: scheme + '://agamotto' + baseHost
     }
   } else {
     let scheme = window.location.href.split(':')[0]
