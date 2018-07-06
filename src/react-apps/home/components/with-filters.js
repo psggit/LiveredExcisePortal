@@ -32,6 +32,7 @@ class WithFilters extends React.Component {
       <div style={{ marginTop: '62px', padding: '20px' }}>
         {
           <Filter
+            statusFilters={this.props.statusFilters}
             setFilters={this.setFilters}
             filters={this.props.filters}
           />
