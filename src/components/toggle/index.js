@@ -6,7 +6,7 @@ class ToggleButton extends React.Component {
     super()
     this.handleChange = this.handleChange.bind(this)
     this.state = {
-      toggled: !props.isToggled
+      toggled: props.isToggled
     }
   }
   componentWillReceiveProps(nextProps) {
