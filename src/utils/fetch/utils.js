@@ -72,7 +72,7 @@ export function constructFetchUtility(options) {
   // construct options for creating `window.fetch` instance
   let fetchOptions = {
     method,
-    credentials: 'include',
+    // credentials: 'include',
     headers: getHeaders(type),
   }
 
