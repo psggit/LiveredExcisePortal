@@ -6,6 +6,8 @@ import Navbar from '@components/navbar'
 import { menuItemsMap, menuItems } from './../constants/navbar-items'
 import LiveOrdersList from './../components/live-orders-list'
 import HistoryOrdersList from './../components/history-orders-list'
+import OrderDetail from './../components/order-detail'
+import UserManagement from './../components/user-management'
 import WithFilters from './../components/with-filters'
 import '@sass/app.scss'
 
@@ -46,8 +48,7 @@ class App extends React.Component {
         backgroundColor: '#DFDAE6',
         width: '100%',
         height: '100vh',
-        overflow: 'auto',
-        padding: '20px'
+        overflow: 'auto'
       }}>
         <Navbar
           history={history}
@@ -59,11 +60,11 @@ class App extends React.Component {
           <Switch>
             <Route
               exact
-              path='/home/live-orders'
+              path="/home/live-ottp"
               render={
                 props => (
-                  <WithFilters currentRoute={this.state.currentRoute}>
-                    <LiveOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
+                  <WithFilters filters={['status']}>
+                    <LiveOrdersList {...props} />
                   </WithFilters>
                 )
               }
@@ -71,11 +72,11 @@ class App extends React.Component {
 
             <Route
               exact
-              path='/home/history-orders'
+              path="/home/history-ottp"
               render={
                 props => (
-                  <WithFilters currentRoute={this.state.currentRoute}>
-                    <HistoryOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
+                  <WithFilters filters={['status', 'date']}>
+                    <HistoryOrdersList {...props} />
                   </WithFilters>
                 )
               }
@@ -83,10 +84,30 @@ class App extends React.Component {
 
             <Route
               exact
-              path='/home/user-management'
+              path="/home/user-management"
               render={
                 props => (
-                  <HistoryOrdersList {...props} mountOrderDetail={this.mountOrderDetail} />
+                  <UserManagement {...props} />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/home/history-ottp/:orderId"
+              render={
+                props => (
+                  <OrderDetail {...props} />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/home/live-ottp/:orderId"
+              render={
+                props => (
+                  <OrderDetail {...props} />
                 )
               }
             />
