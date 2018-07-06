@@ -73,8 +73,8 @@ export default function DatePicker (data) {
               {
                 this.state.fromDate && this.state.toDate
                 ? <p style={{textAlign: 'center', marginTop: '20px', fontWeight: '600'}}>
-                  From: {Moment(this.state.fromDate).format('MMM Do YY')}&nbsp;&nbsp;
-                  To: {Moment(this.state.toDate).format('MMM Do YY')}
+                  From: {Moment(this.state.fromDate).format('DD/MM/YYYY')}&nbsp;&nbsp;
+                  To: {Moment(this.state.toDate).format('DD/MM/YYYY')}
                   </p>
                 : ''
               }
