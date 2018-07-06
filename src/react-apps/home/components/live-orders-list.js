@@ -19,23 +19,24 @@ class LiveOrdersList extends React.Component {
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.pollData = this.pollData.bind(this)
     this.openAssignOrderModal = this.openAssignOrderModal.bind(this)
     this.handleConfirmAssign = this.handleConfirmAssign.bind(this)
+    this.defaultData = this.defaultData.bind(this)
+    this.filteredData = this.filteredData.bind(this)
   }
 
   handleClick(orderId, e) {
-    if (e.target.nodeName !== 'BUTTON') {
-      this.props.mountOrderDetail(orderId)
-    }
+    this.props.history.push(`/home/live-ottp/${orderId}`)
   }
 
   handlePageChange(pageNumber) {
-    let offset = this.pagesLimit * (pageNumber - 1)
+    const offset = this.pagesLimit * (pageNumber - 1)
+    const { filters } = this.props
     this.setState({ activePage: pageNumber, pageOffset: offset })
     this.props.actions.fetchHistoryOrders({
       limit: this.pagesLimit,
-      offset
+      offset,
+      status: filters.status === 'all' ? undefined : filters.status
     })
   }
 
@@ -58,21 +59,35 @@ class LiveOrdersList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.fetchLiveOrders({
-      limit: 40,
-      offset: 0
-    })
-    //
-    // this.pollData()
+    this.defaultData()
   }
 
-  pollData() {
-    this.props.actions.fetchLiveOrders({
+  defaultData() {
+    this.props.actions.fetchInProgressOTTP({
       limit: 40,
       offset: 0
     })
 
-    this.timeoutId = setTimeout(this.pollData, 30000)
+    this.timeoutId = setTimeout(this.defaultData, 3000)
+  }
+
+  filteredData() {
+    this.props.actions.fetchInProgressOTTP({
+      limit: 40,
+      offset: 0,
+      status: this.filters.status === 'all' ? undefined : this.filters.status
+    })
+
+    this.timeoutId = setTimeout(this.filteredData, 3000)
+  }
+
+  componentDidUpdate(prevProps) {
+    const { filters } = this.props
+    this.filters = Object.assign({}, filters)
+    if (filters && JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
+      clearTimeout(this.timeoutId)
+      this.filteredData()
+    }
   }
 
   componentWillUnmount() {
@@ -86,27 +101,27 @@ class LiveOrdersList extends React.Component {
           <table>
             <thead>
               <tr>
-                <td>OTTP Id</td>
-                <td>OTTP generated at</td>
-                <td>OTTP status</td>
-                <td>Agent name</td>
-                <td>Vehicle number</td>
-                <td>Retailer</td>
+                <th>OTTP Id</th>
+                <th>OTTP generated at</th>
+                <th>OTTP status</th>
+                <th>Agent name</th>
+                <th>Vehicle number</th>
+                <th>Retailer</th>
               </tr>
             </thead>
             <tbody>
               {
-                !this.props.loadingLiveOrders
-                ? this.props.liveOrdersData.map(item => (
+                !this.props.loadingInProgressOTTP
+                ? this.props.inProgressOTTP.map(item => (
                   <LiveOrdersListItem
                     handleClick={this.handleClick}
                     handleOrderAssign={this.openAssignOrderModal}
                     handleShowNotes={this.handleShowNotes}
-                    key={item.order_id}
+                    key={item.ottp_id}
                     data={item}
                   />
                 ))
-                : <tr className='loader2' />
+                : <tr className="loader2" />
               }
             </tbody>
           </table>

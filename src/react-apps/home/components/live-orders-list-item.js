@@ -42,30 +42,14 @@ const LiveOrdersListItem = ({ data, handleClick, handleOrderAssign, handleShowNo
     orderPlacedWaitingTime = getTimeDiff(data.order_placed_time)
   }
 
-  let statusStyle = {}
-  if (cancellation_time) {
-    statusStyle = {
-      color: time >= 5 && !cancellation_time && getHasuraRole() !== 'excise_person' ? '#ff3b34' : ''
-    }
-  }
-
   return (
-    <tr onClick={ (e) => {handleClick(data.order_id, e)} }>
-      <td
-        style={{ color: '#0070D9' }}
-        className={
-          orderPlacedWaitingTime >= 60 && getHasuraRole() !== 'excise_person'
-          ? 'danger'
-          : ''
-        }
-      >
-        { data.order_id }
-      </td>
-      <td style={statusStyle}>{ orderStatus }</td>
-      <td>{ data.dp_name }</td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr onClick={ (e) => {handleClick(data.ottp_id, e)} }>
+      <td className="clickable">{ data.ottp_id }</td>
+      <td>{ Moment(data.ottp_issued_time).format("DD/MM/YYYY, h:mm") }</td>
+      <td>{ data.ottp_status }</td>
+      <td>{ data.agent_name }</td>
+      <td>{ data.vehicle_number }</td>
+      <td>{ data.retailer_name }</td>
     </tr>
   )
 }
