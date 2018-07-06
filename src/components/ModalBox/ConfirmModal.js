@@ -4,7 +4,7 @@ import ModalFooter from './ModalFooter'
 import ModalBody from './ModalBody'
 import ModalBox from './'
 import { unMountModal } from './utils'
-import Button from '@components/Button/index.js'
+import Button from '@components/button/index.js'
 
 export default function confirmModal (data) {
   return class confirmModal extends React.Component {
