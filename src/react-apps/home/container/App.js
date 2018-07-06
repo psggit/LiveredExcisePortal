@@ -9,6 +9,7 @@ import HistoryOrdersList from './../components/history-orders-list'
 import OrderDetail from './../components/order-detail'
 import UserManagement from './../components/user-management'
 import WithFilters from './../components/with-filters'
+import { liveFilters, historyFilters } from './../constants/status-filters'
 import '@sass/app.scss'
 
 const history = createHistory()
@@ -63,7 +64,7 @@ class App extends React.Component {
               path="/home/live-ottp"
               render={
                 props => (
-                  <WithFilters filters={['status']}>
+                  <WithFilters statusFilters={liveFilters} filters={['status']}>
                     <LiveOrdersList {...props} />
                   </WithFilters>
                 )
@@ -75,7 +76,7 @@ class App extends React.Component {
               path="/home/history-ottp"
               render={
                 props => (
-                  <WithFilters filters={['status', 'date']}>
+                  <WithFilters statusFilters={historyFilters} filters={['status', 'date']}>
                     <HistoryOrdersList {...props} />
                   </WithFilters>
                 )
