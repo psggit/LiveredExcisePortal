@@ -3,8 +3,8 @@ This is your saga file, which containes generator functions.
 This is a side-effect container. Do all your side-effect here only.
 */
 
-import { takeLatest, delay } from 'redux-saga'
-import { call, fork, put, race, take } from 'redux-saga/effects'
+import { takeLatest } from 'redux-saga'
+import { call, fork, put, all } from 'redux-saga/effects'
 import * as ActionTypes from './../constants/actions'
 import * as Api from './api'
 // import Notify from '@components/Notification'
@@ -13,48 +13,49 @@ import * as Api from './api'
 /**
  * Handlers
  */
-function* fetchLiveOrders(action) {
+function* fetchInProgressOTTP(action) {
   try {
-    const data = yield call(Api.fetchLiveOrders, action)
-    yield put({type: ActionTypes.SUCCESS_FETCH_LIVE_ORDERS, data})
+    const data = yield call(Api.fetchInProgressOTTP, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP, data })
   } catch (err) {
     console.log(err)
   }
 }
 
 
-function* fetchHistoryOrders(action) {
+function* fetchHistoryOTTP(action) {
   try {
-    const data = yield call(Api.fetchHistoryOrders, action)
-    yield put({type: ActionTypes.SUCCESS_FETCH_HISTORY_ORDERS, data})
+    const data = yield call(Api.fetchHistoryOTTP, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_HISTORY_OTTP, data })
   } catch (err) {
     console.log(err)
   }
 }
 
-function* searchLiveOrders(action) {
+function* fetchOTTPDetail(action) {
   try {
-    const data = yield call(Api.searchLiveOrders, action)
-    yield put({type: ActionTypes.SUCCESS_SEARCH_LIVE_ORDERS, data})
+    const data = yield call(Api.fetchOTTPDetail, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_OTTP_DETAIL, data })
   } catch (err) {
     console.log(err)
   }
 }
 
-function* searchHistoryOrders(action) {
-  try {
-    const data = yield call(Api.searchHistoryOrders, action)
-    yield put({type: ActionTypes.SUCCESS_SEARCH_LIVE_ORDERS, data})
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-function* fetchOrderDetail(action) {
+function* fetchSquadMembers(action) {
   console.log(action)
   try {
-    const data = yield call(Api.fetchOrderDetail, action)
-    yield put({type: ActionTypes.SUCCESS_FETCH_ORDER_DETAIL, data})
+    const data = yield call(Api.fetchSquadMembers, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS, data })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+function* updateSquadMember(action) {
+  console.log(action)
+  try {
+    const data = yield call(Api.fetchSquadMembers, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS, data })
   } catch (err) {
     console.log(err)
   }
@@ -77,35 +78,34 @@ function* setLoadingAll(action) {
   }
 }
 
-function* watchFetchLiveOrders() {
+function* watchFetchInProgressOTTP() {
   while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_LIVE_ORDERS, fetchLiveOrders)
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_IN_PROGRESS_OTTP, fetchInProgressOTTP)
   }
 }
 
-function* watchFetchHistoryOrders() {
+function* watchFetchHistoryOTTP() {
   while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_HISTORY_ORDERS, fetchHistoryOrders)
-  }
-}
-
-function* watchSearchLiveOrders() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_SEARCH_LIVE_ORDERS, searchLiveOrders)
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_HISTORY_OTTP, fetchHistoryOTTP)
   }
 }
 
 
-function* watchSearchHistoryOrders() {
+function* watchFetchOTTPDetail() {
   while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_SEARCH_HISTORY_ORDERS, searchHistoryOrders)
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_OTTP_DETAIL, fetchOTTPDetail)
   }
 }
 
-
-function* watchFetchOrderDetail() {
+function* watchFetchSquadMembers() {
   while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_ORDER_DETAIL, fetchOrderDetail)
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS, fetchSquadMembers)
+  }
+}
+
+function* watchUpdateSquadMember() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_UPDATE_SQUAD_MEMBER, updateSquadMember)
   }
 }
 
@@ -123,11 +123,11 @@ function* watchSetLoadingAll() {
 
 export default function* rootSaga() {
   yield [
-    fork(watchFetchLiveOrders),
-    fork(watchFetchHistoryOrders),
-    fork(watchSearchLiveOrders),
-    fork(watchSearchHistoryOrders),
-    fork(watchFetchOrderDetail),
+    fork(watchFetchInProgressOTTP),
+    fork(watchFetchHistoryOTTP),
+    fork(watchFetchOTTPDetail),
+    fork(watchFetchSquadMembers),
+    fork(watchUpdateSquadMember),
     fork(watchSetLoading),
     fork(watchSetLoadingAll)
   ]
