@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { setLoadingAll } from './../actions'
 import createHistory from 'history/createBrowserHistory'
 import { Route, Switch } from 'react-router-dom'
 import { Router } from 'react-router'
@@ -19,27 +22,17 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentRoute: location.pathname.split('/')[2] || 'live-orders',
-      isFilters: true
-    }
-
-    this.mountFilters = this.mountFilters.bind(this)
-  }
-
-  mountFilters(route) {
-    if (route === 'user-management') {
-      this.setState({ isFilters: false })
-    } else {
-      this.setState({ isFilters: true })
+      currentRoute: location.pathname.split('/')[2] || 'live-ottp',
     }
   }
 
   componentDidMount() {
-    this.mountFilters(this.state.currentRoute)
     history.listen((loction) => {
       const newRoute = location.pathname.split('/')[2]
-      this.setState({ currentRoute: newRoute })
-      this.mountFilters(newRoute)
+      if (newRoute !== this.state.currentRoute) {
+        this.props.actions.setLoadingAll()
+        this.setState({ currentRoute: newRoute })
+      }
     })
   }
 
@@ -64,7 +57,11 @@ class App extends React.Component {
               path="/home/live-ottp"
               render={
                 props => (
-                  <WithFilters statusFilters={liveFilters} filters={['status']}>
+                  <WithFilters
+                    currentRoute={this.state.currentRoute}
+                    statusFilters={liveFilters}
+                    filters={['status']}
+                  >
                     <LiveOrdersList {...props} />
                   </WithFilters>
                 )
@@ -76,7 +73,11 @@ class App extends React.Component {
               path="/home/history-ottp"
               render={
                 props => (
-                  <WithFilters statusFilters={historyFilters} filters={['status', 'date']}>
+                  <WithFilters
+                    currentRoute={this.state.currentRoute}
+                    statusFilters={historyFilters}
+                    filters={['status', 'date']}
+                  >
                     <HistoryOrdersList {...props} />
                   </WithFilters>
                 )
@@ -119,4 +120,10 @@ class App extends React.Component {
   }
 }
 
-export default App
+const mapStateToProps = state => state.main
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({ setLoadingAll }, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
