@@ -4,10 +4,7 @@ import { bindActionCreators } from 'redux'
 // import Pagination from 'react-js-pagination'
 import * as Actions from './../actions'
 import LiveOrdersListItem from './live-orders-list-item'
-// import { mountModal, unMountModal } from '@components/ModalBox/utils'
-// import ConfirmModal from '@components/ModalBox/ConfirmModal'
-// import { getHasuraId } from './../utils'
-// import Notes from './Notes'
+import Loader from '@components/loader'
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -68,7 +65,7 @@ class LiveOrdersList extends React.Component {
       offset: 0
     })
 
-    this.timeoutId = setTimeout(this.defaultData, 3000)
+    this.timeoutId = setTimeout(this.defaultData, 30000)
   }
 
   filteredData() {
@@ -78,13 +75,14 @@ class LiveOrdersList extends React.Component {
       status: this.filters.status === 'all' ? undefined : this.filters.status
     })
 
-    this.timeoutId = setTimeout(this.filteredData, 3000)
+    this.timeoutId = setTimeout(this.filteredData, 30000)
   }
 
   componentDidUpdate(prevProps) {
     const { filters } = this.props
     this.filters = Object.assign({}, filters)
     if (filters && JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
+      this.props.actions.setLoadingAll()
       clearTimeout(this.timeoutId)
       this.filteredData()
     }
@@ -121,7 +119,7 @@ class LiveOrdersList extends React.Component {
                     data={item}
                   />
                 ))
-                : <tr className="loader2" />
+                : <Loader />
               }
             </tbody>
           </table>
