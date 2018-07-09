@@ -47,16 +47,6 @@ class Filter extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.props.setFilters(this.state.filters)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.currentRoute !== prevProps.currentRoute) {
-      this.resetFilters()
-    }
-  }
-
   mountDate() {
     mountModal(DatePicker({
       setDate: this.setDateFilter
@@ -78,7 +68,7 @@ class Filter extends React.Component {
       filters: Object.assign({}, this.defaultFilters)
     })
 
-    this.props.setFilters(this.defaultFilters)
+    // this.props.setFilters(this.defaultFilters)
   }
 
   handleCollapseFilter() {
@@ -88,7 +78,7 @@ class Filter extends React.Component {
 
   handleApplyFilter() {
     this.props.setFilters(this.state.filters)
-    this.setState({ isCollapsed: true })
+    // this.setState({ isCollapsed: true })
   }
 
   render() {
