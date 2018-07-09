@@ -47,6 +47,15 @@ const actionsMap = {
       loadingOrderDetail: false,
       orderDetailData: action.data.orderStatus
     })
+  },
+
+  [ActionTypes.SUCCESS_SET_LOADING_ALL]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingInProgressOTTP: true,
+      loadingHistoryOTTP: true,
+      loadingOTTPDetail: true,
+      loadingSquadMembers: true
+    })
   }
 }
 

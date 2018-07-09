@@ -54,8 +54,18 @@ function* fetchSquadMembers(action) {
 function* updateSquadMember(action) {
   console.log(action)
   try {
-    const data = yield call(Api.fetchSquadMembers, action)
-    yield put({ type: ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS, data })
+    const data = yield call(Api.updateSquadMember, action)
+    yield put({ type: ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS, data: { offset: 0, limit: 10 } })
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+function* addSquadMember(action) {
+  console.log(action)
+  try {
+    const data = yield call(Api.addSquadMember, action)
+    yield put({ type: ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS, data: { offset: 0, limit: 10 } })
   } catch (err) {
     console.log(err)
   }
@@ -70,9 +80,9 @@ function* setLoading(action) {
   }
 }
 
-function* setLoadingAll(action) {
+function* setLoadingAll() {
   try {
-    yield put({ type: ActionTypes.SUCCESS_SET_LOADING_ALL, data: action.data })
+    yield put({ type: ActionTypes.SUCCESS_SET_LOADING_ALL })
   } catch (err) {
     console.log(err)
   }
@@ -109,6 +119,12 @@ function* watchUpdateSquadMember() {
   }
 }
 
+function* watchAddSquadMember() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_ADD_SQUAD_MEMBER, addSquadMember)
+  }
+}
+
 function* watchSetLoading() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_SET_LOADING, setLoading)
@@ -128,6 +144,7 @@ export default function* rootSaga() {
     fork(watchFetchOTTPDetail),
     fork(watchFetchSquadMembers),
     fork(watchUpdateSquadMember),
+    fork(watchAddSquadMember),
     fork(watchSetLoading),
     fork(watchSetLoadingAll)
   ]
