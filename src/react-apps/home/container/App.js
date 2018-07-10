@@ -58,6 +58,7 @@ class App extends React.Component {
               render={
                 props => (
                   <WithFilters
+                    history={history}
                     currentRoute={this.state.currentRoute}
                     statusFilters={liveFilters}
                     filters={['status']}
@@ -74,6 +75,7 @@ class App extends React.Component {
               render={
                 props => (
                   <WithFilters
+                    history={history}
                     currentRoute={this.state.currentRoute}
                     statusFilters={historyFilters}
                     filters={['status', 'date']}
