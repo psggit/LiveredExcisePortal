@@ -16,17 +16,16 @@ class Filter extends React.Component {
     tommorrow.setUTCHours(0, 0, 0, 0)
 
     this.defaultFilters = {
-      statusFilter: 'all',
-      dateFilter: {
-        from: today.toISOString(),
-        to: tommorrow.toISOString()
-      }
+      status: 'all',
+      from: today.toISOString(),
+      to: tommorrow.toISOString()
     }
 
     this.state = {
       isCollapsed: false,
       shouldMountDatePicker: false,
-      filters: Object.assign({}, this.defaultFilters)
+      ...this.defaultFilters
+      // filters: Object.assign({}, this.defaultFilters)
     }
 
     this.handleCollapseFilter = this.handleCollapseFilter.bind(this)
@@ -35,16 +34,30 @@ class Filter extends React.Component {
     this.handleApplyFilter = this.handleApplyFilter.bind(this)
     this.mountDate = this.mountDate.bind(this)
     this.resetFilters = this.resetFilters.bind(this)
+    this.setStatus = this.setStatus.bind(this)
+  }
+
+  componentDidMount() {
+    const queryUri = location.search.slice(1)
+    const queryObj = {}
+
+    queryUri.split('&')
+    .map(item => item.split('='))
+    .forEach(([key, value]) => {
+      queryObj[key] = value
+    })
+
+    // console.log(queryObj);
+    this.setDateFilter(queryObj.from_date, queryObj.to_date)
+    this.setStatus(queryObj.status)
+  }
+
+  setStatus(val) {
+    this.setState({ status: val })
   }
 
   handleSetOTTPStatus(e) {
-    this.setState({
-      filters: Object.assign(
-        {},
-        this.state.filters,
-        { statusFilter: e.target.value }
-      )
-    })
+    this.setStatus(e.target.value)
   }
 
   mountDate() {
@@ -54,21 +67,12 @@ class Filter extends React.Component {
   }
 
   setDateFilter(from, to) {
-    this.setState({
-      filters: Object.assign(
-        {},
-        this.state.filters,
-        { dateFilter: { from, to } }
-      )
-    })
+    this.setState({ from, to })
   }
 
   resetFilters() {
-    this.setState({
-      filters: Object.assign({}, this.defaultFilters)
-    })
-
-    // this.props.setFilters(this.defaultFilters)
+    this.setState(Object.assign({}, this.state, this.defaultFilters))
+    this.props.setFilters(this.defaultFilters)
   }
 
   handleCollapseFilter() {
@@ -77,7 +81,12 @@ class Filter extends React.Component {
   }
 
   handleApplyFilter() {
-    this.props.setFilters(this.state.filters)
+    const { status, from, to } = this.state
+    this.props.setFilters({
+      status,
+      from,
+      to
+    })
     // this.setState({ isCollapsed: true })
   }
 
@@ -137,7 +146,7 @@ class Filter extends React.Component {
                 <div className="date-filter">
                   <input
                     value={
-                      `${Moment(filters.dateFilter.from).format('DD/MM/YYYY')} - ${Moment(filters.dateFilter.to).format('DD/MM/YYYY')}`
+                      `${Moment(this.state.from).format('DD/MM/YYYY')} - ${Moment(this.state.to).format('DD/MM/YYYY')}`
                     }
                     readOnly
                     onFocus={this.mountDate}
@@ -152,7 +161,7 @@ class Filter extends React.Component {
               this.props.filters.indexOf('status') > -1 &&
               <div className="filter-item">
                 <label>OTTP Status</label>
-                <select value={filters.statusFilter} onChange={this.handleSetOTTPStatus}>
+                <select value={this.state.status} onChange={this.handleSetOTTPStatus}>
                   {
                     this.props.statusFilters.map(item => (
                       <option value={item.value}>{ item.label }</option>
