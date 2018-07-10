@@ -60,9 +60,12 @@ class LiveOrdersList extends React.Component {
   }
 
   defaultData() {
+    const queryUri = location.search.slice(1).split('=')
+    const status = queryUri[1]
     this.props.actions.fetchInProgressOTTP({
       limit: 40,
-      offset: 0
+      offset: 0,
+      status: status === 'all' ? undefined : status
     })
 
     this.timeoutId = setTimeout(this.defaultData, 30000)
