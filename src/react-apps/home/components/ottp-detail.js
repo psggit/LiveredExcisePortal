@@ -57,9 +57,9 @@ class OrderDetail extends Component {
   }
 
   componentDidMount() {
-    const { orderId } = this.props.match.params
+    const { ottpId } = this.props.match.params
     this.props.actions.fetchOTTPDetail({
-      ottp_id: orderId
+      ottp_id: ottpId
     })
   }
 
@@ -68,7 +68,8 @@ class OrderDetail extends Component {
   }
 
   unmountOrderDetail() {
-    this.props.history.push('/home/history-orders')
+    this.props.history.goBack()
+    // this.props.history.push('/home/history-orders')
   }
 
   handleRefersh() {

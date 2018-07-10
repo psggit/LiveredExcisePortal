@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 // import Pagination from 'react-js-pagination'
 import * as Actions from './../actions'
-import LiveOrdersListItem from './live-orders-list-item'
+import LiveOrdersListItem from './live-ottp-list-item'
 import Loader from '@components/loader'
 
 class LiveOrdersList extends React.Component {

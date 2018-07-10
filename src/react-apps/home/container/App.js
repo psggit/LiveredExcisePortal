@@ -7,9 +7,9 @@ import { Route, Switch } from 'react-router-dom'
 import { Router } from 'react-router'
 import Navbar from '@components/navbar'
 import { menuItemsMap, menuItems } from './../constants/navbar-items'
-import LiveOrdersList from './../components/live-orders-list'
-import HistoryOrdersList from './../components/history-orders-list'
-import OrderDetail from './../components/order-detail'
+import LiveOTTPList from './../components/live-ottp-list'
+import HistoryOTTPList from './../components/history-ottp-list'
+import OTTPDetail from './../components/ottp-detail'
 import UserManagement from './../components/user-management'
 import WithFilters from './../components/with-filters'
 import { liveFilters, historyFilters } from './../constants/status-filters'
@@ -63,7 +63,7 @@ class App extends React.Component {
                     statusFilters={liveFilters}
                     filters={['status']}
                   >
-                    <LiveOrdersList {...props} />
+                    <LiveOTTPList {...props} />
                   </WithFilters>
                 )
               }
@@ -80,7 +80,7 @@ class App extends React.Component {
                     statusFilters={historyFilters}
                     filters={['status', 'date']}
                   >
-                    <HistoryOrdersList {...props} />
+                    <HistoryOTTPList {...props} />
                   </WithFilters>
                 )
               }
@@ -98,20 +98,20 @@ class App extends React.Component {
 
             <Route
               exact
-              path="/home/history-ottp/:orderId"
+              path="/home/history-ottp/:ottpId"
               render={
                 props => (
-                  <OrderDetail {...props} />
+                  <OTTPDetail {...props} />
                 )
               }
             />
 
             <Route
               exact
-              path="/home/live-ottp/:orderId"
+              path="/home/live-ottp/:ottpId"
               render={
                 props => (
-                  <OrderDetail {...props} />
+                  <OTTPDetail {...props} />
                 )
               }
             />

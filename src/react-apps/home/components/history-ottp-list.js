@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
-import HistoryOrdersListItem from './history-orders-list-item'
+import HistoryOrdersListItem from './history-ottp-list-item'
 // import Pagination from 'react-js-pagination'
 import Loader from '@components/loader'
 
