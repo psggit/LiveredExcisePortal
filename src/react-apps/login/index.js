@@ -29,8 +29,6 @@ class Login extends React.Component {
         api: '/excise-person/auth/otp-login',
         apiBase: 'gremlinUrl',
         handleError: false,
-        cookie: false,
-        type: 'Public',
         data: { mobile: phoneNumber, otp }
       })
         .then((json) => {
@@ -48,8 +46,6 @@ class Login extends React.Component {
         api: '/excise-person/auth/otp-login',
         apiBase: 'gremlinUrl',
         handleError: true,
-        type: 'Public',
-        cookie: false,
         data: { otp, mobile: phoneNumber }
       })
         .then(json => {
