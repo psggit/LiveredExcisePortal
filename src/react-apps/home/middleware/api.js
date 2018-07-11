@@ -5,7 +5,6 @@ export function fetchInProgressOTTP(action) {
     api: '/excisePortal/liveOttp',
     apiBase: 'agamotto',
     handleError: true,
-    type: 'Public',
     data: action.data
   })
     .then(json => json)
