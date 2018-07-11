@@ -10,6 +10,8 @@ import { Api } from '@utils/config'
 import Login from './login'
 import Home from './home/container/Root'
 
+console.log(Api);
+
 // import makeAsyncComponent from './makeAsyncComponent'
 // const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
 // const Dashboard = makeAsyncComponent(() => import("./dashboard").then(module => module.default), { name: "Page 1" })

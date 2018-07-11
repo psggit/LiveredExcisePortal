@@ -26,7 +26,8 @@ function getAPIObj() {
       ordermanUrl: scheme + '://orderman' + baseHost,
       catman: scheme + '://catman' + baseHost,
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
-      socketUrl: scheme + '://livered' + baseHost
+      socketUrl: scheme + '://livered' + baseHost,
+      agamotto: scheme + '://agamotto' + baseHost
     }
   }
 }
