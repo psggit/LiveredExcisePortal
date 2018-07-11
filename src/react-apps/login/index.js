@@ -3,6 +3,7 @@ import Button from '@components/button/index.js'
 import { Api } from '@utils/config'
 import '@sass/_animation.scss'
 import { POST } from '@utils/fetch'
+import { createSession } from './session'
 
 class Login extends React.Component {
   constructor() {
@@ -10,32 +11,30 @@ class Login extends React.Component {
     this.state = {
       showOTPField: false,
       isSubmitting: false,
-      phoneNumber: ''
+      phoneNumber: '',
+      otp: null
     }
     this.handleOTP = this.handleOTP.bind(this)
+    this.handleLogin = this.handleLogin.bind(this)
     this.setPhoneNumber = this.setPhoneNumber.bind(this)
     this.setOTP = this.setOTP.bind(this)
   }
 
   handleOTP() {
-    const { phoneNumber } = this.state
+    const { phoneNumber, otp } = this.state
     if (phoneNumber.length === 10) {
       this.setState({ isSubmitting: true })
-      const fetchOptions = { mobile: phoneNumber, otp: null }
+
       POST({
         api: '/excise-person/auth/otp-login',
         apiBase: 'gremlinUrl',
-        handleError: true,
+        handleError: false,
+        cookie: false,
         type: 'Public',
-        data: { mobile: phoneNumber, otp: null }
+        data: { mobile: phoneNumber, otp }
       })
         .then((json) => {
-          // createSession(json)
-          this.setState({ showOTPField: true })
-        })
-        .catch((err) => {
-          alert(err)
-          this.setState({ isSubmitting: false })
+          this.setState({ showOTPField: true, isSubmitting: false })
         })
     }
   }
@@ -50,9 +49,11 @@ class Login extends React.Component {
         apiBase: 'gremlinUrl',
         handleError: true,
         type: 'Public',
+        cookie: false,
         data: { otp, mobile: phoneNumber }
       })
         .then(json => {
+          createSession(json)
           window.location.href = '/home/live-ottp'
         })
         .catch(err => {
@@ -133,10 +134,16 @@ class Login extends React.Component {
                   maxLength="6"
                   type="text"
                 />
+                <span
+                  style={{ fontSize: '12px' }}
+                >
+                  Click <a onClick={this.handleOTP} style={{ color: '#39475e', cursor: 'pointer', textDecoration: 'underline' }}>here</a> to resend
+                </span>
               </div>
+
               <div className="form-group">
                 <Button
-                  onClick={this.handleOTP}
+                  onClick={this.handleLogin}
                   style={this.state.isSubmitting ? submittingStyle : {}}
                   primary
                 >
