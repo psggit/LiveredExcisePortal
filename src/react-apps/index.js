@@ -16,14 +16,13 @@ import Home from './home/container/Root'
 
 class App extends React.Component {
   componentWillMount() {
-    console.log("debug");
     const fetchOptions = {
       method: 'get',
       credentials: 'include',
       mode: 'cors',
       'x-hasura-role': 'user'
     }
-    console.log("debug");
+    
     // https://auth.hipbar-dev.com/user/account/info
     fetch(`${Api.authUrl}/user/account/info`, fetchOptions)
       .then((response) => {
