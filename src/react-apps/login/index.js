@@ -2,14 +2,15 @@ import React from 'react'
 import Button from '@components/button/index.js'
 import { Api } from '@utils/config'
 import '@sass/_animation.scss'
-import 'whatwg-fetch'
+import { POST } from '@utils/fetch'
 
 class Login extends React.Component {
   constructor() {
     super()
     this.state = {
       showOTPField: false,
-      isSubmitting: false
+      isSubmitting: false,
+      phoneNumber: ''
     }
     this.handleOTP = this.handleOTP.bind(this)
     this.setPhoneNumber = this.setPhoneNumber.bind(this)
@@ -17,31 +18,48 @@ class Login extends React.Component {
   }
 
   handleOTP() {
-    this.setState({ isSubmitting: true })
     const { phoneNumber } = this.state
-    const fetchOptions = { mobile: phoneNumber, otp: null }
-
-    fetch(`${Api.authURl}/excise-person/auth/otp-login`, fetchOptions)
-      .then((res) => {
-        if (res.status !== 2000) {
-          console.log(`Problem with status code ${res.status}`)
-          this.setState({ isSubmitting: false })
-          return;
-        }
-        res.json().then(data => {
-          // createSession(data)
-          // redirect
+    if (phoneNumber.length === 10) {
+      this.setState({ isSubmitting: true })
+      const fetchOptions = { mobile: phoneNumber, otp: null }
+      POST({
+        api: '/excise-person/auth/otp-login',
+        apiBase: 'gremlinUrl',
+        handleError: true,
+        type: 'Public',
+        data: { mobile: phoneNumber, otp: null }
+      })
+        .then((json) => {
+          // createSession(json)
+          this.setState({ showOTPField: true })
         })
-      })
-      .catch(err => {
-        console.log(err)
-        this.setState({ isSubmitting: false })
-      })
+        .catch((err) => {
+          alert(err)
+          this.setState({ isSubmitting: false })
+        })
+    }
   }
 
   handleLogin() {
-    this.setState({ isSubmitting: true })
-    const { otp } = this.state
+    const { otp, phoneNumber } = this.state
+
+    if (otp.length === 6) {
+      this.setState({ isSubmitting: true })
+      POST({
+        api: '/excise-person/auth/otp-login',
+        apiBase: 'gremlinUrl',
+        handleError: true,
+        type: 'Public',
+        data: { otp, mobile: phoneNumber }
+      })
+        .then(json => {
+          window.location.href = '/home/live-ottp'
+        })
+        .catch(err => {
+          alert(err)
+          this.setState({ isSubmitting: false })
+        })
+    }
   }
 
   setPhoneNumber(e) {
@@ -84,6 +102,7 @@ class Login extends React.Component {
               <div className="form-group">
                 <label>Phone Number</label>
                 <input
+                  maxLength={10}
                   value={this.state.phoneNumber}
                   onChange={this.setPhoneNumber}
                   style={{ width: '100%' }}
@@ -111,7 +130,7 @@ class Login extends React.Component {
                   value={this.state.otp}
                   onChange={this.setOTP}
                   style={{ width: '100%' }}
-                  maxLength="4"
+                  maxLength="6"
                   type="text"
                 />
               </div>
