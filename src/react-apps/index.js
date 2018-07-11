@@ -23,6 +23,7 @@ class App extends React.Component {
       mode: 'cors',
       'x-hasura-role': 'user'
     }
+    console.log("debug");
     // https://auth.hipbar-dev.com/user/account/info
     fetch(`${Api.authUrl}/user/account/info`, fetchOptions)
       .then((response) => {
