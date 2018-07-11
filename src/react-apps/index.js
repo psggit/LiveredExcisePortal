@@ -16,6 +16,7 @@ import Home from './home/container/Root'
 
 class App extends React.Component {
   componentWillMount() {
+    console.log("debug");
     const fetchOptions = {
       method: 'get',
       credentials: 'include',
