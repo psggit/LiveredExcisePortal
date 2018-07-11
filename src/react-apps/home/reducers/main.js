@@ -38,7 +38,8 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS]: (state, action) => {
     return Object.assign({}, state, {
       loadingSquadMembers: false,
-      squadMembersData: action.data.data
+      squadMembersData: action.data.data,
+      squadMembersCount: action.data.count
     })
   },
 

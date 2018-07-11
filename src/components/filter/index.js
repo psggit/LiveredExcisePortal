@@ -163,8 +163,8 @@ class Filter extends React.Component {
                 <label>OTTP Status</label>
                 <select value={this.state.status} onChange={this.handleSetOTTPStatus}>
                   {
-                    this.props.statusFilters.map(item => (
-                      <option value={item.value}>{ item.label }</option>
+                    this.props.statusFilters.map((item, i) => (
+                      <option key={i} value={item.value}>{ item.label }</option>
                     ))
                   }
                 </select>

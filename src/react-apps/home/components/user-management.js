@@ -7,7 +7,8 @@ import { mountModal, unMountModal } from '@components/ModalBox/utils'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
-// import Pagination from 'react-js-pagination
+import Pagination from 'react-js-pagination'
+import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 
 class UserManagement extends React.Component {
@@ -62,39 +63,52 @@ class UserManagement extends React.Component {
       }
     }))
   }
-  
+
   render() {
     const { loadingSquadMembers, squadMembersData } = this.props
     return (
-      <div style={{ marginTop: '62px', padding: '20px' }}>
-        <Button primary onClick={this.mountMemberInfoModal}>Add Member</Button>
-        <table style={{ marginTop: '20px' }}>
-          <thead>
-            <tr>
-              <th>Access status</th>
-              <th>Member name</th>
-              <th>Phone number</th>
-              <th>Email address</th>
-              <th>Role</th>
-              {/* <th></th> */}
-            </tr>
-          </thead>
+      <React.Fragment>
+        <div style={{ marginTop: '62px', padding: '20px' }}>
+          <Button primary onClick={this.mountMemberInfoModal}>Add Member</Button>
+          <table style={{ marginTop: '20px' }}>
+            <thead>
+              <tr>
+                <th>Access status</th>
+                <th>Member name</th>
+                <th>Phone number</th>
+                <th>Email address</th>
+                <th>Role</th>
+                {/* <th></th> */}
+              </tr>
+            </thead>
 
-          <tbody>
-            {
-              !loadingSquadMembers
-              ? squadMembersData.map((item, i) => (
-                <UserManagementListItem
-                  data={item}
-                  key={i}
-                  openAccessDeniedModal={this.openAccessDeniedModal}
-                />
-              ))
-              : <Loader />
-            }
-          </tbody>
-        </table>
-      </div>
+            <tbody>
+              {
+                !loadingSquadMembers
+                ? squadMembersData.map((item, i) => (
+                  <UserManagementListItem
+                    data={item}
+                    key={i}
+                    openAccessDeniedModal={this.openAccessDeniedModal}
+                  />
+                ))
+                : <Loader />
+              }
+            </tbody>
+          </table>
+          {
+            !this.props.loadingSquadMembers && this.props.squadMembersData.length
+            ? <Pagination
+              activePage={this.state.activePage}
+              itemsCountPerPage={this.pagesLimit}
+              totalItemsCount={this.props.squadMembersCount}
+              pageRangeDisplayed={5}
+              onChange={this.handlePageChange}
+            />
+            : ''
+          }
+        </div>
+      </React.Fragment>
     )
   }
 }

@@ -119,7 +119,7 @@ class OrderDetail extends Component {
             <div className="order-detail__header">
               <div>
                 <span onClick={this.unmountOrderDetail} style={{ marginRight: '20px', cursor: 'pointer' }}>{ getIcon('back') }</span>
-                <span style={{ fontSize: '18px', color: '#687189' }}>OTTP ID: <b>{`#${this.props.match.params.orderId}`}</b></span>
+                <span style={{ fontSize: '18px', color: '#687189' }}>OTTP ID: <b>{`#${this.props.match.params.ottpId}`}</b></span>
               </div>
               <div style={{ marginLeft: '38px', marginTop: '10px' }}>
                 <span

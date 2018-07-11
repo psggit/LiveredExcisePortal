@@ -1,0 +1,35 @@
+.pagination {
+  text-align: right;
+  margin-top: 20px;
+  list-style-type: none;
+  li {
+    display: inline-block;
+    border-radius: 4px;
+    border: 1px solid #D9D9D9;
+    margin: 0 5px;
+    background-color: #fff;
+    &.active {
+      background-color: #0070D9;
+      a {
+        color: #fff;
+      }
+    }
+
+    a {
+      padding: 5px 12px;
+      display: inline-block;
+      text-decoration: none;
+      color: #0070D9;
+    }
+    &:first-child, &:last-child {
+      display: none;
+    }
+
+    &:nth-last-child(2) {
+      margin-right: 0;
+    }
+    &:nth-child(2) {
+      margin-left: 0;
+    }
+  }
+}

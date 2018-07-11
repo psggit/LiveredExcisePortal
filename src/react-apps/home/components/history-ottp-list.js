@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
 import HistoryOrdersListItem from './history-ottp-list-item'
-// import Pagination from 'react-js-pagination'
+import Pagination from 'react-js-pagination'
+import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 
 class HistoryOrdersList extends React.Component {
@@ -53,7 +54,7 @@ class HistoryOrdersList extends React.Component {
 
 
     this.props.actions.fetchHistoryOTTP({
-      limit: 40,
+      limit: this.pagesLimit,
       offset: 0,
       from_date: queryObj.from_date || today,
       to_date: queryObj.to_date || tommorrow,
@@ -66,7 +67,7 @@ class HistoryOrdersList extends React.Component {
     if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
       this.props.actions.setLoadingAll()
       this.props.actions.fetchHistoryOTTP({
-        limit: 40,
+        limit: this.pagesLimit,
         offset: 0,
         from_date: filters.from,
         to_date: filters.to,
@@ -106,17 +107,17 @@ class HistoryOrdersList extends React.Component {
             </tbody>
           </table>
         </div>
-        {/* {
-          !this.props.loadingHistoryOrders && this.props.historyOrdersData.length
+        {
+          !this.props.loadingHistoryOTTP && this.props.historyOTTPData.length
           ? <Pagination
             activePage={this.state.activePage}
             itemsCountPerPage={this.pagesLimit}
-            totalItemsCount={this.props.historyOrdersCount}
+            totalItemsCount={this.props.historyOTTPCount}
             pageRangeDisplayed={5}
             onChange={this.handlePageChange}
           />
           : ''
-        } */}
+        }
 
       </Fragment>
     )

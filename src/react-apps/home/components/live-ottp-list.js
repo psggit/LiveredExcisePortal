@@ -1,23 +1,23 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-// import Pagination from 'react-js-pagination'
+import Pagination from 'react-js-pagination'
 import * as Actions from './../actions'
 import LiveOrdersListItem from './live-ottp-list-item'
 import Loader from '@components/loader'
+import '@sass/_pagination.scss'
+
 
 class LiveOrdersList extends React.Component {
   constructor() {
     super()
-    this.pagesLimit = 40
+    this.pagesLimit = 10
     this.state = {
       activePage: 1,
       pageOffset: 0
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.openAssignOrderModal = this.openAssignOrderModal.bind(this)
-    this.handleConfirmAssign = this.handleConfirmAssign.bind(this)
     this.defaultData = this.defaultData.bind(this)
     this.filteredData = this.filteredData.bind(this)
   }
@@ -26,33 +26,24 @@ class LiveOrdersList extends React.Component {
     this.props.history.push(`/home/live-ottp/${orderId}`)
   }
 
-  handlePageChange(pageNumber) {
-    const offset = this.pagesLimit * (pageNumber - 1)
-    const { filters } = this.props
-    this.setState({ activePage: pageNumber, pageOffset: offset })
-    this.props.actions.fetchHistoryOrders({
+  fetchData() {
+    this.props.actions.fetchInProgressOTTP({
       limit: this.pagesLimit,
       offset,
       status: filters.status === 'all' ? undefined : filters.status
     })
   }
 
-  openAssignOrderModal(orderId) {
-    // this.props.unmountOrderDetail()
-    mountModal(ConfirmModal({
-      heading: 'Assign order',
-      confirmMessage: 'Are your sure you want to assign this order?',
-      handleConfirm: () => { this.handleConfirmAssign(orderId) }
-    }))
-  }
-
-  handleConfirmAssign(orderId) {
-    const postData = {
-      support_id: parseInt(getHasuraId()),
-      order_id: orderId
-    }
-    this.props.actions.assignOrder(postData)
-    unMountModal()
+  handlePageChange(pageNumber) {
+    clearTimeout(this.timeoutId)
+    const offset = this.pagesLimit * (pageNumber - 1)
+    const { filters } = this.props
+    this.setState({ activePage: pageNumber, pageOffset: offset })
+    this.props.actions.fetchInProgressOTTP({
+      limit: this.pagesLimit,
+      offset,
+      status: filters.status === 'all' ? undefined : filters.status
+    })
   }
 
   componentDidMount() {
@@ -63,7 +54,7 @@ class LiveOrdersList extends React.Component {
     const queryUri = location.search.slice(1).split('=')
     const status = queryUri[1]
     this.props.actions.fetchInProgressOTTP({
-      limit: 40,
+      limit: this.pagesLimit,
       offset: 0,
       status: status === 'all' ? undefined : status
     })
@@ -73,7 +64,7 @@ class LiveOrdersList extends React.Component {
 
   filteredData() {
     this.props.actions.fetchInProgressOTTP({
-      limit: 40,
+      limit: this.pagesLimit,
       offset: 0,
       status: this.filters.status === 'all' ? undefined : this.filters.status
     })
@@ -127,17 +118,17 @@ class LiveOrdersList extends React.Component {
             </tbody>
           </table>
         </div>
-        {/* {
-          !this.props.loadingLiveOrders && this.props.liveOrdersData.length
+        {
+          !this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length
           ? <Pagination
             activePage={this.state.activePage}
             itemsCountPerPage={this.pagesLimit}
-            totalItemsCount={this.props.liveOrdersCount}
+            totalItemsCount={this.props.inProgressCount}
             pageRangeDisplayed={5}
             onChange={this.handlePageChange}
           />
           : ''
-        } */}
+        }
 
       </Fragment>
     )
