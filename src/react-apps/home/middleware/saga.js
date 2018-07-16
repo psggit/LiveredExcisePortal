@@ -7,6 +7,7 @@ import { takeLatest } from 'redux-saga'
 import { call, fork, put, all } from 'redux-saga/effects'
 import * as ActionTypes from './../constants/actions'
 import * as Api from './api'
+import Notify from '@components/notification';
 // import Notify from '@components/Notification'
 
 
@@ -25,6 +26,7 @@ function* fetchInProgressOTTP(action) {
 
 function* fetchHistoryOTTP(action) {
   try {
+    Notify("Successfully done", "warning");
     const data = yield call(Api.fetchHistoryOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_HISTORY_OTTP, data })
   } catch (err) {
