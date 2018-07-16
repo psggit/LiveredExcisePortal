@@ -26,7 +26,7 @@ function* fetchInProgressOTTP(action) {
 
 function* fetchHistoryOTTP(action) {
   try {
-    Notify("Successfully done", "warning");
+    Notify("Successfully done", "success");
     const data = yield call(Api.fetchHistoryOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_HISTORY_OTTP, data })
   } catch (err) {
