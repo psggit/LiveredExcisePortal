@@ -11,8 +11,6 @@
     min-width: calc(350px - 32px - 16px);//min-width - padding(16px+16px)- cross-icon(width : 24px)
     max-width: calc(520px - 32px - 16px);//max-width - padding(16px+16px)- cross-icon(width : 24px)
     border-radius: 4px;
-    // z-index: 2;
-    // color: #fff;
     box-shadow: 0 2px 4px 0 #9b9b9b;
     transform: translateX(-360px);
     display: flex;
@@ -30,7 +28,7 @@
 
     .notification-message {
         display: flex;
-        //align-items: center;
+        align-items: center;
         min-width: calc(100% - 10px - 16px); //width - marginRight(10px) - cross-icon(width : 24px)
         max-width: calc(100% - 10px - 16px); //width - marginRight(10px) - cross-icon(width : 24px)
         margin-right: 10px;
@@ -52,8 +50,6 @@
       cursor: pointer;
       width: 16px;
       height: 16px;
-      display: flex;
-      align-items: center;
     }
    
   }
