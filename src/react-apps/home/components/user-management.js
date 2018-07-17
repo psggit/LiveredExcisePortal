@@ -7,7 +7,9 @@ import { mountModal, unMountModal } from '@components/ModalBox/utils'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
-// import Pagination from 'react-js-pagination
+import Pagination from 'react-js-pagination'
+import '@sass/_pagination.scss'
+import Loader from '@components/loader'
 
 class UserManagement extends React.Component {
   constructor() {
@@ -16,13 +18,35 @@ class UserManagement extends React.Component {
       shouldMountMemberInfoModal: false
     }
     this.mountMemberInfoModal = this.mountMemberInfoModal.bind(this)
+    this.handleAccessUpdate = this.handleAccessUpdate.bind(this)
+    this.openAccessDeniedModal = this.openAccessDeniedModal.bind(this)
   }
-  openAccessDeniedModal() {
+
+  openAccessDeniedModal(id, name, status) {
+    let heading, confirmMessage, cancelTitle
+    if (status) {
+      heading = `Grant access to ${name}`
+      confirmMessage =  ``
+      cancelTitle = 'Yes, grant access'
+    } else {
+      heading = `Deny access to ${name}`
+      confirmMessage = `If you deny access to ${name}, he won’t be able to access this portal. You can grant him access later if necessary.`
+      cancelTitle = 'Yes, deny access'
+    }
+
     mountModal(ConfirmModal({
-      heading: 'Deny access to Karthik Pasagada?',
-      confirmMessage: 'If you deny access to Karthik Pasagada, he won’t be able to access this portal. You can grant him access later if necessary.',
-      cancelTitle: 'Yes, deny access'
+      heading,
+      confirmMessage,
+      cancelTitle,
+      handleConfirm: () => {
+        this.handleAccessUpdate(id, status)
+      }
     }))
+  }
+
+  handleAccessUpdate(id, status) {
+    this.props.actions.updateSquadMember({ id, status })
+    unMountModal()
   }
 
   componentDidMount() {
@@ -33,41 +57,58 @@ class UserManagement extends React.Component {
   }
 
   mountMemberInfoModal() {
-    mountModal(MemberInfoModal({}))
-  }
-
-  handleAddMember() {
-
+    mountModal(MemberInfoModal({
+      handleSubmit: (data) => {
+        this.props.actions.addSquadMember(data)
+      }
+    }))
   }
 
   render() {
     const { loadingSquadMembers, squadMembersData } = this.props
     return (
-      <div style={{ marginTop: '62px', padding: '20px' }}>
-        <Button primary onClick={this.mountMemberInfoModal}>Add Member</Button>
-        <table style={{ marginTop: '20px' }}>
-          <thead>
-            <tr>
-              <th>Access status</th>
-              <th>Member name</th>
-              <th>Phone number</th>
-              <th>Email address</th>
-              <th>Role</th>
-              <th></th>
-            </tr>
-          </thead>
+      <React.Fragment>
+        <div style={{ marginTop: '62px', padding: '20px' }}>
+          <Button primary onClick={this.mountMemberInfoModal}>Add Member</Button>
+          <table style={{ marginTop: '20px' }}>
+            <thead>
+              <tr>
+                <th>Access status</th>
+                <th>Member name</th>
+                <th>Phone number</th>
+                <th>Email address</th>
+                <th>Role</th>
+                {/* <th></th> */}
+              </tr>
+            </thead>
 
-          <tbody>
-            {
-              !loadingSquadMembers
-              ? squadMembersData.map((item, i) => (
-                <UserManagementListItem data={item} key={i} openAccessDeniedModal={this.openAccessDeniedModal} />
-              ))
-              : <tr className="loader2" />
-            }
-          </tbody>
-        </table>
-      </div>
+            <tbody>
+              {
+                !loadingSquadMembers
+                ? squadMembersData.map((item, i) => (
+                  <UserManagementListItem
+                    data={item}
+                    key={i}
+                    openAccessDeniedModal={this.openAccessDeniedModal}
+                  />
+                ))
+                : <Loader />
+              }
+            </tbody>
+          </table>
+          {
+            !this.props.loadingSquadMembers && this.props.squadMembersData.length
+            ? <Pagination
+              activePage={this.state.activePage}
+              itemsCountPerPage={this.pagesLimit}
+              totalItemsCount={this.props.squadMembersCount}
+              pageRangeDisplayed={5}
+              onChange={this.handlePageChange}
+            />
+            : ''
+          }
+        </div>
+      </React.Fragment>
     )
   }
 }

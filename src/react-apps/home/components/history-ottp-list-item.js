@@ -1,5 +1,6 @@
 import React from 'react'
 import moment from 'moment'
+import Indicator from '@components/indicator'
 
 function getTimeDiff(d2) {
   const d1 = new Date()
@@ -37,7 +38,11 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
   const orderStatus = `${status}${time}${article}`
   return (
     <tr onClick={(e) => {handleClick(data.ottp_id, e)} }>
-      <td></td>
+      <td
+        style={{ textAlign: 'center' }}
+      >
+        <Indicator type={data.ottp_status === 'returning' ? 'danger' : 'success'} />
+      </td>
       <td className="clickable">{ data.ottp_id }</td>
       <td>{ data.ottp_issued_time }</td>
       <td>{ data.ottp_status }</td>

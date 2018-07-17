@@ -20,18 +20,36 @@ class WithFilters extends React.Component {
   // }
 
   setFilters(filters) {
+    let fromUrl = ''
+    let toUrl = ''
+
+    if (this.props.currentRoute === 'history-ottp') {
+      fromUrl = `&from_date=${filters.from}`
+      toUrl = `&to_date=${filters.to}`
+    }
+
+    this.props.history.push(`/home/${this.props.currentRoute}?status=${filters.status}${fromUrl}${toUrl}`)
     this.setState({
-      status: filters.statusFilter,
-      from: filters.dateFilter.from,
-      to: filters.dateFilter.to
+      status: filters.status,
+      from: filters.from,
+      to: filters.to
     })
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentRoute !== this.props.currentRoute) {
+      this.filterData.resetFilters()
+    }
+  }
+
   render() {
     const { children } = this.props
     return (
       <div style={{ marginTop: '62px', padding: '20px' }}>
         {
           <Filter
+            ref={(node) => this.filterData = node }
+            statusFilters={this.props.statusFilters}
             setFilters={this.setFilters}
             filters={this.props.filters}
           />

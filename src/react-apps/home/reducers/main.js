@@ -38,7 +38,8 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS]: (state, action) => {
     return Object.assign({}, state, {
       loadingSquadMembers: false,
-      squadMembersData: action.data.data
+      squadMembersData: action.data.data,
+      squadMembersCount: action.data.count
     })
   },
 
@@ -46,6 +47,15 @@ const actionsMap = {
     return Object.assign({}, state, {
       loadingOrderDetail: false,
       orderDetailData: action.data.orderStatus
+    })
+  },
+
+  [ActionTypes.SUCCESS_SET_LOADING_ALL]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingInProgressOTTP: true,
+      loadingHistoryOTTP: true,
+      loadingOTTPDetail: true,
+      loadingSquadMembers: true
     })
   }
 }

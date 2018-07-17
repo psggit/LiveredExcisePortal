@@ -5,6 +5,7 @@ import AccordianItem from '@components/accordian/accordian-item'
 import Button from '@components/button/index.js'
 import Toggle from '@components/toggle'
 import InfoBar from '@components/infobar'
+import { unMountModal } from '@components/ModalBox/utils'
 
 function MemberInfoModal(data) {
   return class MemberInfoModal extends React.Component {
@@ -13,9 +14,16 @@ function MemberInfoModal(data) {
       this.handleChange = this.handleChange.bind(this)
       this.setActiveAccordian = this.setActiveAccordian.bind(this)
       this.handleNextAccordian = this.handleNextAccordian.bind(this)
+      this.handleSetAccess = this.handleSetAccess.bind(this)
+      this.handleSubmit = this.handleSubmit.bind(this)
+
       this.state = {
+        activeAccordian: 1,
+        name: '',
+        mobile_number: '',
+        email: '',
+        status: false,
         role: 'member',
-        activeAccordian: 1
       }
     }
 
@@ -30,9 +38,26 @@ function MemberInfoModal(data) {
       }
     }
 
+    handleSubmit() {
+      const { name, mobile_number, email, role, status } = this.state
+      data.handleSubmit({
+        name,
+        mobile_number,
+        email,
+        role,
+        status
+      })
+      unMountModal()
+    }
+
     handleChange(e) {
       this.setState({ [e.target.name]: e.target.value })
     }
+
+    handleSetAccess() {
+      this.setState({ status: !this.state.status })
+    }
+
     render() {
       return (
         <ModalBox>
@@ -43,29 +68,48 @@ function MemberInfoModal(data) {
             <AccordianItem title="Basic Member Information" id={1}>
               <div className="form-group">
                 <label>Member Name</label>
-                <input type="text" />
+                <input
+                  onChange={this.handleChange}
+                  value={this.state.name}
+                  name="name"
+                  type="text"
+                />
               </div>
 
               <div className="form-group">
                 <label>Member Phone Number</label>
-                <input type="text" />
+                <input
+                  onChange={this.handleChange}
+                  value={this.state.mobile_number}
+                  name="mobile_number"
+                  type="text"
+                  maxLength={10}
+                />
               </div>
 
               <div className="form-group">
                 <label>Email Address</label>
-                <input type="text" />
+                <input
+                  onChange={this.handleChange}
+                  value={this.state.email}
+                  name="email"
+                  type="text"
+                />
               </div>
 
               <div style={{ marginTop: '30px' }} className="form-group">
                 <Button onClick={this.handleNextAccordian} primary>Next</Button>
-                <Button secondary>Cancel</Button>
+                <Button onClick={unMountModal} secondary>Cancel</Button>
               </div>
             </AccordianItem>
 
             <AccordianItem title="Access Status" id={2}>
               <div className="form-group">
                 <label>Set access status</label>
-                <Toggle onToggle={this.handleSetAccess} />
+                <Toggle
+                  isToggled={this.state.status}
+                  onToggle={() => { this.handleSetAccess(this.state.status) }}
+                />
                 <span
                   style={{
                     marginLeft: '12px',
@@ -78,7 +122,7 @@ function MemberInfoModal(data) {
 
               <div style={{ marginTop: '30px' }} className="form-group">
                 <Button onClick={this.handleNextAccordian} primary>Next</Button>
-                <Button secondary>Cancel</Button>
+                <Button onClick={unMountModal} secondary>Cancel</Button>
               </div>
             </AccordianItem>
 
@@ -121,8 +165,8 @@ function MemberInfoModal(data) {
               />
 
               <div style={{ marginTop: '30px' }} className="form-group">
-                <Button primary>Save changes</Button>
-                <Button secondary>Cancel</Button>
+                <Button onClick={this.handleSubmit} primary>Save changes</Button>
+                <Button onClick={unMountModal} secondary>Cancel</Button>
               </div>
             </AccordianItem>
           </Accordian>

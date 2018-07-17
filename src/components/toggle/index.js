@@ -14,7 +14,6 @@ class ToggleButton extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({ toggled: !this.state.toggled })
     this.props.onToggle()
   }
   render() {

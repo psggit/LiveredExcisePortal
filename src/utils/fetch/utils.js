@@ -64,7 +64,7 @@ export function checkStatus(response) {
  * @param {Object} options
  */
 export function constructFetchUtility(options) {
-  const { api, data, method, type, cors, prependBaseUrl = true, apiBase } = options
+  const { api, data, method, type, cors, prependBaseUrl = true, apiBase, cookie } = options
 
   // construct request url
   const url = prependBaseUrl ? `${Api[apiBase]}${api}` : api
@@ -72,15 +72,16 @@ export function constructFetchUtility(options) {
   // construct options for creating `window.fetch` instance
   let fetchOptions = {
     method,
-    // credentials: 'include',
     headers: getHeaders(type),
   }
 
+  if (cookie === undefined) fetchOptions.credentials = 'include'
   if(cors) fetchOptions.mode = 'cors'
   // add data to request
   if (data) {
     fetchOptions.body = constructBody({type, data})
   }
+
 
   // return window.fetch instance
   return (options.handleError)

@@ -1,0 +1,14 @@
+.indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+
+  &.indicator--success {
+    background-color: #27AE60;
+  }
+
+  &.indicator--danger {
+    background-color: #D13222;
+  }
+}

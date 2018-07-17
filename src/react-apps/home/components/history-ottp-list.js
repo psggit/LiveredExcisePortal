@@ -2,8 +2,10 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
-import HistoryOrdersListItem from './history-orders-list-item'
-// import Pagination from 'react-js-pagination'
+import HistoryOrdersListItem from './history-ottp-list-item'
+import Pagination from 'react-js-pagination'
+import '@sass/_pagination.scss'
+import Loader from '@components/loader'
 
 class HistoryOrdersList extends React.Component {
   constructor() {
@@ -35,26 +37,37 @@ class HistoryOrdersList extends React.Component {
   }
 
   componentDidMount() {
-    const today = new Date()
+    const queryUri = location.search.slice(1)
+    let today = new Date()
     today.setUTCHours(0, 0, 0, 0)
-    const tommorrow = new Date(today.getTime())
+    let tommorrow = new Date(today.getTime())
     tommorrow.setDate(tommorrow.getDate() + 1)
     tommorrow.setUTCHours(0, 0, 0, 0)
 
+    const queryObj = {}
+
+    queryUri.split('&')
+    .map(item => item.split('='))
+    .forEach(([key, value]) => {
+      queryObj[key] = value
+    })
+
+
     this.props.actions.fetchHistoryOTTP({
-      limit: 40,
+      limit: this.pagesLimit,
       offset: 0,
-      from_date: today,
-      to_date: tommorrow,
-      status: 'all'
+      from_date: queryObj.from_date || today,
+      to_date: queryObj.to_date || tommorrow,
+      status: queryObj.status === 'all' ? undefined : queryObj.status
     })
   }
 
   componentDidUpdate(prevProps) {
     const { filters } = this.props
     if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
+      this.props.actions.setLoadingAll()
       this.props.actions.fetchHistoryOTTP({
-        limit: 40,
+        limit: this.pagesLimit,
         offset: 0,
         from_date: filters.from,
         to_date: filters.to,
@@ -89,22 +102,22 @@ class HistoryOrdersList extends React.Component {
                     data={item}
                   />
                 ))
-                : <tr className='loader2' />
+                : <Loader />
               }
             </tbody>
           </table>
         </div>
-        {/* {
-          !this.props.loadingHistoryOrders && this.props.historyOrdersData.length
+        {
+          !this.props.loadingHistoryOTTP && this.props.historyOTTPData.length
           ? <Pagination
             activePage={this.state.activePage}
             itemsCountPerPage={this.pagesLimit}
-            totalItemsCount={this.props.historyOrdersCount}
+            totalItemsCount={this.props.historyOTTPCount}
             pageRangeDisplayed={5}
             onChange={this.handlePageChange}
           />
           : ''
-        } */}
+        }
 
       </Fragment>
     )

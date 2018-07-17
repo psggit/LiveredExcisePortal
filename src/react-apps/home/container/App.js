@@ -1,14 +1,18 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { setLoadingAll } from './../actions'
 import createHistory from 'history/createBrowserHistory'
 import { Route, Switch } from 'react-router-dom'
 import { Router } from 'react-router'
 import Navbar from '@components/navbar'
 import { menuItemsMap, menuItems } from './../constants/navbar-items'
-import LiveOrdersList from './../components/live-orders-list'
-import HistoryOrdersList from './../components/history-orders-list'
-import OrderDetail from './../components/order-detail'
+import LiveOTTPList from './../components/live-ottp-list'
+import HistoryOTTPList from './../components/history-ottp-list'
+import OTTPDetail from './../components/ottp-detail'
 import UserManagement from './../components/user-management'
 import WithFilters from './../components/with-filters'
+import { liveFilters, historyFilters } from './../constants/status-filters'
 import '@sass/app.scss'
 
 const history = createHistory()
@@ -18,27 +22,17 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentRoute: location.pathname.split('/')[2] || 'live-orders',
-      isFilters: true
-    }
-
-    this.mountFilters = this.mountFilters.bind(this)
-  }
-
-  mountFilters(route) {
-    if (route === 'user-management') {
-      this.setState({ isFilters: false })
-    } else {
-      this.setState({ isFilters: true })
+      currentRoute: location.pathname.split('/')[2] || 'live-ottp',
     }
   }
 
   componentDidMount() {
-    this.mountFilters(this.state.currentRoute)
     history.listen((loction) => {
       const newRoute = location.pathname.split('/')[2]
-      this.setState({ currentRoute: newRoute })
-      this.mountFilters(newRoute)
+      if (newRoute !== this.state.currentRoute) {
+        this.props.actions.setLoadingAll()
+        this.setState({ currentRoute: newRoute })
+      }
     })
   }
 
@@ -63,8 +57,13 @@ class App extends React.Component {
               path="/home/live-ottp"
               render={
                 props => (
-                  <WithFilters filters={['status']}>
-                    <LiveOrdersList {...props} />
+                  <WithFilters
+                    history={history}
+                    currentRoute={this.state.currentRoute}
+                    statusFilters={liveFilters}
+                    filters={['status']}
+                  >
+                    <LiveOTTPList {...props} />
                   </WithFilters>
                 )
               }
@@ -75,8 +74,13 @@ class App extends React.Component {
               path="/home/history-ottp"
               render={
                 props => (
-                  <WithFilters filters={['status', 'date']}>
-                    <HistoryOrdersList {...props} />
+                  <WithFilters
+                    history={history}
+                    currentRoute={this.state.currentRoute}
+                    statusFilters={historyFilters}
+                    filters={['status', 'date']}
+                  >
+                    <HistoryOTTPList {...props} />
                   </WithFilters>
                 )
               }
@@ -94,20 +98,20 @@ class App extends React.Component {
 
             <Route
               exact
-              path="/home/history-ottp/:orderId"
+              path="/home/history-ottp/:ottpId"
               render={
                 props => (
-                  <OrderDetail {...props} />
+                  <OTTPDetail {...props} />
                 )
               }
             />
 
             <Route
               exact
-              path="/home/live-ottp/:orderId"
+              path="/home/live-ottp/:ottpId"
               render={
                 props => (
-                  <OrderDetail {...props} />
+                  <OTTPDetail {...props} />
                 )
               }
             />
@@ -118,4 +122,10 @@ class App extends React.Component {
   }
 }
 
-export default App
+const mapStateToProps = state => state.main
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators({ setLoadingAll }, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

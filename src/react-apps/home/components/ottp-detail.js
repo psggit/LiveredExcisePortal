@@ -57,9 +57,9 @@ class OrderDetail extends Component {
   }
 
   componentDidMount() {
-    const { orderId } = this.props.match.params
+    const { ottpId } = this.props.match.params
     this.props.actions.fetchOTTPDetail({
-      ottp_id: orderId
+      ottp_id: ottpId
     })
   }
 
@@ -68,7 +68,8 @@ class OrderDetail extends Component {
   }
 
   unmountOrderDetail() {
-    this.props.history.push('/home/history-orders')
+    this.props.history.goBack()
+    // this.props.history.push('/home/history-orders')
   }
 
   handleRefersh() {
@@ -118,7 +119,7 @@ class OrderDetail extends Component {
             <div className="order-detail__header">
               <div>
                 <span onClick={this.unmountOrderDetail} style={{ marginRight: '20px', cursor: 'pointer' }}>{ getIcon('back') }</span>
-                <span style={{ fontSize: '18px', color: '#687189' }}>OTTP ID: <b>{`#${this.props.match.params.orderId}`}</b></span>
+                <span style={{ fontSize: '18px', color: '#687189' }}>OTTP ID: <b>{`#${this.props.match.params.ottpId}`}</b></span>
               </div>
               <div style={{ marginLeft: '38px', marginTop: '10px' }}>
                 <span

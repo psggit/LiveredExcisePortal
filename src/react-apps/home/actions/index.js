@@ -20,7 +20,16 @@ export const fetchSquadMembers = data => ({
   data
 })
 
+export const addSquadMember = data => ({
+  type: ActionTypes.REQUEST_ADD_SQUAD_MEMBER,
+  data
+})
+
 export const updateSquadMember = data => ({
   type: ActionTypes.REQUEST_UPDATE_SQUAD_MEMBER,
   data
+})
+
+export const setLoadingAll = () => ({
+  type: ActionTypes.REQUEST_SET_LOADING_ALL
 })

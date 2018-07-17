@@ -16,7 +16,6 @@ function* fetchInProgressOTTP(action) {
   try {
     const data = yield call(Api.fetchInProgressOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP, data })
-    Notify("Successfully fetched in progress OTTP", "success");
   } catch (err) {
     console.log(err)
     err.response.json().then(json => { Notify(json.message, "warning") })
@@ -28,7 +27,6 @@ function* fetchHistoryOTTP(action) {
   try {
     const data = yield call(Api.fetchHistoryOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_HISTORY_OTTP, data })
-    Notify("Successfully fetched OTTP history", "success");
   } catch (err) {
     console.log(err)
     err.response.json().then(json => { Notify(json.message, "warning") })
@@ -39,7 +37,6 @@ function* fetchOTTPDetail(action) {
   try {
     const data = yield call(Api.fetchOTTPDetail, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_OTTP_DETAIL, data })
-    Notify("Successfully fetched OTTP details", "success");
   } catch (err) {
     console.log(err)
     err.response.json().then(json => { Notify(json.message, "warning") })
@@ -51,7 +48,6 @@ function* fetchSquadMembers(action) {
   try {
     const data = yield call(Api.fetchSquadMembers, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS, data })
-    Notify("Successfully fetched squad members", "success");
   } catch (err) {
     console.log(err)
     err.response.json().then(json => { Notify(json.message, "warning") })
@@ -61,11 +57,24 @@ function* fetchSquadMembers(action) {
 function* updateSquadMember(action) {
   console.log(action)
   try {
-    const data = yield call(Api.fetchSquadMembers, action)
-    yield put({ type: ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS, data })
-    //Notify("Successfully updated squad member", "success");
+    const data = yield call(Api.updateSquadMember, action)
+    yield put({ type: ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS, data: { offset: 0, limit: 10 } })
+    Notify("Successfully updated squad members", "success");
   } catch (err) {
     console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
+function* addSquadMember(action) {
+  console.log(action)
+  try {
+    const data = yield call(Api.addSquadMember, action)
+    yield put({ type: ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS, data: { offset: 0, limit: 10 } })
+    Notify("Successfully added squad members", "success");
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
   }
 }
 
@@ -78,9 +87,9 @@ function* setLoading(action) {
   }
 }
 
-function* setLoadingAll(action) {
+function* setLoadingAll() {
   try {
-    yield put({ type: ActionTypes.SUCCESS_SET_LOADING_ALL, data: action.data })
+    yield put({ type: ActionTypes.SUCCESS_SET_LOADING_ALL })
   } catch (err) {
     console.log(err)
   }
@@ -117,6 +126,12 @@ function* watchUpdateSquadMember() {
   }
 }
 
+function* watchAddSquadMember() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_ADD_SQUAD_MEMBER, addSquadMember)
+  }
+}
+
 function* watchSetLoading() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_SET_LOADING, setLoading)
@@ -136,6 +151,7 @@ export default function* rootSaga() {
     fork(watchFetchOTTPDetail),
     fork(watchFetchSquadMembers),
     fork(watchUpdateSquadMember),
+    fork(watchAddSquadMember),
     fork(watchSetLoading),
     fork(watchSetLoadingAll)
   ]

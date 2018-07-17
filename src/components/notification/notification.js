@@ -58,9 +58,9 @@ class Notification extends Component {
 
       setTimeout(this.mountNotify, 500)
 
-      // setTimeout(() => {
-      //   this.unmountNotify()
-      // }, 3500)
+      setTimeout(() => {
+        this.unmountNotify()
+      }, 3500)
 
     }
 
