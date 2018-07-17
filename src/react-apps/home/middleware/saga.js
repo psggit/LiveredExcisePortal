@@ -7,8 +7,7 @@ import { takeLatest } from 'redux-saga'
 import { call, fork, put, all } from 'redux-saga/effects'
 import * as ActionTypes from './../constants/actions'
 import * as Api from './api'
-// import Notify from '@components/Notification'
-
+import Notify from '@components/notification';
 
 /**
  * Handlers
@@ -17,8 +16,10 @@ function* fetchInProgressOTTP(action) {
   try {
     const data = yield call(Api.fetchInProgressOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP, data })
+    Notify("Successfully fetched in progress OTTP", "success");
   } catch (err) {
     console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
   }
 }
 
@@ -27,8 +28,10 @@ function* fetchHistoryOTTP(action) {
   try {
     const data = yield call(Api.fetchHistoryOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_HISTORY_OTTP, data })
+    Notify("Successfully fetched OTTP history", "success");
   } catch (err) {
     console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
   }
 }
 
@@ -36,8 +39,10 @@ function* fetchOTTPDetail(action) {
   try {
     const data = yield call(Api.fetchOTTPDetail, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_OTTP_DETAIL, data })
+    Notify("Successfully fetched OTTP details", "success");
   } catch (err) {
     console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
   }
 }
 
@@ -46,8 +51,10 @@ function* fetchSquadMembers(action) {
   try {
     const data = yield call(Api.fetchSquadMembers, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS, data })
+    Notify("Successfully fetched squad members", "success");
   } catch (err) {
     console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
   }
 }
 

@@ -47,6 +47,7 @@ class LiveOrdersList extends React.Component {
   }
 
   componentDidMount() {
+    console.log("props", this.props)
     this.defaultData()
   }
 
