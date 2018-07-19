@@ -14,12 +14,14 @@ import Loader from '@components/loader'
 class UserManagement extends React.Component {
   constructor() {
     super()
+    this.pagesLimit = 10
     this.state = {
       shouldMountMemberInfoModal: false
     }
     this.mountMemberInfoModal = this.mountMemberInfoModal.bind(this)
     this.handleAccessUpdate = this.handleAccessUpdate.bind(this)
     this.openAccessDeniedModal = this.openAccessDeniedModal.bind(this)
+    this.handlePageChange = this.handlePageChange.bind(this)
   }
 
   openAccessDeniedModal(id, name, status) {
@@ -44,6 +46,16 @@ class UserManagement extends React.Component {
     }))
   }
 
+  handlePageChange(pageNumber) {
+    const offset = this.pagesLimit * (pageNumber - 1)
+    const { filters } = this.props
+    this.setState({ activePage: pageNumber, pageOffset: offset })
+    this.props.actions.fetchSquadMembers({
+      limit: this.pagesLimit,
+      offset,
+    })
+  }
+
   handleAccessUpdate(id, status) {
     this.props.actions.updateSquadMember({ id, status })
     unMountModal()
@@ -51,7 +63,7 @@ class UserManagement extends React.Component {
 
   componentDidMount() {
     this.props.actions.fetchSquadMembers({
-      limit: 40,
+      limit: this.pagesLimit,
       offset: 0
     })
   }
