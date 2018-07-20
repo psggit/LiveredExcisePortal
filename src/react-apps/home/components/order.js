@@ -27,7 +27,7 @@ function Order({ cartItems }) {
               {
                 cartItems.reduce((sum, item) => {
                   return sum + ((parseInt(item.volume) * item.count) / 1000)
-                }, 0)
+                }, 0).toFixed(2)
               }
               &nbsp;Litres
             </b>
