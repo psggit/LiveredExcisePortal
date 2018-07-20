@@ -7,6 +7,6 @@ export const liveFilters = [
 
 export const historyFilters = [
   { value: 'all', label: '-All-' },
-  { value: 'Returned', label: 'Cancelled' },
+  { value: 'Returned', label: 'Returned' },
   { value: 'Delivered', label: 'Delivered' }
 ]
