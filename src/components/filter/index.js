@@ -180,13 +180,13 @@ class Filter extends React.Component {
             <Button onClick={this.resetFilters} secondary>Reset to default</Button>
           </div>
 
-          {
+          {/* {
             currentRoute === 'history-ottp' &&
             <div style={{ borderLeft: '1px solid #D0D6E2', padding: '0 20px', marginLeft: '20px' }}>
               <label>OTTP Status</label>
               <Button secondary>Download OTTP Report</Button>
             </div>
-          }
+          } */}
         </div>
       </div>
     )
