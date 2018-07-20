@@ -52,6 +52,7 @@ class WithFilters extends React.Component {
             statusFilters={this.props.statusFilters}
             setFilters={this.setFilters}
             filters={this.props.filters}
+            currentRoute={this.props.currentRoute}
           />
         }
         <div style={{ marginTop: '20px' }}>
