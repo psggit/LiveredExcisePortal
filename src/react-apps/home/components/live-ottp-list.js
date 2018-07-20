@@ -114,7 +114,21 @@ class LiveOrdersList extends React.Component {
                     data={item}
                   />
                 ))
-                : <Loader />
+                : (
+                  <tr>
+                    <td colSpan="6">
+                      <Loader />
+                    </td>
+                  </tr>
+                )
+              }
+              {
+                !this.props.loadingInProgressOTTP && !this.props.inProgressOTTP.length &&
+                <tr>
+                  <td style={{ textAlign: 'center' }} colSpan="6">
+                    No records found
+                  </td>
+                </tr>
               }
             </tbody>
           </table>

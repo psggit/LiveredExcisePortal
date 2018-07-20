@@ -102,7 +102,21 @@ class HistoryOrdersList extends React.Component {
                     data={item}
                   />
                 ))
-                : <Loader />
+                : (
+                  <tr>
+                    <td colSpan="7">
+                      <Loader />
+                    </td>
+                  </tr>
+                )
+              }
+              {
+                !this.props.loadingHistoryOTTP && !this.props.historyOTTPData.length &&
+                <tr>
+                  <td style={{ textAlign: 'center' }} colSpan='7'>
+                    No records found
+                  </td>
+                </tr>
               }
             </tbody>
           </table>

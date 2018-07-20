@@ -25,6 +25,7 @@ class UserManagement extends React.Component {
   }
 
   openAccessDeniedModal(id, name, status) {
+    if (parseInt(localStorage.getItem('hasura-id')) === id) return;
     let heading, confirmMessage, cancelTitle
     heading = `Deny access to ${name}`
     confirmMessage = `If you deny access to ${name}, he won’t be able to access this portal. You can grant him access later if necessary.`
@@ -111,7 +112,13 @@ class UserManagement extends React.Component {
                     openAccessDeniedModal={this.openAccessDeniedModal}
                   />
                 ))
-                : <Loader />
+                : (
+                  <tr>
+                    <td colSpan="5">
+                      <Loader />
+                    </td>
+                  </tr>
+                )
               }
             </tbody>
           </table>
