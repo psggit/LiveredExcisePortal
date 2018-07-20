@@ -91,10 +91,8 @@ class Filter extends React.Component {
   }
 
   render() {
-    console.log("Props in filter", this.props)
     const { isCollapsed, filters } = this.state
     const { currentRoute } = this.props
-    console.log("Props in filter", this.props, currentRoute)
     // const filterItemsJSX = {
     //   date: [
     //     <div className="filter-item">
@@ -183,7 +181,7 @@ class Filter extends React.Component {
           </div>
 
           {
-            currentRoute === 'history-orders' &&
+            currentRoute === 'history-ottp' &&
             <div style={{ borderLeft: '1px solid #D0D6E2', padding: '0 20px', marginLeft: '20px' }}>
               <label>OTTP Status</label>
               <Button secondary>Download OTTP Report</Button>
