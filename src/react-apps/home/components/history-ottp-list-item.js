@@ -44,7 +44,7 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
         <Indicator type={data.ottp_status === 'returning' ? 'danger' : 'success'} />
       </td>
       <td className="clickable">{ data.ottp_id }</td>
-      <td>{ data.ottp_issued_time }</td>
+      <td>{ Moment(data.ottp_issued_time).format("DD/MM/YYYY, h:mm") }</td>
       <td>{ data.ottp_status }</td>
       <td>{ data.agent_name }</td>
       <td>{ data.vehicle_number }</td>
