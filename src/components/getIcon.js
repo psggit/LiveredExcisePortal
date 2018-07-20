@@ -165,7 +165,7 @@ function getIcon(name) {
             </g>
         </svg>
       )
-    case 'cancelled':
+    case 'Returned':
       return (
         <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g id="Excise-DB---V0.2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
@@ -179,7 +179,7 @@ function getIcon(name) {
             </g>
         </svg>
       )
-    case 'delivered':
+    case 'Delivered':
       return (
         <svg width="30px" height="30px" viewBox="0 0 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g id="Excise-DB---V0.2" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
