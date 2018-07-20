@@ -1,5 +1,6 @@
 const merge = require('webpack-merge')
 const common = require('./webpack.common.js')
+const CompressionPlugin = require('compression-webpack-plugin')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(common, {
@@ -7,7 +8,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   plugins: [
     new CompressionPlugin({
-      test: /\.js$|\.css$|\.html$/,
+      test: /\.js$|\.css$/,
       asset: '[path].gz[query]',
       exclude: /node_modules/,
       algortithm: 'gzip',
