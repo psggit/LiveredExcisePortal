@@ -19,6 +19,17 @@ class Login extends React.Component {
     this.handleLogin = this.handleLogin.bind(this)
     this.setPhoneNumber = this.setPhoneNumber.bind(this)
     this.setOTP = this.setOTP.bind(this)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+  }
+
+  handleKeyPress(e) {
+    if (e.keyCode === 13) {
+      if (this.state.showOTPField) {
+        this.handleLogin()
+      } else {
+        this.handleOTP()
+      }
+    }
   }
 
   handleOTP() {
@@ -52,16 +63,16 @@ class Login extends React.Component {
       POST({
         api: '/excise-person/auth/otp-login',
         apiBase: 'gremlinUrl',
-        handleError: true,
+        handleError: false,
         data: { otp, mobile: phoneNumber }
       })
         .then(json => {
-          createSession(json)
-          window.location.href = '/home/live-ottp'
-        })
-        .catch(err => {
-          alert(err)
-          this.setState({ isSubmitting: false })
+          if (json.data) {
+            Notify(JSON.parse(json.data).message, 'warning')
+          } else {
+            createSession(json)
+            window.location.href = '/home/live-ottp'
+          }
         })
     }
   }
@@ -108,6 +119,7 @@ class Login extends React.Component {
                 <input
                   maxLength={10}
                   value={this.state.phoneNumber}
+                  onKeyDown={this.handleKeyPress}
                   onChange={this.setPhoneNumber}
                   style={{ width: '100%' }}
                   type="text"
@@ -133,6 +145,7 @@ class Login extends React.Component {
                 <input
                   value={this.state.otp}
                   onChange={this.setOTP}
+                  onKeyDown={this.handleKeyPress}
                   style={{ width: '100%' }}
                   maxLength="6"
                   type="text"
