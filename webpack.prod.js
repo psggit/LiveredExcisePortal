@@ -6,10 +6,14 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: '[name].[hash].css',
-    //   chunkFilename: '[id].[hash].css',
-    // })
+    new CompressionPlugin({
+      test: /\.js$|\.css$|\.html$/,
+      asset: '[path].gz[query]',
+      exclude: /node_modules/,
+      algortithm: 'gzip',
+      threshhold: 10240,
+      minRatio: 0.8
+    }),
   ],
   module: {
     // rules: [
