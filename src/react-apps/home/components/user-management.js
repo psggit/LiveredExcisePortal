@@ -26,24 +26,31 @@ class UserManagement extends React.Component {
 
   openAccessDeniedModal(id, name, status) {
     let heading, confirmMessage, cancelTitle
-    if (status) {
-      heading = `Grant access to ${name}`
-      confirmMessage =  ``
-      cancelTitle = 'Yes, grant access'
-    } else {
-      heading = `Deny access to ${name}`
-      confirmMessage = `If you deny access to ${name}, he won’t be able to access this portal. You can grant him access later if necessary.`
-      cancelTitle = 'Yes, deny access'
-    }
+    heading = `Deny access to ${name}`
+    confirmMessage = `If you deny access to ${name}, he won’t be able to access this portal. You can grant him access later if necessary.`
+    cancelTitle = 'Yes, deny access'
+    // if (status) {
+    //   heading = `Grant access to ${name}`
+    //   confirmMessage =  ``
+    //   cancelTitle = 'Yes, grant access'
+    // } else {
+    //   heading = `Deny access to ${name}`
+    //   confirmMessage = `If you deny access to ${name}, he won’t be able to access this portal. You can grant him access later if necessary.`
+    //   cancelTitle = 'Yes, deny access'
+    // }
 
-    mountModal(ConfirmModal({
-      heading,
-      confirmMessage,
-      cancelTitle,
-      handleConfirm: () => {
-        this.handleAccessUpdate(id, status)
-      }
-    }))
+    if (!status) {
+      mountModal(ConfirmModal({
+        heading,
+        confirmMessage,
+        cancelTitle,
+        handleConfirm: () => {
+          this.handleAccessUpdate(id, status)
+        }
+      }))
+    } else {
+      this.handleAccessUpdate(id, status)
+    }
   }
 
   handlePageChange(pageNumber) {

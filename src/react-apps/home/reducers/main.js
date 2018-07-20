@@ -44,9 +44,15 @@ const actionsMap = {
   },
 
   [ActionTypes.SUCCESS_UPDATE_SQUAD_MEMBER]: (state, action) => {
+    const updatedSquadMembersData = state.squadMembersData.map((item) => {
+      if (action.data.id === item.id) {
+        item.status = action.data.status
+      }
+      return item
+    })
+
     return Object.assign({}, state, {
-      loadingOrderDetail: false,
-      orderDetailData: action.data.orderStatus
+      squadMembersData: updatedSquadMembersData
     })
   },
 

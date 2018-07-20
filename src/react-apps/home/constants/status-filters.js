@@ -1,12 +1,12 @@
 export const liveFilters = [
   { value: 'all', label: '-All-' },
-  { value: 'returning', label: 'Returning' },
-  { value: 'ongoing', label: 'On going' }
+  { value: 'Returning', label: 'Returning' },
+  { value: 'Ongoing', label: 'On going' }
 ]
 
 
 export const historyFilters = [
   { value: 'all', label: '-All-' },
-  { value: 'cancelled', label: 'Cancelled' },
-  { value: 'delivered', label: 'Delivered' }
+  { value: 'Returned', label: 'Cancelled' },
+  { value: 'Delivered', label: 'Delivered' }
 ]

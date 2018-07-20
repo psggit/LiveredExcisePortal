@@ -58,7 +58,7 @@ function* updateSquadMember(action) {
   console.log(action)
   try {
     const data = yield call(Api.updateSquadMember, action)
-    yield put({ type: ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS, data: { offset: 0, limit: 10 } })
+    yield put({ type: ActionTypes.SUCCESS_UPDATE_SQUAD_MEMBER, data: { id: action.data.id, status: action.data.status } })
     Notify("Successfully updated squad members", "success");
   } catch (err) {
     console.log(err)
