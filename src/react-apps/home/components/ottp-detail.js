@@ -130,7 +130,7 @@ class OrderDetail extends Component {
                     verticalAlign: 'middle',
                     marginRight: '10px'
                   }}>
-                  { getIcon('en-route') }
+                  { getIcon(OTTPDetailData.ottp_status) }
                 </span>
                 <span style={{
                   color: '#687189',
@@ -160,7 +160,7 @@ class OrderDetail extends Component {
                 </div>
                 <div style={{ margin: '20px 0' }}>
                   <ErrorBoundary>
-                    <DeliveryAgentDetail deliveryAgentName={OTTPDetailData.agent_name} />
+                    <DeliveryAgentDetail vehicleNumber={OTTPDetailData.vehicle_number} deliveryAgentName={OTTPDetailData.agent_name} />
                   </ErrorBoundary>
                 </div>
                 <div>

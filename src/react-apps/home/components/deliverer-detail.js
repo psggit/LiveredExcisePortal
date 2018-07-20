@@ -1,7 +1,7 @@
 import React from 'react'
 import Card from '@components/card'
 
-function DeliveryAgentDetail({ deliveryAgentName }) {
+function DeliveryAgentDetail({ deliveryAgentName, vehicleNumber }) {
   return (
     <Card title="Delivery Agent Information">
       <div style={{ display: 'flex' }}>
@@ -12,7 +12,7 @@ function DeliveryAgentDetail({ deliveryAgentName }) {
 
         <div style={{ marginLeft: '30px' }}>
           <p>Vehicle Number</p>
-          <b><p>KA03-AS3929</p></b>
+          <b><p>{ vehicleNumber }</p></b>
         </div>
       </div>
     </Card>
