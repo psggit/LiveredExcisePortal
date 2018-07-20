@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Gmaps, Marker, InfoWindow } from 'react-gmaps';
 import { Api } from '@utils/config'
-// const customerImg = './../../assets/icons/customer.svg';
+import customerImg from  './../../../../images/customer.svg';
 import delivererImg from  './../../../../images/deliverer.svg';
-// const outletImg = './../../assets/icons/retailer.svg';
+import retailerImg from  './../../../../images/retailer.svg';
 
 // import customer from '/icons/customer.svg'
 // console.log(customer)
@@ -87,11 +87,12 @@ class Gmap extends Component {
 
   render() {
 
-    // const { customer } = this.props
-    // const cx = customer.gps ? parseFloat(customer.gps.split(',')[0]) : null
-    // const cy = customer.gps ? parseFloat(customer.gps.split(',')[1]) : null
-    // const rx = retailer.gps ? parseFloat(retailer.gps.split(',')[0]) : null
-    // const ry = retailer.gps ? parseFloat(retailer.gps.split(',')[1]) : null
+    const { customerGps, retailerGps } = this.props
+
+    const cx = customerGps ? parseFloat(customerGps.split(',')[0]) : null
+    const cy = customerGps ? parseFloat(customerGps.split(',')[1]) : null
+    const rx = retailerGps ? parseFloat(retailerGps.split(',')[0]) : null
+    const ry = retailerGps ? parseFloat(retailerGps.split(',')[1]) : null
     const { dx, dy } = this.state
 
     return (
@@ -106,19 +107,20 @@ class Gmap extends Component {
           onMapCreated={this.handleMapCreated}
           onZoomChanged={this.handleZoomChanged}
           >
-          {/* <Marker
+          <Marker
             icon={customerImg}
             lat={cx}
-            lng={cy} /> */}
+            lng={cy}
+          />
           <Marker
             icon={delivererImg}
             lat={dx}
             lng={dy}
           />
-          {/* <Marker
-            icon={outletImg}
+          <Marker
+            icon={retailerImg}
             lat={rx}
-            lng={ry} /> */}
+            lng={ry} />
         </Gmaps>
       </div>
     )

@@ -44,7 +44,7 @@ class Login extends React.Component {
         data: { mobile: phoneNumber, otp: null }
       })
         .then((json) => {
-          if (json.status === 'invalid user details.') {
+          if (json.status) {
             Notify(json.status, 'warning')
             this.setState({ isSubmitting: false })
           } else {

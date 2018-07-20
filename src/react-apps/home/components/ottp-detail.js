@@ -44,8 +44,11 @@ class OTTPDetail extends Component {
 
   openGmap() {
     const { ottpId } = this.props.match.params
+    const { OTTPDetailData } = this.props
     mountModal(ShowGmap({
-      id: ottpId
+      id: ottpId,
+      customerGps: OTTPDetailData.customer_gps,
+      retailerGps: OTTPDetailData.store_gps
     }))
   }
 
