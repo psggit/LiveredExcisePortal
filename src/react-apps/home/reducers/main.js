@@ -36,9 +36,14 @@ const actionsMap = {
   },
 
   [ActionTypes.SUCCESS_FETCH_SQUAD_MEMBERS]: (state, action) => {
+    const transformedSquadMembersData = action.data.data.map((item) => {
+      const _role = item.role.replace('_', ' ')
+      item.role = _role.charAt(0).toUpperCase() + _role.slice(1)
+      return item
+    })
     return Object.assign({}, state, {
       loadingSquadMembers: false,
-      squadMembersData: action.data.data,
+      squadMembersData: transformedSquadMembersData,
       squadMembersCount: action.data.count
     })
   },
