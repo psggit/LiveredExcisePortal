@@ -30,7 +30,7 @@ function Moment(time) {
 }
 
 
-class OrderDetail extends Component {
+class OTTPDetail extends Component {
   constructor() {
     super()
     this.handleClick = this.handleClick.bind(this)
@@ -74,7 +74,7 @@ class OrderDetail extends Component {
                 <span onClick={this.unmountOrderDetail} style={{ marginRight: '20px', cursor: 'pointer' }}>{ getIcon('back') }</span>
                 <span style={{ fontSize: '18px', color: '#687189' }}>OTTP ID: <b>{`#${this.props.match.params.ottpId}`}</b></span>
               </div>
-              <div style={{ marginLeft: '38px', marginTop: '10px' }}>
+              <div style={{ marginLeft: '38px', marginTop: '10px', position: 'relative' }}>
                 <div style={{ display: 'inline-block', verticalAlign: 'bottom' }}>
                   <span
                     style={{
@@ -87,17 +87,29 @@ class OrderDetail extends Component {
                     { getIcon(OTTPDetailData.ottp_status) }
                   </span>
                   <span style={{
-                    color: '#687189',
-                    fontSize: '18px',
-                    verticalAlign: 'middle',
-                    marginRight: '20px',
-                    textTransform: 'Capitalize'
-                  }}>
-                  {OTTPDetailData.ottp_status}
-                </span>
-                  <Button onClick={this.openGmap} primary>Track OTTP</Button>
+                      color: '#687189',
+                      fontSize: '18px',
+                      verticalAlign: 'middle',
+                      marginRight: '20px',
+                      textTransform: 'Capitalize'
+                    }}>
+                    {OTTPDetailData.ottp_status}
+                  </span>
+                  {
+                    this.props.currentRoute !== 'history-ottp'
+                    ? <Button onClick={this.openGmap} primary>Track OTTP</Button>
+                    : ''
+                  }
                 </div>
-                <div style={{ display: 'inline-block', verticalAlign: 'bottom', marginLeft: '80px' }}>
+                <div style={{
+                  display: 'inline-block',
+                  verticalAlign: 'bottom',
+                  position: 'absolute',
+                  left: '50%',
+                  top: '-20px',
+                  transform: 'translateX(-50%)'
+                }}
+                >
                   <div style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '40px' }}>
                     <label>OTTP expiry time</label>
                     <p style={{ color: '#333', fontSize: '13px' }}>{ Moment(OTTPDetailData.ottp_expiry_time).format("DD/MM/YYYY, h:mm") }</p>
@@ -162,4 +174,4 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(OrderDetail)
+)(OTTPDetail)
