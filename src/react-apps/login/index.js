@@ -4,6 +4,7 @@ import { Api } from '@utils/config'
 import '@sass/_animation.scss'
 import { POST } from '@utils/fetch'
 import { createSession } from './session'
+import Notify from '@components/notification'
 
 class Login extends React.Component {
   constructor() {
@@ -12,7 +13,7 @@ class Login extends React.Component {
       showOTPField: false,
       isSubmitting: false,
       phoneNumber: '',
-      otp: null
+      otp: ''
     }
     this.handleOTP = this.handleOTP.bind(this)
     this.handleLogin = this.handleLogin.bind(this)
@@ -29,10 +30,16 @@ class Login extends React.Component {
         api: '/excise-person/auth/otp-login',
         apiBase: 'gremlinUrl',
         handleError: false,
-        data: { mobile: phoneNumber, otp }
+        data: { mobile: phoneNumber, otp: null }
       })
         .then((json) => {
-          this.setState({ showOTPField: true, isSubmitting: false })
+          if (json.status === 'invalid user details.') {
+            Notify(json.status, 'warning')
+            this.setState({ isSubmitting: false })
+          } else {
+            Notify('OTP sent to mobile number', 'success')
+            this.setState({ showOTPField: true, isSubmitting: false })
+          }
         })
     }
   }
