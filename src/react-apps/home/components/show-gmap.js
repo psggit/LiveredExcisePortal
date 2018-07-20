@@ -20,6 +20,8 @@ export default function showGmap (data) {
           <ModalBody>
             <Gmap
               ottpId={data.id}
+              customerGps={data.customerGps}
+              retailerGps={data.retailerGps}
             />
           </ModalBody>
           {/* <ModalFooter>

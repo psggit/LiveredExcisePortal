@@ -120,7 +120,8 @@ class Gmap extends Component {
           <Marker
             icon={retailerImg}
             lat={rx}
-            lng={ry} />
+            lng={ry}
+          />
         </Gmaps>
       </div>
     )
