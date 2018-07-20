@@ -101,7 +101,7 @@ class App extends React.Component {
               path="/home/history-ottp/:ottpId"
               render={
                 props => (
-                  <OTTPDetail {...props} />
+                  <OTTPDetail currentRoute={this.state.currentRoute} {...props} />
                 )
               }
             />
@@ -111,7 +111,7 @@ class App extends React.Component {
               path="/home/live-ottp/:ottpId"
               render={
                 props => (
-                  <OTTPDetail {...props} />
+                  <OTTPDetail currentRoute={this.state.currentRoute} {...props} />
                 )
               }
             />
