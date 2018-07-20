@@ -40,14 +40,16 @@ function MemberInfoModal(data) {
 
     handleSubmit() {
       const { name, mobile_number, email, role, status } = this.state
-      data.handleSubmit({
-        name,
-        mobile_number,
-        email,
-        role,
-        status
-      })
-      unMountModal()
+      if (name.length && mobile_number.length && email.length) {
+        data.handleSubmit({
+          name,
+          mobile_number,
+          email,
+          role,
+          status
+        })
+        unMountModal()
+      }
     }
 
     handleChange(e) {
