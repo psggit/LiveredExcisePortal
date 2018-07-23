@@ -9,6 +9,7 @@ const UserManagementListItem = ({ data, openAccessDeniedModal }) => {
           isToggled={data.status}
           onToggle={() => { openAccessDeniedModal(data.id, data.name, !data.status) }}
         />
+        <span style={{ marginLeft: '20px' }}>{ data.status ? 'Access Granted' : 'Access Denied'}</span>
       </td>
       <td>{ data.name }</td>
       <td>{ data.mobile_number }</td>

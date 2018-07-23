@@ -39,7 +39,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={{
-        backgroundColor: '#DFDAE6',
+        backgroundColor: '#D5DAE6',
         width: '100%',
         height: '100vh',
         overflow: 'auto'

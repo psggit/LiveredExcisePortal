@@ -13,9 +13,10 @@ class Navbar extends React.Component {
 
   handleChangeRoute(e, currentRoute) {
     e.preventDefault()
-    if (this.props.currentRoute !== currentRoute) {
-      this.props.history.push(`/home/${currentRoute}`)
-    }
+    this.props.history.push(`/home/${currentRoute}`)
+    // if (this.props.currentRoute !== currentRoute) {
+    //   this.props.history.push(`/home/${currentRoute}`)
+    // }
   }
 
   handleLogout() {

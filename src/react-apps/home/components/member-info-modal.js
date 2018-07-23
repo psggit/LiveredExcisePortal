@@ -167,7 +167,7 @@ function MemberInfoModal(data) {
               />
 
               <div style={{ marginTop: '30px' }} className="form-group">
-                <Button onClick={this.handleSubmit} primary>Save changes</Button>
+                <Button onClick={this.handleSubmit} primary>Add member</Button>
                 <Button onClick={unMountModal} secondary>Cancel</Button>
               </div>
             </AccordianItem>

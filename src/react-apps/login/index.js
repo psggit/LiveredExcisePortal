@@ -109,7 +109,7 @@ class Login extends React.Component {
             transform: 'translateY(-50%)',
             overflow: 'hidden'
           }}>
-          <h2 style={{ color: '#49587D', textAlign: 'center', marginBottom: '20px' }}>Live Red</h2>
+          <h2 style={{ fontSize: '20px', color: '#49587D', textAlign: 'center', marginBottom: '30px' }}>Login to Live Red</h2>
 
           {
             !this.state.showOTPField &&
@@ -131,7 +131,7 @@ class Login extends React.Component {
                   style={this.state.isSubmitting ? submittingStyle : {}}
                   primary
                 >
-                  Send otp
+                  Get otp &amp; login
                 </Button>
               </div>
             </React.Fragment>
@@ -163,7 +163,7 @@ class Login extends React.Component {
                   style={this.state.isSubmitting ? submittingStyle : {}}
                   primary
                 >
-                  Log in
+                  Login
                 </Button>
               </div>
             </React.Fragment>

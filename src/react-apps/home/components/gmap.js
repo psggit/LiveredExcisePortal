@@ -99,8 +99,8 @@ class Gmap extends Component {
       <div className='MapWrapper'>
         <Gmaps
           style={{width: '100%', height: '100%'}}
-          lat={dx}
-          lng={dy}
+          lat={dx || rx}
+          lng={dy || ry}
           zoom={this.state.zoom}
           loadingMessage={'Loading...'}
           params={params}
