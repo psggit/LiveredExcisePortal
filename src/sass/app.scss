@@ -84,3 +84,9 @@ label {
 .form-group button:not(:last-child) {
   margin-right: 20px;
 }
+
+.form-group__error {
+  color: #ff3b34;
+  font-size: 12px;
+  margin-top: 5px;
+}

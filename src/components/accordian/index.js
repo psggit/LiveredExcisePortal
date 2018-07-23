@@ -8,7 +8,12 @@ class Accordian extends React.Component {
   }
 
   handleClick(e) {
-    this.props.setActiveAccordian(parseInt(e.target.id))
+    // if middleware exists then apply
+    if (this.props.middleware) {
+      if (this.props.middleware()) {
+        this.props.setActiveAccordian(parseInt(e.target.id))
+      }
+    }
   }
   render() {
     const { children } = this.props

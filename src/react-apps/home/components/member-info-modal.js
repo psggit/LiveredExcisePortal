@@ -6,6 +6,7 @@ import Button from '@components/button/index.js'
 import Toggle from '@components/toggle'
 import InfoBar from '@components/infobar'
 import { unMountModal } from '@components/ModalBox/utils'
+import { emailRegex } from '@utils/regex'
 
 function MemberInfoModal(data) {
   return class MemberInfoModal extends React.Component {
@@ -16,14 +17,27 @@ function MemberInfoModal(data) {
       this.handleNextAccordian = this.handleNextAccordian.bind(this)
       this.handleSetAccess = this.handleSetAccess.bind(this)
       this.handleSubmit = this.handleSubmit.bind(this)
+      this.checkFormStatus = this.checkFormStatus.bind(this)
 
       this.state = {
         activeAccordian: 1,
         name: '',
-        mobile_number: '',
+        phone: '',
         email: '',
         status: false,
         role: 'member',
+        nameErr: {
+          status: false,
+          value: ''
+        },
+        phoneErr: {
+          status: false,
+          value: ''
+        },
+        emailErr: {
+          status: false,
+          value: ''
+        }
       }
     }
 
@@ -31,16 +45,66 @@ function MemberInfoModal(data) {
       this.setState({ activeAccordian })
     }
 
+    validateName(name) {
+      if (!name.length) {
+        return { status: true, value: 'Name is required' }
+      }
+      return { status: false, value: '' }
+    }
+
+    validateEmail(email) {
+      if (!email.length) {
+        return { status: true, value: 'Email is required' }
+      } else if (!emailRegex.test(email)) {
+        return { status: true, value: 'Email is invalid' }
+      } else {
+        return { status: false, value: '' }
+      }
+    }
+
+    validatePhone(phone) {
+      if (!phone.length) {
+        return { status: true, value: 'Mobile number is required' }
+      }
+
+      if (!isNaN(phone) && phone.length === 10) {
+        return { status: false, value: '' }
+      } else {
+        return { status: true, value: 'Mobile number is invalid' }
+      }
+    }
+
     handleNextAccordian() {
-      const { activeAccordian } = this.state
-      if (activeAccordian <= 3) {
-        this.setActiveAccordian(activeAccordian + 1)
+      if (this.checkFormStatus()) {
+        const { activeAccordian } = this.state
+        if (activeAccordian <= 3) {
+          this.setActiveAccordian(activeAccordian + 1)
+        }
+      }
+    }
+
+    checkFormStatus() {
+      // form validation middleware
+      const { name, email, phone } = this.state
+      const nameErr = this.validateName(name)
+      const emailErr = this.validateEmail(email)
+      const phoneErr = this.validatePhone(phone)
+      console.log(nameErr, emailErr, phoneErr);
+      if (!nameErr.status && !emailErr.status && !phoneErr.status) {
+        return true
+      } else {
+        this.setState({
+          nameErr,
+          emailErr,
+          phoneErr
+        })
+        return false
       }
     }
 
     handleSubmit() {
-      const { name, mobile_number, email, role, status } = this.state
-      if (name.length && mobile_number.length && email.length) {
+      const { name, phone, email, role, status } = this.state
+      if (name.length && phone.length && email.length) {
         data.handleSubmit({
           name,
           mobile_number,
@@ -53,7 +117,11 @@ function MemberInfoModal(data) {
     }
 
     handleChange(e) {
-      this.setState({ [e.target.name]: e.target.value })
+      const errName = `${e.target.name}Err`
+      this.setState({
+        [e.target.name]: e.target.value,
+        [errName]: { status: false, value: '' }
+      })
     }
 
     handleSetAccess() {
@@ -61,9 +129,11 @@ function MemberInfoModal(data) {
     }
 
     render() {
+      const { nameErr, emailErr, phoneErr } = this.state
       return (
         <ModalBox>
           <Accordian
+            middleware={this.checkFormStatus}
             setActiveAccordian={this.setActiveAccordian}
             activeAccordian={this.state.activeAccordian}
           >
@@ -76,17 +146,19 @@ function MemberInfoModal(data) {
                   name="name"
                   type="text"
                 />
+                { nameErr.status && <p className="form-group__error">{ nameErr.value }</p>}
               </div>
 
               <div className="form-group">
                 <label>Member Phone Number</label>
                 <input
                   onChange={this.handleChange}
-                  value={this.state.mobile_number}
-                  name="mobile_number"
+                  value={this.state.phone}
+                  name="phone"
                   type="text"
                   maxLength={10}
                 />
+                { phoneErr.status && <p className="form-group__error">{ phoneErr.value }</p>}
               </div>
 
               <div className="form-group">
@@ -97,6 +169,7 @@ function MemberInfoModal(data) {
                   name="email"
                   type="text"
                 />
+                { emailErr.status && <p className="form-group__error">{ emailErr.value }</p>}
               </div>
 
               <div style={{ marginTop: '30px' }} className="form-group">
