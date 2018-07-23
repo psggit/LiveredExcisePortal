@@ -107,7 +107,7 @@ function MemberInfoModal(data) {
       if (name.length && phone.length && email.length) {
         data.handleSubmit({
           name,
-          mobile_number,
+          mobile_number: phone,
           email,
           role,
           status
