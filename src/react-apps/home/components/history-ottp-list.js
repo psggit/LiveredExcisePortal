@@ -10,7 +10,7 @@ import Loader from '@components/loader'
 class HistoryOrdersList extends React.Component {
   constructor() {
     super()
-    this.pagesLimit = 40
+    this.pagesLimit = 10
     this.state = {
       activePage: 1,
       pageOffset: 0
