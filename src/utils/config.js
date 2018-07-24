@@ -5,9 +5,9 @@ function getAPIObj() {
     let appName = 'amebae21'
 
     return {
-      authUrl: 'https://auth.hipbar.com',
+      authUrl: 'https://auth.' + appName + '.hasura-app.io',
       blogicUrl: 'https://api1.' + appName + '.hasura-app.io',
-      gremlinUrl: 'https://gremlin.hipbar.com',
+      gremlinUrl: scheme + '://gremlin' + baseHost,
       catman: scheme + '://catman' + baseHost,
       ordermanUrl: scheme + '://orderman' + baseHost,
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
@@ -20,14 +20,14 @@ function getAPIObj() {
     let subdomain = window.location.hostname.split('.')[0]
 
     return {
-      authUrl: scheme + '://auth' + baseHost,
+      authUrl: 'https://auth.hipbar.com',
       blogicUrl: scheme + '://api1' + baseHost,
-      gremlinUrl: scheme + '://gremlin' + baseHost,
+      gremlinUrl: 'https://gremlin.hipbar.com',
       ordermanUrl: scheme + '://orderman' + baseHost,
       catman: scheme + '://catman' + baseHost,
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: scheme + '://livered' + baseHost,
-      agamotto: scheme + '://agamotto' + baseHost
+      agamotto: 'https://agamotto.hipbar.com'
     }
   }
 }
