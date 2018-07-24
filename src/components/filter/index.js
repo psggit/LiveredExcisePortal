@@ -51,6 +51,11 @@ class Filter extends React.Component {
       // console.log(queryObj);
       this.setDateFilter(queryObj.from_date, queryObj.to_date)
       this.setStatus(queryObj.status)
+      this.props.setFilters({
+        from: queryObj.from_date,
+        to: queryObj.to_date,
+        status: queryObj.status
+      })
     } else {
       this.props.setFilters(this.defaultFilters)
     }
