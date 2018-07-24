@@ -9,6 +9,7 @@ import {
 import { Api } from '@utils/config'
 import Login from './login'
 import Home from './home/container/Root'
+import { createSession } from './login/session'
 
 // import makeAsyncComponent from './makeAsyncComponent'
 // const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
@@ -33,8 +34,8 @@ class App extends React.Component {
           return
         }
         response.json().then((data) => {
+          createSession(data)
           if (!location.pathname.includes('home')) {
-            // createSession(data)
             location.href = '/home/live-ottp'
           }
         })
