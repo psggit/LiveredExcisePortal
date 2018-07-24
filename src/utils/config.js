@@ -20,14 +20,14 @@ function getAPIObj() {
     let subdomain = window.location.hostname.split('.')[0]
 
     return {
-      authUrl: 'https://auth.hipbar.com',
+      authUrl: scheme + '://auth' + baseHost,
       blogicUrl: scheme + '://api1' + baseHost,
-      gremlinUrl: 'https://gremlin.hipbar.com',
+      gremlinUrl: scheme + '://gremlin' + baseHost,
       ordermanUrl: scheme + '://orderman' + baseHost,
       catman: scheme + '://catman' + baseHost,
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: scheme + '://livered' + baseHost,
-      agamotto: 'https://agamotto.hipbar.com'
+      agamotto: scheme + '://agamotto' + baseHost
     }
   }
 }
