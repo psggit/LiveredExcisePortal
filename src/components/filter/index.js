@@ -41,15 +41,19 @@ class Filter extends React.Component {
     const queryUri = location.search.slice(1)
     const queryObj = {}
 
-    queryUri.split('&')
-    .map(item => item.split('='))
-    .forEach(([key, value]) => {
-      queryObj[key] = value
-    })
+    if (queryUri.length) {
+      queryUri.split('&')
+      .map(item => item.split('='))
+      .forEach(([key, value]) => {
+        queryObj[key] = value
+      })
 
-    // console.log(queryObj);
-    this.setDateFilter(queryObj.from_date, queryObj.to_date)
-    this.setStatus(queryObj.status)
+      // console.log(queryObj);
+      this.setDateFilter(queryObj.from_date, queryObj.to_date)
+      this.setStatus(queryObj.status)
+    } else {
+      this.props.setFilters(this.defaultFilters)
+    }
   }
 
   setStatus(val) {
