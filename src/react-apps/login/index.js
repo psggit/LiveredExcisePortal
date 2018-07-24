@@ -41,6 +41,7 @@ class Login extends React.Component {
         api: '/excise-person/auth/otp-login',
         apiBase: 'gremlinUrl',
         handleError: false,
+        cors: true,
         data: { mobile: phoneNumber, otp: null }
       })
         .then((json) => {

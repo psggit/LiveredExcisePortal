@@ -5,9 +5,9 @@ function getAPIObj() {
     let appName = 'amebae21'
 
     return {
-      authUrl: 'https://auth.' + appName + '.hasura-app.io',
+      authUrl: 'https://auth.hipbar.com',
       blogicUrl: 'https://api1.' + appName + '.hasura-app.io',
-      gremlinUrl: scheme + '://gremlin' + baseHost,
+      gremlinUrl: 'https://gremlin.hipbar.com',
       catman: scheme + '://catman' + baseHost,
       ordermanUrl: scheme + '://orderman' + baseHost,
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
