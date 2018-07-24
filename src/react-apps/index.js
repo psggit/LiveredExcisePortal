@@ -34,7 +34,6 @@ class App extends React.Component {
           return
         }
         response.json().then((data) => {
-          createSession(data)
           if (!location.pathname.includes('home')) {
             location.href = '/home/live-ottp'
           }
