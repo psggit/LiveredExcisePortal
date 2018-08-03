@@ -43,7 +43,7 @@ class Gmap extends Component {
       })
       socket.on('status', function (data) {
         console.log(data);
-        socket.emit('subscribe', {"order_id": ottpId });
+        socket.emit('subscribe', {"ottp_id": `ottp_${ottpId}` });
       });
 
       socket.on('subscribed', function(data) {
