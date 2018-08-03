@@ -6,7 +6,7 @@ import Button from '@components/button/index.js'
 import Toggle from '@components/toggle'
 import InfoBar from '@components/infobar'
 import { unMountModal } from '@components/ModalBox/utils'
-import { emailRegex } from '@utils/regex'
+import { validateName, validateEmail, validatePhone } from '@utils/validators'
 
 function MemberInfoModal(data) {
   return class MemberInfoModal extends React.Component {
@@ -45,35 +45,6 @@ function MemberInfoModal(data) {
       this.setState({ activeAccordian })
     }
 
-    validateName(name) {
-      if (!name.length) {
-        return { status: true, value: 'Name is required' }
-      }
-      return { status: false, value: '' }
-    }
-
-    validateEmail(email) {
-      if (!email.length) {
-        return { status: true, value: 'Email is required' }
-      } else if (!emailRegex.test(email)) {
-        return { status: true, value: 'Email is invalid' }
-      } else {
-        return { status: false, value: '' }
-      }
-    }
-
-    validatePhone(phone) {
-      if (!phone.length) {
-        return { status: true, value: 'Mobile number is required' }
-      }
-
-      if (!isNaN(phone) && phone.length === 10) {
-        return { status: false, value: '' }
-      } else {
-        return { status: true, value: 'Mobile number is invalid' }
-      }
-    }
-
     handleNextAccordian() {
       if (this.checkFormStatus()) {
         const { activeAccordian } = this.state
@@ -86,10 +57,10 @@ function MemberInfoModal(data) {
     checkFormStatus() {
       // form validation middleware
       const { name, email, phone } = this.state
-      const nameErr = this.validateName(name)
-      const emailErr = this.validateEmail(email)
-      const phoneErr = this.validatePhone(phone)
-      console.log(nameErr, emailErr, phoneErr);
+      const nameErr = validateName(name)
+      const emailErr = validateEmail(email)
+      const phoneErr = validatePhone(phone)
+      
       if (!nameErr.status && !emailErr.status && !phoneErr.status) {
         return true
       } else {
