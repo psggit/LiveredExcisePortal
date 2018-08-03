@@ -11,9 +11,9 @@ import Login from './login'
 import Home from './home/container/Root'
 import { createSession } from './login/session'
 
-// import makeAsyncComponent from './makeAsyncComponent'
+import makeAsyncComponent from './makeAsyncComponent'
 // const Login = makeAsyncComponent(() => import("./login").then(module => module.default), { name: "Page 1" })
-// const Dashboard = makeAsyncComponent(() => import("./dashboard").then(module => module.default), { name: "Page 1" })
+// const Home = makeAsyncComponent(() => import("./home/container/Root").then(module => module.default), { name: "Page 1" })
 
 class App extends React.Component {
   componentWillMount() {
