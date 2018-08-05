@@ -178,7 +178,7 @@ class BirdsEyeView extends React.Component {
   render() {
     return (
       <div style={{ width: '100%', marginTop: '62px', padding: '20px' }}>
-        <Card style={{ padding: '0' }} title="BirdsEyeView">
+        <Card style={{ padding: '0' }} title="Live view">
           <Gmaps
             lat={this.state.lat}
             lng={this.state.lng}
