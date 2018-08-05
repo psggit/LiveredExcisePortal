@@ -52,7 +52,7 @@ class Navbar extends React.Component {
     return (
       <div className="navbar">
         <div className="col navbar-brand">
-          <h4 style={{ cursor: 'pointer' }} onClick={(e) => { this.handleChangeRoute(e, 'dso') }}><span>LIVE</span><span>RED</span></h4>
+          <h4 style={{ cursor: 'pointer' }} onClick={(e) => { this.handleChangeRoute(e, menuItems[0].value) }}><span>LIVE</span><span>RED</span></h4>
         </div>
 
         <div className="col menu-items">
