@@ -1,5 +1,5 @@
 export const menuItems = [
-  { value: 'birds-eye-view', label: 'Birds Eye View' },
+  { value: 'live-view', label: 'Live View' },
   { value: 'dso', label: 'DSO' },
   { value: 'rule-management', label: 'Rule Management' },
   { value: 'retailers', label: 'Retailers' },

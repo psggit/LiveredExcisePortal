@@ -171,7 +171,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/birds-eye-view"
+                path="/home/live-view"
                 render={
                   props => (
                     <BirdsEyeView {...props} />
