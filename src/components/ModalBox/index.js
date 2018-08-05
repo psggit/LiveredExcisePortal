@@ -6,7 +6,7 @@ class ModalBox extends React.Component {
   constructor() {
     super()
     this.state = {
-      width: "46%",
+      width: "660px",
       maxHeight: '95vh'
     }
   }

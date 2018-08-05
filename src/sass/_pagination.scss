@@ -9,7 +9,7 @@
     margin: 0 5px;
     background-color: #fff;
     &.active {
-      background-color: #0070D9;
+      background-color: #3e3e40;
       a {
         color: #fff;
       }
@@ -19,7 +19,7 @@
       padding: 5px 12px;
       display: inline-block;
       text-decoration: none;
-      color: #0070D9;
+      color: #3e3e40;
     }
     &:first-child, &:last-child {
       display: none;

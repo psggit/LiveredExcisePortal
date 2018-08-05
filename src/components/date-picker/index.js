@@ -56,14 +56,14 @@ export default function DatePicker (data) {
             <ModalBody>
               <div style={{display: 'flex', justifyContent: 'space-around'}}>
                 <div>
-                  <h4 style={{textAlign: 'center', textDecoration: 'underline'}}>From date</h4>
+                  <h4 style={{textAlign: 'center' }}>From</h4>
                   <DayPicker
                     onDayClick={this.setFromDate}
                     selectedDays={this.state.fromDate}
                   />
                 </div>
                 <div>
-                  <h4 style={{textAlign: 'center', textDecoration: 'underline'}}>To date</h4>
+                  <h4 style={{textAlign: 'center'}}>To</h4>
                   <DayPicker
                     onDayClick={this.setToDate}
                     selectedDays={this.state.toDate}

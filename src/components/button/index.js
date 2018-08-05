@@ -8,6 +8,8 @@ class Button extends React.Component {
       className = 'btn-primary'
     } else if (this.props.secondary) {
       className = 'btn-secondary'
+    } else if (this.props.danger) {
+      className = 'btn-danger'
     }
 
     return className
@@ -16,6 +18,7 @@ class Button extends React.Component {
   render() {
     return (
       <button
+        disabled={this.props.disabled}
         style={this.props.style}
         onClick={this.props.onClick}
         className={`btn ${this.getClassName()}`

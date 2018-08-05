@@ -20,6 +20,7 @@ class LiveOrdersList extends React.Component {
     this.handleClick = this.handleClick.bind(this)
     this.defaultData = this.defaultData.bind(this)
     this.filteredData = this.filteredData.bind(this)
+    this.resetPagination = this.resetPagination.bind(this)
   }
 
   handleClick(orderId, e) {
@@ -44,6 +45,10 @@ class LiveOrdersList extends React.Component {
       offset,
       status: filters.status === 'all' ? undefined : filters.status
     })
+  }
+
+  resetPagination() {
+    this.setState({ activePage: 1 })
   }
 
   componentDidMount() {
@@ -78,6 +83,7 @@ class LiveOrdersList extends React.Component {
     this.filters = Object.assign({}, filters)
     if (filters && JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
       this.props.actions.setLoadingAll()
+      this.resetPagination()
       clearTimeout(this.timeoutId)
       this.filteredData()
     }

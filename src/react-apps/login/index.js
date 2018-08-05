@@ -5,7 +5,9 @@ import '@sass/_animation.scss'
 import { POST } from '@utils/fetch'
 import { createSession } from './session'
 import Notify from '@components/notification'
+import loginBg from './../../../images/login-bg.jpg'
 
+console.log(loginBg);
 class Login extends React.Component {
   constructor() {
     super()
@@ -93,84 +95,99 @@ class Login extends React.Component {
     }
 
     return (
-      <div style={{
-        backgroundColor: '#D5DAE6',
-        height: '100vh'
+      <div className="login-wrap" style={{
+        backgroundColor: '#fff',
+        height: '100vh',
+        // backgroundImage: `url(${loginBg})`,
       }}>
-        <div
-          style={{
-            backgroundColor: '#fff',
-            borderRadius: '6px',
-            padding: '40px',
-            width: '100%',
-            maxWidth: '400px',
-            margin: '0 auto',
-            position: 'relative',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            overflow: 'hidden'
-          }}>
-          <h2 style={{ fontSize: '20px', color: '#49587D', textAlign: 'center', marginBottom: '30px' }}>Login to Live Red</h2>
+        <div style={{
+          // border: '1px solid #333',
+          position: 'relative',
+          backgroundColor: 'transparent',
+          width: '70%',
+          height: '70%',
+          margin: '0 auto',
+          top: '50%',
+          zIndex: '2',
+          transform: 'translateY(-50%)',
+        }}>
+          <div
+            style={{
+              backgroundColor: '#a2172a',
+              borderRadius: '6px',
+              padding: '40px',
+              width: '100%',
+              maxWidth: '400px',
+              margin: '0 auto',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              overflow: 'hidden',
+              boxShadow: '0 2px 24px 0 #424242'
+            }}>
+            <h2 style={{ fontSize: '24px', color: '#fff', textAlign: 'center', marginBottom: '30px' }}><span style={{ fontFamily: 'Montserrat', fontWeight: '400' }}>LIVE</span><span style={{ fontFamily: 'Montserrat', fontWeight: '700' }}>RED</span></h2>
 
-          {
-            !this.state.showOTPField &&
-            <React.Fragment>
-              <div className="form-group">
-                <label>Phone Number</label>
-                <input
-                  maxLength={10}
-                  value={this.state.phoneNumber}
-                  onKeyDown={this.handleKeyPress}
-                  onChange={this.setPhoneNumber}
-                  style={{ width: '100%' }}
-                  type="text"
-                />
-              </div>
-              <div className="form-group">
-                <Button
-                  onClick={this.handleOTP}
-                  style={this.state.isSubmitting ? submittingStyle : {}}
-                  primary
-                >
-                  Get otp &amp; login
-                </Button>
-              </div>
-            </React.Fragment>
-          }
+            {
+              !this.state.showOTPField &&
+              <React.Fragment>
+                <div className="form-group">
+                  <label style={{ color: '#fff' }}>Enter Phone Number</label>
+                  <input
+                    maxLength={10}
+                    value={this.state.phoneNumber}
+                    onKeyDown={this.handleKeyPress}
+                    onChange={this.setPhoneNumber}
+                    style={{ width: '100%' }}
+                    type="text"
+                  />
+                </div>
+                <div className="form-group">
+                  <Button
+                    onClick={this.handleOTP}
+                    style={this.state.isSubmitting ? submittingStyle : { boxShadow: '0 2px 4px 0 #333' }}
+                    primary
+                  >
+                    Get otp &amp; login
+                  </Button>
+                </div>
+              </React.Fragment>
+            }
 
-          {
-            this.state.showOTPField &&
-            <React.Fragment>
-              <div className="form-group animated bounceInRight">
-                <label>OTP</label>
-                <input
-                  value={this.state.otp}
-                  onChange={this.setOTP}
-                  onKeyDown={this.handleKeyPress}
-                  style={{ width: '100%' }}
-                  maxLength="6"
-                  type="text"
-                />
-                <span
-                  style={{ fontSize: '12px' }}
-                >
-                  Click <a onClick={this.handleOTP} style={{ color: '#39475e', cursor: 'pointer', textDecoration: 'underline' }}>here</a> to resend
-                </span>
-              </div>
+            {
+              this.state.showOTPField &&
+              <React.Fragment>
+                <div className="form-group animated bounceInRight">
+                  <label style={{ color: '#fff' }}>Enter OTP</label>
+                  <input
+                    value={this.state.otp}
+                    onChange={this.setOTP}
+                    onKeyDown={this.handleKeyPress}
+                    style={{ width: '100%' }}
+                    maxLength="6"
+                    type="text"
+                  />
+                  <span
+                    style={{ fontSize: '12px', color: '#fff' }}
+                  >
+                    Click <a onClick={this.handleOTP} style={{ color: '#fff', cursor: 'pointer', textDecoration: 'underline' }}>here</a> to resend
+                  </span>
+                </div>
 
-              <div className="form-group">
-                <Button
-                  onClick={this.handleLogin}
-                  style={this.state.isSubmitting ? submittingStyle : {}}
-                  primary
-                >
-                  Login
-                </Button>
-              </div>
-            </React.Fragment>
-          }
+                <div className="form-group">
+                  <Button
+                    onClick={this.handleLogin}
+                    style={this.state.isSubmitting ? submittingStyle : { boxShadow: '0 2px 4px 0 #333' }}
+                    primary
+                  >
+                    Login
+                  </Button>
+                </div>
+              </React.Fragment>
+            }
 
 
+          </div>
         </div>
       </div>
     )

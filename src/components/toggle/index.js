@@ -14,7 +14,11 @@ class ToggleButton extends React.Component {
   }
 
   handleChange(e) {
-    this.props.onToggle()
+    if (this.props.onToggle) {
+      this.props.onToggle()
+    } else {
+      this.setState({ toggled: !this.state.toggled })
+    }
   }
   render() {
     return (

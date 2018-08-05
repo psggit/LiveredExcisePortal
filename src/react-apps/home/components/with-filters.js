@@ -45,11 +45,12 @@ class WithFilters extends React.Component {
   render() {
     const { children } = this.props
     return (
-      <div style={{ marginTop: '62px', padding: '20px' }}>
+      <div style={{ marginTop: '62px', padding: '20px', width: '100%' }}>
         {
           <Filter
             ref={(node) => this.filterData = node }
             statusFilters={this.props.statusFilters}
+            dsoFilters={this.props.dsoFilters}
             setFilters={this.setFilters}
             filters={this.props.filters}
             currentRoute={this.props.currentRoute}

@@ -4,6 +4,9 @@ import './navbar.scss'
 import { Api } from '@utils/config'
 
 class Navbar extends React.Component {
+  constructor() {
+    super()
+  }
   checkActiveClass(value) {
     if (this.props.currentRoute === value) {
       return 'active'
@@ -13,11 +16,7 @@ class Navbar extends React.Component {
 
   handleChangeRoute(e, currentRoute) {
     e.preventDefault()
-    if (this.props.currentRoute === currentRoute) {
-      this.props.history.goBack()
-    } else {
-      this.props.history.push(`/home/${currentRoute}`)
-    }
+    this.props.history.push(`/home/${currentRoute}`)
   }
 
   handleLogout() {
@@ -53,7 +52,7 @@ class Navbar extends React.Component {
     return (
       <div className="navbar">
         <div className="col navbar-brand">
-          <h4>Live Red</h4>
+          <h4 style={{ cursor: 'pointer' }} onClick={(e) => { this.handleChangeRoute(e, 'dso') }}><span>LIVE</span><span>RED</span></h4>
         </div>
 
         <div className="col menu-items">

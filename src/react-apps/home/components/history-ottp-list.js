@@ -17,6 +17,7 @@ class HistoryOrdersList extends React.Component {
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.resetPagination = this.resetPagination.bind(this)
   }
 
   handleClick(orderId) {
@@ -34,6 +35,10 @@ class HistoryOrdersList extends React.Component {
       to_date: filters.to,
       status: filters.status === 'all' ? undefined : filters.status
     })
+  }
+
+  resetPagination() {
+    this.setState({ activePage: 1 })
   }
 
   componentDidMount() {
@@ -66,6 +71,7 @@ class HistoryOrdersList extends React.Component {
     const { filters } = this.props
     if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
       this.props.actions.setLoadingAll()
+      this.resetPagination()
       this.props.actions.fetchHistoryOTTP({
         limit: this.pagesLimit,
         offset: 0,

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Gmaps, Marker, InfoWindow } from 'react-gmaps';
 import { Api } from '@utils/config'
-import customerImg from  './../../../../images/customer.svg';
-import delivererImg from  './../../../../images/deliverer.svg';
-import retailerImg from  './../../../../images/retailer.svg';
+import customerImg from './../../../../images/customer.svg';
+import delivererImg from './../../../../images/deliverer.svg';
+import retailerImg from './../../../../images/retailer.svg';
 
 // import customer from '/icons/customer.svg'
 // console.log(customer)

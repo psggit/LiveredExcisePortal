@@ -1,12 +1,12 @@
 input, select {
-  height: 33px;
+  height: 33px !important;
   width: 247px;
-  border: 1px solid #CCD0D8;
-  border-radius: 4px;
-  background-color: #FCFDFE;
-  transition: all 0.2s ease;
-  font-size: 14px;
-  color: #465880;
+  border: 1px solid #CCD0D8 !important;
+  border-radius: 4px !important;
+  background-color: #FCFDFE !important;
+  transition: all 0.2s ease !important;
+  font-size: 14px !important;
+  color: #465880 !important;
 
   &:focus {
     outline: 0;
@@ -14,6 +14,7 @@ input, select {
     border-color: #49587D;
   }
 }
+
 
 input[type="radio"] {
   width: auto;
@@ -64,7 +65,7 @@ input[type="radio"]:not(:checked) + label:after {
     content: '';
     width: 8px;
     height: 8px;
-    background-color: #006FE1;
+    background-color: #3e3e40;
     position: absolute;
     top: 5px;
     left: 5px;

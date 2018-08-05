@@ -78,6 +78,18 @@ function* addSquadMember(action) {
   }
 }
 
+function* updateStateExciseRules(action) {
+  console.log(action)
+  try {
+    // const data = yield call(Api.updateStateExciseRules, action)
+    yield put({ type: ActionTypes.SUCCESS_UPDATE_STATE_EXCISE_RULES })
+    Notify("Successfully updated state excise rules", "success");
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 
 function* setLoading(action) {
   try {
@@ -132,6 +144,12 @@ function* watchAddSquadMember() {
   }
 }
 
+function* watchUpdateStateExciseRules() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_UPDATE_STATE_EXCISE_RULES, updateStateExciseRules)
+  }
+}
+
 function* watchSetLoading() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_SET_LOADING, setLoading)
@@ -144,6 +162,7 @@ function* watchSetLoadingAll() {
   }
 }
 
+
 export default function* rootSaga() {
   yield [
     fork(watchFetchInProgressOTTP),
@@ -153,6 +172,7 @@ export default function* rootSaga() {
     fork(watchUpdateSquadMember),
     fork(watchAddSquadMember),
     fork(watchSetLoading),
-    fork(watchSetLoadingAll)
+    fork(watchSetLoadingAll),
+    fork(watchUpdateStateExciseRules)
   ]
 }

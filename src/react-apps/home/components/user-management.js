@@ -88,7 +88,7 @@ class UserManagement extends React.Component {
     const { loadingSquadMembers, squadMembersData } = this.props
     return (
       <React.Fragment>
-        <div style={{ marginTop: '62px', padding: '20px' }}>
+        <div style={{ marginTop: '62px', padding: '20px', width: '100%' }}>
           <Button primary onClick={this.mountMemberInfoModal}>Add Member</Button>
           <table style={{ marginTop: '20px' }}>
             <thead>

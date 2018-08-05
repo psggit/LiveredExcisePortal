@@ -59,3 +59,13 @@ export function addSquadMember(action) {
   })
     .then(json => json)
 }
+
+export function updateStateExciseRules(action) {
+  return POST({
+    api: '/excisePortal/userManagement/addUsers',
+    handleError: true,
+    apiBase: 'agamotto',
+    data: action.data
+  })
+    .then(json => json)
+}

@@ -33,3 +33,8 @@ export const updateSquadMember = data => ({
 export const setLoadingAll = () => ({
   type: ActionTypes.REQUEST_SET_LOADING_ALL
 })
+
+export const updateStateExciseRules = data => ({
+  type: ActionTypes.REQUEST_UPDATE_STATE_EXCISE_RULES,
+  data
+})

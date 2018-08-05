@@ -17,6 +17,7 @@ class Filter extends React.Component {
 
     this.defaultFilters = {
       status: 'all',
+      dsoStatus: 'all',
       from: today.toISOString(),
       to: tommorrow.toISOString()
     }
@@ -30,6 +31,7 @@ class Filter extends React.Component {
 
     this.handleCollapseFilter = this.handleCollapseFilter.bind(this)
     this.handleSetOTTPStatus = this.handleSetOTTPStatus.bind(this)
+    this.handleSetDSOStatus = this.handleSetDSOStatus.bind(this)
     this.setDateFilter = this.setDateFilter.bind(this)
     this.handleApplyFilter = this.handleApplyFilter.bind(this)
     this.mountDate = this.mountDate.bind(this)
@@ -65,8 +67,16 @@ class Filter extends React.Component {
     this.setState({ status: val })
   }
 
+  setDSOStatus(val) {
+    this.setState({ dsoStatus: val })
+  }
+
   handleSetOTTPStatus(e) {
     this.setStatus(e.target.value)
+  }
+
+  handleSetDSOStatus(e) {
+    this.setDSOStatus(e.target.value)
   }
 
   mountDate() {
@@ -102,6 +112,7 @@ class Filter extends React.Component {
   render() {
     const { isCollapsed, filters } = this.state
     const { currentRoute } = this.props
+
     // const filterItemsJSX = {
     //   date: [
     //     <div className="filter-item">
@@ -176,6 +187,31 @@ class Filter extends React.Component {
                       <option key={i} value={item.value}>{ item.label }</option>
                     ))
                   }
+                </select>
+              </div>
+            }
+
+            {
+              this.props.filters.indexOf('dso-status') > -1 &&
+              <div className="filter-item">
+                <label>DSO application Status</label>
+                <select value={this.state.dsoStatus} onChange={this.handleSetDSOStatus}>
+                  {
+                    this.props.dsoFilters.map((item, i) => (
+                      <option key={i} value={item.value}>{ item.label }</option>
+                    ))
+                  }
+                </select>
+              </div>
+            }
+
+            {
+              this.props.filters.indexOf('jurisdiction') > -1 &&
+              <div className="filter-item">
+                <label>Jurisdiction</label>
+                <select value={'banglore-urban'} onChange={this.handleSetDSOStatus}>
+                  <option value='all'>-All-</option>
+                  <option value={'banglore-urban'}>Banglore urban</option>
                 </select>
               </div>
             }

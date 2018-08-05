@@ -8,7 +8,7 @@ class Card extends React.Component {
         <div className="card__header">
           <p>{ this.props.title }</p>
         </div>
-        <div className="card__body">
+        <div style={this.props.style} className="card__body">
           { this.props.children }
         </div>
       </div>

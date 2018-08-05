@@ -10,3 +10,10 @@ export const historyFilters = [
   { value: 'Returned', label: 'Returned' },
   { value: 'Delivered', label: 'Delivered' }
 ]
+
+
+export const dsoFilters = [
+  { value: 'all', label: '-All-' },
+  { value: 'accepted', label: 'Accepted' },
+  { value: 'requested', label: 'Requested' }
+]
