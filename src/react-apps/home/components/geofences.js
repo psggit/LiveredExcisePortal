@@ -83,7 +83,7 @@ class GeoFences extends React.Component {
 
     return (
       <div style={{ width: '100%', marginTop: '62px', padding: '20px' }}>
-        <Card style={{ padding: '0' }} title="GeoFences in bengaluru">
+        <Card style={{ padding: '0' }} title="Jurisdictions in bengaluru">
           <Gmaps
             lat={coords.lat}
             lng={coords.lng}
