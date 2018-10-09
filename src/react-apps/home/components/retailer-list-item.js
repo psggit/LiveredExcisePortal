@@ -38,6 +38,7 @@ const DSOListItem = ({ data, handleClick }) => {
   // const orderStatus = `${status}${time}${article}`
   return (
     <tr>
+      <td>{ data.jurisdiction }</td>
       <td>{ data.name }</td>
       {/* <td>{ data.application_status }</td> */}
       <td>{ data.code }</td>
@@ -45,7 +46,6 @@ const DSOListItem = ({ data, handleClick }) => {
       <td>{ data.licence_number }</td>
       <td>{ data.licence_validity }</td>
       <td>{ data.locality }</td>
-      <td>{ data.jurisdiction }</td>
     </tr>
   )
 }

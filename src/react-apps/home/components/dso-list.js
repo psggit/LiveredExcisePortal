@@ -90,6 +90,7 @@ class DSOList extends React.Component {
           <table>
             <thead>
               <tr>
+                <th>Jurisdiction</th>
                 <th>DSO Name</th>
                 <th>Application Status</th>
                 <th>Website/Mobile Application Name</th>

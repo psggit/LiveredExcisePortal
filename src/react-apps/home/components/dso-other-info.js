@@ -6,7 +6,7 @@ function DSOOtherInfo() {
     <Card title="Other Information">
       <div>
         <p>Name of website / mobile application proposed to be used</p>
-        <b><p>Drizzly</p></b>
+        <b><p>Hipbar delivery</p></b>
       </div>
       <div style={{ marginTop: '20px' }}>
         <p>Date of incorporation of applicant, if it's a company</p>

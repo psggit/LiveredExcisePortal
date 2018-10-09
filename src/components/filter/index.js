@@ -209,9 +209,13 @@ class Filter extends React.Component {
               this.props.filters.indexOf('jurisdiction') > -1 &&
               <div className="filter-item">
                 <label>Jurisdiction</label>
-                <select value={'banglore-urban'} onChange={this.handleSetDSOStatus}>
+                <select>
                   <option value='all'>-All-</option>
-                  <option value={'banglore-urban'}>Banglore urban</option>
+                  <option value={'banglore-south'}>Banglore south</option>
+                  <option value={'banglore-central'}>Banglore central</option>
+                  <option value={'banglore-north'}>Banglore north</option>
+                  <option value={'banglore-east'}>Banglore east</option>
+                  <option value={'banglore-west'}>Banglore west</option>
                 </select>
               </div>
             }

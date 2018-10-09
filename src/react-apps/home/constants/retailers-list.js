@@ -7,7 +7,7 @@ export const retailersList = [
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore Urban'
+    jurisdiction: 'Bangalore West'
   },
   {
     code: 'KC80767',
@@ -17,7 +17,7 @@ export const retailersList = [
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore Urban'
+    jurisdiction: 'Bangalore East'
   },
   {
     code: 'KC80767',
@@ -27,7 +27,7 @@ export const retailersList = [
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore Urban'
+    jurisdiction: 'Bangalore Central'
   },
   {
     code: 'KC80767',
@@ -37,7 +37,7 @@ export const retailersList = [
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore Urban'
+    jurisdiction: 'Bangalore South'
   },
   {
     code: 'KC80767',
@@ -47,6 +47,6 @@ export const retailersList = [
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore Urban'
+    jurisdiction: 'Bangalore North'
   }
 ]

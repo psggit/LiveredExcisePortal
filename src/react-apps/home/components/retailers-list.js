@@ -90,6 +90,7 @@ class RetailersList extends React.Component {
           <table>
             <thead>
               <tr>
+                <th>Jurisdiction</th>
                 <th>Retailer Name</th>
                 {/* <th>Application status</th> */}
                 <th>KSBCL Code</th>
@@ -97,7 +98,6 @@ class RetailersList extends React.Component {
                 <th>Licence no.</th>
                 <th>Licence validity</th>
                 <th>Locality</th>
-                <th>Jurisdiction</th>
               </tr>
             </thead>
             <tbody>

@@ -114,8 +114,8 @@ class App extends React.Component {
                     <WithFilters
                       history={history}
                       currentRoute={this.state.currentRoute}
-                      dsoFilters={dsoFilters}
-                      filters={['dso-status']}
+                      // dsoFilters={dsoFilters}
+                      filters={['jurisdiction']}
                     >
                       <DSO {...props} />
                     </WithFilters>

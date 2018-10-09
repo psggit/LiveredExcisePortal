@@ -5,10 +5,13 @@ import OrderTimeRestriction from './order-time-restriction'
 import { connect } from 'react-redux'
 import * as Actions from './../actions'
 import { bindActionCreators } from 'redux'
+import { mountModal, unMountModal } from '@components/ModalBox/utils'
+import setDryDayModal from './dry-days-modal'
 
 class RuleManagement extends React.Component {
   constructor() {
     super()
+    this.mountDryDaysModal = this.mountDryDaysModal.bind(this)
     this.days = [
       { value: 'monday', label: 'Monday' },
       { value: 'tuesday', label: 'Tuesday' },
@@ -19,21 +22,35 @@ class RuleManagement extends React.Component {
       { value: 'sunday', label: 'Sunday' }
     ]
     this.state = {
+      dryDays: [],
       dryDay: '2018-08-10',
-      legalPurchaseAge: '18',
+      legalPurchaseAge: '21',
       maxDeliveriesPerMonth: '10',
       maxDeliveriesPerWeek: '2',
       possesionOverall: '12',
-      possesionIMFL: '2.5',
+      possesionIMFL: '2.3',
       possesionFMFL: '4',
       possesionBeer: '10',
-      possesionLiquor: '3',
+      possesionWine: '3',
       canSubmit: false,
       isSubmitting: false
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  mountDryDaysModal() {
+    mountModal(setDryDayModal({
+      dryDaysMonths: this.state.dryDaysMonths,
+      dryDays: this.state.dryDays,
+      setNumberOfDryDays: (dryDays) => {
+        this.setState({
+          dryDays
+        })
+        unMountModal()
+      }
+    }))
   }
 
   handleChange(e) {
@@ -108,11 +125,12 @@ class RuleManagement extends React.Component {
           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
 
             <div style={{ padding: '20px', boxShadow: '0 1px 1px #dfdfdf' }}>
-              <p style={{ fontSize: '14px' }}>Dry day</p>
+              <p style={{ fontSize: '14px' }}>Set dry days</p>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '10px' }}>
                 <div className="form-group">
-                  <label>Day</label>
-                  <input value={this.state.dryDay} onChange={this.handleChange} name="dryDay" type="date" style={{ maxWidth: '180px' }} />
+                  <label>{this.state.dryDays.length} dry days <span onClick={this.mountDryDaysModal} style={{ color: '#4990e2', cursor: 'pointer' }}>Change</span></label>
+                  {/* <label>Select date</label>
+                  <input value={this.state.dryDay} onChange={this.handleChange} name="dryDay" type="date" style={{ maxWidth: '180px' }} /> */}
                 </div>
               </div>
             </div>
@@ -162,8 +180,8 @@ class RuleManagement extends React.Component {
                   <input value={this.state.possesionBeer} onChange={this.handleChange} name="possesionBeer" style={{ maxWidth: '88px', marginRight: '20px' }} />
                 </div>
                 <div className="form-group">
-                  <label>Liquor</label>
-                  <input value={this.state.possesionLiquor} onChange={this.handleChange} name="possesionLiquor" style={{ maxWidth: '88px' }} />
+                  <label>Wine</label>
+                  <input value={this.state.possesionWine} onChange={this.handleChange} name="possesionWine" style={{ maxWidth: '88px' }} />
                 </div>
               </div>
             </div>

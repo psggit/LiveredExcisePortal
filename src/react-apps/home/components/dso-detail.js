@@ -55,9 +55,9 @@ class OTTPDetail extends Component {
 
   componentDidMount() {
     const { dsoId } = this.props.match.params
-    this.props.actions.fetchOTTPDetail({
-      ottp_id: dsoId
-    })
+    // this.props.actions.fetchOTTPDetail({
+    //   ottp_id: dsoId
+    // })
   }
 
   unmountOrderDetail() {
@@ -71,7 +71,7 @@ class OTTPDetail extends Component {
     return (
       <div className="order-detail__wrapper">
         {
-          !this.props.loadingOTTPDetail
+          this.props.loadingOTTPDetail
           ? <Fragment>
             <div className="order-detail__header">
               <div>
@@ -93,8 +93,8 @@ class OTTPDetail extends Component {
                         <Toggle isToggled={this.props.location.state.status === 'Authorized'} />
                         {
                           this.props.location.state.status === 'Authorized'
-                          ? <span style={{ color: '#6D788F', marginLeft: '20px' }}>DSO Authorized for Delivery Service</span>
-                          : <span style={{ color: '#6D788F', marginLeft: '20px' }}>DSO Deauthorized for Delivery Service</span>
+                          ? <span style={{ color: '#6D788F', marginLeft: '20px' }}>DSO Activated for Delivery Service</span>
+                          : <span style={{ color: '#6D788F', marginLeft: '20px' }}>DSO Deactivated for Delivery Service</span>
                         }
                       </div>
                     )
@@ -103,9 +103,9 @@ class OTTPDetail extends Component {
               </div>
             </div>
 
-            <div style={this.props.location.state.status !== 'Application Recieved' ? { display: 'block' } : {}} className="order-detail__body">
+            <div style={this.props.location.state.status === 'Application Recieved' ? { display: 'block' } : {}} className="order-detail__body">
               {
-                this.props.location.state.status === 'Application Recieved'
+                this.props.location.state.status !== 'Application Recieved'
                 ? (
                   <React.Fragment>
                     <div style={{ width: 'calc(50% - 10px)', marginRight: '10px' }}>

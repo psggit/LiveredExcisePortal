@@ -14,6 +14,6 @@ export const historyFilters = [
 
 export const dsoFilters = [
   { value: 'all', label: '-All-' },
-  { value: 'accepted', label: 'Accepted' },
-  { value: 'requested', label: 'Requested' }
+  { value: 'authorized', label: 'Authorized' },
+  { value: 'deauthorized', label: 'Deauthorized' }
 ]

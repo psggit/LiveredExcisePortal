@@ -38,6 +38,7 @@ const DSOListItem = ({ data, handleClick }) => {
   // const orderStatus = `${status}${time}${article}`
   return (
     <tr onClick={(e) => {handleClick(data.id, data.name, data.application_status)} }>
+      <td>{ data.jurisdiction }</td>
       <td>{ data.name }</td>
       <td>{ data.application_status }</td>
       <td>{ data.app_name }</td>

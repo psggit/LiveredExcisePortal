@@ -3,10 +3,10 @@ import './index.scss'
 import { unmountComponentAtNode } from 'react-dom'
 
 class ModalBox extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      width: "660px",
+      width: props.width || "660px",
       maxHeight: '95vh'
     }
   }
