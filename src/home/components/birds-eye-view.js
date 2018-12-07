@@ -1,9 +1,9 @@
 import React from 'react'
 import { Gmaps, Marker } from 'react-gmaps'
 import Card from '@components/card'
-import customerImg from './../../../../images/customer.svg'
-import delivererImg from './../../../../images/deliverer.svg'
-import retailerImg from './../../../../images/retailer.svg'
+import customerImg from '@images/customer.svg'
+import delivererImg from '@images/deliverer.svg'
+import retailerImg from '@images/retailer.svg'
 
 const params = { v: '3.exp', key: 'AIzaSyDpG-NeL-XGYAduQul2JenVr86HIPITEso' }
 

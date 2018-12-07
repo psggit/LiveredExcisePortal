@@ -14,7 +14,6 @@
   "author": "Madhur Garg <madhur@hipbar.com>",
   "license": "ISC",
   "devDependencies": {
-    "abspath-webpack-plugin": "0.0.1",
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-import": "^1.7.0",

@@ -5,7 +5,7 @@ import '@sass/_animation.scss'
 import { POST } from '@utils/fetch'
 import { createSession } from './session'
 import Notify from '@components/notification'
-import loginBg from './../../../images/login-bg.jpg'
+import loginBg from '@images/login-bg.jpg'
 
 console.log(loginBg);
 class Login extends React.Component {

@@ -1,12 +1,10 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const AbsolutePathProviderPlugin = require('abspath-webpack-plugin')
-
 
 module.exports = {
   entry: {
-    app: './src/react-apps/index.js',
+    app: './src/index.js',
     vendor: ['react', 'react-dom', 'react-router', 'react-router-dom', 'styled-components']
   },
   plugins: [
@@ -14,27 +12,20 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       template: './index.html'
-    }),
-    new AbsolutePathProviderPlugin(
-      /^@sass/,
-      path.resolve('./src/sass')
-    ),
-
-    new AbsolutePathProviderPlugin(
-      /^@components/,
-      path.resolve('./src/components')
-    ),
-
-    new AbsolutePathProviderPlugin(
-      /^@utils/,
-      path.resolve('./src/utils')
-    )
+    })
   ],
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
-
+  },
+  resolve: {
+    alias: {
+      '@sass': path.resolve(__dirname, 'src/sass'),
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+      '@images': path.resolve(__dirname, 'images')
+    }
   },
   module: {
     rules: [
