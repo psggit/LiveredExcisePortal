@@ -6,6 +6,7 @@ import * as Actions from './../actions'
 import LiveOrdersListItem from './live-ottp-list-item'
 import Loader from '@components/loader'
 import '@sass/_pagination.scss'
+import Button from '@components/button'
 
 
 class LiveOrdersList extends React.Component {
@@ -53,7 +54,7 @@ class LiveOrdersList extends React.Component {
 
   componentDidMount() {
     console.log("props", this.props)
-    this.defaultData()
+    // this.defaultData()
   }
 
   defaultData() {
@@ -150,7 +151,6 @@ class LiveOrdersList extends React.Component {
           />
           : ''
         }
-
       </Fragment>
     )
   }

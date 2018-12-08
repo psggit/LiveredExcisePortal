@@ -5,7 +5,7 @@ import { setLoadingAll } from './../actions'
 import createHistory from 'history/createBrowserHistory'
 import { Route, Switch } from 'react-router-dom'
 import { Router } from 'react-router'
-import Navbar from '@components/navbar'
+import Header from '@components/header'
 import SideMenu from '@components/sidemenu'
 import { menuItemsMap, menuItems } from './../constants/navbar-items'
 import LiveOTTPList from './../components/live-ottp-list'
@@ -19,7 +19,6 @@ import RetailerDetail2 from './../components/retailer-detail2'
 import WithFilters from './../components/with-filters'
 import RuleManagement from './../components/rule-management'
 import GeoFences from './../components/geofences'
-import BirdsEyeView from './../components/birds-eye-view'
 import { liveFilters, historyFilters, dsoFilters } from './../constants/status-filters'
 import '@sass/app.scss'
 
@@ -57,7 +56,7 @@ class App extends React.Component {
         height: '100vh',
         overflow: 'auto'
       }}>
-        <Navbar
+        <Header
           history={history}
           menuItems={menuItems}
           menuItemsMap={menuItemsMap}
@@ -165,16 +164,6 @@ class App extends React.Component {
                 render={
                   props => (
                     <GeoFences {...props} />
-                  )
-                }
-              />
-
-              <Route
-                exact
-                path="/home/live-view"
-                render={
-                  props => (
-                    <BirdsEyeView {...props} />
                   )
                 }
               />
