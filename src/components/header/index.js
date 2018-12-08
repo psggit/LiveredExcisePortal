@@ -1,9 +1,9 @@
 import React from 'react'
 import getIcon from './../getIcon'
-import './navbar.scss'
+import './header.scss'
 import { Api } from '@utils/config'
 
-class Navbar extends React.Component {
+class Header extends React.Component {
   constructor() {
     super()
   }
@@ -81,4 +81,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar
+export default Header
