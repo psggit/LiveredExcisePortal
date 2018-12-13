@@ -1,0 +1,31 @@
+.collapsible--wrapper {
+  width: 100%;
+  border: 1px solid #dfdfdf;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.collapsible--header {
+  width: 100%;
+  padding: 0 30px;
+  line-height: 66px;
+  border-bottom: 1px solid #dfdfdf;
+  background-color: #f0f3f6;
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #152935;
+    text-transform: uppercase;
+  }
+}
+
+.collapsible--body {
+  padding: 24px;
+  width: 100%;
+  background-color: #fff;
+  transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &.collapsed {
+    transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 0 24px;
+  }
+}
