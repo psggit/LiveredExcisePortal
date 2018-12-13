@@ -1,5 +1,6 @@
 import React from 'react'
 import './sidemenu.scss'
+import Icon from './../icon'
 
 class SideMenu extends React.Component {
   checkActiveClass(value) {
@@ -9,27 +10,30 @@ class SideMenu extends React.Component {
     return ''
   }
 
+  handleClick(e) {
+    this.props.onClick(e)
+  }
+
   handleChangeRoute(e, currentRoute) {
     e.preventDefault()
     this.props.history.push(`/home/${currentRoute}`)
   }
 
   render() {
-    const { menuItems, menuItemsMap, currentRoute } = this.props
+    const { menuItems } = this.props
     return (
       <div className="side-menu">
         {
-          menuItems.map((item, i) => (
-            <div className={`side-menu__item ${this.checkActiveClass(item.value)}`}>
+          menuItems.map((item, i) => <div key={i} className={`side-menu__item ${this.checkActiveClass(item.value)}`}>
               <a
                 href={`/home/${item.value}`}
-                key={i}
-                onClick={(e) => { this.handleChangeRoute(e, item.value) }}
+                onClick={this.handleClick}
               >
+              <Icon name={item.icon} />
                 { item.label }
               </a>
             </div>
-          ))
+          )
         }
       </div>
     )
