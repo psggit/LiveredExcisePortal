@@ -4,7 +4,7 @@
 }
 
 .select {
-  min-width: 225px;
+  width: 225px;
   height: 40px;
   background-color: rgba(61, 112, 178, 0.1);
   border: 0;
@@ -12,6 +12,9 @@
   color: #5a6872;
   &:focus {
     outline: 0;
+  }
+  &.small {
+    width: 90px;
   }
 }
 

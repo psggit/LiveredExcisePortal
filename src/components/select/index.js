@@ -15,7 +15,10 @@ class Select extends React.Component {
     return (
       <div className="select--container">
         <Icon name="down-small" size="10"/>
-        <select placeholder={this.props.placeholder} className="select" onChange={this.handleChange}>
+        <select
+          placeholder={this.props.placeholder}
+          className={`select ${this.props.small ? 'small' : ''}`}
+          onChange={this.handleChange}>
         {
           this.props.options.map((item, i) => (
             <option key={i} value={item.value}>{ item.text }</option>

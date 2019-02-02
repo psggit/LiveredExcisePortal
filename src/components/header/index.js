@@ -10,11 +10,17 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header">
-      <div className="upper">
-        <p>
-          Logout
-        </p>
-      </div>
+      {
+        this.props.isLoggedIn
+        ? (
+          <div className="upper">
+            <p>
+              Logout
+            </p>
+          </div>
+        )
+        : ''
+      }
       <div className="lower">
         <div className="brand">
           <Icon name="excise-logo" />
@@ -27,7 +33,10 @@ class Header extends React.Component {
           </div>
         </div>
 
-        <div className="header--items">
+       {
+         this.props.isLoggedIn
+         ? (
+          <div className="header--items">
           <div className="item">
             <Icon name="support" />
             <span>
@@ -42,6 +51,9 @@ class Header extends React.Component {
             </span>
           </div>
         </div>
+         )
+         : ''
+       }
       </div>
       </div>
     )

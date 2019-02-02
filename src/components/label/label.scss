@@ -1,6 +1,11 @@
 .label {
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #152935;
+  svg {
+    position: relative;
+    top: 7px;
+    margin-left: 12px;
+  }
 }

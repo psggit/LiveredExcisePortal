@@ -12,15 +12,13 @@ class Login extends React.Component {
   constructor() {
     super()
     this.state = {
-      showOTPField: false,
-      isSubmitting: false,
-      phoneNumber: '',
-      otp: ''
+      email: '',
+      password: 'fefwfewf'
     }
-    this.handleOTP = this.handleOTP.bind(this)
+
     this.handleLogin = this.handleLogin.bind(this)
-    this.setPhoneNumber = this.setPhoneNumber.bind(this)
-    this.setOTP = this.setOTP.bind(this)
+    this.handleEmailChange = this.handleEmailChange.bind(this)
+    this.handlePassword = this.handlePassword.bind(this)
     this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
@@ -34,32 +32,8 @@ class Login extends React.Component {
     }
   }
 
-  handleOTP() {
-    const { phoneNumber, otp } = this.state
-    if (phoneNumber.length === 10) {
-      this.setState({ isSubmitting: true })
-
-      POST({
-        api: '/excise-person/auth/otp-login',
-        apiBase: 'gremlinUrl',
-        handleError: false,
-        cors: true,
-        data: { mobile: phoneNumber, otp: null }
-      })
-        .then((json) => {
-          if (json.status) {
-            Notify(json.status, 'warning')
-            this.setState({ isSubmitting: false })
-          } else {
-            Notify('OTP sent to mobile number', 'success')
-            this.setState({ showOTPField: true, isSubmitting: false })
-          }
-        })
-    }
-  }
-
   handleLogin() {
-    const { otp, phoneNumber } = this.state
+    const { email, password } = this.state
 
     if (otp.length === 6) {
       this.setState({ isSubmitting: true })
@@ -79,13 +53,13 @@ class Login extends React.Component {
         })
     }
   }
-
-  setPhoneNumber(e) {
-    this.setState({ phoneNumber: e.target.value })
+  
+  handlePassword() {
+    this.setState({ password: e.target.value })
   }
 
-  setOTP(e) {
-    this.setState({ otp: e.target.value })
+  handleEmailChange() {
+    this.setState({ email: e.target.value })
   }
 
   render() {
@@ -111,18 +85,24 @@ class Login extends React.Component {
           }}>
           <h3 style={{ fontSize: '24px', color: '#444', textAlign: 'center', lineHeight: '54px', fontWeight: '600', borderBottom: '1px solid #d9d9d9' }}>Login</h3>
            <div style={{ padding :'40px' }}>
-           {
-              !this.state.showOTPField &&
               <React.Fragment>
                 <div className="form-group">
-                  <label style={{ color: '#152935', fontWeight: '500' }}>Enter Phone Number</label>
+                  <label style={{ color: '#152935', fontWeight: '500' }}>Email Address</label>
                   <input
-                    maxLength={10}
-                    value={this.state.phoneNumber}
+                    spellCheck={false}
                     onKeyDown={this.handleKeyPress}
-                    onChange={this.setPhoneNumber}
+                    onChange={this.handleEmailChange}
                     style={{ width: '100%' }}
                     type="text"
+                  />
+                </div>
+                <div className="form-group">
+                  <label style={{ color: '#152935', fontWeight: '500' }}>Password</label>
+                  <input
+                    onKeyDown={this.handleKeyPress}
+                    onChange={this.handlePassword}
+                    style={{ width: '100%' }}
+                    type="password"
                   />
                 </div>
                 <div className="form-group">
@@ -135,39 +115,6 @@ class Login extends React.Component {
                   </Button>
                 </div>
               </React.Fragment>
-            }
-
-            {
-              this.state.showOTPField &&
-              <React.Fragment>
-                <div className="form-group animated bounceInRight">
-                  <label style={{ color: '#fff' }}>Enter OTP</label>
-                  <input
-                    value={this.state.otp}
-                    onChange={this.setOTP}
-                    onKeyDown={this.handleKeyPress}
-                    style={{ width: '100%' }}
-                    maxLength="6"
-                    type="text"
-                  />
-                  <span
-                    style={{ fontSize: '12px', color: '#fff' }}
-                  >
-                    Click <a onClick={this.handleOTP} style={{ color: '#fff', cursor: 'pointer', textDecoration: 'underline' }}>here</a> to resend
-                  </span>
-                </div>
-
-                <div className="form-group">
-                  <Button
-                    onClick={this.handleLogin}
-                    style={this.state.isSubmitting ? submittingStyle : { boxShadow: '0 2px 4px 0 #333' }}
-                    primary
-                  >
-                    Login
-                  </Button>
-                </div>
-              </React.Fragment>
-            }
            </div>
           </div>
      </React.Fragment>

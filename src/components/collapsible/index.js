@@ -1,5 +1,6 @@
 import React from 'react'
 import './collapsible.scss'
+import Icon from './../icon'
 
 class Collapsible extends React.Component {
   constructor() {
@@ -22,6 +23,7 @@ class Collapsible extends React.Component {
             <p>
             { this.props.title }
             </p>
+            <Icon name="down" />
           </div>
           <div className={`collapsible--body ${this.state.isCollpased ? 'collapsed' : ''}`}>
             { this.props.children }

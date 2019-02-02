@@ -5,6 +5,9 @@
 }
 
 .collapsible--header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 0 30px;
   line-height: 66px;
@@ -19,13 +22,17 @@
 }
 
 .collapsible--body {
-  padding: 24px;
+  padding: 30px;
   width: 100%;
   background-color: #fff;
-  transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: 0.8s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  opacity: 1;
 
   &.collapsed {
-    transition: 0.3s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: 0.8s all cubic-bezier(0.175, 0.885, 0.32, 1.275);
     padding: 0 24px;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
   }
 }

@@ -1,0 +1,89 @@
+#rule-engine {
+  .collapsible--wrapper {
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+
+  .label {
+    margin-bottom: 11px;
+  }
+  p {
+    color: #152935;
+    font-size: 14px;
+  }
+
+  input:read-only {
+    background-color: #fff;
+  }
+
+  input.small {
+    width: 90px;
+  }
+
+  .possession {
+    max-width: 225px;
+    input {
+      margin-bottom: 10px;
+    }
+  }
+
+  .zone-layout {
+    display: flex;
+    .sec-1 {
+      width: 30%;
+    }
+
+    .sec-2 {
+      display: flex;
+      justify-content: space-between;
+      width: 40%;
+    }
+
+    .sec-3 {
+      width: 30%;
+    }
+  }
+
+  table * {
+    border: 0;
+  }
+
+  table tr th {
+    text-transform: capitalize;
+    padding: 0;
+    background: none;
+  }
+
+  td {
+    padding: 12px 0;
+    font-size: 14px;
+  }
+
+  table tbody tr:hover {
+    background: none;
+  }
+
+  td:first-child {
+    width: 30%;
+  }
+
+  td:last-child {
+    text-align: right;
+    width: 30%;
+    svg:first-child {
+      cursor: pointer;
+      margin-right: 40px;
+      width: 18px;
+      height: 18px;
+      g g{
+        fill: #3d70b2;
+      }
+    }
+    
+    svg:last-child {
+      cursor: pointer;
+      width: 19px;
+      height: 19px;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+table {
+  font-family: 'IBM Plex Sans', sans-serif;
+  border: 1px solid #d9d9d9;
+  background-color: #fff;
+  * {
+    pointer-events: all;
+  }
+}
+
+thead {
+  // background-color: #f4f7fb;
+}
+
+th {
+  font-weight: bold;
+  padding: 12px !important;
+  // border-bottom: 0;
+}
+
+td {
+  padding: 12px !important;
+}

@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 
 import { Api } from '@utils/config'
-import Login from './login'
+import Login from './login/new'
 import Home from './home/container/Root'
 import { createSession } from './login/session'
 
@@ -17,6 +17,10 @@ import makeAsyncComponent from './makeAsyncComponent'
 
 class App extends React.Component {
   componentWillMount() {
+  //  this.checkUserLoggedIn()
+  }
+
+  checkUserLoggedIn() {
     const fetchOptions = {
       method: 'get',
       credentials: 'include',

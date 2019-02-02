@@ -7,7 +7,11 @@ import LiveOrdersListItem from './live-ottp-list-item'
 import Loader from '@components/loader'
 import '@sass/_pagination.scss'
 import Button from '@components/button'
-
+import data from './../constants/live-orders-mock'
+import Search from '@components/search'
+import Toggle from '@components/toggle'
+import Icon from '@components/icon'
+import PageHeader from '@components/pageheader'
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -15,7 +19,9 @@ class LiveOrdersList extends React.Component {
     this.pagesLimit = 10
     this.state = {
       activePage: 1,
-      pageOffset: 0
+      pageOffset: 0,
+      data: data,
+      loading: false
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -25,7 +31,7 @@ class LiveOrdersList extends React.Component {
   }
 
   handleClick(orderId, e) {
-    this.props.history.push(`/home/live-ottp/${orderId}`)
+    this.props.history.push(`/home/live-orders/${orderId}`)
   }
 
   fetchData() {
@@ -97,22 +103,54 @@ class LiveOrdersList extends React.Component {
   render() {
     return (
       <Fragment>
+      <PageHeader pageName="Live Orders" />
+      <div style={{
+        display: 'flex',
+        marginBottom: '20px',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+        }}>
+        <Search
+          placeholder="Search"
+        />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <Toggle />
+            <span style={{
+              color: '#5a6872',
+              fontSize: '14px',
+              marginLeft: '10px'
+              }}>
+              Delivery enabled
+            </span>
+          </div>
+          <div style={{ marginLeft: '46px' }}>
+            <Button primary>
+              <Icon name="filter" />
+              <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
+            </Button>
+          </div>
+        </div>
+      </div>
         <div>
           <table>
             <thead>
               <tr>
-                <th>OTTP Id</th>
-                <th>OTTP generated at</th>
-                <th>OTTP status</th>
-                <th>Agent name</th>
-                <th>Vehicle number</th>
+                <th>Permit ID</th>
+                <th>Date issued</th>
+                <th>Time issued</th>
+                <th>DSO</th>
                 <th>Retailer</th>
+                <th>City/Town</th>
+                <th>Order amount</th>
+                <th>Permit status</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               {
-                !this.props.loadingInProgressOTTP
-                ? this.props.inProgressOTTP.map(item => (
+                !this.state.loading
+                ? this.state.data.map(item => (
                   <LiveOrdersListItem
                     handleClick={this.handleClick}
                     handleOrderAssign={this.openAssignOrderModal}
@@ -130,7 +168,7 @@ class LiveOrdersList extends React.Component {
                 )
               }
               {
-                !this.props.loadingInProgressOTTP && !this.props.inProgressOTTP.length &&
+                !this.state.loading && !this.state.data.length &&
                 <tr>
                   <td style={{ textAlign: 'center' }} colSpan="6">
                     No records found

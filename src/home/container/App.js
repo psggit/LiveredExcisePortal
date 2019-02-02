@@ -17,7 +17,7 @@ import DSO from './../components/dso-list'
 import RetailersList from './../components/retailers-list'
 import RetailerDetail2 from './../components/retailer-detail2'
 import WithFilters from './../components/with-filters'
-import RuleManagement from './../components/rule-management'
+import RuleManagement from './../components/rule-engine'
 import GeoFences from './../components/geofences'
 import { liveFilters, historyFilters, dsoFilters } from './../constants/status-filters'
 import '@sass/app.scss'
@@ -57,51 +57,30 @@ class App extends React.Component {
         overflow: 'auto'
       }}>
         <Header
+          isLoggedIn
           history={history}
-          menuItems={menuItems}
-          menuItemsMap={menuItemsMap}
-          currentRoute={this.state.currentRoute}
         />
-        <div style={{ display: 'flex' }}>
+        <div>
           <SideMenu
             history={history}
             menuItems={menuItems}
             menuItemsMap={menuItemsMap}
             currentRoute={this.state.currentRoute}
           />
+          <div style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 96px)', overflow: 'auto' }}>
           <Router history={history}>
             <Switch>
               <Route
                 exact
-                path="/home/live-ottp"
-                render={
-                  props => (
-                    <WithFilters
-                      history={history}
-                      currentRoute={this.state.currentRoute}
-                      statusFilters={liveFilters}
-                      filters={['status']}
-                    >
-                      <LiveOTTPList {...props} />
-                    </WithFilters>
-                  )
-                }
+                path="/home/live-orders"
+                render={ props => <LiveOTTPList {...props} /> }
               />
 
               <Route
                 exact
                 path="/home/history-ottp"
                 render={
-                  props => (
-                    <WithFilters
-                      history={history}
-                      currentRoute={this.state.currentRoute}
-                      statusFilters={historyFilters}
-                      filters={['status', 'date']}
-                    >
-                      <HistoryOTTPList {...props} />
-                    </WithFilters>
-                  )
+                  props => <HistoryOTTPList {...props} />
                 }
               />
 
@@ -109,16 +88,7 @@ class App extends React.Component {
                 exact
                 path="/home/dso"
                 render={
-                  props => (
-                    <WithFilters
-                      history={history}
-                      currentRoute={this.state.currentRoute}
-                      // dsoFilters={dsoFilters}
-                      filters={['jurisdiction']}
-                    >
-                      <DSO {...props} />
-                    </WithFilters>
-                  )
+                  props => <DSO {...props} />
                 }
               />
 
@@ -126,15 +96,7 @@ class App extends React.Component {
                 exact
                 path="/home/retailers"
                 render={
-                  props => (
-                    <WithFilters
-                      history={history}
-                      currentRoute={this.state.currentRoute}
-                      filters={['jurisdiction']}
-                    >
-                      <RetailersList {...props} />
-                    </WithFilters>
-                  )
+                  props => <RetailersList {...props} />
                 }
               />
 
@@ -150,7 +112,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/rule-management"
+                path="/home/rule-engine"
                 render={
                   props => (
                     <RuleManagement {...props} />
@@ -200,7 +162,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/live-ottp/:ottpId"
+                path="/home/live-orders/:ottpId"
                 render={
                   props => (
                     <OTTPDetail currentRoute={this.state.currentRoute} {...props} />
@@ -209,6 +171,7 @@ class App extends React.Component {
               />
             </Switch>
           </Router>
+          </div>
         </div>
       </div>
     )

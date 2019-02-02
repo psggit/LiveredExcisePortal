@@ -1,7 +1,8 @@
 .side-menu {
   position: relative;
-  width: 240px;
-  height: calc(100vh - 62px);
+  width: 250px;
+  display: inline-block;
+  height: calc(100vh - 96px);
   // border-right: 1px solid #D6DAE3;
   border: 1px solid #dfdfdf;
   .side-menu__item {
@@ -16,8 +17,9 @@
       width: 100%;
       text-decoration: none;
       color: #333;
-      svg {
-        margin-right: 20px;
+      span {
+        display: inline-block;
+        width: 40px;
       }
     }
     &.active, &:hover {

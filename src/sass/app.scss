@@ -1,21 +1,10 @@
-@import "./_input.scss";
+// @import "./_input.scss";
 
 body {
   font-family: 'Open Sans', sans-serif;
   background-color: #fbfbfb;
 }
 
-.login-wrap {
-  &:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    // background: rgba(0,0,0,0.3);
-  }
-}
 
 table {
   font-family: 'Open Sans', sans-serif;
@@ -29,6 +18,7 @@ table tr td {
   border-bottom: 1px solid #D6DAE3;
   padding: 5px;
   font-size: 12px;
+  // transition: 1s all ease-in;
 }
 table tr th:first-child,
 table tr td:first-child {
@@ -40,45 +30,72 @@ table tbody {
 }
 
 table tbody tr:hover {
-  background-color: #EEF1F7;
+  background-color: rgba(85, 150, 230, 0.1);
+  td {
+    border-bottom: 1px solid #5596e6;
+    border-top: 1px solid #5596e6;
+    // transition: 1s all ease-in;
+  }
+  td:first-child {
+    border-left: 1px solid #5596e6;
+  }
+
+  td:last-child {
+    border-right: 1px solid #5596e6;
+  }
 }
 
 table tr td {
-  color: #6B7891;
+  color: #152935;
   padding: 12px;
   &.clickable {
-    color: #0070D9;
+    color: #3d70b2;
     cursor: pointer;
   }
 }
+
+input[type='text'], input[type='password'], input[type='number'] {
+  width: 225px;
+  height: 40px;
+  background-color: rgba(61, 112, 178, 0.1);
+  border: 0;
+  padding: 0 10px;
+  color: #222;
+  font-size: 14px;
+  &:focus {
+    outline: 0;
+  }
+}
+
+
 table tr th {
   background: #EEF1F7;
   border-top: 1px solid #D6DAE3;
-  color: #49587D;
+  color: #152935;
   text-transform: uppercase;
   text-align: left;
   padding: 12px;
 }
 
-/* top-left border-radius */
-table tr:first-child th:first-child {
-  border-top-left-radius: 6px;
-}
+// /* top-left border-radius */
+// table tr:first-child th:first-child {
+//   border-top-left-radius: 6px;
+// }
 
-/* top-right border-radius */
-table tr:first-child th:last-child {
-  border-top-right-radius: 6px;
-}
+// /* top-right border-radius */
+// table tr:first-child th:last-child {
+//   border-top-right-radius: 6px;
+// }
 
-/* bottom-left border-radius */
-table tr:last-child td:first-child {
-  border-bottom-left-radius: 6px;
-}
+// /* bottom-left border-radius */
+// table tr:last-child td:first-child {
+//   border-bottom-left-radius: 6px;
+// }
 
-/* bottom-right border-radius */
-table tr:last-child td:last-child {
-  border-bottom-right-radius: 6px;
-}
+// /* bottom-right border-radius */
+// table tr:last-child td:last-child {
+//   border-bottom-right-radius: 6px;
+// }
 
 
 label {

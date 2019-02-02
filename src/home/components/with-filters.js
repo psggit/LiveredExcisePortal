@@ -45,7 +45,7 @@ class WithFilters extends React.Component {
   render() {
     const { children } = this.props
     return (
-      <div style={{ marginTop: '62px', padding: '20px', width: '100%' }}>
+      <div style={{ width: 'calc(100% - 250px)', padding: '60px', verticalAlign: 'top', display: 'inline-block' }}>
         {
           <Filter
             ref={(node) => this.filterData = node }
