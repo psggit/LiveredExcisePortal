@@ -1,11 +1,26 @@
 .search--box {
   position: relative;
-  svg {
+  // svg {
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 8px;
+  //   transform: translateY(-50%);
+  // }
+  .search-icon {
     position: absolute;
     top: 50%;
-    left: 8px;
     transform: translateY(-50%);
+    cursor: pointer;
   }
+
+  .search {
+    left: 8px;
+  }
+
+  .cross {
+    right: 8px;
+  }
+
   input {
     border: 0;
     background-color: #fff;

@@ -28,6 +28,7 @@ class LiveOrdersList extends React.Component {
     this.defaultData = this.defaultData.bind(this)
     this.filteredData = this.filteredData.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   handleClick(orderId, e) {
@@ -100,6 +101,10 @@ class LiveOrdersList extends React.Component {
     clearTimeout(this.timeoutId)
   }
 
+  handleSearch(searchQuery) {
+    console.log("searched text", searchQuery)
+  }
+
   render() {
     return (
       <Fragment>
@@ -112,6 +117,7 @@ class LiveOrdersList extends React.Component {
         }}>
         <Search
           placeholder="Search"
+          search={this.handleSearch}
         />
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <div>
