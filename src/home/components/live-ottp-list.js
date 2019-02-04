@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Pagination from 'react-js-pagination'
+//import Pagination from 'react-js-pagination'
 import * as Actions from './../actions'
 import LiveOrdersListItem from './live-ottp-list-item'
 import Loader from '@components/loader'
@@ -11,6 +11,7 @@ import data from './../constants/live-orders-mock'
 import Search from '@components/search'
 import Toggle from '@components/toggle'
 import Icon from '@components/icon'
+import Pagination from '@components/pagination'
 import PageHeader from '@components/pageheader'
 
 class LiveOrdersList extends React.Component {
@@ -45,14 +46,14 @@ class LiveOrdersList extends React.Component {
 
   handlePageChange(pageNumber) {
     clearTimeout(this.timeoutId)
-    const offset = this.pagesLimit * (pageNumber - 1)
-    const { filters } = this.props
-    this.setState({ activePage: pageNumber, pageOffset: offset })
-    this.props.actions.fetchInProgressOTTP({
-      limit: this.pagesLimit,
-      offset,
-      status: filters.status === 'all' ? undefined : filters.status
-    })
+    // const offset = this.pagesLimit * (pageNumber - 1)
+    // const { filters } = this.props
+    // this.setState({ activePage: pageNumber, pageOffset: offset })
+    // this.props.actions.fetchInProgressOTTP({
+    //   limit: this.pagesLimit,
+    //   offset,
+    //   status: filters.status === 'all' ? undefined : filters.status
+    // })
   }
 
   resetPagination() {
@@ -138,6 +139,15 @@ class LiveOrdersList extends React.Component {
           </div>
         </div>
       </div>
+      <div style={{margin: '10px 0'}}>
+        <Pagination
+          activePage={1}
+          pageSize={10}
+          totalItemsCount={1000}
+          //pageRangeDisplayed={5}
+          onChangePage={this.handlePageChange}
+        />
+      </div>
         <div>
           <table>
             <thead>
@@ -184,7 +194,7 @@ class LiveOrdersList extends React.Component {
             </tbody>
           </table>
         </div>
-        {
+        {/* {
           !this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length
           ? <Pagination
             activePage={this.state.activePage}
@@ -194,7 +204,7 @@ class LiveOrdersList extends React.Component {
             onChange={this.handlePageChange}
           />
           : ''
-        }
+        } */}
       </Fragment>
     )
   }
