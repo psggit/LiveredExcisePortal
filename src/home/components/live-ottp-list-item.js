@@ -6,7 +6,7 @@ const LiveOrdersListItem = ({ data, handleClick, handleOrderAssign, handleShowNo
     <tr onClick={ (e) => {handleClick(data.permit_id, e)} }>
       <td className="clickable">{ data.permit_id }</td>
       <td>{ data.issued_date }</td>
-      <td>{ data.issued_time }</td>
+      {/* <td>{ data.issued_time }</td> */}
       <td>{ data.dso_name }</td>
       <td>{ data.retailer_name }</td>
       <td>{ data.city }</td>

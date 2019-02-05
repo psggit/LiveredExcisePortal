@@ -14,6 +14,7 @@ import Icon from '@components/icon'
 import Pagination from '@components/pagination'
 import PageHeader from '@components/pageheader'
 import Filter from "@components/filterModal"
+import Label from "@components/label"
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -120,6 +121,11 @@ class LiveOrdersList extends React.Component {
   }
 
   render() {
+    const tableHeaderStyle = {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-evenly'
+    }
     return (
       <Fragment>
       <PageHeader pageName="Live Orders" />
@@ -171,14 +177,78 @@ class LiveOrdersList extends React.Component {
           <table>
             <thead>
               <tr>
-                <th>Permit ID</th>
-                <th>Date issued</th>
-                <th>Time issued</th>
-                <th>DSO</th>
-                <th>Retailer</th>
+                <th>
+                  <div 
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      //justifyContent: 'space-around'
+                    }}
+                  >
+                    <span style={{marginRight: '5px'}}>Permit ID</span>
+                    <Icon name="info" />
+                  </div>
+                </th>
+                <th>
+                  Date issued
+                </th>
+                {/* <th>Time issued</th> */}
+                <th>
+                  <div 
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      //justifyContent: 'space-around'
+                    }}
+                  >
+                    <span style={{marginRight: '5px'}}>Delivery Operator</span>
+                    <Icon name="info" />
+                  </div>
+                </th>
+                <th>
+                  <div 
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      //justifyContent: 'space-around'
+                    }}
+                  >
+                    <span style={{marginRight: '5px'}}>Retailer</span>
+                    <Icon name="info" />
+                  </div>
+                </th>
                 <th>City/Town</th>
-                <th>Order amount</th>
-                <th>Permit status</th>
+                <th>
+                  <div 
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      //justifyContent: 'space-around'
+                    }}
+                  >
+                    <span style={{marginRight: '5px'}}>Order Amount</span>
+                    <span><Icon name="info" /></span>
+                  </div>
+                </th>
+                <th>
+                  <div 
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      //justifyContent: 'space-around'
+                    }}
+                  >
+                    <span style={{marginRight: '5px'}}>Permit Status</span>
+                    <span
+                      // className="tooltip"
+                    >
+                      <Icon name="info" />
+                      {/* <span className="toolTipText">
+                        Permit ID is the ID of the One Time Transport Permit that has been generated
+                      </span> */}
+                    </span>
+                  </div>
+                </th>
                 <th></th>
               </tr>
             </thead>

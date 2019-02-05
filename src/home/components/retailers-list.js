@@ -3,9 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
 import RetailersListItem from './retailer-list-item'
-import Pagination from 'react-js-pagination'
+import Pagination from '@components/pagination'
 import '@sass/_pagination.scss'
 import Loader from '@components/loader'
+import Search from '@components/search'
+import Icon from '@components/icon'
+import Button from '@components/button'
+import PageHeader from '@components/pageheader'
+import Filter from "@components/filterModal"
 import { retailersList } from './../constants/retailers-list'
 
 class RetailersList extends React.Component {
@@ -86,18 +91,49 @@ class RetailersList extends React.Component {
   render() {
     return (
       <Fragment>
+        <PageHeader pageName="Retailers" />
+        <div style={{
+        display: 'flex',
+        marginBottom: '20px',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+        }}>
+        <Search
+          placeholder="Search"
+          search={this.handleSearch}
+        />
+        <div style={{ marginLeft: '46px', position: 'relative' }}>
+          <Button primary onClick={this.mountFilterModal}>
+            <Icon name="filter" />
+            <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
+          </Button>
+          <Filter
+            showFilter={this.state.mountFilter}
+            filterName="pastOrders"
+            applyFilter={this.applyFilter}
+          >
+          </Filter>
+        </div>
+        </div>
+        <div style={{margin: '10px 0'}}>
+          <Pagination
+            activePage={1}
+            pageSize={10}
+            totalItemsCount={1000}
+            //pageRangeDisplayed={5}
+            onChangePage={this.handlePageChange}
+          />
+        </div>
         <div style={{ width: '100%' }}>
           <table>
             <thead>
               <tr>
-                <th>Jurisdiction</th>
-                <th>Retailer Name</th>
+                <th>Name</th>
+                <th>City/Town</th>
                 {/* <th>Application status</th> */}
-                <th>KSBCL Code</th>
-                <th>Licence holder</th>
-                <th>Licence no.</th>
-                <th>Licence validity</th>
-                <th>Locality</th>
+                <th>Address</th>
+                <th>License Type</th>
+                <th>License Status</th>
               </tr>
             </thead>
             <tbody>
@@ -121,13 +157,13 @@ class RetailersList extends React.Component {
             </tbody>
           </table>
         </div>
-        <Pagination
+        {/* <Pagination
           activePage={this.state.activePage}
           itemsCountPerPage={this.pagesLimit}
           totalItemsCount={retailersList.length}
           pageRangeDisplayed={5}
           onChange={this.handlePageChange}
-        />
+        /> */}
 
       </Fragment>
     )
