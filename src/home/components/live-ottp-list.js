@@ -30,6 +30,7 @@ class LiveOrdersList extends React.Component {
     this.filteredData = this.filteredData.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.fetchData = this.fetchData.bind(this)
   }
 
   handleClick(orderId, e) {
@@ -44,8 +45,9 @@ class LiveOrdersList extends React.Component {
     })
   }
 
-  handlePageChange(pageNumber) {
+  handlePageChange(pagerObj) {
     clearTimeout(this.timeoutId)
+    //console.log("pager obj", pagerObj)
     // const offset = this.pagesLimit * (pageNumber - 1)
     // const { filters } = this.props
     // this.setState({ activePage: pageNumber, pageOffset: offset })
@@ -62,7 +64,8 @@ class LiveOrdersList extends React.Component {
 
   componentDidMount() {
     console.log("props", this.props)
-    // this.defaultData()
+    //this.fetchData()
+    this.defaultData()
   }
 
   defaultData() {

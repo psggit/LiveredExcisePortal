@@ -30,10 +30,8 @@ class Pagination extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // reset page if items array has changed
     const { pageSize, totalItemsCount, activePage } = this.props;
     if (this.props.activePage !== prevProps.activePage) {
-      //this.setPage(activePage);
       this.setState({
         pager: { 
           activePage: activePage,
@@ -59,7 +57,6 @@ class Pagination extends React.Component {
   // }
 
   updateActivePage(activePage) {
-
     const { pageSize, totalItemsCount } = this.props;
   
     if (activePage < 1 || activePage > totalItemsCount / pageSize) {
@@ -68,7 +65,9 @@ class Pagination extends React.Component {
   
     let newPager = { ...this.state.pager };    
     newPager.activePage = activePage;                       
-    this.setState({ pager: newPager });
+    this.setState({ pager: newPager }, () => {
+      this.props.onChangePage(this.state.pager)
+    });
   }
 
   updatePageSize(e) {
@@ -78,7 +77,10 @@ class Pagination extends React.Component {
     }
     let newPager = { ...this.state.pager };    
     newPager.pageSize =  parseInt(e.target.value);                       
-    this.setState({ pager: newPager });
+    //this.setState({ pager: newPager });
+    this.setState({ pager: newPager }, () => {
+      this.props.onChangePage(this.state.pager)
+    });
   }
 
   render() {
@@ -89,12 +91,24 @@ class Pagination extends React.Component {
           display: 'flex', 
           flexDirection: 'row', 
           justifyContent: 'space-between',
-          alignItems: 'center'
+          alignItems: 'baseline'
         }}
       >   
         <div>
           <div style={{'display': 'inline-block', marginRight: '10px'}}>
-            <select onChange={(e) => this.updatePageSize(e) }>
+            <select 
+              onChange={(e) => this.updatePageSize(e) }
+              style={{ 
+                height: '24px',
+                border: 'none', 
+                width: '60px', 
+                color: '#152935',
+                fontSize: '14px',
+                lineHeight: '1.29',
+                padding: '0 5px',
+                backgroundColor: 'rgba(61, 112, 178, 0.1)'
+              }}
+            >
               {
                 [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((item) => {
                   return <option value={item}>{item}</option>
@@ -103,23 +117,55 @@ class Pagination extends React.Component {
             </select>
           </div>
           <div style={{'display': 'inline-block'}}>
-            <span>Items per page | {activePage} - {pageSize*activePage} of {totalItemsCount} items</span>
+            <span
+              style={{
+                fontSize: '12px',
+                lineHeight: '1.25',
+                color: '#5a6872'
+              }}
+            >
+              Items per page | {activePage} - {pageSize*activePage} of {totalItemsCount} items
+            </span>
           </div>
         </div>
        
-        <div>
-          <span style={{marginRight: '10px'}}> 
+        <div >
+          <span style={{
+              marginRight: '20px',
+              fontSize: '12px',
+              lineHeight: '1.25',
+              color: '#5a6872'
+            }}
+          > 
             {activePage} of {Math.ceil(totalItemsCount/pageSize)} pages 
           </span>
 
-          <span  onClick={() => this.updateActivePage(activePage-1)}>
-            <Icon name="paginationRight"/>
+          <span  
+            onClick={() => this.updateActivePage(activePage-1)}
+            style={{cursor: 'pointer'}}
+          >
+            <Icon name="leftArrow"/>
           </span>
 
-          <span style={{margin: '10px'}}> {activePage} </span>
+          <span 
+            style={{
+              margin: '30px',
+              // width: '26px',
+              height: '24px',
+              padding: '3px 10px',
+              fontSize: '14px',
+              color: '#152935',
+              backgroundColor: 'rgba(61, 112, 178, 0.1)'
+            }}
+          > 
+            {activePage} 
+          </span>
 
-          <span  onClick={() => this.updateActivePage(activePage+1)}>
-            <Icon name="paginationRight"/>
+          <span  
+            onClick={() => this.updateActivePage(activePage+1)}
+            style={{cursor: 'pointer'}}
+          >
+            <Icon name="rightArrow"/>
           </span>
 
         </div>

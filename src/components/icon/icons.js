@@ -315,16 +315,18 @@ export default {
         </g>
     </svg>
   ),
-  'paginationRight': (
-    <svg width="18px" height="19px" viewBox="0 0 26 19" version="1.1">
-        <g id="V0.3---With-Mobile-Version" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-            <g id="01a-Gifitng-Website---V0.7---Home-Page" transform="translate(-797.000000, -4820.000000)" fill="#000000" fillRule="nonzero">
-                <g id="BigGifting-Section" transform="translate(0.000000, 4545.000000)">
-                    <g id="Content" transform="translate(310.000000, 60.000000)">
-                        <g id="Button/Black---Backup" transform="translate(271.000000, 188.000000)">
-                            <g id="With-Arrow" transform="translate(36.000000, 23.000000)">
-                                <g id="Arrow" transform="translate(180.000000, 4.000000)">
-                                    <path d="M24.7547454,8.52793742 L16.6830497,0.470870367 C16.1905753,-0.020711436 15.391881,-0.020711436 14.8994067,0.470870367 C14.4068315,0.962552884 14.4068315,1.75959824 14.8994067,2.25128076 L20.8180785,8.15922589 L1.58987713,8.15922589 C0.893390687,8.15922589 0.328674673,8.72291844 0.328674673,9.41814262 C0.328674673,10.1132661 0.893390687,10.6770593 1.58987713,10.6770593 L20.8180785,10.6770593 L14.8996085,16.5850045 C14.4070333,17.076687 14.4070333,17.8737323 14.8996085,18.3654149 C15.1457952,18.6110547 15.468663,18.7341264 15.79143,18.7341264 C16.1141969,18.7341264 16.4369638,18.6110547 16.6832515,18.3654149 L24.7547454,10.3083478 C25.2473207,9.81666529 25.2473207,9.01961994 24.7547454,8.52793742 Z" id="Shape"></path>
+  'leftArrow': (
+    <svg width="9px" height="14px" viewBox="0 0 9 14" version="1.1">
+        <g id="Account-Settings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Audit-Log" transform="translate(-1248.000000, -386.000000)" fill="#5A6872">
+                <g id="Group-2" transform="translate(273.000000, 310.000000)">
+                    <g id="Table" transform="translate(0.000000, 70.000000)">
+                        <g id="Table-Controls" transform="translate(37.000000, 0.000000)">
+                            <g id="Pagination" transform="translate(845.919864, 0.000000)">
+                                <g id="Icon/UI/Chevron/Light-UI" transform="translate(96.484228, 13.000000) scale(-1, 1) translate(-96.484228, -13.000000) translate(91.996590, 7.000000)">
+                                    <g id="Chevron-/-Light-UI" transform="translate(4.500000, 6.000000) scale(-1, 1) rotate(90.000000) translate(-4.500000, -6.000000) translate(-2.250000, 2.000000)">
+                                        <polygon id="Shape" points="11.925 -4.4408921e-16 6.75 4.66216216 1.575 -4.4408921e-16 0 1.41891892 6.75 7.5 13.5 1.41891892"></polygon>
+                                    </g>
                                 </g>
                             </g>
                         </g>
@@ -334,15 +336,24 @@ export default {
         </g>
     </svg>
   ),
-  'pagination-left': (
-    <svg version="1.1" id="Capa_1" x="0px" y="0px"
-	 width="20px" height="20px" viewBox="0 0 457.896 457.896" style="enable-background:new 0 0 457.896 457.896;"
-	>
-        <g>
-            <path d="M403.107,403.883c12.354,12.354,12.354,32.391,0,44.744c-12.354,12.359-32.386,12.359-44.751,0L164.073,254.34
-                c-6.174-6.177-9.262-14.269-9.262-22.366s3.094-16.195,9.262-22.369L358.356,15.32c12.365-12.359,32.397-12.359,44.751,0
-                c12.354,12.354,12.354,32.394,0,44.748L231.201,231.974L403.107,403.883z M108.065,0H51.576c-3.346,0-6.053,2.707-6.053,6.053
-                v436.291c0,3.352,2.707,6.053,6.053,6.053h56.489c3.348,0,6.052-2.701,6.052-6.053V6.053C114.118,2.707,111.414,0,108.065,0z"/>
+  'rightArrow': (
+    <svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1">
+        <g id="Account-Settings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Audit-Log" transform="translate(-1350.000000, -386.000000)" fill="#5A6872">
+                <g id="Group-2" transform="translate(273.000000, 310.000000)">
+                    <g id="Table" transform="translate(0.000000, 70.000000)">
+                        <g id="Table-Controls" transform="translate(37.000000, 0.000000)">
+                            <g id="Pagination" transform="translate(845.919864, 0.000000)">
+                                <g id="Icon/UI/Chevron/Light-UI" transform="translate(194.090367, 7.000000)">
+                                    <g id="Chevron-/-Light-UI" transform="translate(4.500000, 6.000000) scale(-1, 1) rotate(90.000000) translate(-4.500000, -6.000000) translate(-2.250000, 2.000000)">
+                                        <polygon id="Shape" points="11.925 -4.4408921e-16 6.75 4.66216216 1.575 -4.4408921e-16 0 1.41891892 6.75 7.5 13.5 1.41891892"></polygon>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
         </g>
     </svg>
   )
