@@ -13,6 +13,7 @@ import Toggle from '@components/toggle'
 import Icon from '@components/icon'
 import Pagination from '@components/pagination'
 import PageHeader from '@components/pageheader'
+import Filter from "@components/filterModal"
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -22,7 +23,8 @@ class LiveOrdersList extends React.Component {
       activePage: 1,
       pageOffset: 0,
       data: data,
-      loading: false
+      loading: false,
+      mountFilter: false
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
@@ -31,6 +33,7 @@ class LiveOrdersList extends React.Component {
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.fetchData = this.fetchData.bind(this)
+    this.mountFilterModal = this.mountFilterModal.bind(this)
   }
 
   handleClick(orderId, e) {
@@ -63,7 +66,6 @@ class LiveOrdersList extends React.Component {
   }
 
   componentDidMount() {
-    console.log("props", this.props)
     //this.fetchData()
     this.defaultData()
   }
@@ -109,6 +111,14 @@ class LiveOrdersList extends React.Component {
     console.log("searched text", searchQuery)
   }
 
+  mountFilterModal() {
+    this.setState({ mountFilter: !this.state.mountFilter })
+  }
+
+  applyFilter() {
+    console.log("apply filter")
+  }
+
   render() {
     return (
       <Fragment>
@@ -134,11 +144,17 @@ class LiveOrdersList extends React.Component {
               Delivery enabled
             </span>
           </div>
-          <div style={{ marginLeft: '46px' }}>
-            <Button primary>
+          <div style={{ marginLeft: '46px', position: 'relative' }}>
+            <Button primary onClick={this.mountFilterModal}>
               <Icon name="filter" />
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
             </Button>
+            <Filter
+              showFilter={this.state.mountFilter}
+              filterName="pastOrders"
+              applyFilter={this.applyFilter}
+            >
+            </Filter>
           </div>
         </div>
       </div>
