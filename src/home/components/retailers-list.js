@@ -98,25 +98,26 @@ class RetailersList extends React.Component {
         marginBottom: '20px',
         justifyContent: 'space-between',
         alignItems: 'center'
-        }}>
-        <Search
-          placeholder="Search"
-          search={this.handleSearch}
-        />
-        <div style={{ marginLeft: '46px', position: 'relative' }}>
-          <Button primary onClick={this.mountFilterModal}>
-            <Icon name="filter" />
-            <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
-          </Button>
-          <Filter
-            showFilter={this.state.mountFilter}
-            filterName="pastOrders"
-            applyFilter={this.applyFilter}
-          >
-          </Filter>
+        }}
+        >
+          <Search
+            placeholder="Search"
+            search={this.handleSearch}
+          />
+          <div style={{ marginLeft: '46px', position: 'relative' }}>
+            <Button primary onClick={this.mountFilterModal}>
+              <Icon name="filter" />
+              <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
+            </Button>
+            {/* <Filter
+              showFilter={this.state.mountFilter}
+              filterName="pastOrders"
+              applyFilter={this.applyFilter}
+            >
+            </Filter> */}
+          </div>
         </div>
-        </div>
-        <div style={{margin: '10px 0'}}>
+        {/* <div style={{margin: '10px 0'}}>
           <Pagination
             activePage={1}
             pageSize={10}
@@ -124,7 +125,7 @@ class RetailersList extends React.Component {
             //pageRangeDisplayed={5}
             onChangePage={this.handlePageChange}
           />
-        </div>
+        </div> */}
         <div style={{ width: '100%' }}>
           <table>
             <thead>

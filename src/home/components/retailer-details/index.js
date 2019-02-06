@@ -14,7 +14,7 @@ class RetailerDetail extends React.Component {
     return (
       <React.Fragment>
         <div style={{display: 'flex', marginBottom: '70px'}}>
-          <Icon name="cross"/>
+          {/* <Icon name="cross"/> */}
           <p 
             style={{
               fontSize: '32px',
@@ -22,7 +22,7 @@ class RetailerDetail extends React.Component {
               color: '#152935'
             }}
           >
-            Tonique
+            {data.name}
           </p>
         </div>
         <div 
@@ -31,7 +31,8 @@ class RetailerDetail extends React.Component {
             fontSize: '16px',
             lineHeight: '1.13',
             color: '#152935',
-            padding: '20px 30px'
+            padding: '20px 30px',
+            border: '1px solid #dfe3e6'
           }}
         >
           BASIC INFORMATION
@@ -43,12 +44,11 @@ class RetailerDetail extends React.Component {
             licenseStatus={data.license_status ? 'Active' : 'Inactive'}
             licenceValidity={data.licence_validity}
           />
-           <OutletAddressDetail
+          <OutletAddressDetail
             outletsCount={data.outlets_count}
             city={data.city}
             address={data.address}
           />
-
           <OutletContactDetail
             name={data.name}
             email={data.email}

@@ -12,7 +12,7 @@ import LiveOTTPList from './../components/live-ottp-list'
 import HistoryOTTPList from './../components/history-ottp-list'
 import OTTPDetail from './../components/ottp-detail'
 import RetailerDetail from './../components/retailer-details'
-import DSODetail from './../components/dso-detail'
+import DSODetail from './../components/dso-details'
 import UserManagement from './../components/user-management'
 import DSO from './../components/dso-list'
 import RetailersList from './../components/retailers-list'
@@ -87,7 +87,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/dso"
+                path="/home/delivery-operators"
                 render={
                   props => <DSO {...props} />
                 }
@@ -133,7 +133,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/dso/:dsoId"
+                path="/home/delivery-operators/:dsoId"
                 render={
                   props => (
                     <DSODetail currentRoute={this.state.currentRoute} {...props} />

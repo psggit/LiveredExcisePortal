@@ -1,29 +1,29 @@
 import React from "react"
-import "./retailer-detail.scss"
+import "./dso-detail.scss"
 import Icon from "@components/icon"
 
-const OutletDetail = ({storeCode, licenseType, licenseStatus, licenceValidity}) => (
-  <div className="outlet-detail-card">
-    <div className="item">
-      <p className="label">Store Code</p>
-      <p className="value">{storeCode}</p>
-    </div>
+const LicenseDetails = ({type, status, validity, locationsIn}) => (
+  <div className="dso-detail-card">
     <div className="item">
       <p className="label">License Type</p>
-      <p className="value">{licenseType}</p>
+      <p className="value">{type}</p>
     </div>
     <div className="item">
       <p className="label">License Status</p>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <span style={{marginRight: '2px'}}><Icon name="active-indicator" /></span>
-        <p className="value">{licenseStatus}</p>
+        <p className="value">{status}</p>
       </div>
     </div>
     <div className="item">
       <p className="label">License Validity</p>
-      <p className="value">{licenceValidity}</p>
+      <p className="value">{validity}</p>
+    </div>
+    <div className="item">
+      <p className="label">Locations present in</p>
+      <p className="value">{locationsIn}</p>
     </div>
   </div>
 )
 
-export default OutletDetail
+export default LicenseDetails

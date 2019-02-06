@@ -1,73 +1,54 @@
 export const dsoList = [
-  // {
-  //   id: 1,
-  //   name: 'Demo_dso1',
-  //   application_status: 'Application Recieved',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
   {
-    id: 2,
-    name: 'Hipbar',
-    jurisdiction: 'Central Bengaluru',
-    application_status: 'Authorized',
-    app_name: 'Hipbar delivery',
-    address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
+    Id: "SW123",
+    name : "Swiggy",
+    head_office :  {
+      city : "Chennai",
+      address : "12, 2nd Cross Street, Gandhinagar, Adayar",
+      contact : {
+        name : "Saurav",
+        phone : "9029939291",
+        email : "saurav@swiggy.com"
+      }
+    },
+    regional_office :  {
+      city : "Chennai",
+      address : "12, 2nd Cross Street, Gandhinagar, Adayar",
+      contact : {
+        name : "Saurav",
+        phone : "9029939291",
+        email : "saurav@swiggy.com"
+      }
+    },
+    locations_in : "Bombay, Chennai, Kolkata, Hyderabad",
+    license_type: "DL2",
+    license_validity: "31/12/2019",
+    is_active : true
   },
-  // {
-  //   id: 3,
-  //   name: 'Demo_dso3',
-  //   application_status: 'Authorized',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 4,
-  //   name: 'Demo_dso4',
-  //   application_status: 'Application Recieved',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 5,
-  //   name: 'Demo_dso5',
-  //   application_status: 'Deauthorized',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 6,
-  //   name: 'Demo_dso6',
-  //   application_status: 'Deauthorized',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 7,
-  //   name: 'Demo_dso7',
-  //   application_status: 'Authorized',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 8,
-  //   name: 'Demo_dso8',
-  //   application_status: 'Application Recieved',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 9,
-  //   name: 'Demo_dso9',
-  //   application_status: 'Authorized',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
-  // {
-  //   id: 10,
-  //   name: 'Demo_dso10',
-  //   application_status: 'Application Recieved',
-  //   app_name: 'Drizzly',
-  //   address: 'Tower D, 9th Floor, IBC Knowledge Park, Bannerghatta Road, Bangalore – 560029'
-  // },
+  {
+    Id: "SW123",
+    name : "Swiggy",
+    head_office :  {
+      city : "Chennai",
+      address : "12, 2nd Cross Street, Gandhinagar, Adayar",
+      contact : {
+          name : "Saurav",
+          phone : "9029939291",
+          email : "saurav@swiggy.com"
+      }
+    },
+    regional_office :  {
+      city : "Chennai",
+      address : "12, 2nd Cross Street, Gandhinagar, Adayar",
+      contact : {
+          name : "Saurav",
+          phone : "9029939291",
+          email : "saurav@swiggy.com"
+      }
+    },
+    locations_in : "Bombay, Chennai, Kolkata, Hyderabad",
+    license_type: "DL2",
+    license_validity: "31/12/2019",
+    is_active : true
+  }  
 ]

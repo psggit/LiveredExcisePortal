@@ -3,10 +3,14 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
 import DSOListItem from './dso-list-item'
-import Pagination from 'react-js-pagination'
+//import Pagination from '@components/pagination'
 import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 import { dsoList } from './../constants/dso-list'
+import Search from '@components/search'
+import Icon from '@components/icon'
+import Button from '@components/button'
+import PageHeader from '@components/pageheader'
 
 class DSOList extends React.Component {
   constructor() {
@@ -21,8 +25,8 @@ class DSOList extends React.Component {
     this.resetPagination = this.resetPagination.bind(this)
   }
 
-  handleClick(orderId, name, status) {
-    this.props.history.push(`/home/dso/${orderId}`, { name, status })
+  handleClick(dataObj) {
+    this.props.history.push(`/home/delivery-operators/${dataObj.Id}`, dataObj)
   }
 
   handlePageChange(pageNumber) {
@@ -86,15 +90,43 @@ class DSOList extends React.Component {
   render() {
     return (
       <Fragment>
+        <PageHeader pageName="Delivery Service Operators" />
+        <div style={{
+          display: 'flex',
+          marginBottom: '20px',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+          }}
+        >
+          <Search
+            placeholder="Search"
+            search={this.handleSearch}
+          />
+          <div style={{ marginLeft: '46px', position: 'relative' }}>
+            <Button primary onClick={this.mountFilterModal}>
+              <Icon name="filter" />
+              <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
+            </Button>
+          </div>
+        </div>
+        {/* <div style={{margin: '10px 0'}}>
+          <Pagination
+            activePage={1}
+            pageSize={10}
+            totalItemsCount={1000}
+            //pageRangeDisplayed={5}
+            onChangePage={this.handlePageChange}
+          />
+        </div> */}
         <div style={{ width: '100%' }}>
           <table>
             <thead>
               <tr>
-                <th>Jurisdiction</th>
-                <th>DSO Name</th>
-                <th>Application Status</th>
-                <th>Website/Mobile Application Name</th>
-                <th>Address of Registered Office / Principle Office</th>
+                <th>Name</th>
+                <th>HQ</th>
+                <th>Location Servicable</th>
+                <th>License Type</th>
+                <th>License Status</th>
               </tr>
             </thead>
             <tbody>
@@ -118,13 +150,13 @@ class DSOList extends React.Component {
             </tbody>
           </table>
         </div>
-        <Pagination
+        {/* <Pagination
           activePage={this.state.activePage}
           itemsCountPerPage={this.pagesLimit}
           totalItemsCount={dsoList.length}
           pageRangeDisplayed={5}
           onChange={this.handlePageChange}
-        />
+        /> */}
 
       </Fragment>
     )

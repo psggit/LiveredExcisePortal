@@ -37,12 +37,12 @@ const DSOListItem = ({ data, handleClick }) => {
   // const article = orderStatusArr[2] || ''
   // const orderStatus = `${status}${time}${article}`
   return (
-    <tr onClick={(e) => {handleClick(data.id, data.name, data.application_status)} }>
-      <td>{ data.jurisdiction }</td>
+    <tr onClick={(e) => {handleClick(data)} } className="clickable">
       <td>{ data.name }</td>
-      <td>{ data.application_status }</td>
-      <td>{ data.app_name }</td>
-      <td>{ data.address }</td>
+      <td>{ data.head_office.city }</td>
+      <td>{ data.locations_in}</td>
+      <td>{ data.license_type}</td>
+      <td>{ data.is_active ? 'Active' : 'Inactive'}</td>
     </tr>
   )
 }
