@@ -11,6 +11,7 @@ import { menuItemsMap, menuItems } from './../constants/navbar-items'
 import LiveOTTPList from './../components/live-ottp-list'
 import HistoryOTTPList from './../components/history-ottp-list'
 import OTTPDetail from './../components/ottp-detail'
+import RetailerDetail from './../components/retailer-details'
 import DSODetail from './../components/dso-detail'
 import UserManagement from './../components/user-management'
 import DSO from './../components/dso-list'
@@ -145,7 +146,7 @@ class App extends React.Component {
                 path="/home/retailers/:retailerId"
                 render={
                   props => (
-                    <RetailerDetail2 currentRoute={this.state.currentRoute} {...props} />
+                    <RetailerDetail currentRoute={this.state.currentRoute} {...props} />
                   )
                 }
               />

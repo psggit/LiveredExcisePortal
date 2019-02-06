@@ -45,6 +45,10 @@ table tbody tr:hover {
   }
 }
 
+table tr.clickable {
+  cursor: pointer;
+}
+
 table tr td {
   color: #152935;
   padding: 12px;

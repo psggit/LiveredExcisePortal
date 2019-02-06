@@ -2,51 +2,86 @@ export const retailersList = [
   {
     code: 'KC80767',
     name: 'Demo_retailer1',
+    contact: '9043713871',
+    email: 'abc@gmail.com',
     application_status: 'Application Recieved',
     licence_holder: 'R Venkat.',
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore West'
+    jurisdiction: 'Bangalore West',
+    city: 'Hyderabad',
+    address: 'TG, 645, Rd Number 36, Aditya Enclave, Venkatagiri, Jubilee Hills, Hyderabad, 500033',
+    license_type: 'CL2',
+    license_status: true,
+    outlets_count: 1
   },
   {
     code: 'KC80767',
     name: 'Demo_retailer2',
+    contact: '9043713871',
+    email: 'abc@gmail.com',
     application_status: 'Authorized',
     licence_holder: 'R Venkat.',
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore East'
+    jurisdiction: 'Bangalore East',
+    city: 'Hyderabad',
+    address: 'Inorbit Mall Rd, Inside Hypercity, Vittal Rao Nagar, Madhapur, Hyderabad, Telangana 500081',
+    license_type: 'CL2',
+    license_status: true,
+    outlets_count: 1
   },
   {
     code: 'KC80767',
     name: 'Demo_retailer3',
+    contact: '9043713871',
+    email: 'abc@gmail.com',
     application_status: 'Application Recieved',
     licence_holder: 'R Venkat.',
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore Central'
+    jurisdiction: 'Bangalore Central',
+    city: 'Hyderabad',
+    address: '589, Rd Number 36, Jawahar Colony, Jubilee Hills, Hyderabad, Telangana 500034',
+    license_type: 'CL2',
+    license_status: true,
+    outlets_count: 1
   },
   {
     code: 'KC80767',
     name: 'Demo_retailer4',
+    contact: '9043713871',
+    email: 'abc@gmail.com',
     application_status: 'Deauthorized',
     licence_holder: 'R Venkat.',
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore South'
+    jurisdiction: 'Bangalore South',
+    city: 'Hyderabad',
+    address: 'Musheerabad Main Rd, Dayara, Hyderabad, Telangana 500020',
+    license_type: 'CL2',
+    license_status: true,
+    outlets_count: 1
   },
   {
     code: 'KC80767',
     name: 'Demo_retailer5',
+    contact: '9043713871',
+    email: 'abc@gmail.com',
     application_status: 'Authorized',
     licence_holder: 'R Venkat.',
     licence_number: 'KA072018122509876',
     licence_validity: '04/08/2037',
     locality: 'HSR Layout, Bangalore',
-    jurisdiction: 'Bangalore North'
+    jurisdiction: 'Bangalore North',
+    city: 'Hyderabad',
+    address: 'Jambagh Road, Jam Bagh, Putlibowli, Koti, Hyderabad, Telangana 500095',
+    license_type: 'CL2',
+    license_status: true,
+    outlets_count: 1
   }
 ]

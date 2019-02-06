@@ -1,0 +1,21 @@
+.outlet-detail-card {
+  width: calc(100% / 3);
+  padding: 30px 20px;
+  border: 1px solid #e2e5e8;
+  background-color: #fff;
+
+  .label {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #4a90e2;
+  }
+
+  .value {
+    color: #152935;
+    font-size: 16px;
+  }
+}
+
+.outlet-detail-card .item:not(:first-child){
+  margin-top: 26px;
+}

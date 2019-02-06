@@ -37,13 +37,13 @@ const DSOListItem = ({ data, handleClick }) => {
   // const article = orderStatusArr[2] || ''
   // const orderStatus = `${status}${time}${article}`
   return (
-    <tr>
+    <tr onClick={ () => {handleClick(data)} } className="clickable">
       <td>{ data.name }</td>
       {/* <td>{ data.application_status }</td> */}
-      <td>{ data.code }</td>
-      <td>{ data.licence_holder }</td>
-      <td>{ data.licence_number }</td>
-      <td>{ data.licence_validity }</td>
+      <td>{ data.city }</td>
+      <td>{ data.address }</td>
+      <td>{ data.license_type }</td>
+      <td>{ data.license_status ? 'Active' : 'Inactive' }</td>
     </tr>
   )
 }

@@ -26,8 +26,9 @@ class RetailersList extends React.Component {
     this.resetPagination = this.resetPagination.bind(this)
   }
 
-  handleClick(id, name, status) {
-    this.props.history.push(`/home/retailers/${id}`, { name, status })
+  handleClick(dataObj) {
+    console.log("props", this.props)
+    this.props.history.push(`/home/retailers/${dataObj.code}`, dataObj)
   }
 
   handlePageChange(pageNumber) {
