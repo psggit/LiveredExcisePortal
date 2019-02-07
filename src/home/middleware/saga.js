@@ -13,6 +13,7 @@ import Notify from '@components/notification';
  * Handlers
  */
 function* fetchInProgressOTTP(action) {
+  console.log("fetch in progress otp")
   try {
     const data = yield call(Api.fetchInProgressOTTP, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP, data })

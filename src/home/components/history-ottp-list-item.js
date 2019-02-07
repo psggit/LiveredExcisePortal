@@ -1,21 +1,21 @@
 import React from 'react'
 import moment from 'moment'
-import Indicator from '@components/indicator'
+import Icon from '@components/icon'
 
-function getTimeDiff(d2) {
-  const d1 = new Date()
-  return Math.round(
-    (d1 - new Date(d2)) / 60000
-  )
-}
+// function getTimeDiff(d2) {
+//   const d1 = new Date()
+//   return Math.round(
+//     (d1 - new Date(d2)) / 60000
+//   )
+// }
 
-function Moment(time) {
-  return {
-    format: function(format) {
-      return moment(time).format('MMM Do YY, h:mm a')
-    }
-  }
-}
+// function Moment(time) {
+//   return {
+//     format: function(format) {
+//       return moment(time).format('MMM Do YY, h:mm a')
+//     }
+//   }
+// }
 
 const HistoryOrdersListItem = ({ data, handleClick }) => {
   const {retailer_notified_time} = data
@@ -37,18 +37,26 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
   const article = orderStatusArr[2] || ''
   const orderStatus = `${status}${time}${article}`
   return (
-    <tr onClick={(e) => {handleClick(data.ottp_id, e)} }>
-      <td
-        style={{ textAlign: 'center' }}
-      >
-        <Indicator type={data.ottp_status === 'Returned' ? 'danger' : 'success'} />
+    <tr onClick={(e) => {handleClick(data)} } className="clickable">
+      <td>{ data.ottp_info.ottp_id }</td>
+      <td style={{width: '100px'}}>{ moment(data.ottp_info.issued_at).format("DD/MM/YYYY, h:mm A") }</td>
+      <td>{ data.dso.name }</td>
+      <td>{ data.retailer.name }</td>
+      <td>{ data.city }</td>
+      <td>{ data.order.total }</td>
+      <td>{ data.order.total_volume }</td>
+      <td>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <span style={{marginRight: '5px'}}><Icon name="expired" /></span>
+          {data.ottp_info.ottp_status}
+        </div>
       </td>
-      <td className="clickable">{ data.ottp_id }</td>
-      <td>{ Moment(data.ottp_issued_time).format("DD/MM/YYYY, h:mm") }</td>
-      <td>{ data.ottp_status }</td>
-      <td>{ data.agent_name }</td>
-      <td>{ data.vehicle_number }</td>
-      <td>{ data.retailer_name }</td>
+      <td>
+        <div style={{display: 'flex', alignItems: 'center'}}>
+          <span style={{marginRight: '5px'}}><Icon name="green-flag" /></span>
+          {data.consumer.is_verified ? "Verified" : ""}
+        </div>
+      </td>
     </tr>
   )
 }

@@ -2,7 +2,7 @@ import { POST } from '@utils/fetch'
 
 export function fetchInProgressOTTP(action) {
   return POST({
-    api: '/excisePortal/liveOttp',
+    api: '/livered/liveOttps',
     apiBase: 'agamotto',
     handleError: true,
     data: action.data

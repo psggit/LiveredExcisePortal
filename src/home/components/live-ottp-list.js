@@ -42,15 +42,15 @@ class LiveOrdersList extends React.Component {
   }
 
   fetchData() {
-    this.props.actions.fetchInProgressOTTP({
-      limit: this.pagesLimit,
-      offset,
-      status: filters.status === 'all' ? undefined : filters.status
-    })
+    // this.props.actions.fetchInProgressOTTP({
+    //   limit: this.pagesLimit,
+    //   offset,
+    //   status: filters.status === 'all' ? undefined : filters.status
+    // })
   }
 
   handlePageChange(pagerObj) {
-    clearTimeout(this.timeoutId)
+    //   clearTimeout(this.timeoutId)
     //console.log("pager obj", pagerObj)
     // const offset = this.pagesLimit * (pageNumber - 1)
     // const { filters } = this.props
@@ -72,25 +72,25 @@ class LiveOrdersList extends React.Component {
   }
 
   defaultData() {
-    const queryUri = location.search.slice(1).split('=')
-    const status = queryUri[1]
+    // const queryUri = location.search.slice(1).split('=')
+    // const status = queryUri[1]
     this.props.actions.fetchInProgressOTTP({
       limit: this.pagesLimit,
       offset: 0,
-      status: status === 'all' ? undefined : status
+      //status: status === 'all' ? undefined : status
     })
 
     this.timeoutId = setTimeout(this.defaultData, 30000)
   }
 
   filteredData() {
-    this.props.actions.fetchInProgressOTTP({
-      limit: this.pagesLimit,
-      offset: 0,
-      status: this.filters.status === 'all' ? undefined : this.filters.status
-    })
+    // this.props.actions.fetchInProgressOTTP({
+    //   limit: this.pagesLimit,
+    //   offset: 0,
+    //   status: this.filters.status === 'all' ? undefined : this.filters.status
+    // })
 
-    this.timeoutId = setTimeout(this.filteredData, 30000)
+    // this.timeoutId = setTimeout(this.filteredData, 30000)
   }
 
   componentDidUpdate(prevProps) {
@@ -186,7 +186,7 @@ class LiveOrdersList extends React.Component {
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Permit ID</span>
-                    <Icon name="info" />
+                    <span><Icon name="info" /></span>
                   </div>
                 </th>
                 <th>
@@ -202,7 +202,7 @@ class LiveOrdersList extends React.Component {
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Delivery Operator</span>
-                    <Icon name="info" />
+                    <span><Icon name="info" /></span>
                   </div>
                 </th>
                 <th>
@@ -214,7 +214,7 @@ class LiveOrdersList extends React.Component {
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Retailer</span>
-                    <Icon name="info" />
+                    <span><Icon name="info" /></span>
                   </div>
                 </th>
                 <th>City/Town</th>

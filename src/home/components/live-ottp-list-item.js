@@ -3,8 +3,8 @@ import React from 'react'
 
 const LiveOrdersListItem = ({ data, handleClick, handleOrderAssign, handleShowNotes }) => {
   return (
-    <tr onClick={ (e) => {handleClick(data.permit_id, e)} } className="clickable">
-      <td className="clickable">{ data.permit_id }</td>
+    <tr onClick={ (e) => {handleClick(data)} } className="clickable">
+      <td>{ data.permit_id }</td>
       <td>{ data.issued_date }</td>
       {/* <td>{ data.issued_time }</td> */}
       <td>{ data.dso_name }</td>

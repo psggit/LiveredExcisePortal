@@ -79,7 +79,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/history-ottp"
+                path="/home/past-orders"
                 render={
                   props => <HistoryOTTPList {...props} />
                 }
@@ -153,7 +153,7 @@ class App extends React.Component {
 
               <Route
                 exact
-                path="/home/history-ottp/:ottpId"
+                path="/home/past-orders/:ottpId"
                 render={
                   props => (
                     <OTTPDetail currentRoute={this.state.currentRoute} {...props} />

@@ -365,5 +365,40 @@ export default {
             </g>
         </g>
     </svg>
+  ),
+  'expired': (
+    <svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1">
+        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Component/Data-Table/Tall/Default" transform="translate(-840.000000, -141.000000)" fill="#D0021B">
+                <g id="Data-Table---Tall" transform="translate(5.000000, 0.000000)">
+                    <g id="Columns" transform="translate(13.000000, 9.000000)">
+                        <g id="Column-6" transform="translate(821.000000, 6.000000)">
+                            <g id="Circle" transform="translate(0.921993, 62.000000)">
+                                <ellipse id="Oval-3-Copy-11" cx="4.40136054" cy="68" rx="3.52721088" ry="4"></ellipse>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </svg>
+  ),
+  'green-flag': (
+    <svg width="12px" height="13px" viewBox="0 0 12 13" version="1.1">
+        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Component/Data-Table/Tall/Default" transform="translate(-934.000000, -265.000000)">
+                <g id="Column-5" transform="translate(930.000000, 15.000000)">
+                    <g id="Group">
+                        <g id="Flag" transform="translate(1.000000, 54.000000)">
+                            <g transform="translate(0.000000, 193.000000)" id="Shape">
+                                <polygon points="0 0 18 0 18 18 0 18"></polygon>
+                                <polygon fill="#8BC34A" fill-rule="nonzero" points="10.8 4.5 10.5 3 3.75 3 3.75 15.75 5.25 15.75 5.25 10.5 9.45 10.5 9.75 12 15 12 15 4.5"></polygon>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </svg>
   )
 }
