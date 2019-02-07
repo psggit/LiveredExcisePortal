@@ -20,11 +20,11 @@ class DSODetails extends React.Component {
     const data = this.props.history.location.state
     return (
       <React.Fragment>
-        <div style={{display: 'flex', marginBottom: '70px'}}>
+        <div style={{display: 'flex', marginBottom: '60px'}}>
           {/* <Icon name="cross"/> */}
           <p 
             style={{
-              fontSize: '32px',
+              fontSize: '22px',
               letterSpacing: '0.3px',
               color: '#152935'
             }}
