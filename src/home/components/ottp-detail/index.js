@@ -88,9 +88,15 @@ class OTTPDetail extends Component {
           <p style={{ fontSize: '12px' }}>
             Issued on { moment(data.ottp_info.issued_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.issued_at).format("h:mm A") } 
           </p>
-          <p style={{ fontSize: '12px', textAlign: 'right' }}>
-            Expired on { moment(data.ottp_info.expiry_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.expiry_at).format("h:mm A") } 
-          </p>
+          {
+            location.pathname.includes("live-orders")
+            ?  <p style={{ fontSize: '12px', textAlign: 'left' }}>
+                Valid till { moment(data.ottp_info.expiry_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.expiry_at).format("h:mm A") } 
+              </p>
+            :  <p style={{ fontSize: '12px', textAlign: 'left' }}>
+                Expired on { moment(data.ottp_info.expiry_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.expiry_at).format("h:mm A") }
+              </p> 
+          }
         </div>
        </div>
 

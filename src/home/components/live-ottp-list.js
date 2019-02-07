@@ -7,7 +7,7 @@ import LiveOrdersListItem from './live-ottp-list-item'
 import Loader from '@components/loader'
 import '@sass/_pagination.scss'
 import Button from '@components/button'
-import data from './../constants/live-orders-mock'
+import {pastOrderData} from './../constants/past-orders-mock'
 import Search from '@components/search'
 import Toggle from '@components/toggle'
 import Icon from '@components/icon'
@@ -23,7 +23,7 @@ class LiveOrdersList extends React.Component {
     this.state = {
       activePage: 1,
       pageOffset: 0,
-      data: data,
+      data: pastOrderData.data,
       loading: false,
       mountFilter: false
     }
@@ -37,8 +37,8 @@ class LiveOrdersList extends React.Component {
     this.mountFilterModal = this.mountFilterModal.bind(this)
   }
 
-  handleClick(orderId, e) {
-    this.props.history.push(`/home/live-orders/${orderId}`)
+  handleClick(dataObj) {
+    this.props.history.push(`/home/live-orders/${dataObj.order.order_id}`, dataObj)
   }
 
   fetchData() {
@@ -139,7 +139,19 @@ class LiveOrdersList extends React.Component {
           placeholder="Search"
           search={this.handleSearch}
         />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ marginLeft: '46px', position: 'relative' }}>
+          <Button primary onClick={this.mountFilterModal}>
+            <Icon name="filter" />
+            <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
+          </Button>
+          <Filter
+            showFilter={this.state.mountFilter}
+            filterName="pastOrders"
+            applyFilter={this.applyFilter}
+          >
+          </Filter>
+        </div>
+        {/* <div style={{ display: 'flex', alignItems: 'center' }}>
           <div>
             <Toggle />
             <span style={{
@@ -150,19 +162,8 @@ class LiveOrdersList extends React.Component {
               Delivery enabled
             </span>
           </div>
-          <div style={{ marginLeft: '46px', position: 'relative' }}>
-            <Button primary onClick={this.mountFilterModal}>
-              <Icon name="filter" />
-              <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
-            </Button>
-            <Filter
-              showFilter={this.state.mountFilter}
-              filterName="pastOrders"
-              applyFilter={this.applyFilter}
-            >
-            </Filter>
-          </div>
-        </div>
+          
+        </div> */}
       </div>
       <div style={{margin: '10px 0'}}>
         <Pagination
