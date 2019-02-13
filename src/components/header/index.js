@@ -1,20 +1,43 @@
 import React from 'react'
 import './header.scss'
 import Icon from './../icon'
+import Dialog from "./../dialog"
+import Button from './../button'
 
 class Header extends React.Component {
   constructor() {
     super()
+    this.state = {
+      showLogoutModal: false
+    }
+    this.logout = this.logout.bind(this)
+    this.mountModal = this.mountModal.bind(this)
+    this.unMountModal = this.unMountModal.bind(this)
+  }
+
+  mountModal() {
+    this.setState({ showLogoutModal: true })
+  }
+
+  unMountModal() {
+    console.log("unmount modal")
+    this.setState({ showLogoutModal: false })
+  }
+
+  logout() {
+    console.log("handle logout")
+    this.setState({ showLogoutModal: false })
   }
 
   render() {
+    const{ showLogoutModal } = this.state
     return (
       <div className="header">
       {
         this.props.isLoggedIn
         ? (
           <div className="upper">
-            <p>
+            <p onClick={this.mountModal}>
               Logout
             </p>
           </div>
@@ -27,9 +50,9 @@ class Header extends React.Component {
           
           <div className="brand--name">
             Excise Department<br />
-            <span>
+            {/* <span>
             of Telengana
-            </span>
+            </span> */}
           </div>
         </div>
 
@@ -55,6 +78,31 @@ class Header extends React.Component {
          : ''
        }
       </div>
+      {
+        showLogoutModal &&
+        <Dialog
+          title="Do you want to logout?"
+          actions={[
+            (
+              <Button
+                onClick={() => this.unMountModal()}
+                secondary
+              >
+              No
+              </Button>
+            ),
+            (
+              <Button
+                onClick={() => this.logout()}
+                primary
+              >
+              Yes
+              </Button>
+            )
+          ]}
+        >
+        </Dialog>
+      }
       </div>
     )
   }

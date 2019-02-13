@@ -5,10 +5,13 @@
   font-family: 'IBM Plex Sans', sans-serif;
   max-width: 500px;
   background-color: #fff;
-  position: relative;
+  position: absolute;
   border: 1px solid #9b9b9b;
   border-top: 5px solid #3d70b2;
   border-right: 5px solid #dfdfdf;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
 }
 
 .dialog--body {

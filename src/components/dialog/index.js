@@ -8,9 +8,9 @@ import Icon from './../icon'
   render() {
     return (
      <div className="dialog--container">
-     <div style={{ position: 'absolute', right: '16px', top: '12px' }}>
+     {/* <div style={{ position: 'absolute', right: '16px', top: '12px' }}>
       <Icon name="cross" size="10" />
-     </div>
+     </div> */}
       <div className="dialog--body">
         {
           this.props.title
