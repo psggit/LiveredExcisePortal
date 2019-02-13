@@ -4,7 +4,7 @@ import Card from '@components/card'
 import fences from './../constants/jurisdictions'
 
 const params = { v: '3.exp', key: 'AIzaSyDpG-NeL-XGYAduQul2JenVr86HIPITEso' }
-const infoWindow = new google.maps.InfoWindow
+//const infoWindow = new google.maps.InfoWindow
 
 export function getCoordinatesInObjects(coordinatesInString) {
   const points = coordinatesInString.split('~')

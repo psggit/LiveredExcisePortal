@@ -207,12 +207,12 @@ class DefineLocality extends React.Component {
   displayRetailers(map) {
     const { geoLocalitiesData } = this.props
     geoLocalitiesData.retailers.forEach((retailer) => {
-      const infoWindow = new google.maps.InfoWindow
-      const lat = parseFloat(retailer.gps.split(',')[0])
-      const lng = parseFloat(retailer.gps.split(',')[1])
-      infoWindow.setContent(`<div style='background-color: #333;color:#fff;padding: 10px'>${retailer.org_name}</div>`)
-      infoWindow.setPosition(new google.maps.LatLng(lat, lng))
-      infoWindow.open(map)
+      // const infoWindow = new google.maps.InfoWindow
+      // const lat = parseFloat(retailer.gps.split(',')[0])
+      // const lng = parseFloat(retailer.gps.split(',')[1])
+      // infoWindow.setContent(`<div style='background-color: #333;color:#fff;padding: 10px'>${retailer.org_name}</div>`)
+      // infoWindow.setPosition(new google.maps.LatLng(lat, lng))
+      // infoWindow.open(map)
     })
   }
 

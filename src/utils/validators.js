@@ -1,10 +1,11 @@
 import { emailRegex } from './regex'
 
-export function validateName(name) {
-  if (!name.length) {
+export function validateTextField({ fieldName, fieldValue }) {
+  //console.log("name", fieldName, "vale", fieldValue)
+  if (!fieldValue.length) {
     return {
       status: true,
-      value: 'Name is required'
+      value: `${fieldName} is required`
     }
   }
   return {
@@ -13,16 +14,16 @@ export function validateName(name) {
   }
 }
 
-export function validateEmail(email) {
-  if (!email.length) {
+export function validateEmail({ fieldName, fieldValue }) {
+  if (!fieldValue.length) {
     return {
       status: true,
-      value: 'Email is required'
+      value: `${fieldName} is required`
     }
-  } else if (!emailRegex.test(email)) {
+  } else if (!emailRegex.test(fieldValue)) {
     return {
       status: true,
-      value: 'Email is invalid'
+      value: `${fieldName} is invalid`
     }
   }
   return {

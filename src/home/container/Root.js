@@ -5,7 +5,7 @@ import rootSaga from './../middleware/saga'
 import App from './App'
 
 const config = configureStore()
-//config.runSaga(rootSaga)
+config.runSaga(rootSaga)
 
 const Root = () => (
   <Provider store={config.store}>

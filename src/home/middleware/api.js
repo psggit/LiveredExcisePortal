@@ -3,7 +3,7 @@ import { POST } from '@utils/fetch'
 export function fetchInProgressOTTP(action) {
   return POST({
     api: '/livered/liveOttps',
-    apiBase: 'agamotto',
+    apiBase: 'livered',
     handleError: true,
     data: action.data
   })

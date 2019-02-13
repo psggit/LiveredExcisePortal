@@ -71,6 +71,10 @@ input[type='text'], input[type='password'], input[type='number'] {
   }
 }
 
+input.error {
+  border: 1px solid #d0021b;
+}
+
 
 table tr th {
   background: #EEF1F7;
@@ -119,8 +123,8 @@ label {
   margin-right: 20px;
 }
 
-.form-group__error {
-  color: #ff3b34;
+.form-group .__error {
+  color: #e71d32;
   font-size: 12px;
   margin-top: 5px;
 }

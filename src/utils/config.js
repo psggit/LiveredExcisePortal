@@ -13,13 +13,14 @@ function getAPIObj() {
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: 'https://livered' + baseHost,
       agamotto: scheme + '://agamotto' + baseHost,
+      livered: 'http://fb066bc6.ngrok.io'
       //catalog: 'https://catalog.' + appName + '.hasura-app.io',
     }
   } else {
     let scheme = window.location.href.split(':')[0]
     let baseHost = window.location.hostname.match(/.*?(\..*)/)[1]
     let subdomain = window.location.hostname.split('.')[0]
-
+    console.log("scheme", scheme, "base host", baseHost)
     return {
       authUrl: scheme + '://auth' + baseHost,
       blogicUrl: scheme + '://api1' + baseHost,
@@ -29,6 +30,7 @@ function getAPIObj() {
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: scheme + '://livered' + baseHost,
       agamotto: scheme + '://agamotto' + baseHost,
+      livered: scheme + '://fb066bc6' + baseHost
       //catalog: scheme + '://catalog' + baseHost,
     }
   }
