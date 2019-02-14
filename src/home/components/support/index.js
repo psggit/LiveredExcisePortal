@@ -23,6 +23,7 @@
       .container .body {
         padding: 14px 33px;
         width: 100%;
+        height: calc(100vh - 50px);
       }
 
       .title {
@@ -89,6 +90,8 @@
       textarea {
         padding: 8px;
         height: 112px;
+        width: 100%;
+        border: 1px solid #c2c2c2;
       }
 
       :focus {
@@ -143,7 +146,9 @@
         </div>
         <div class="form-group">
           <label>Message</label>
-          <textarea placeholder="Write a message"></textarea>
+          <div>
+            <textarea placeholder="Write a message"></textarea>
+          </div>
         </div>
         <div class="form-group">
           <button>

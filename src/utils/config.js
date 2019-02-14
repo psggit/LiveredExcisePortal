@@ -13,7 +13,7 @@ function getAPIObj() {
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: 'https://livered' + baseHost,
       agamotto: scheme + '://agamotto' + baseHost,
-      livered: 'http://fb066bc6.ngrok.io'
+      livered: 'http://edf473e5.ngrok.io'
       //catalog: 'https://catalog.' + appName + '.hasura-app.io',
     }
   } else {
@@ -30,7 +30,7 @@ function getAPIObj() {
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: scheme + '://livered' + baseHost,
       agamotto: scheme + '://agamotto' + baseHost,
-      livered: scheme + '://fb066bc6' + baseHost
+      livered: scheme + '://edf473e5' + baseHost
       //catalog: scheme + '://catalog' + baseHost,
     }
   }
