@@ -6,7 +6,7 @@ export const menuItems = [
   { label: 'Retailers', value: 'retailers', icon: 'retailers' },
   { label: 'Delivery Operators', value: 'delivery-operators', icon: 'delivery-operators' },
   { label: 'Consumers', value: 'consumers', icon: 'consumers' },
-  { label: 'Reports', value: 'reports', icon: 'reports' }
+  // { label: 'Reports', value: 'reports', icon: 'reports' }
 ]
 
 export const menuItemsMap = menuItems.reduce((menuItemsMap, item) => {

@@ -10,7 +10,7 @@ import { Api } from './../config'
  */
 
 const getToken = () => ({
-  'x-hasura-role': `${localStorage.getItem('x-hasura-role')}`
+  // 'x-hasura-role': `${localStorage.getItem('x-hasura-role')}`
 })
 
 function getHeaders(type) {
@@ -75,7 +75,7 @@ export function constructFetchUtility(options) {
     headers: getHeaders(type),
   }
 
-  if (cookie === undefined) fetchOptions.credentials = 'include'
+  //if (cookie === undefined) fetchOptions.credentials = 'include'
   if(cors) fetchOptions.mode = 'cors'
   // add data to request
   if (data) {

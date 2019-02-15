@@ -38,7 +38,7 @@ class LiveOrdersList extends React.Component {
   }
 
   handleClick(dataObj) {
-    this.props.history.push(`/home/live-orders/${dataObj.order.order_id}`, dataObj)
+    this.props.history.push(`/home/live-orders/${dataObj.ottp_info.ottp_id}`, dataObj)
   }
 
   fetchData() {
@@ -255,8 +255,8 @@ class LiveOrdersList extends React.Component {
             </thead>
             <tbody>
               {
-                !this.state.loading
-                ? this.state.data.map(item => (
+                !this.props.loadingInProgressOTTP
+                ? this.props.inProgressOTTP.map(item => (
                   <LiveOrdersListItem
                     handleClick={this.handleClick}
                     handleOrderAssign={this.openAssignOrderModal}

@@ -13,9 +13,10 @@ const initialState = {
 
 const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP]: (state, action) => {
+    console.log("data", action.data)
     return Object.assign({}, state, {
       loadingInProgressOTTP: false,
-      inProgressOTTP: action.data.data,
+      inProgressOTTP: action.data.ottp,
       inProgressCount: action.data.count
     })
   },
@@ -31,7 +32,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_OTTP_DETAIL]: (state, action) => {
     return Object.assign({}, state, {
       loadingOTTPDetail: false,
-      OTTPDetailData: action.data.data
+      OTTPDetailData: action.data.ottp
     })
   },
 

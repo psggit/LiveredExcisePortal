@@ -23,9 +23,9 @@ export function fetchHistoryOTTP(action) {
 
 export function fetchOTTPDetail(action) {
   return POST({
-    api: '/excisePortal/ottpDetails',
+    api: 'http://192.168.5.86:8084/livered/ottpDetails',
     handleError: true,
-    apiBase: 'agamotto',
+    prependBaseUrl: false,
     data: action.data
   })
     .then(json => json)

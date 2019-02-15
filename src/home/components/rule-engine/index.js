@@ -341,7 +341,7 @@ class RuleManagement extends React.Component {
               </tbody>
             </table>
 
-            <div>
+            {/* <div>
               <Label icon="info">Restricting Delivery</Label>
               <div style={{ display: 'inline-block' }}>
                 <Select options={[]} />
@@ -375,7 +375,7 @@ class RuleManagement extends React.Component {
                   <p style={{ marginLeft: '10px' }}>Don't Repeat</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </Collpasible>
       </div>
     )

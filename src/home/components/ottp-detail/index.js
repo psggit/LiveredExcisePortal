@@ -60,7 +60,9 @@ class OTTPDetail extends Component {
   componentDidMount() {
     const { ottpId } = this.props.match.params
     this.props.actions.fetchOTTPDetail({
-      ottp_id: ottpId
+      ottp_info: {
+        ottp_id: ottpId
+      }
     })
   }
 
@@ -70,59 +72,63 @@ class OTTPDetail extends Component {
   }
 
   render() {
-    const { actions, OTTPDetailData } = this.props
-    console.log("props", this.props.history)
-    const data = this.props.history.location.state
+    // const { actions, OTTPDetailData } = this.props
+    // console.log("props", this.props.history)
+    const data = this.props.OTTPDetailData
     return (
-     <div>
-     {/* <p style={{ position: 'relative', top: '-30px', fontSize: '14px'  }}>Back to Live Orders</p> */}
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div>
-          <p style={{ fontSize: '12px', marginBottom: '5px' }}>PERMIT ID</p>
-          <h3 style={{ color: '#3d70b2', borderBottom: '2px solid #3d70b2' }}>{ data.ottp_info.ottp_id }</h3>
-        </div>
+      <div>
+        {
+          !this.props.loadingOTTPDetail &&
+          <div>
+            {/* <p style={{ position: 'relative', top: '-30px', fontSize: '14px'  }}>Back to Live Orders</p> */}
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div>
+                <p style={{ fontSize: '12px', marginBottom: '5px' }}>PERMIT ID</p>
+                <h3 style={{ color: '#3d70b2', borderBottom: '2px solid #3d70b2' }}>{data.ottp_info.ottp_id}</h3>
+              </div>
 
-        <div>
-          {data.ottp_info.ottp_status === "closed" ? <Icon name="expired" /> : <Icon name="active-indicator" /> }
-          <span style={{ display: 'inline-block', fontSize: '14px', marginLeft: '5px', marginBottom: '20px' }}>{ data.ottp_info.ottp_status }</span>
-          <p style={{ fontSize: '12px' }}>
-            Issued on { moment(data.ottp_info.issued_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.issued_at).format("h:mm A") } 
-          </p>
-          {
-            location.pathname.includes("live-orders")
-            ?  <p style={{ fontSize: '12px', textAlign: 'left' }}>
-                Valid till { moment(data.ottp_info.expiry_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.expiry_at).format("h:mm A") } 
-              </p>
-            :  <p style={{ fontSize: '12px', textAlign: 'left' }}>
-                Expired on { moment(data.ottp_info.expiry_at).format("DD/MM/YYYY") } at { moment(data.ottp_info.expiry_at).format("h:mm A") }
-              </p> 
-          }
-        </div>
-       </div>
+              <div>
+                {data.ottp_info.ottp_status === "closed" ? <Icon name="expired" /> : <Icon name="active-indicator" />}
+                <span style={{ display: 'inline-block', fontSize: '14px', marginLeft: '5px', marginBottom: '20px' }}>{data.ottp_info.ottp_status}</span>
+                <p style={{ fontSize: '12px' }}>
+                  Issued on {moment(data.ottp_info.issued_at).format("DD/MM/YYYY")} at {moment(data.ottp_info.issued_at).format("h:mm A")}
+                </p>
+                {
+                  location.pathname.includes("live-orders")
+                    ? <p style={{ fontSize: '12px', textAlign: 'left' }}>
+                      Valid till {moment(data.ottp_info.expiry_at).format("DD/MM/YYYY")} at {moment(data.ottp_info.expiry_at).format("h:mm A")}
+                    </p>
+                    : <p style={{ fontSize: '12px', textAlign: 'left' }}>
+                      Expired on {moment(data.ottp_info.expiry_at).format("DD/MM/YYYY")} at {moment(data.ottp_info.expiry_at).format("h:mm A")}
+                    </p>
+                }
+              </div>
+            </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '27px' }}>
-        <OttpDetailDSO 
-          name={data.dso.name}
-          address={data.dso.address}
-        />
-        <OttpDetailCustomer 
-          age={data.consumer.age}
-          address={data.consumer.address}
-          phone={data.consumer.phone}  
-        />
-        <OttpDetailDeliveryAgent 
-          age={data.delivery_agent.age}
-          name={data.delivery_agent.name}
-          phone={data.delivery_agent.phone_number}  
-          vehicleLicenseNo={data.delivery_agent.license_number}
-          driverLicenseNo={data.delivery_agent.vehicle_number}
-        />
-        <OttpDetailOrder 
-          order={data.order}
-        />
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', marginTop: '27px' }}>
+              <OttpDetailDSO
+                name={data.dso.name}
+                address={data.retailer.address}
+              />
+              <OttpDetailCustomer
+                age={data.consumer.age}
+                address={data.consumer.address}
+                phone={data.consumer.phone}
+              />
+              <OttpDetailDeliveryAgent
+                age={data.delivery_agent.age}
+                name={data.delivery_agent.name}
+                phone={data.delivery_agent.phone_number}
+                vehicleLicenseNo={data.delivery_agent.license_number}
+                driverLicenseNo={data.delivery_agent.vehicle_number}
+              />
+              <OttpDetailOrder
+                order={data.order}
+              />
+            </div>
+          </div>
+        }
       </div>
-
-     </div>
     )
   }
 }
