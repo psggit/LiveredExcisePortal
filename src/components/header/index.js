@@ -3,6 +3,7 @@ import './header.scss'
 import Icon from './../icon'
 import Dialog from "./../dialog"
 import Button from './../button'
+import { POST } from '@utils/fetch'
 
 class Header extends React.Component {
   constructor() {
@@ -24,10 +25,37 @@ class Header extends React.Component {
     this.setState({ showLogoutModal: false })
   }
 
+  // logout() {
+  //   console.log("handle logout")
+  //   this.setState({ showLogoutModal: false })
+  // }
+
   logout() {
-    console.log("handle logout")
     this.setState({ showLogoutModal: false })
-  }
+    POST({
+      api: '/retailer/auth/user/logout',
+      apiBase: 'api1',
+      handleError: false,
+      cors: true
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          console.log(`Looks like there was a problem. Status Code: ${response.status}`)
+          localStorage.clear()
+          location.href = '/'
+          return
+        }
+        response.json().then((data) => {
+          localStorage.clear()
+          location.href = '/'
+        })
+    })
+    .catch((err) => {
+      console.log('Fetch Error :-S', err)
+      localStorage.clear()
+      location.href = '/'
+    })
+}
 
   render() {
     const{ showLogoutModal } = this.state

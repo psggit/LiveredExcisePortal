@@ -34,7 +34,7 @@ const OttpDetailOrder = ({ order }) => (
             order.items.map((item, i) => {
               return <tr>
                       <td>{i+1}</td>
-                      <td>FMFL</td>
+                      <td>{ item.name}</td>
                       <td>{ item.volume }</td>
                       <td>{ item.price }</td>
                     </tr>

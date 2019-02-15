@@ -16,6 +16,7 @@ class Login extends React.Component {
       email: '',
       password: '',
       isSubmitting: false,
+      showLoginErr: false,
       emailErr: {
         value: '',
         status: false
@@ -50,25 +51,29 @@ class Login extends React.Component {
     if (!emailErr.status && !passwordErr.status) {
       console.log("success login")
       this.setState({ isSubmitting: true })
-      // POST({
-      //   api: '/excise-person/auth/otp-login',
-      //   apiBase: 'gremlinUrl',
-      //   handleError: false,
-      //   data: { otp, mobile: phoneNumber }
-      // })
-      //   .then(json => {
-      //     if (json.data) {
-      //       Notify(JSON.parse(json.data).message, 'warning')
-      //     } else {
-      //       createSession(json)
-      //       window.location.href = '/home/live-ottp'
-      //     }
-      //   })
+      POST({
+        api: '/retailer/auth/login',
+        apiBase: 'api1',
+        handleError: false,
+        data: { email, password }
+      })
+        .then(json => {
+          if (json.data) {
+            Notify(JSON.parse(json.data).message, 'warning')
+          } else {
+            createSession(json)
+            window.location.href = '/home/live-ottp'
+          }
+        })
+        .catch((error) => {
+          //console.log("status", error)
+          this.setState({ showLoginErr: true })
+        })
     }
   }
   
   handlePassword(e) {
-    this.setState({ password: e.target.value })
+    this.setState({ password: e.target.value, showLoginErr: false })
     // const errName = `${e.target.name}Err`
         
     // this.setState({
@@ -84,7 +89,7 @@ class Login extends React.Component {
     //   [e.target.name]: e.target.value,
     //   [errName]: validateEmail({ fieldName: 'Email ID', fieldValue: e.target.value }),
     // })
-    this.setState({ email: e.target.value })
+    this.setState({ email: e.target.value, showLoginErr: false })
   }
 
   render() {
@@ -96,20 +101,22 @@ class Login extends React.Component {
     return (
       <React.Fragment>
         <Header isLoggedIn={false} />
-        <div style={{
-          backgroundColor: '#fff',
-          border: '1px solid #d9d9d9',
-          width: '100%',
-          maxWidth: '400px',
-          margin: '0 auto',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          overflow: 'hidden'
-        }}>
+        <div 
+          style = {{
+            backgroundColor: '#fff',
+            border: '1px solid #d9d9d9',
+            width: '100%',
+            maxWidth: '400px',
+            margin: '0 auto',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            overflow: 'hidden'
+          }}
+        >
           <h3 style={{ fontSize: '24px', color: '#444', textAlign: 'center', lineHeight: '54px', fontWeight: '600', borderBottom: '1px solid #d9d9d9' }}>Login</h3>
-          <div style={{ padding: '40px' }}>
+          <div style={{ padding: '40px 40px 40px 40px' }}>
             <React.Fragment>
               <div className="form-group">
                 <label style={{ color: '#152935', fontWeight: '500' }}>Email ID</label>
@@ -150,10 +157,25 @@ class Login extends React.Component {
                   primary
                 >
                   Login
-                  </Button>
+                </Button>
               </div>
             </React.Fragment>
           </div>
+          {
+            this.state.showLoginErr &&
+            <p
+              style={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                //marginTop: '0px', 
+                paddingBottom: '20px',
+                color: '#ff3b30',
+                fontSize: '16px'
+              }}
+            >
+              Wrong username or password
+            </p>
+          }
         </div>
       </React.Fragment>
     )

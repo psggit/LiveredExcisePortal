@@ -23,8 +23,8 @@ class LiveOrdersList extends React.Component {
     this.state = {
       activePage: 1,
       pageOffset: 0,
-      data: pastOrderData.data,
-      loading: false,
+      // data: pastOrderData.data,
+      // loading: false,
       mountFilter: false
     }
     this.handlePageChange = this.handlePageChange.bind(this)
@@ -50,16 +50,15 @@ class LiveOrdersList extends React.Component {
   }
 
   handlePageChange(pagerObj) {
-    //   clearTimeout(this.timeoutId)
-    //console.log("pager obj", pagerObj)
-    // const offset = this.pagesLimit * (pageNumber - 1)
-    // const { filters } = this.props
-    // this.setState({ activePage: pageNumber, pageOffset: offset })
-    // this.props.actions.fetchInProgressOTTP({
-    //   limit: this.pagesLimit,
-    //   offset,
-    //   status: filters.status === 'all' ? undefined : filters.status
-    // })
+    clearTimeout(this.timeoutId)
+    const offset = this.pagesLimit * (pagerObj.activePage - 1)
+    //const { filters } = this.props
+    this.setState({ activePage: pagerObj.activePage, pageOffset: offset })
+    this.props.actions.fetchInProgressOTTP({
+      limit: this.pagesLimit,
+      offset,
+      //status: filters.status === 'all' ? undefined : filters.status
+    })
   }
 
   resetPagination() {
@@ -93,16 +92,16 @@ class LiveOrdersList extends React.Component {
     // this.timeoutId = setTimeout(this.filteredData, 30000)
   }
 
-  componentDidUpdate(prevProps) {
-    const { filters } = this.props
-    this.filters = Object.assign({}, filters)
-    if (filters && JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
-      this.props.actions.setLoadingAll()
-      this.resetPagination()
-      clearTimeout(this.timeoutId)
-      this.filteredData()
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const { filters } = this.props
+  //   this.filters = Object.assign({}, filters)
+  //   if (filters && JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
+  //     this.props.actions.setLoadingAll()
+  //     this.resetPagination()
+  //     clearTimeout(this.timeoutId)
+  //     this.filteredData()
+  //   }
+  // }
 
   componentWillUnmount() {
     clearTimeout(this.timeoutId)
@@ -128,30 +127,30 @@ class LiveOrdersList extends React.Component {
     }
     return (
       <Fragment>
-      <PageHeader pageName="Live Orders" />
-      <div style={{
-        display: 'flex',
-        marginBottom: '20px',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-        }}>
-        <Search
-          placeholder="Search"
-          search={this.handleSearch}
-        />
-        <div style={{ marginLeft: '46px', position: 'relative' }}>
-          <Button primary onClick={this.mountFilterModal}>
-            <Icon name="filter" />
-            <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
-          </Button>
-          <Filter
-            showFilter={this.state.mountFilter}
-            filterName="pastOrders"
-            applyFilter={this.applyFilter}
-          >
-          </Filter>
-        </div>
-        {/* <div style={{ display: 'flex', alignItems: 'center' }}>
+        <PageHeader pageName="Live Orders" />
+        <div style={{
+          display: 'flex',
+          marginBottom: '20px',
+          justifyContent: 'space-between',
+          alignItems: 'center'
+          }}>
+          <Search
+            placeholder="Search"
+            search={this.handleSearch}
+          />
+          <div style={{ marginLeft: '46px', position: 'relative' }}>
+            <Button primary onClick={this.mountFilterModal}>
+              <Icon name="filter" />
+              <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
+            </Button>
+            <Filter
+              showFilter={this.state.mountFilter}
+              filterName="pastOrders"
+              applyFilter={this.applyFilter}
+            >
+            </Filter>
+          </div>
+          {/* <div style={{ display: 'flex', alignItems: 'center' }}>
           <div>
             <Toggle />
             <span style={{
@@ -164,16 +163,19 @@ class LiveOrdersList extends React.Component {
           </div>
           
         </div> */}
-      </div>
-      <div style={{margin: '10px 0'}}>
-        <Pagination
-          activePage={1}
-          pageSize={10}
-          totalItemsCount={1000}
-          //pageRangeDisplayed={5}
-          onChangePage={this.handlePageChange}
-        />
-      </div>
+        </div>
+        {
+          !this.props.loadingInProgressOTTP &&
+          <div style={{ margin: '10px 0' }}>
+            <Pagination
+              activePage={this.state.activePage}
+              pageSize={this.pagesLimit}
+              totalItemsCount={this.props.inProgressCount}
+              //pageRangeDisplayed={5}
+              onChangePage={this.handlePageChange}
+            />
+          </div>
+        }
         <div>
           <table>
             <thead>
@@ -191,7 +193,7 @@ class LiveOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  Date issued
+                  Date Issued
                 </th>
                 {/* <th>Time issued</th> */}
                 <th>
@@ -274,9 +276,9 @@ class LiveOrdersList extends React.Component {
                 )
               }
               {
-                !this.state.loading && !this.state.data.length &&
+                !this.props.loadingInProgressOTTP && !this.props.inProgressOTTP.length === 0 &&
                 <tr>
-                  <td style={{ textAlign: 'center' }} colSpan="6">
+                  <td style={{ textAlign: 'center' }} colSpan="7">
                     No records found
                   </td>
                 </tr>

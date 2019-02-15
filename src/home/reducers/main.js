@@ -5,6 +5,7 @@ const initialState = {
   loadingHistoryOTTP: true,
   loadingOTTPDetail: true,
   loadingSquadMembers: true,
+  inProgressCount: 0,
   inProgressOTTP: [],
   historyOTTPData: [],
   squadMembersData: [],
@@ -13,7 +14,6 @@ const initialState = {
 
 const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_IN_PROGRESS_OTTP]: (state, action) => {
-    console.log("data", action.data)
     return Object.assign({}, state, {
       loadingInProgressOTTP: false,
       inProgressOTTP: action.data.ottp,

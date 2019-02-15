@@ -13,8 +13,8 @@ function getAPIObj() {
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: 'https://livered' + baseHost,
       agamotto: scheme + '://agamotto' + baseHost,
-      livered: '192.168.5.86:8084'
-      //catalog: 'https://catalog.' + appName + '.hasura-app.io',
+      livered: '192.168.5.86:8084',
+      api1: 'https://api1.' + appName + '.hasura-app.io'
     }
   } else {
     let scheme = window.location.href.split(':')[0]
@@ -30,8 +30,8 @@ function getAPIObj() {
       deliverymanUrl: scheme + '://deliveryman' + baseHost,
       socketUrl: scheme + '://livered' + baseHost,
       agamotto: scheme + '://agamotto' + baseHost,
-      livered: '192.168.5.86:8084'
-      //catalog: scheme + '://catalog' + baseHost,
+      livered: '192.168.5.86:8084',
+      api1: scheme + '://api1' + baseHost
     }
   }
 }
