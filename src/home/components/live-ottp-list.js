@@ -128,17 +128,17 @@ class LiveOrdersList extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Live Orders" />
-        <div style={{
+        {/* <div style={{
           display: 'flex',
           marginBottom: '20px',
           justifyContent: 'space-between',
           alignItems: 'center'
-          }}>
-          <Search
+          }}> */}
+          {/* <Search
             placeholder="Search"
             search={this.handleSearch}
-          />
-          <div style={{ marginLeft: '46px', position: 'relative' }}>
+          /> */}
+          {/* <div style={{ marginLeft: '46px', position: 'relative' }}>
             <Button primary onClick={this.mountFilterModal}>
               <Icon name="filter" />
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
@@ -149,7 +149,7 @@ class LiveOrdersList extends React.Component {
               applyFilter={this.applyFilter}
             >
             </Filter>
-          </div>
+          </div> */}
           {/* <div style={{ display: 'flex', alignItems: 'center' }}>
           <div>
             <Toggle />
@@ -163,7 +163,7 @@ class LiveOrdersList extends React.Component {
           </div>
           
         </div> */}
-        </div>
+        {/* </div> */}
         {
           !this.props.loadingInProgressOTTP &&
           <div style={{ margin: '10px 0' }}>
@@ -269,7 +269,7 @@ class LiveOrdersList extends React.Component {
                 ))
                 : (
                   <tr>
-                    <td colSpan="6">
+                    <td colSpan="8">
                       <Loader />
                     </td>
                   </tr>
@@ -278,7 +278,7 @@ class LiveOrdersList extends React.Component {
               {
                 !this.props.loadingInProgressOTTP && !this.props.inProgressOTTP.length === 0 &&
                 <tr>
-                  <td style={{ textAlign: 'center' }} colSpan="7">
+                  <td style={{ textAlign: 'center' }} colSpan="8">
                     No records found
                   </td>
                 </tr>
