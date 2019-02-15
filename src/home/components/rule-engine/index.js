@@ -198,7 +198,7 @@ class RuleManagement extends React.Component {
 
               </div>
 
-              <div style={{ marginLeft: '77px' }}>
+              {/* <div style={{ marginLeft: '77px' }}>
                 <div>
                   <Label icon="info">Velocity Check (per week)</Label>
                   <input type="text" className="small" />
@@ -208,7 +208,28 @@ class RuleManagement extends React.Component {
                   <Label icon="info">Amount Check (per week)</Label>
                   <input type="text" className="small" />
                 </div>
-              </div>
+              </div> */}
+            </div>
+          </Collpasible>
+
+          <Collpasible title="Permit Rules">
+            <div style={{ display: 'inline-block', marginRight: '20px' }} className="permit-time-validity">
+              <Label icon="info">
+                Permit Time Validity
+              </Label>
+              <input type="text" />
+            </div>
+            <div style={{ display: 'inline-block' }} className="cost">
+              <Label icon="info">
+                Cost/Permit
+              </Label>
+              <input type="text" className="small" />
+            </div>
+            <div className="late-fee">
+              <Label icon="info">
+                Late Fee
+              </Label>
+              <input type="text" className="small" />
             </div>
           </Collpasible>
 
@@ -229,7 +250,7 @@ class RuleManagement extends React.Component {
           </Collpasible>
 
 
-          <Collpasible title="Zone Restrictions">
+          {/* <Collpasible title="Zone Restrictions">
             <table>
               <thead>
                 <tr>
@@ -291,7 +312,7 @@ class RuleManagement extends React.Component {
                 </div>
               </div>
             </div>
-          </Collpasible>
+          </Collpasible> */}
 
           <Collpasible title="Special Restrictions">
             <table>

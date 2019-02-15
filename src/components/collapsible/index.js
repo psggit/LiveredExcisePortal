@@ -20,9 +20,14 @@ class Collapsible extends React.Component {
       <div>
         <div className="collapsible--wrapper">
           <div onClick={this.handleClick} className="collapsible--header">
-            <p>
-            { this.props.title }
-            </p>
+            <div style={{ display: 'flex' }}>
+              <span>
+                { this.props.title }
+              </span>
+              <span style={{ position: 'relative', top: '7px', marginLeft: '12px' }}>
+                <Icon name="info" />
+              </span>
+            </div>
             <Icon name="down" />
           </div>
           <div className={`collapsible--body ${this.state.isCollpased ? 'collapsed' : ''}`}>

@@ -2,9 +2,10 @@ import { POST } from '@utils/fetch'
 
 export function fetchInProgressOTTP(action) {
   return POST({
-    api: '/livered/liveOttps',
-    apiBase: 'livered',
+    api: 'http://192.168.5.86:8084/livered/liveOttps',
+    // apiBase: 'livered',
     handleError: true,
+    prependBaseUrl: false,
     data: action.data
   })
     .then(json => json)

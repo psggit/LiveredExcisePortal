@@ -50,9 +50,9 @@ class Header extends React.Component {
           
           <div className="brand--name">
             Excise Department<br />
-            {/* <span>
-            of Telengana
-            </span> */}
+            <span>
+            of Pondicherry
+            </span>
           </div>
         </div>
 
