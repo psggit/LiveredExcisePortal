@@ -31,17 +31,21 @@ class App extends React.Component {
     super()
     this.state = {
       currentRoute: location.pathname.split('/')[2] || 'live-ottp',
+      key: 0
     }
   }
 
   componentDidMount() {
+    console.log("mount")
     history.listen((loction) => {
+      console.log("history")
       const { key } = this.state
       this.setState({ key: key + 1 })
     })
   }
 
   render() {
+    console.log("re render")
     return (
       <div style={{
         backgroundColor: '#fbfbfb',

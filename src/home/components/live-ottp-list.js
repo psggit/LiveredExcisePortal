@@ -15,14 +15,16 @@ import Pagination from '@components/pagination'
 import PageHeader from '@components/pageheader'
 import Filter from "@components/filterModal"
 import Label from "@components/label"
+import { getQueryObj, getQueryUri } from '@utils/url-utils'
 
 class LiveOrdersList extends React.Component {
   constructor() {
     super()
-    this.pagesLimit = 10
+    //this.pagesLimit = 10
     this.state = {
       activePage: 1,
       pageOffset: 0,
+      limit: 10,
       // data: pastOrderData.data,
       // loading: false,
       mountFilter: false
@@ -51,16 +53,28 @@ class LiveOrdersList extends React.Component {
 
   handlePageChange(pagerObj) {
     //console.log("pager obj", pagerObj)
-    this.pagesLimit = pagerObj.pageSize
+    //this.limit = pagerObj.pageSize
     clearTimeout(this.timeoutId)
-    const offset = this.pagesLimit * (pagerObj.activePage - 1)
+    const offset = this.state.limit * (pagerObj.activePage - 1)
     //const { filters } = this.props
-    this.setState({ activePage: pagerObj.activePage, pageOffset: offset })
+    this.setState({ 
+      activePage: pagerObj.activePage, 
+      pageOffset: offset, 
+      //limit: pagerObj.pageSize, 
+    })
     this.props.actions.fetchInProgressOTTP({
-      limit: this.pagesLimit,
+      limit:  pagerObj.pageSize,
       offset,
       //status: filters.status === 'all' ? undefined : filters.status
     })
+
+    const queryParamsObj = {
+      //pageOffset: offset,
+      activePage: pagerObj.activePage,
+      limit: pagerObj.pageSize
+    }
+
+    history.pushState(queryParamsObj, "organisation listing", `/home/live-orders?${getQueryUri(queryParamsObj)}`)
   }
 
   resetPagination() {
@@ -69,7 +83,28 @@ class LiveOrdersList extends React.Component {
 
   componentDidMount() {
     //this.fetchData()
-    this.defaultData()
+    //console.log("mount")
+    if (location.search.length) {
+      this.setQueryParamas()
+    } else {
+      this.defaultData()
+    }
+  }
+
+  setQueryParamas() {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
+    Object.entries(queryObj).forEach((item) => {
+      this.setState({ [item[0]]: item[1] })
+      // this.filter[item[0]] = item[1]
+    })
+
+    this.props.actions.fetchInProgressOTTP({
+      limit: parseInt(queryObj.limit),
+      offset: queryObj.limit * (queryObj.activePage - 1),
+      //status: status === 'all' ? undefined : status
+    })
   }
 
   defaultData() {
@@ -77,7 +112,7 @@ class LiveOrdersList extends React.Component {
     // const status = queryUri[1]
     console.log("default data")
     this.props.actions.fetchInProgressOTTP({
-      limit: this.pagesLimit,
+      limit: this.state.limit,
       offset: 0,
       //status: status === 'all' ? undefined : status
     })
@@ -168,127 +203,132 @@ class LiveOrdersList extends React.Component {
         </div> */}
         {/* </div> */}
         {
-          !this.props.loadingInProgressOTTP &&
+          !this.props.loadingInProgressOTTP && this.props.inProgressOTTP &&
           <div style={{ margin: '10px 0' }}>
             <Pagination
               activePage={this.state.activePage}
-              pageSize={this.pagesLimit}
+              pageSize={this.state.limit}
               totalItemsCount={this.props.inProgressCount}
               //pageRangeDisplayed={5}
               onChangePage={this.handlePageChange}
             />
           </div>
         }
-        <div>
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      //justifyContent: 'space-around'
-                    }}
-                  >
-                    <span style={{marginRight: '5px'}}>Permit ID</span>
-                    <span><Icon name="info" /></span>
-                  </div>
-                </th>
-                <th>
-                  Date Issued
-                </th>
-                {/* <th>Time issued</th> */}
-                <th>
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      //justifyContent: 'space-around'
-                    }}
-                  >
-                    <span style={{marginRight: '5px'}}>Delivery Operator</span>
-                    <span><Icon name="info" /></span>
-                  </div>
-                </th>
-                <th>
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      //justifyContent: 'space-around'
-                    }}
-                  >
-                    <span style={{marginRight: '5px'}}>Retailer</span>
-                    <span><Icon name="info" /></span>
-                  </div>
-                </th>
-                <th>City/Town</th>
-                <th>
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      //justifyContent: 'space-around'
-                    }}
-                  >
-                    <span style={{marginRight: '5px'}}>Order Amount</span>
-                    <span><Icon name="info" /></span>
-                  </div>
-                </th>
-                <th>
-                  <div 
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      //justifyContent: 'space-around'
-                    }}
-                  >
-                    <span style={{marginRight: '5px'}}>Permit Status</span>
-                    <span
-                      // className="tooltip"
+        {
+          !this.props.loadingInProgressOTTP &&
+          //this.props.inProgressOTTP &&
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        //justifyContent: 'space-around'
+                      }}
                     >
-                      <Icon name="info" />
-                      {/* <span className="toolTipText">
+                      <span style={{ marginRight: '5px' }}>Permit ID</span>
+                      <span><Icon name="info" /></span>
+                    </div>
+                  </th>
+                  <th>
+                    Date Issued
+                </th>
+                  {/* <th>Time issued</th> */}
+                  <th>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        //justifyContent: 'space-around'
+                      }}
+                    >
+                      <span style={{ marginRight: '5px' }}>Delivery Operator</span>
+                      <span><Icon name="info" /></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        //justifyContent: 'space-around'
+                      }}
+                    >
+                      <span style={{ marginRight: '5px' }}>Retailer</span>
+                      <span><Icon name="info" /></span>
+                    </div>
+                  </th>
+                  <th>City/Town</th>
+                  <th>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        //justifyContent: 'space-around'
+                      }}
+                    >
+                      <span style={{ marginRight: '5px' }}>Order Amount</span>
+                      <span><Icon name="info" /></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        //justifyContent: 'space-around'
+                      }}
+                    >
+                      <span style={{ marginRight: '5px' }}>Permit Status</span>
+                      <span
+                      // className="tooltip"
+                      >
+                        <Icon name="info" />
+                        {/* <span className="toolTipText">
                         Permit ID is the ID of the One Time Transport Permit that has been generated
                       </span> */}
-                    </span>
-                  </div>
-                </th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                !this.props.loadingInProgressOTTP
-                ? this.props.inProgressOTTP.map(item => (
-                  <LiveOrdersListItem
-                    handleClick={this.handleClick}
-                    handleOrderAssign={this.openAssignOrderModal}
-                    handleShowNotes={this.handleShowNotes}
-                    key={item.ottp_id}
-                    data={item}
-                  />
-                ))
-                : (
+                      </span>
+                    </div>
+                  </th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  !this.props.loadingInProgressOTTP && this.props.inProgressOTTP 
+                    && this.props.inProgressOTTP.map(item => (
+                      <LiveOrdersListItem
+                        handleClick={this.handleClick}
+                        handleOrderAssign={this.openAssignOrderModal}
+                        handleShowNotes={this.handleShowNotes}
+                        key={item.ottp_id}
+                        data={item}
+                      />
+                    ))
+                }
+                {
+                  this.props.loadingInProgressOTTP &&
                   <tr>
                     <td colSpan="8">
                       <Loader />
                     </td>
                   </tr>
-                )
-              }
-              {
-                !this.props.loadingInProgressOTTP && !this.props.inProgressOTTP.length === 0 &&
-                <tr>
-                  <td style={{ textAlign: 'center' }} colSpan="8">
-                    No records found
+                }
+                {
+                  !this.props.loadingInProgressOTTP && !this.props.inProgressOTTP &&
+                  <tr>
+                    <td style={{ textAlign: 'center' }} colSpan="8">
+                      No records found
                   </td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
         {/* {
           !this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length
           ? <Pagination
