@@ -14,6 +14,7 @@ class Header extends React.Component {
     this.logout = this.logout.bind(this)
     this.mountModal = this.mountModal.bind(this)
     this.unMountModal = this.unMountModal.bind(this)
+    this.openDropdown = this.openDropdown.bind(this)
   }
 
   mountModal() {
@@ -23,6 +24,11 @@ class Header extends React.Component {
   unMountModal() {
     console.log("unmount modal")
     this.setState({ showLogoutModal: false })
+  }
+
+  openDropdown() {
+    console.log("open dropdown")  
+    this.setState({ showDropdown: !this.state.showDropdown })
   }
 
   // logout() {
@@ -58,10 +64,10 @@ class Header extends React.Component {
 }
 
   render() {
-    const{ showLogoutModal } = this.state
+    const{ showLogoutModal, showDropdown } = this.state
     return (
       <div className="header">
-      {
+      {/* {
         this.props.isLoggedIn
         ? (
           <div className="upper">
@@ -71,16 +77,16 @@ class Header extends React.Component {
           </div>
         )
         : ''
-      }
+      } */}
       <div className="lower">
         <div className="brand">
           <Icon name="excise-logo" />
           
           <div className="brand--name">
             Excise Department<br />
-            <span>
+            {/* <span>
             of Pondicherry
-            </span>
+            </span> */}
           </div>
         </div>
 
@@ -88,18 +94,21 @@ class Header extends React.Component {
          this.props.isLoggedIn
          ? (
           <div className="header--items">
-          <div className="item">
+          {/* <div className="item">
             <Icon name="support" />
             <span>
               Support
             </span>
-          </div>
+          </div> */}
 
-          <div className="item">
+          <div className="item" onClick={this.openDropdown}>
             <Icon name="account" />
             <span>
               Account Settings
             </span>
+            <div className={`dropdown-menu ${showDropdown ? 'show' : 'hide'}`} >
+              <div onClick={() => this.mountModal()} className="menu-item os s9">Logout</div>
+            </div>
           </div>
         </div>
          )

@@ -46,17 +46,48 @@
 .header--items {
   display: flex;
   align-items: center;
+  cursor: pointer;
  .item {
-   svg {
-     vertical-align: middle;
-   }
-   span {
-     letter-spacing: 0.5px;
-     vertical-align: middle;
-     font-size: 14px;
-     color: #fff;
-     margin-left: 10px;
-   }
+  svg {
+    vertical-align: middle;
+  }
+  span {
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #fff;
+    margin-left: 10px;
+  }
+
+  .dropdown-menu {
+    margin-top: 5px;
+    position: absolute;
+    top: 60px;
+    //right: 4.6%;
+    background: #152934;
+    color: #fff;
+    width: 160px;
+    transition: all 0.2s ease-out;
+  }
+
+  .dropdown-menu.show {
+    display: block;
+    overflow: auto;
+    // right: 0px;
+    //transition: all 0.2s ease-out;
+
+    .menu-item {
+      padding: 10px 20px;
+      color: #fff;
+      letter-spacing: .4px;
+    }
+  }
+
+  .dropdown-menu.hide {
+      display: none;
+      // right: -300px;
+      // transition: all 0.2s ease-out;
+  }
  }
  .item:not(:last-child) {
    margin-right: 58px;

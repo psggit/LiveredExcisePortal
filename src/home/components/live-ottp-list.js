@@ -97,6 +97,7 @@ class LiveOrdersList extends React.Component {
   handlePageChange(pagerObj) {
     //console.log("pager obj", pagerObj)
     //this.limit = pagerObj.pageSize
+    this.props.actions.setLoadingAll()
     clearTimeout(this.timeoutId)
     const offset = this.state.limit * (pagerObj.activePage - 1)
     //const { filters } = this.props
@@ -259,7 +260,7 @@ class LiveOrdersList extends React.Component {
           </div>
         }
         {
-          !this.props.loadingInProgressOTTP &&
+          //!this.props.loadingInProgressOTTP &&
           //this.props.inProgressOTTP &&
           <div>
             <table>
@@ -366,7 +367,7 @@ class LiveOrdersList extends React.Component {
                   <tr>
                     <td style={{ textAlign: 'center' }} colSpan="8">
                       No records found
-                  </td>
+                    </td>
                   </tr>
                 }
               </tbody>
