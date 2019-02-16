@@ -50,6 +50,8 @@ class LiveOrdersList extends React.Component {
   }
 
   handlePageChange(pagerObj) {
+    //console.log("pager obj", pagerObj)
+    this.pagesLimit = pagerObj.pageSize
     clearTimeout(this.timeoutId)
     const offset = this.pagesLimit * (pagerObj.activePage - 1)
     //const { filters } = this.props
@@ -73,6 +75,7 @@ class LiveOrdersList extends React.Component {
   defaultData() {
     // const queryUri = location.search.slice(1).split('=')
     // const status = queryUri[1]
+    console.log("default data")
     this.props.actions.fetchInProgressOTTP({
       limit: this.pagesLimit,
       offset: 0,

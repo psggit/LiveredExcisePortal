@@ -36,11 +36,8 @@ class App extends React.Component {
 
   componentDidMount() {
     history.listen((loction) => {
-      const newRoute = location.pathname.split('/')[2]
-      if (newRoute !== this.state.currentRoute) {
-        this.props.actions.setLoadingAll()
-        this.setState({ currentRoute: newRoute })
-      }
+      const { key } = this.state
+      this.setState({ key: key + 1 })
     })
   }
 
@@ -68,7 +65,10 @@ class App extends React.Component {
             menuItemsMap={menuItemsMap}
             currentRoute={this.state.currentRoute}
           />
-          <div style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 96px)', overflow: 'auto' }}>
+          <div 
+            style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 96px)', overflow: 'auto' }}
+            key={this.state.key}
+          >
           <Router history={history}>
             <Switch>
               <Route
