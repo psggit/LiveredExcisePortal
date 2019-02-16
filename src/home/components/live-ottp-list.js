@@ -20,6 +20,49 @@ import { getQueryObj, getQueryUri } from '@utils/url-utils'
 class LiveOrdersList extends React.Component {
   constructor() {
     super()
+    this.data = [
+      {
+        text: "10",
+        value: "1"
+      },
+      {
+        text: "9",
+        value: "2"
+      },
+      {
+        text: "8",
+        value: "3"
+      },
+      {
+        text: "7",
+        value: "4"
+      },
+      {
+        text: "6",
+        value: "5"
+      },
+      {
+        text: "5",
+        value: "6"
+      },
+      {
+        text: "4",
+        value: "7"
+      },
+      {
+        text: "3",
+        value: "8"
+      },
+      {
+        text: "2",
+        value: "9"
+      },
+      {
+        text: "1",
+        value: "10"
+      }
+    ]
+
     //this.pagesLimit = 10
     this.state = {
       activePage: 1,
@@ -60,7 +103,7 @@ class LiveOrdersList extends React.Component {
     this.setState({ 
       activePage: pagerObj.activePage, 
       pageOffset: offset, 
-      //limit: pagerObj.pageSize, 
+      limit: pagerObj.pageSize, 
     })
     this.props.actions.fetchInProgressOTTP({
       limit:  pagerObj.pageSize,
@@ -209,6 +252,7 @@ class LiveOrdersList extends React.Component {
               activePage={this.state.activePage}
               pageSize={this.state.limit}
               totalItemsCount={this.props.inProgressCount}
+              data={this.data}
               //pageRangeDisplayed={5}
               onChangePage={this.handlePageChange}
             />

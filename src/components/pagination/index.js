@@ -4,9 +4,11 @@ import Icon from '@components/icon'
 class Pagination extends React.Component {
   constructor() {
     super()
-
     this.state = {
-      pager: {}
+      pager: {},
+      active: this.props && this.props.data 
+              ? this.props.data.find((item) => item.text === pageSize.toString()).value 
+              : 1
     }
 
     //this.setPage = this.setPage.bind(this)
@@ -16,7 +18,7 @@ class Pagination extends React.Component {
 
   componentWillMount() {
     const { pageSize, totalItemsCount, activePage } = this.props;
-
+    // console.log("props", this.props)
     if (activePage) {
       //this.setPage(activePage)
       this.setState({
@@ -24,7 +26,8 @@ class Pagination extends React.Component {
           activePage: activePage,
           totalItemsCount: totalItemsCount,
           pageSize: pageSize
-        }
+        },
+        active: this.props.data.find((item) => item.text === pageSize.toString()).value
       });
     }
   }
@@ -32,12 +35,14 @@ class Pagination extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { pageSize, totalItemsCount, activePage } = this.props;
     if (this.props.activePage !== prevProps.activePage) {
+      //console.log("data", this.props.data, "page size", pageSize, "props", this.props)
       this.setState({
         pager: { 
           activePage: activePage,
           totalItemsCount: totalItemsCount,
           pageSize: pageSize
-        }
+        },
+        active: this.props.data.find((item) => item.text === pageSize.toString()).value
       });
     }
   }
@@ -57,36 +62,54 @@ class Pagination extends React.Component {
   // }
 
   updateActivePage(activePage) {
+    // console.log("activePage", activePage)
     const { pageSize, totalItemsCount } = this.props;
-    console.log("active page", activePage)
+    // console.log("active page", activePage, this.props, this.props.data)
   
     if (activePage < 1 || activePage > ((totalItemsCount / pageSize) + 1)) {
       return;
     }
+
+    if (Number.isInteger(totalItemsCount / pageSize)) {
+      if (activePage < 1 || activePage > ((totalItemsCount / pageSize))) {
+        return;
+      }
+    } else {
+      if (activePage < 1 || activePage > ((totalItemsCount / pageSize) + 1)) {
+        return;
+      }
+    }
   
     let newPager = { ...this.state.pager };    
     newPager.activePage = activePage;                       
-    this.setState({ pager: newPager }, () => {
+    this.setState({
+      pager: newPager,
+      active: this.props.data.find((item) => item.value === pageSize.toString()).value
+    },
+    () => {
       this.props.onChangePage(this.state.pager)
     });
   }
 
   updatePageSize(e) {
+    const selectedValue = this.props.data.find((item) => item.value === e.target.value).text
+    console.log("value", selectedValue)
     const { totalItemsCount, activePage } = this.props
-    if (activePage < 1 || e.target.value > totalItemsCount) {
+    if (activePage < 1 || selectedValue > totalItemsCount) {
       return;
     }
     let newPager = { ...this.state.pager };    
-    newPager.pageSize =  parseInt(e.target.value);
+    newPager.pageSize =  parseInt(selectedValue);
     newPager.activePage =  1;                              
     //this.setState({ pager: newPager });
-    this.setState({ pager: newPager }, () => {
+    this.setState({ pager: newPager, active: e.target.value }, () => {
       this.props.onChangePage(this.state.pager)
     });
   }
 
   render() {
     const { activePage, pageSize, totalItemsCount } = this.state.pager
+    //console.log("active", this.state.active, this.props.data)
     return (
       <div 
         style={{
@@ -100,6 +123,7 @@ class Pagination extends React.Component {
           <div style={{'display': 'inline-block', marginRight: '10px'}}>
             <select 
               onChange={(e) => this.updatePageSize(e) }
+              value={this.state.active}
               style={{ 
                 height: '24px',
                 border: 'none', 
@@ -112,8 +136,8 @@ class Pagination extends React.Component {
               }}
             >
               {
-                [10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((item) => {
-                  return <option value={item}>{item}</option>
+                this.props.data.map((item, i) => {
+                  return <option value={item.value}>{item.text}</option>
                 })
               }
             </select>
@@ -143,7 +167,7 @@ class Pagination extends React.Component {
           </span>
 
           <span  
-            onClick={() => this.updateActivePage(activePage-1)}
+            onClick={() => this.updateActivePage(parseInt(activePage)-1)}
             style={{cursor: 'pointer'}}
           >
             <Icon name="leftArrow"/>
@@ -164,7 +188,7 @@ class Pagination extends React.Component {
           </span>
 
           <span  
-            onClick={() => this.updateActivePage(activePage+1)}
+            onClick={() => this.updateActivePage(parseInt(activePage)+1)}
             style={{cursor: 'pointer'}}
           >
             <Icon name="rightArrow"/>
