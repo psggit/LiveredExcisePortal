@@ -4,10 +4,17 @@ import "./support.scss"
 class Support extends React.Component {
   constructor() {
     super()
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange() {
     console.log("change", document.getElementById("reason").value)
+  }
+
+  handleSubmit() {
+    console.log("inside submit")
   }
 
   render() {
@@ -24,7 +31,7 @@ class Support extends React.Component {
           <div className="content">
             <div className="form-group">
               <label>Please select a reason</label>
-              <select id="reason" onChange="handleChange()">
+              <select id="reason" onChange={() => this.handleChange()}>
                 <option value="" disabled selected>Choose a reason</option>
                 <option value="a">a</option>
                 <option value="b">b</option>
@@ -39,9 +46,9 @@ class Support extends React.Component {
               </div>
             </div>
             <div className="form-group">
-              <button onClick="handleSubmit()" disabled>
+              <button onClick={() => this.handleSubmit()} >
                 Submit
-            </button>
+              </button>
             </div>
           </div>
           <div className="footer">
