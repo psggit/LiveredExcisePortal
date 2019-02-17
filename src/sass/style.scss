@@ -1,0 +1,30 @@
+.tooltip-text {
+  display: none;
+  box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  top: 30px;
+  left: -93px;
+  position: absolute;
+  width: 200px;
+  max-width: 200px;
+  padding: 10px 15px;
+  // opacity: 0;
+  // transition: all ease-in .6s;
+}
+
+.info:hover .tooltip-text {
+  display: block;
+  // opacity: 1;
+  // transition: all ease-in .6s;
+}
+
+.tooltip-text::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+}

@@ -13,45 +13,49 @@ class Support extends React.Component {
   render() {
     return (
       <div id="support" className="container">
-      <div className="header">
-        Excise Department of Pondicherry
+        <div className="main-header">
+          Excise Department of Pondicherry
       </div>
-      <div className="body">
-        <p className="title">Grievances & Complaints</p>
-        <p className="sub-title">Ref OTTP ID# 678263525086</p>
-        <div className="form-group">
-          <label>Please select a reason</label>
-          <select id="reason" onChange={this.handleChange}>
-            <option  value="" disabled selected>Choose a reason</option>
-            <option value="a">a</option>
-            <option value="b">b</option>
-            <option value="c">c</option>
-            <option value="d">d</option>
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Message</label>
-          <div>
-            <textarea placeholder="Write a message"></textarea>
+        <div className="body">
+          <div className="header">
+            <p className="title">Grievances & Complaints</p>
+            <p className="sub-title">Ref OTTP ID# 678263525086</p>
           </div>
-        </div>
-        <div className="form-group">
-          <button>
-            Submit
-          </button>
-        </div>
-        <div className="footer">
-          <div>
-            <p className="text">For any other support, please contact us</p>
-            <p className="ottp-id">00 800 1008110</p>
+          <div className="content">
+            <div className="form-group">
+              <label>Please select a reason</label>
+              <select id="reason" onChange="handleChange()">
+                <option value="" disabled selected>Choose a reason</option>
+                <option value="a">a</option>
+                <option value="b">b</option>
+                <option value="c">c</option>
+                <option value="d">d</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Message</label>
+              <div>
+                <textarea placeholder="Write a message"></textarea>
+              </div>
+            </div>
+            <div className="form-group">
+              <button onClick="handleSubmit()" disabled>
+                Submit
+            </button>
+            </div>
           </div>
-          <div>
-            <p className="text" style={{ 'color': '#4a90e2' }}>Operating hours</p>
-            <p className="text">Mon - Fri (09:00 AM - 18:00 PM)</p>
+          <div className="footer">
+            <div>
+              <p className="text">For any other support, please contact us</p>
+              <p className="ottp-id">00 800 1008110</p>
+            </div>
+            <div>
+              <p className="text" style={{ 'color': '#4a90e2' }}>Operating hours</p>
+              <p className="text">Mon - Fri (09:00 AM - 18:00 PM)</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     )
   }
 }

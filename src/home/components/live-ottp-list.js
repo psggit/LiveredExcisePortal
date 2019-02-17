@@ -16,6 +16,7 @@ import PageHeader from '@components/pageheader'
 import Filter from "@components/filterModal"
 import Label from "@components/label"
 import { getQueryObj, getQueryUri } from '@utils/url-utils'
+import "@sass/style.scss"
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -275,7 +276,11 @@ class LiveOrdersList extends React.Component {
                       }}
                     >
                       <span style={{ marginRight: '5px' }}>Permit ID</span>
-                      <span><Icon name="info" /></span>
+                      <span className="info" style={{ position: 'relative' }}>
+                        <Icon name="info" />
+                        <span className="tooltip-text">Permit ID is the ID of the One Time Transport Permit that has been generated</span>
+                      </span>
+                      
                     </div>
                   </th>
                   <th>
