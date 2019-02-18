@@ -4,13 +4,40 @@ import "./support.scss"
 class Support extends React.Component {
   constructor() {
     super()
-
+    this.reasons = [
+      {
+        text: 'Wrong product(s) delivered / Product(s) missing',
+        value: 0
+      },
+      {
+        text: 'Product(s) delivered late',
+        value: 1
+      },
+      {
+        text: 'Proper packaging absent',
+        value: 2
+      },
+      {
+        text: 'MRP violation',
+        value: 3
+      },
+      {
+        text: 'Product(s) damaged/ tampered/ spurious',
+        value: 4
+      },
+      {
+        text: 'Inappropriate behaviour by agent',
+        value: 5
+      },
+    ]
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange() {
     console.log("change", document.getElementById("reason").value)
+    const selectedReasonIdx = parseInt(document.getElementById("reason").value)
+    console.log("selected reason", this.reasons.find(item => item.value === selectedReasonIdx).text)
   }
 
   handleSubmit() {
@@ -33,10 +60,11 @@ class Support extends React.Component {
               <label>Please select a reason</label>
               <select id="reason" onChange={() => this.handleChange()}>
                 <option value="" disabled selected>Choose a reason</option>
-                <option value="a">a</option>
-                <option value="b">b</option>
-                <option value="c">c</option>
-                <option value="d">d</option>
+                {
+                  this.reasons.map((item) => {
+                    return <option value={item.value}>{item.text}</option>
+                  })
+                }
               </select>
             </div>
             <div className="form-group">

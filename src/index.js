@@ -118,12 +118,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("mount")
     history.listen((loction) => {
-      console.log("history")
       const { key } = this.state
       this.setState({ key: key + 1 })
     })
+  }
+
+  componentWillMount() {
+    // console.log(localStorage.getItem('hasura-id'))
+    // if (!localStorage.getItem('hasura-id')) {
+    //   location.href = '/login'
+    // } else{
+    //   location.href = '/home/live-ottp'
+    // }
   }
 
   // checkUserLoggedIn() {
@@ -175,7 +182,7 @@ class App extends React.Component {
                 // borderTop: 0,
                 // borderBottom: 0,
                 width: '100%',
-                maxWidth: '1440px',
+                //maxWidth: '1440px',
                 margin: '0 auto',
                 height: '100vh',
                 overflow: 'auto'
@@ -192,7 +199,7 @@ class App extends React.Component {
                     currentRoute={this.state.currentRoute}
                   />
                   <div
-                    style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 96px)', overflow: 'auto' }}
+                    style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 60px)', overflow: 'auto' }}
                     key={this.state.key}
                   >
                     <Switch>
@@ -307,13 +314,5 @@ class App extends React.Component {
   }
 }
 ReactDOM.render(<App />, document.getElementById('root'))
+
 export default App
-
-// const mapStateToProps = state => state.main
-
-// const mapDispatchToProps = (dispatch) => ({
-//   actions: bindActionCreators({ setLoadingAll }, dispatch)
-// })
-
-// export default connect(mapStateToProps, mapDispatchToProps)(App)
-

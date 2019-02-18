@@ -11,7 +11,8 @@
     "dev-server": "NODE_ENV=production node server.js",
     "start": "NODE_ENV=production babel-node --presets es2015 server.js",
     "storybook": "start-storybook -p 6006 -c .storybook",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prettier": "prettier \"**/*.js\" --write"
   },
   "author": "Madhur Garg <madhur@hipbar.com>",
   "license": "ISC",
@@ -56,6 +57,7 @@
     "express": "^4.16.3",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "prettier": "^1.16.4",
     "prop-types": "^15.6.1",
     "rc-time-picker": "^3.3.1",
     "react": "^16.6.3",

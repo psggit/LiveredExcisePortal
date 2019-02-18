@@ -6,28 +6,69 @@ class Pagination extends React.Component {
     super()
     this.state = {
       pager: {},
-      active: this.props && this.props.data 
-              ? this.props.data.find((item) => item.text === pageSize.toString()).value 
-              : 1
+      active: this.props && this.props.pageSize 
+        ? this.pageSizeOptions.find(item => item.text === this.props.pageSize.toString()).value 
+        : 1
     }
 
-    //this.setPage = this.setPage.bind(this)
+    this.pageSizeOptions = [
+      {
+        text: "10",
+        value: "1"
+      },
+      {
+        text: "9",
+        value: "2"
+      },
+      {
+        text: "8",
+        value: "3"
+      },
+      {
+        text: "7",
+        value: "4"
+      },
+      {
+        text: "6",
+        value: "5"
+      },
+      {
+        text: "5",
+        value: "6"
+      },
+      {
+        text: "4",
+        value: "7"
+      },
+      {
+        text: "3",
+        value: "8"
+      },
+      {
+        text: "2",
+        value: "9"
+      },
+      {
+        text: "1",
+        value: "10"
+      }
+    ];
+
     this.updateActivePage = this.updateActivePage.bind(this)
     this.updatePageSize = this.updatePageSize.bind(this)
   }
 
   componentWillMount() {
     const { pageSize, totalItemsCount, activePage } = this.props;
-    // console.log("props", this.props)
+
     if (activePage) {
-      //this.setPage(activePage)
       this.setState({
         pager: { 
-          activePage: activePage,
-          totalItemsCount: totalItemsCount,
-          pageSize: pageSize
+          activePage,
+          totalItemsCount,
+          pageSize
         },
-        active: this.props.data.find((item) => item.text === pageSize.toString()).value
+        active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
       });
     }
   }
@@ -35,14 +76,13 @@ class Pagination extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { pageSize, totalItemsCount, activePage } = this.props;
     if (this.props.activePage !== prevProps.activePage) {
-      //console.log("data", this.props.data, "page size", pageSize, "props", this.props)
       this.setState({
         pager: { 
-          activePage: activePage,
-          totalItemsCount: totalItemsCount,
-          pageSize: pageSize
+          activePage,
+          totalItemsCount,
+          pageSize
         },
-        active: this.props.data.find((item) => item.text === pageSize.toString()).value
+        active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
       });
     }
   }
@@ -84,7 +124,7 @@ class Pagination extends React.Component {
     newPager.activePage = activePage;                       
     this.setState({
       pager: newPager,
-      active: this.props.data.find((item) => item.value === pageSize.toString()).value
+      active: this.pageSizeOptions.find(item => item.value === pageSize.toString()).value
     },
     () => {
       this.props.onChangePage(this.state.pager)
@@ -92,8 +132,7 @@ class Pagination extends React.Component {
   }
 
   updatePageSize(e) {
-    const selectedValue = this.props.data.find((item) => item.value === e.target.value).text
-    console.log("value", selectedValue)
+    const selectedValue = this.pageSizeOptions.find(item => item.value === e.target.value).text
     const { totalItemsCount, activePage } = this.props
     if (activePage < 1 || selectedValue > totalItemsCount) {
       return;
@@ -101,7 +140,6 @@ class Pagination extends React.Component {
     let newPager = { ...this.state.pager };    
     newPager.pageSize =  parseInt(selectedValue);
     newPager.activePage =  1;                              
-    //this.setState({ pager: newPager });
     this.setState({ pager: newPager, active: e.target.value }, () => {
       this.props.onChangePage(this.state.pager)
     });
@@ -109,7 +147,6 @@ class Pagination extends React.Component {
 
   render() {
     const { activePage, pageSize, totalItemsCount } = this.state.pager
-    //console.log("active", this.state.active, this.props.data)
     return (
       <div 
         style={{
@@ -120,9 +157,9 @@ class Pagination extends React.Component {
         }}
       >   
         <div>
-          <div style={{'display': 'inline-block', marginRight: '10px'}}>
+          <div style={{ display: 'inline-block', marginRight: '10px' }}>
             <select 
-              onChange={(e) => this.updatePageSize(e) }
+              onChange={e => this.updatePageSize(e)}
               value={this.state.active}
               style={{ 
                 height: '24px',
@@ -136,13 +173,13 @@ class Pagination extends React.Component {
               }}
             >
               {
-                this.props.data.map((item, i) => {
+                this.pageSizeOptions.map((item, i) => {
                   return <option value={item.value}>{item.text}</option>
                 })
               }
             </select>
           </div>
-          <div style={{'display': 'inline-block'}}>
+          <div style={{display: 'inline-block'}}>
             <span
               style={{
                 fontSize: '12px',
@@ -150,7 +187,7 @@ class Pagination extends React.Component {
                 color: '#5a6872'
               }}
             >
-              Items per page | {pageSize*activePage > totalItemsCount ? totalItemsCount - ((totalItemsCount % pageSize) - 1) : ((pageSize*activePage) - (pageSize - 1))} - {pageSize*activePage > totalItemsCount ? totalItemsCount : pageSize*activePage} of {totalItemsCount} items
+              Items per page | {pageSize * activePage > totalItemsCount ? totalItemsCount - ((totalItemsCount % pageSize) - 1) : ((pageSize*activePage) - (pageSize - 1))} - {pageSize * activePage > totalItemsCount ? totalItemsCount : pageSize * activePage} of {totalItemsCount} items
             </span>
           </div>
         </div>
