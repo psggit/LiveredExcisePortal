@@ -1,9 +1,15 @@
 import React from "react"
 import "./support.scss"
+import { POST } from "@utils/fetch";
 
 class Support extends React.Component {
   constructor() {
     super()
+    this.state = {
+      reason: "",
+      message: "",
+      ottpId: ""
+    }
     this.reasons = [
       {
         text: 'Wrong product(s) delivered / Product(s) missing',
@@ -32,16 +38,40 @@ class Support extends React.Component {
     ]
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleMessageChange = this.handleMessageChange.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({ ottpId: location.search.split("=")[1] })
+  }
+
+  handleMessageChange(e) {
+    //console.log("message", e.target.value)
+    this.setState({ message: e.target.value })
   }
 
   handleChange() {
     console.log("change", document.getElementById("reason").value)
     const selectedReasonIdx = parseInt(document.getElementById("reason").value)
     console.log("selected reason", this.reasons.find(item => item.value === selectedReasonIdx).text)
+    this.setState({ reason:  this.reasons.find(item => item.value === selectedReasonIdx).text })
   }
 
   handleSubmit() {
-    console.log("inside submit")
+    console.log("inside submit", this.state)
+    const { message, ottpId, reason } = this.state
+    // POST({
+    //   api: "/retailer/auth/login",
+    //   apiBase: "api1",
+    //   handleError: false,
+    //   data: { message, ottpId, reason }
+    // })
+    //   .then((json) => {
+       
+    //   })
+    //   .catch((error) => {
+       
+    //   });
   }
 
   render() {
@@ -70,7 +100,11 @@ class Support extends React.Component {
             <div className="form-group">
               <label>Message</label>
               <div>
-                <textarea placeholder="Write a message"></textarea>
+                <textarea 
+                  placeholder="Write a message"
+                  value={this.state.message}
+                  onChange={e => this.handleMessageChange(e)}
+                />
               </div>
             </div>
             <div className="form-group">
