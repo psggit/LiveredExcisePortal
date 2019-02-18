@@ -24,7 +24,7 @@ const OttpDetailOrder = ({ order }) => (
         <thead>
           <tr>
             <td>No.</td>
-            <td>Type</td>
+            <td>Name</td>
             <td>Volume(Litres)</td>
             <td>Amount</td>
           </tr>
