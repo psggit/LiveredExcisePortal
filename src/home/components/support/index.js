@@ -78,7 +78,10 @@ class Support extends React.Component {
     return (
       <div id="support" className="container">
         <div className="main-header">
-          Excise Department of Pondicherry
+          Excise Department
+          {/* <span>
+            of Pondicherry
+          </span> */}
       </div>
         <div className="body">
           <div className="header">
