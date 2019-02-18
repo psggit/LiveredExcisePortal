@@ -48,7 +48,8 @@ function getAPIObj() {
 
   return {
     //livered: '192.168.5.86:8084',
-    api1: 'https://api1.' + baseHost
+    api1: 'https://api1.' + baseHost,
+    authUrl: "https://auth." + baseHost,
   }
 }
 
