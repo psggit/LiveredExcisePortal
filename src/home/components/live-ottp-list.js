@@ -23,7 +23,7 @@ class LiveOrdersList extends React.Component {
     super();
     this.state = {
       activePage: 1,
-      pageOffset: 0,
+      //pageOffset: 0,
       limit: 10,
       mountFilter: false
     };
@@ -55,16 +55,16 @@ class LiveOrdersList extends React.Component {
   handlePageChange(pagerObj) {
     this.props.actions.setLoadingAll();
     clearTimeout(this.timeoutId);
-    const offset = this.state.limit * (pagerObj.activePage - 1);
+    // const offset = this.state.limit * (pagerObj.activePage - 1);
+    const offset = pagerObj.pageSize * (pagerObj.activePage - 1);
     this.setState({
       activePage: pagerObj.activePage,
-      pageOffset: offset,
+      //pageOffset: offset,
       limit: pagerObj.pageSize
     });
     this.props.actions.fetchInProgressOTTP({
       limit: pagerObj.pageSize,
       offset
-      //status: filters.status === 'all' ? undefined : filters.status
     });
 
     const queryParamsObj = {
@@ -74,7 +74,7 @@ class LiveOrdersList extends React.Component {
 
     history.pushState(
       queryParamsObj,
-      "organisation listing",
+      "live orders listing",
       `/home/live-orders?${getQueryUri(queryParamsObj)}`
     );
   }
@@ -95,7 +95,7 @@ class LiveOrdersList extends React.Component {
     const queryUri = location.search.slice(1);
     const queryObj = getQueryObj(queryUri);
 
-    Object.entries(queryObj).forEach(item => {
+    Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] });
       // this.filter[item[0]] = item[1]
     });
@@ -103,7 +103,6 @@ class LiveOrdersList extends React.Component {
     this.props.actions.fetchInProgressOTTP({
       limit: parseInt(queryObj.limit),
       offset: queryObj.limit * (queryObj.activePage - 1)
-      //status: status === 'all' ? undefined : status
     });
   }
 
@@ -114,7 +113,6 @@ class LiveOrdersList extends React.Component {
     this.props.actions.fetchInProgressOTTP({
       limit: this.state.limit,
       offset: 0
-      //status: status === 'all' ? undefined : status
     });
 
     this.timeoutId = setTimeout(this.defaultData, 30000);

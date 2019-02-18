@@ -66,10 +66,14 @@ class Support extends React.Component {
     console.log("inside submit", this.state);
     const { message, ottpId, reason } = this.state;
     // POST({
-    //   api: "/retailer/auth/login",
+    //   api: "/livered/createComplaints",
     //   apiBase: "api1",
     //   handleError: false,
-    //   data: { message, ottpId, reason }
+    //   data: { 
+    //     complaint_message: message, 
+    //     ottp_id: ottpId, 
+    //     reason 
+    //   }
     // })
     //   .then((json) => {
 

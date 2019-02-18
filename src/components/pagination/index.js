@@ -106,9 +106,9 @@ class Pagination extends React.Component {
     const { pageSize, totalItemsCount } = this.props;
     // console.log("active page", activePage, this.props, this.props.data)
   
-    if (activePage < 1 || activePage > ((totalItemsCount / pageSize) + 1)) {
-      return;
-    }
+    // if (activePage < 1 || activePage > ((totalItemsCount / pageSize) + 1)) {
+    //   return;
+    // }
 
     if (Number.isInteger(totalItemsCount / pageSize)) {
       if (activePage < 1 || activePage > ((totalItemsCount / pageSize))) {
@@ -124,7 +124,8 @@ class Pagination extends React.Component {
     newPager.activePage = activePage;                       
     this.setState({
       pager: newPager,
-      active: this.pageSizeOptions.find(item => item.value === pageSize.toString()).value
+      //active: this.pageSizeOptions.find(item => item.value === pageSize.toString()).value
+      active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
     },
     () => {
       this.props.onChangePage(this.state.pager)
@@ -187,7 +188,7 @@ class Pagination extends React.Component {
                 color: '#5a6872'
               }}
             >
-              Items per page | {pageSize * activePage > totalItemsCount ? totalItemsCount - ((totalItemsCount % pageSize) - 1) : ((pageSize*activePage) - (pageSize - 1))} - {pageSize * activePage > totalItemsCount ? totalItemsCount : pageSize * activePage} of {totalItemsCount} items
+              Items per page | {pageSize * activePage > totalItemsCount ? totalItemsCount - ((totalItemsCount % pageSize) - 1) : ((pageSize * activePage) - (pageSize - 1))} - {pageSize * activePage > totalItemsCount ? totalItemsCount : pageSize * activePage} of {totalItemsCount} items
             </span>
           </div>
         </div>
