@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
   entry: {
@@ -12,6 +13,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       template: './index.html'
+    }),
+    new webpack.DefinePlugin({
+      "process.env.BASE_URL": JSON.stringify(process.env.BASE_URL || "amebae21.hasura-app.io"),
+      //"process.env.PAYU_BASE": JSON.stringify(process.env.PAYU_BASE || "test"),
     })
   ],
   output: {
