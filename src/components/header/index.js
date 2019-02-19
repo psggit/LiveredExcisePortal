@@ -106,6 +106,7 @@ class Header extends React.Component {
             <span>
               Account Settings
             </span>
+            <Icon name="down-arrow" />
             <div className={`dropdown-menu ${showDropdown ? 'show' : 'hide'}`} >
               <div onClick={() => this.mountModal()} className="menu-item os s9">Logout</div>
             </div>

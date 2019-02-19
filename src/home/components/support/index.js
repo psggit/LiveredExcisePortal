@@ -77,10 +77,10 @@ class Support extends React.Component {
       }
     })
       .then((json) => {
-        //location.ref="complaint-success"
+        location.href="complaint-success"
       })
       .catch((error) => {
-        //location.ref="complaint-failure"
+        location.href="complaint-failure"
       });
   }
 

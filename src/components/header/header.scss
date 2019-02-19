@@ -57,17 +57,18 @@
     font-size: 14px;
     color: #fff;
     margin-left: 10px;
+    margin-right: 10px;
   }
 
   .dropdown-menu {
     margin-top: 5px;
     position: absolute;
-    right: 10px;
+    right: 20px;
     //top: 60px;
     //right: 4.6%;
     background: #fff;
     //color: #fff;
-    width: 160px;
+    width: 180px;
     transition: all 0.2s ease-out;
   }
 

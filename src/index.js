@@ -92,6 +92,8 @@ import RetailerDetail2 from './home/components/retailer-detail2'
 import WithFilters from './home/components/with-filters'
 import RuleManagement from './home/components/rule-engine'
 import Support from './home/components/support'
+import SuccessPage from './home/components/complaint-success'
+import FailurePage from './home/components/complaint-failure'
 import GeoFences from './home/components/geofences'
 import { liveFilters, historyFilters, dsoFilters } from './home/constants/status-filters'
 import '@sass/app.scss'
@@ -175,8 +177,8 @@ class App extends React.Component {
           <div>
             <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
-            {/* <Route exact path="/complaint-success" component={Success} />
-            <Route exact path="/complaint-failure" component={Failure} /> */}
+            <Route exact path="/complaint-success" component={SuccessPage} />
+            <Route exact path="/complaint-failure" component={FailurePage} />
             {/* <Route path="/home" component={Home} /> */}
             <Route path='/support' component={Support} />
             {
