@@ -96,7 +96,7 @@ class Support extends React.Component {
         <div className="body">
           <div className="header">
             <p className="title">Grievances & Complaints</p>
-            <p className="sub-title">Ref OTTP ID# 678263525086</p>
+            <p className="sub-title">Ref OTTP ID# {this.state.ottpId}</p>
           </div>
           <div className="content">
             <div className="form-group">
