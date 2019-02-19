@@ -42,8 +42,9 @@ class Support extends React.Component {
   }
 
   componentDidMount() {
-    console.log("path", location.search)
-    this.setState({ ottpId: location.search.split("=")[1] });
+    const queryParam = location.pathname.split("/")
+    console.log("path", location.search, queryParam)
+    this.setState({ ottpId: queryParam[queryParam.length - 1] });
   }
 
   handleMessageChange(e) {
