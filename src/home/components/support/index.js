@@ -42,6 +42,7 @@ class Support extends React.Component {
   }
 
   componentDidMount() {
+    console.log("path", location.search)
     this.setState({ ottpId: location.search.split("=")[1] });
   }
 
