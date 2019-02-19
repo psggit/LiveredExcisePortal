@@ -6,7 +6,7 @@ class Pagination extends React.Component {
     super()
     this.state = {
       pager: {},
-      active: this.props && this.props.pageSize 
+      activePageSize: this.props && this.props.pageSize 
         ? this.pageSizeOptions.find(item => item.text === this.props.pageSize.toString()).value 
         : 1
     }
@@ -75,7 +75,7 @@ class Pagination extends React.Component {
 
   componentDidMount() {
     const { pageSize, totalItemsCount, activePage } = this.props;
-
+    console.log("props", this.props)
     if (activePage) {
       this.setState({
         pager: { 
@@ -83,7 +83,7 @@ class Pagination extends React.Component {
           totalItemsCount,
           pageSize
         },
-        active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
+        activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
       });
     }
   }
@@ -97,7 +97,7 @@ class Pagination extends React.Component {
           totalItemsCount,
           pageSize
         },
-        active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
+        activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
       });
     }
   }
@@ -140,7 +140,7 @@ class Pagination extends React.Component {
     this.setState({
       pager: newPager,
       //active: this.pageSizeOptions.find(item => item.value === pageSize.toString()).value
-      active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
+      activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
     },
     () => {
       this.props.onChangePage(this.state.pager)
@@ -158,7 +158,7 @@ class Pagination extends React.Component {
     let newPager = { ...this.state.pager };    
     newPager.pageSize =  parseInt(selectedValue);
     newPager.activePage =  1;                              
-    this.setState({ pager: newPager, active: e.target.value }, () => {
+    this.setState({ pager: newPager, activePageSize: e.target.value }, () => {
       this.props.onChangePage(this.state.pager)
     });
   }
@@ -178,7 +178,7 @@ class Pagination extends React.Component {
           <div style={{ display: 'inline-block', marginRight: '10px' }}>
             <select 
               onChange={e => this.updatePageSize(e)}
-              value={this.state.active}
+              value={this.state.activePageSize}
               style={{ 
                 height: '24px',
                 border: 'none', 

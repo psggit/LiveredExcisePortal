@@ -24,7 +24,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_HISTORY_OTTP]: (state, action) => {
     return Object.assign({}, state, {
       loadingHistoryOTTP: false,
-      historyOTTPData: action.data.data,
+      historyOTTPData: action.data.ottp,
       historyOTTPCount: action.data.count
     })
   },

@@ -230,8 +230,7 @@ class LiveOrdersList extends React.Component {
                       <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
                         <span className="tooltip-text">
-                          Permit ID is the ID of the One Time Transport Permit
-                          that has been generated
+                          Unique One Time Transport Permit Number
                         </span>
                       </span>
                     </div>
@@ -343,17 +342,6 @@ class LiveOrdersList extends React.Component {
             </table>
           </div>
         }
-        {/* {
-          !this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length
-          ? <Pagination
-            activePage={this.state.activePage}
-            itemsCountPerPage={this.pagesLimit}
-            totalItemsCount={this.props.inProgressCount}
-            pageRangeDisplayed={5}
-            onChange={this.handlePageChange}
-          />
-          : ''
-        } */}
       </Fragment>
     );
   }

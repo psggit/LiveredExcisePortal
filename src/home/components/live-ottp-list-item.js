@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-const LiveOrdersListItem = ({ data, handleClick, handleOrderAssign, handleShowNotes }) => {
+const LiveOrdersListItem = ({ data, handleClick }) => {
   return (
     <tr onClick={ (e) => {handleClick(data)} } className="clickable">
       <td>{ data.ottp_info.ottp_id }</td>

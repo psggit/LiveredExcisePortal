@@ -13,9 +13,11 @@ export function fetchInProgressOTTP(action) {
 
 export function fetchHistoryOTTP(action) {
   return POST({
-    api: '/excisePortal/ottpHistory',
-    apiBase: 'agamotto',
+    //api: '/excisePortal/ottpHistory',
+    api: 'http://192.168.5.86:3000/livered/ottpHistory',
+    //apiBase: 'agamotto',
     handleError: true,
+    prependBaseUrl: false,
     data: action.data
   })
     .then(json => json)
