@@ -249,8 +249,11 @@ class LiveOrdersList extends React.Component {
                       <span style={{ marginRight: "5px" }}>
                         Delivery Operator
                       </span>
-                      <span>
+                      <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
+                        <span className="tooltip-text">
+                          On-demand application through which a customer places an order
+                        </span>
                       </span>
                     </div>
                   </th>
@@ -263,8 +266,11 @@ class LiveOrdersList extends React.Component {
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Retailer</span>
-                      <span>
+                      <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
+                        <span className="tooltip-text">
+                          The retailer/retail outlet which received the order
+                        </span>
                       </span>
                     </div>
                   </th>
@@ -278,8 +284,11 @@ class LiveOrdersList extends React.Component {
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Order Amount</span>
-                      <span>
+                      <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
+                        <span className="tooltip-text">
+                          Price of the chosen alcohol beverage against its quantity
+                        </span>
                       </span>
                     </div>
                   </th>
@@ -292,13 +301,11 @@ class LiveOrdersList extends React.Component {
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Permit Status</span>
-                      <span
-                      // className="tooltip"
-                      >
+                      <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
-                        {/* <span className="toolTipText">
-                        Permit ID is the ID of the One Time Transport Permit that has been generated
-                      </span> */}
+                        <span className="tooltip-text">
+                          Validity status of a single Permit ID 
+                        </span>
                       </span>
                     </div>
                   </th>

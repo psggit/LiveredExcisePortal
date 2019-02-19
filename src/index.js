@@ -115,6 +115,8 @@ class App extends React.Component {
       currentRoute: location.pathname.split('/')[2] || 'live-ottp',
       key: 0
     }
+
+    this.checkUserLoggedIn = this.checkUserLoggedIn.bind(this)
   }
 
   componentDidMount() {
@@ -152,7 +154,7 @@ class App extends React.Component {
           return
         }
         response.json().then((data) => {
-          if (!location.pathname.includes('home')) {
+          if (!location.pathname.includes('home') && !location.pathname.includes('support')) {
             location.href = '/home/live-ottp'
           }
         })
@@ -173,6 +175,8 @@ class App extends React.Component {
           <div>
             <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
+            {/* <Route exact path="/complaint-success" component={Success} />
+            <Route exact path="/complaint-failure" component={Failure} /> */}
             {/* <Route path="/home" component={Home} /> */}
             <Route path='/support' component={Support} />
             {

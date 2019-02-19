@@ -25,7 +25,8 @@ const OttpDetailOrder = ({ order }) => (
           <tr>
             <td>No.</td>
             <td>Name</td>
-            <td>Volume(Litres)</td>
+            <td>Qty</td>
+            <td>Volume(L)</td>
             <td>Amount</td>
           </tr>
         </thead>
@@ -35,6 +36,7 @@ const OttpDetailOrder = ({ order }) => (
               return <tr>
                       <td>{i+1}</td>
                       <td>{ item.name}</td>
+                      <td>{ item.count}</td>
                       <td>{ item.volume }</td>
                       <td>{ item.price }</td>
                     </tr>

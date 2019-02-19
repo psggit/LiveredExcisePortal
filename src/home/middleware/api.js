@@ -2,7 +2,7 @@ import { POST } from '@utils/fetch'
 
 export function fetchInProgressOTTP(action) {
   return POST({
-    api: 'http://192.168.5.86:8084/livered/liveOttps',
+    api: 'http://192.168.5.86:3000/livered/liveOttps',
     // apiBase: 'livered',
     handleError: true,
     prependBaseUrl: false,
@@ -23,7 +23,7 @@ export function fetchHistoryOTTP(action) {
 
 export function fetchOTTPDetail(action) {
   return POST({
-    api: 'http://192.168.5.86:8084/livered/ottpDetails',
+    api: 'http://192.168.5.86:3000/livered/ottpDetails',
     handleError: true,
     prependBaseUrl: false,
     data: action.data

@@ -65,22 +65,23 @@ class Support extends React.Component {
   handleSubmit() {
     console.log("inside submit", this.state);
     const { message, ottpId, reason } = this.state;
-    // POST({
-    //   api: "/livered/createComplaints",
-    //   apiBase: "api1",
-    //   handleError: false,
-    //   data: { 
-    //     complaint_message: message, 
-    //     ottp_id: ottpId, 
-    //     reason 
-    //   }
-    // })
-    //   .then((json) => {
-
-    //   })
-    //   .catch((error) => {
-
-    //   });
+    POST({
+      api: "http://192.168.5.86:8087/livered/createComplaints",
+      //apiBase: "api1",
+      handleError: false,
+      prependBaseUrl: false,
+      data: { 
+        complaint_message: message, 
+        ottp_id: ottpId, 
+        reason 
+      }
+    })
+      .then((json) => {
+        //location.ref="complaint-success"
+      })
+      .catch((error) => {
+        //location.ref="complaint-failure"
+      });
   }
 
   render() {
