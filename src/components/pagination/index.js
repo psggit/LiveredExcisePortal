@@ -133,9 +133,11 @@ class Pagination extends React.Component {
   }
 
   updatePageSize(e) {
+    console.log("page size", e.target.value)
     const selectedValue = this.pageSizeOptions.find(item => item.value === e.target.value).text
     const { totalItemsCount, activePage } = this.props
-    if (activePage < 1 || selectedValue > totalItemsCount) {
+    if (activePage < 1) {
+      console.log("if", activePage < 1, selectedValue > totalItemsCount, selectedValue, totalItemsCount)
       return;
     }
     let newPager = { ...this.state.pager };    
