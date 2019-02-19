@@ -180,7 +180,7 @@ class App extends React.Component {
             <Route exact path="/complaint-success" component={SuccessPage} />
             <Route exact path="/complaint-failure" component={FailurePage} />
             {/* <Route path="/home" component={Home} /> */}
-            <Route path='/support' component={Support} />
+            <Route path='/complaints' component={Support} />
             {
               location.pathname.includes("home") &&
               <div style={{
