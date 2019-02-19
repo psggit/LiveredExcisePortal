@@ -15,7 +15,7 @@
     background: #f9f9f9;
   }
 
-  .body .content {
+  .content {
     padding:28px;
     width:100%;
     text-align:center;
@@ -25,28 +25,28 @@
     transform:translate(-50%,-50%);
   }
 
-  .body .content .text {
+  .content .text {
     font-weight: normal;
     line-height: 1.4;
     text-align: center;
 
   }
 
-  .body .content .header {
+  .content .header {
     font-size: 18px;
     font-weight: 600;
     /* line-height: 1.4; */
     color: #417505;
   }
 
-  .body .content.failure .header {
+  .content.failure .header {
     font-size: 18px;
     font-weight: 600;
     /* line-height: 1.4; */
     color: #d0021b;
   }
 
-  .body .content .sub-header {
+  .content .sub-header {
     font-size: 15px;
     /* line-height: 1.4; */
     color: #152935;
