@@ -199,7 +199,7 @@ class LiveOrdersList extends React.Component {
           
         </div> */}
         {/* </div> */}
-        {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP && (
+        {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length > 0 && (
           <div style={{ margin: "10px 0" }}>
             <Pagination
               activePage={this.state.activePage}
@@ -332,7 +332,7 @@ class LiveOrdersList extends React.Component {
                   </tr>
                 )}
                 {!this.props.loadingInProgressOTTP &&
-                  !this.props.inProgressOTTP && (
+                  this.props.inProgressOTTP.length === 0 && (
                     <tr>
                       <td style={{ textAlign: "center" }} colSpan="8">
                         No records found

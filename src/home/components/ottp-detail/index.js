@@ -89,7 +89,7 @@ class OTTPDetail extends Component {
 
               <div>
                 {data.ottp_info.ottp_status === "closed" ? <Icon name="expired" /> : <Icon name="active-indicator" />}
-                <span style={{ display: 'inline-block', fontSize: '14px', marginLeft: '5px', marginBottom: '20px' }}>{data.ottp_info.ottp_status}</span>
+                <span style={{ display: 'inline-block', fontSize: '14px', marginLeft: '5px', marginBottom: '20px', textTransform: 'uppercase' }}>{data.ottp_info.status}</span>
                 <p style={{ fontSize: '12px' }}>
                   Issued on {moment(data.ottp_info.issued_at).format("DD/MM/YYYY")} at {moment(data.ottp_info.issued_at).format("h:mm A")}
                 </p>

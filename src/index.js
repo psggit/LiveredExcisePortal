@@ -133,7 +133,7 @@ class App extends React.Component {
     // } else{
     //   location.href = '/home/live-ottp'
     // }
-    this.checkUserLoggedIn()
+    //this.checkUserLoggedIn()
   }
 
   checkUserLoggedIn() {
