@@ -33,6 +33,26 @@ export function fetchOTTPDetail(action) {
     .then(json => json)
 }
 
+export function fetchDSOList(action) {
+  return POST({
+    api: 'http://192.168.5.86:8086/livered/listDso',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
+export function fetchDSODetails(action) {
+  return POST({
+    api: 'http://192.168.5.86:8086/livered/dsoDetails',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
 export function fetchSquadMembers(action) {
   return POST({
     api: '/excisePortal/userManagement/listUsers',

@@ -34,6 +34,26 @@ function* fetchHistoryOTTP(action) {
   }
 }
 
+function* fetchDSOList(action) {
+  try {
+    const data = yield call(Api.fetchDSOList, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_DSO_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
+function* fetchDSODetails(action) {
+  try {
+    const data = yield call(Api.fetchDSODetails, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_DSO_DETAILS, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchOTTPDetail(action) {
   try {
     const data = yield call(Api.fetchOTTPDetail, action)
@@ -120,6 +140,17 @@ function* watchFetchHistoryOTTP() {
   }
 }
 
+function* watchFetchDSOList() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_DSO_LIST, fetchDSOList)
+  }
+}
+
+function* watchFetchDSODetails() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_DSO_DETAILS, fetchDSODetails)
+  }
+}
 
 function* watchFetchOTTPDetail() {
   while (true) {
@@ -174,6 +205,8 @@ export default function* rootSaga() {
     fork(watchAddSquadMember),
     fork(watchSetLoading),
     fork(watchSetLoadingAll),
-    fork(watchUpdateStateExciseRules)
+    fork(watchUpdateStateExciseRules),
+    fork(watchFetchDSODetails),
+    fork(watchFetchDSOList)
   ]
 }

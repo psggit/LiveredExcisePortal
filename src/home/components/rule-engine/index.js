@@ -334,7 +334,7 @@ class RuleManagement extends React.Component {
                   <td>21:00 PM</td>
                   <td>No</td>
                   <td>
-                    <Icon name="edit" />
+                    {/* <Icon name="edit" /> */}
                     <Icon name="cross-red" color="#3d70b2" />
                   </td>
                 </tr>

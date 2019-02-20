@@ -33,13 +33,15 @@ const OttpDetailOrder = ({ order }) => (
         <tbody>
           {
             order.items.map((item, i) => {
-              return <tr>
-                      <td>{i+1}</td>
-                      <td>{ item.name}</td>
-                      <td>{ item.count}</td>
-                      <td>{ item.volume }</td>
-                      <td>{ item.price }</td>
-                    </tr>
+              return (
+                <tr key={i}>
+                  <td>{i+1}</td>
+                  <td>{ item.name}</td>
+                  <td>{ item.count}</td>
+                  <td>{ item.volume }</td>
+                  <td>{ item.price }</td>
+                </tr>
+              ) 
             })
           }
           <tr>

@@ -42,7 +42,8 @@ const DSOListItem = ({ data, handleClick }) => {
       <td>{ data.head_office.city }</td>
       <td>{ data.locations_in}</td>
       <td>{ data.license_type}</td>
-      <td>{ data.is_active ? 'Active' : 'Inactive'}</td>
+      <td></td>
+      {/* <td>{ data.is_active ? 'Active' : 'Inactive'}</td> */}
     </tr>
   )
 }

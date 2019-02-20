@@ -10,6 +10,16 @@ export const fetchHistoryOTTP = data => ({
   data
 })
 
+export const fetchDSOList = data => ({
+  type: ActionTypes.REQUEST_FETCH_DSO_LIST,
+  data
+})
+
+export const fetchDSODetails = data => ({
+  type: ActionTypes.REQUEST_FETCH_DSO_DETAILS,
+  data
+})
+
 export const fetchOTTPDetail = data => ({
   type: ActionTypes.REQUEST_FETCH_OTTP_DETAIL,
   data

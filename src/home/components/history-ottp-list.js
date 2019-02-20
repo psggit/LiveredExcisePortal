@@ -6,6 +6,7 @@ import HistoryOrdersListItem from './history-ottp-list-item'
 import Pagination from '@components/pagination'
 //import '@sass/_pagination.scss'
 import Loader from '@components/loader'
+import { getQueryObj, getQueryUri } from "@utils/url-utils";
 import Icon from "@components/icon"
 import {pastOrderData} from "./../constants/past-orders-mock"
 import "@sass/style.scss"
@@ -17,7 +18,7 @@ import Button from "@components/button"
 class HistoryOrdersList extends React.Component {
   constructor() {
     super()
-    this.pagesLimit = 10
+    //this.pagesLimit = 10
     this.state = {
       activePage: 1,
       limit: 10,
@@ -41,7 +42,6 @@ class HistoryOrdersList extends React.Component {
 
   handlePageChange(pagerObj) {
     this.props.actions.setLoadingAll();
-    clearTimeout(this.timeoutId);
     const offset = pagerObj.pageSize * (pagerObj.activePage - 1);
 
     this.setState({

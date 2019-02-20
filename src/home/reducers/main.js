@@ -5,10 +5,16 @@ const initialState = {
   loadingHistoryOTTP: true,
   loadingOTTPDetail: true,
   loadingSquadMembers: true,
+  loadingDSOList: true,
+  loadingDSODetail: true,
   inProgressCount: 0,
+  historyOTTPCount: 0,
+  DSOListCount: 0,
   inProgressOTTP: [],
   historyOTTPData: [],
   squadMembersData: [],
+  DSOList: [],
+  DSODetail: [],
   OTTPDetailData: {}
 }
 
@@ -26,6 +32,22 @@ const actionsMap = {
       loadingHistoryOTTP: false,
       historyOTTPData: action.data.ottp,
       historyOTTPCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_DSO_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingDSOList: false,
+      DSOList: action.data.dso,
+      DSOListCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_DSO_DETAILS]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingDSODetail: false,
+      DSODetail: action.data,
+      // DSODetailCount: action.data.count
     })
   },
 

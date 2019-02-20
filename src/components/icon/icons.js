@@ -385,7 +385,7 @@ export default {
   ),
   'green-flag': (
     <svg width="12px" height="13px" viewBox="0 0 12 13" version="1.1">
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Component/Data-Table/Tall/Default" transform="translate(-934.000000, -265.000000)">
                 <g id="Column-5" transform="translate(930.000000, 15.000000)">
                     <g id="Group">
@@ -403,7 +403,7 @@ export default {
   ), 
   'down-arrow': (
     <svg width="9px" height="6px" viewBox="0 0 9 6" version="1.1">
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Header/Super-Global/General" transform="translate(-1407.000000, -62.000000)" fill="#FFFFFF">
                 <path d="M1408.25809,69.0637749 C1408.29715,69.0637749 1408.33556,69.05171 1408.36763,69.0294854 L1413.97996,65.16244 C1414.03235,65.1262461 1414.06377,65.0668733 1414.06377,65.0030619 C1414.06377,64.9395635 1414.03234,64.879877 1413.97996,64.8436839 L1408.36763,60.9702999 C1408.30794,60.929339 1408.23048,60.9249012 1408.16634,60.9591876 C1408.10252,60.9931593 1408.06284,61.0601511 1408.06379,61.1328543 L1408.06379,68.870439 C1408.06379,68.9425098 1408.1038,69.0085466 1408.16793,69.0418868 C1408.19586,69.0561551 1408.22666,69.0637749 1408.25809,69.0637749 Z" id="Fill-1" transform="translate(1411.063775, 65.000000) scale(1, -1) rotate(270.000000) translate(-1411.063775, -65.000000) "></path>
             </g>
@@ -412,7 +412,7 @@ export default {
   ),
   'success': (
       <svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1">
-          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+          <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <g id="Complaints-screen---success" transform="translate(-150.000000, -241.000000)">
                   <g id="Group-2" transform="translate(19.000000, 241.000000)">
                       <g id="Success" transform="translate(131.000000, 0.000000)">
@@ -432,7 +432,7 @@ export default {
   ),
   'failure': (
     <svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1">
-        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Complaints-screen---failure" transform="translate(-150.000000, -241.000000)">
                 <g id="Group-2" transform="translate(19.000000, 241.000000)">
                     <g id="Group-4" transform="translate(131.000000, 0.000000)">
