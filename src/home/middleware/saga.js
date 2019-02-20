@@ -44,6 +44,26 @@ function* fetchDSOList(action) {
   }
 }
 
+function* fetchConsumerList(action) {
+  try {
+    const data = yield call(Api.fetchConsumerList, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_CONSUMER_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
+function* fetchConsumerComplaints(action) {
+  try {
+    const data = yield call(Api.fetchConsumerComplaints, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_CONSUMER_COMPLAINTS_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchDSODetails(action) {
   try {
     const data = yield call(Api.fetchDSODetails, action)
@@ -176,6 +196,18 @@ function* watchFetchRules() {
   }
 }
 
+function* watchFetchConsumerList() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_CONSUMER_LIST, fetchConsumerList)
+  }
+}
+
+function* watchFetchConsumerComplaints() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_CONSUMER_COMPLAINTS_LIST, fetchConsumerComplaints)
+  }
+}
+
 function* watchFetchDSOList() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_DSO_LIST, fetchDSOList)
@@ -258,6 +290,8 @@ export default function* rootSaga() {
     fork(watchFetchDSOList),
     fork(watchFetchRetailerList),
     fork(watchFetchRetailerDetails),
-    fork(watchFetchRules)
+    fork(watchFetchRules),
+    fork(watchFetchConsumerList),
+    fork(watchFetchConsumerComplaints)
   ]
 }

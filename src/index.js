@@ -104,6 +104,8 @@ import { createSession } from './login/session'
 import { Provider } from 'react-redux'
 import configureStore from './home/store/configure-store'
 import rootSaga from './home/middleware/saga'
+import ConsumerManagement from "./home/components/consumer-list"
+import ConsumerComplaints from "./home/components/consumer-complaints"
 
 const history = createHistory()
 
@@ -246,6 +248,26 @@ class App extends React.Component {
                         render={
                           props => (
                             <UserManagement {...props} />
+                          )
+                        }
+                      />
+
+                      <Route
+                        exact
+                        path="/home/consumers"
+                        render={
+                          props => (
+                            <ConsumerManagement {...props} />
+                          )
+                        }
+                      />
+
+                      <Route
+                        exact
+                        path="/home/consumer-complaints"
+                        render={
+                          props => (
+                            <ConsumerComplaints {...props} />
                           )
                         }
                       />

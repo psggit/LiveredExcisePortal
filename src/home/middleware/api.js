@@ -83,6 +83,26 @@ export function fetchRetailerDetails(action) {
     .then(json => json)
 }
 
+export function fetchConsumerList(action) {
+  return POST({
+    api: 'http://192.168.5.86:8087/livered/listConsumers',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
+export function fetchConsumerComplaints(action) {
+  return POST({
+    api: 'http://192.168.5.86:8087/livered/listComplaints',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
 export function fetchSquadMembers(action) {
   return POST({
     api: '/excisePortal/userManagement/listUsers',

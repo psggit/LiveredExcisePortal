@@ -15,6 +15,16 @@ export const fetchRules = data => ({
   data
 })
 
+export const fetchConsumerList = data => ({
+  type: ActionTypes.REQUEST_FETCH_CONSUMER_LIST,
+  data
+})
+
+export const fetchConsumerComplaints = data => ({
+  type: ActionTypes.REQUEST_FETCH_CONSUMER_COMPLAINTS_LIST,
+  data
+})
+
 export const fetchDSOList = data => ({
   type: ActionTypes.REQUEST_FETCH_DSO_LIST,
   data

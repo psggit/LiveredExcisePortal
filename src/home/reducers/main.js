@@ -9,19 +9,25 @@ const initialState = {
   loadingDSODetail: true,
   loadingRetailerList: true,
   loadingRetailerDetail: true,
+  loadingCustomerList: true,
+  loadingCustomerComplaints: true,
   loadingRules: true,
   inProgressCount: 0,
+  customerComplaintsCount: 0,
   historyOTTPCount: 0,
   retailerListCount: 0,
   DSOListCount: 0,
+  customerListCount: 0,
   inProgressOTTP: [],
   historyOTTPData: [],
   squadMembersData: [],
   retailerList: [],
+  customerList: [],
   rulesData: [],
   DSOList: [],
   DSODetail: [],
   retailerDetail: [],
+  customerComplaints: [],
   OTTPDetailData: {}
 }
 
@@ -39,6 +45,22 @@ const actionsMap = {
       loadingHistoryOTTP: false,
       historyOTTPData: action.data.ottp,
       historyOTTPCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_CONSUMER_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingCustomerList: false,
+      customerList: action.data.consumer,
+      customerListCount: action.data.count
+    })
+  },
+  
+  [ActionTypes.SUCCESS_FETCH_CONSUMER_COMPLAINTS_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingCustomerComplaints: false,
+      customerComplaints: action.data.complaints,
+      customerComplaintsCount: action.data.count
     })
   },
 
