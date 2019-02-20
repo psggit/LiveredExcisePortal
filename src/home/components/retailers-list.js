@@ -16,78 +16,121 @@ import { retailersList } from './../constants/retailers-list'
 class RetailersList extends React.Component {
   constructor() {
     super()
-    this.pagesLimit = 10
+    //this.pagesLimit = 10
     this.state = {
       activePage: 1,
-      pageOffset: 0
+      limit: 10
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
   }
 
-  handleClick(dataObj) {
-    console.log("props", this.props)
-    this.props.history.push(`/home/retailers/${dataObj.code}`, dataObj)
+  componentDidMount() {
+    if (location.search.length) {
+      this.setQueryParamas();
+    } else {
+      this.defaultData();
+    }
   }
 
-  handlePageChange(pageNumber) {
-    const offset = this.pagesLimit * (pageNumber - 1)
-    const { filters } = this.props
-    this.setState({ activePage: pageNumber, pageOffset: offset })
-    this.props.actions.fetchHistoryOTTP({
-      limit: this.pagesLimit,
-      offset,
-      from_date: filters.from,
-      to_date: filters.to,
-      status: filters.status === 'all' ? undefined : filters.status
-    })
+  setQueryParamas() {
+    const queryUri = location.search.slice(1);
+    const queryObj = getQueryObj(queryUri);
+
+    Object.entries(queryObj).forEach((item) => {
+      this.setState({ [item[0]]: item[1] });
+      // this.filter[item[0]] = item[1]
+    });
+
+    this.props.actions.fetchRetailerList({
+      limit: parseInt(queryObj.limit),
+      offset: queryObj.limit * (queryObj.activePage - 1)
+    });
+  }
+
+  defaultData() {
+    this.props.actions.fetchRetailerList({
+      limit: this.state.limit,
+      offset: 0
+    });
+  }
+
+  handleClick(dataObj) {
+    console.log("props", this.props)
+    this.props.history.push(`/home/retailers/${dataObj.id}`, dataObj)
+  }
+
+  handlePageChange(pagerObj) {
+    this.props.actions.setLoadingAll();
+    const offset = pagerObj.pageSize * (pagerObj.activePage - 1);
+
+    this.setState({
+      activePage: pagerObj.activePage,
+      limit: pagerObj.pageSize
+    });
+
+    this.props.actions.fetchRetailerList({
+      limit: pagerObj.pageSize,
+      offset
+    });
+
+    const queryParamsObj = {
+      activePage: pagerObj.activePage,
+      limit: pagerObj.pageSize
+    };
+
+    history.pushState(
+      queryParamsObj,
+      "past orders listing",
+      `/home/past-orders?${getQueryUri(queryParamsObj)}`
+    );
   }
 
   resetPagination() {
     this.setState({ activePage: 1 })
   }
 
-  componentDidMount() {
-    const queryUri = location.search.slice(1)
-    let today = new Date()
-    today.setUTCHours(0, 0, 0, 0)
-    let tommorrow = new Date(today.getTime())
-    tommorrow.setDate(tommorrow.getDate() + 1)
-    tommorrow.setUTCHours(0, 0, 0, 0)
+  // componentDidMount() {
+  //   const queryUri = location.search.slice(1)
+  //   let today = new Date()
+  //   today.setUTCHours(0, 0, 0, 0)
+  //   let tommorrow = new Date(today.getTime())
+  //   tommorrow.setDate(tommorrow.getDate() + 1)
+  //   tommorrow.setUTCHours(0, 0, 0, 0)
 
-    const queryObj = {}
+  //   const queryObj = {}
 
-    queryUri.split('&')
-    .map(item => item.split('='))
-    .forEach(([key, value]) => {
-      queryObj[key] = value
-    })
+  //   queryUri.split('&')
+  //   .map(item => item.split('='))
+  //   .forEach(([key, value]) => {
+  //     queryObj[key] = value
+  //   })
 
 
-    this.props.actions.fetchInProgressOTTP({
-      limit: this.pagesLimit,
-      offset: 0,
-      from_date: queryObj.from_date || today,
-      to_date: queryObj.to_date || tommorrow,
-      status: queryObj.status === 'all' ? undefined : queryObj.status
-    })
-  }
+  //   this.props.actions.fetchInProgressOTTP({
+  //     limit: this.pagesLimit,
+  //     offset: 0,
+  //     from_date: queryObj.from_date || today,
+  //     to_date: queryObj.to_date || tommorrow,
+  //     status: queryObj.status === 'all' ? undefined : queryObj.status
+  //   })
+  // }
 
-  componentDidUpdate(prevProps) {
-    const { filters } = this.props
-    if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
-      this.props.actions.setLoadingAll()
-      this.resetPagination()
-      this.props.actions.fetchInProgressOTTP({
-        limit: this.pagesLimit,
-        offset: 0,
-        from_date: filters.from,
-        to_date: filters.to,
-        status: filters.status === 'all' ? undefined : filters.status
-      })
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const { filters } = this.props
+  //   if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
+  //     this.props.actions.setLoadingAll()
+  //     this.resetPagination()
+  //     this.props.actions.fetchInProgressOTTP({
+  //       limit: this.pagesLimit,
+  //       offset: 0,
+  //       from_date: filters.from,
+  //       to_date: filters.to,
+  //       status: filters.status === 'all' ? undefined : filters.status
+  //     })
+  //   }
+  // }
 
   render() {
     return (
@@ -117,15 +160,21 @@ class RetailersList extends React.Component {
             </Filter> */}
           </div>
         </div>
-        {/* <div style={{margin: '10px 0'}}>
-          <Pagination
-            activePage={1}
-            pageSize={10}
-            totalItemsCount={1000}
-            //pageRangeDisplayed={5}
-            onChangePage={this.handlePageChange}
-          />
-        </div> */}
+         {
+          !this.props.loadingRetailerList && this.props.retailerList.length > 0 && 
+          (
+            <div style={{ margin: "10px 0" }}>
+              <Pagination
+                activePage={this.state.activePage}
+                pageSize={this.state.limit}
+                totalItemsCount={this.props.retailerListCount}
+                //data={this.data}
+                //pageRangeDisplayed={5}
+                onChangePage={this.handlePageChange}
+              />
+            </div>
+          )
+        }
         <div style={{ width: '100%' }}>
           <table>
             <thead>

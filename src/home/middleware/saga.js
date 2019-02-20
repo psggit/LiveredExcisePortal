@@ -54,6 +54,26 @@ function* fetchDSODetails(action) {
   }
 }
 
+function* fetchRetailerList(action) {
+  try {
+    const data = yield call(Api.fetchRetailerList, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_RETAILER_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
+function* fetchRetailerDetails(action) {
+  try {
+    const data = yield call(Api.fetchRetailerDetails, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_RETAILER_DETAILS, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchOTTPDetail(action) {
   try {
     const data = yield call(Api.fetchOTTPDetail, action)
@@ -152,6 +172,18 @@ function* watchFetchDSODetails() {
   }
 }
 
+function* watchFetchRetailerList() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_LIST, fetchRetailerList)
+  }
+}
+
+function* watchFetchRetailerDetails() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_DETAILS, fetchRetailerDetails)
+  }
+}
+
 function* watchFetchOTTPDetail() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_OTTP_DETAIL, fetchOTTPDetail)
@@ -207,6 +239,8 @@ export default function* rootSaga() {
     fork(watchSetLoadingAll),
     fork(watchUpdateStateExciseRules),
     fork(watchFetchDSODetails),
-    fork(watchFetchDSOList)
+    fork(watchFetchDSOList),
+    fork(watchFetchRetailerList),
+    fork(watchFetchRetailerDetails)
   ]
 }

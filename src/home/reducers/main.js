@@ -7,14 +7,19 @@ const initialState = {
   loadingSquadMembers: true,
   loadingDSOList: true,
   loadingDSODetail: true,
+  loadingRetailerList: true,
+  loadingRetailerDetail: true,
   inProgressCount: 0,
   historyOTTPCount: 0,
+  retailerListCount: 0,
   DSOListCount: 0,
   inProgressOTTP: [],
   historyOTTPData: [],
   squadMembersData: [],
+  retailerList: [],
   DSOList: [],
   DSODetail: [],
+  retailerDetail: [],
   OTTPDetailData: {}
 }
 
@@ -47,6 +52,22 @@ const actionsMap = {
     return Object.assign({}, state, {
       loadingDSODetail: false,
       DSODetail: action.data,
+      // DSODetailCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_RETAILER_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingRetailerList: false,
+      retailerList: action.data.data,
+      retailerListCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_RETAILER_DETAILS]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingRetailerDetail: false,
+      retailerDetail: action.data,
       // DSODetailCount: action.data.count
     })
   },
