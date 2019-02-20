@@ -84,6 +84,16 @@ function* fetchOTTPDetail(action) {
   }
 }
 
+function* fetchRules(action) {
+  try {
+    const data = yield call(Api.fetchRules, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_RULES, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchSquadMembers(action) {
   console.log(action)
   try {
@@ -157,6 +167,12 @@ function* watchFetchInProgressOTTP() {
 function* watchFetchHistoryOTTP() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_HISTORY_OTTP, fetchHistoryOTTP)
+  }
+}
+
+function* watchFetchRules() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_RULES, fetchRules)
   }
 }
 
@@ -241,6 +257,7 @@ export default function* rootSaga() {
     fork(watchFetchDSODetails),
     fork(watchFetchDSOList),
     fork(watchFetchRetailerList),
-    fork(watchFetchRetailerDetails)
+    fork(watchFetchRetailerDetails),
+    fork(watchFetchRules)
   ]
 }

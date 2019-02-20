@@ -14,97 +14,110 @@ import Label from '@components/label'
 import './rule-engine.scss'
 import Select from '@components/select'
 import Checkbox from '@components/checkbox'
+import moment from "moment"
 
 class RuleManagement extends React.Component {
   constructor() {
     super()
-    this.possessionLimits = [
-      { name: 'IMFL', value: '' },
-      { name: 'FMFL', value: '' },
-      { name: 'Beer', value: '' },
-      { name: 'Wine', value: '' },
-      { name: 'Toddy', value: '' }
-    ]
+    //this.possessionLimits = [],
     this.days = [
-      { value: 'monday', label: 'Monday' },
-      { value: 'tuesday', label: 'Tuesday' },
-      { value: 'wednesday', label: 'Wednesday' },
-      { value: 'thursday', label: 'Thursday' },
-      { value: 'friday', label: 'Friday' },
-      { value: 'saturday', label: 'Saturday' },
-      { value: 'sunday', label: 'Sunday' }
+      { value: 1, label: 'Monday' },
+      { value: 2, label: 'Tuesday' },
+      { value: 3, label: 'Wednesday' },
+      { value: 4, label: 'Thursday' },
+      { value: 5, label: 'Friday' },
+      { value: 6, label: 'Saturday' },
+      { value: 7, label: 'Sunday' }
     ]
     this.state = {
-      dryDays: [],
-      dryDay: '2018-08-10',
-      legalPurchaseAge: '21',
-      maxDeliveriesPerMonth: '10',
-      maxDeliveriesPerWeek: '2',
-      possesionOverall: '12',
-      possesionIMFL: '2.3',
-      possesionFMFL: '4',
-      possesionBeer: '10',
-      possesionWine: '3',
-      canSubmit: false,
-      isSubmitting: false,
-      editMode: false
+      possessionLimits: [],
+      timeRestrictions: [],
+      legalPurchaseAge: "",
+      zoneRestrictions: [],
+      // dryDays: [],
+      // dryDay: '2018-08-10',
+      // legalPurchaseAge: '21',
+      // maxDeliveriesPerMonth: '10',
+      // maxDeliveriesPerWeek: '2',
+      // possesionOverall: '12',
+      // possesionIMFL: '2.3',
+      // possesionFMFL: '4',
+      // possesionBeer: '10',
+      // possesionWine: '3',
+      // canSubmit: false,
+      // isSubmitting: false,
+      // editMode: false
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.enableEditMode = this.enableEditMode.bind(this)
-    this.mountDryDaysModal = this.mountDryDaysModal.bind(this)
+    //this.handleChange = this.handleChange.bind(this)
+    //this.handleSubmit = this.handleSubmit.bind(this)
+    //this.enableEditMode = this.enableEditMode.bind(this)
+    //this.mountDryDaysModal = this.mountDryDaysModal.bind(this)
   }
 
-  mountDryDaysModal() {
-    mountModal(setDryDayModal({
-      dryDaysMonths: this.state.dryDaysMonths,
-      dryDays: this.state.dryDays,
-      setNumberOfDryDays: (dryDays) => {
-        this.setState({
-          dryDays
-        })
-        unMountModal()
-      }
-    }))
-  }
+  // mountDryDaysModal() {
+  //   mountModal(setDryDayModal({
+  //     dryDaysMonths: this.state.dryDaysMonths,
+  //     dryDays: this.state.dryDays,
+  //     setNumberOfDryDays: (dryDays) => {
+  //       this.setState({
+  //         dryDays
+  //       })
+  //       unMountModal()
+  //     }
+  //   }))
+  // }
 
   componentDidMount() {
     console.log("Rule engine mounted")
+    this.props.actions.fetchRules({
+      state_short_name: "TN"
+    }) 
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps, this.props)
-    if (prevProps.location.search !== this.props.location.search) {
-      if (this.props.location.search.length) {
-        this.setState({ editMode: true })
-      } else {
-        this.setState({ editMode: false })
-      }
+    if(this.props.rulesData !== prevProps.rulesData) {
+      const timeRestrictions = this.props.rulesData.time_restrictions.map((item) => {
+        return {...item, weekday_name: this.days.find(dayItem => dayItem.value === item.weekday_id).label }
+      })
+      this.setState({
+        timeRestrictions: timeRestrictions,
+        legalPurchaseAge: this.props.rulesData.consumer_min_age,
+        possessionLimits: this.props.rulesData.possession_limit,
+        zoneRestrictions: this.props.rulesData.city_special_days.concat(this.props.rulesData.state_special_days)
+      })
     }
+    // console.log(prevProps, this.props)
+    // if (prevProps.location.search !== this.props.location.search) {
+    //   if (this.props.location.search.length) {
+    //     this.setState({ editMode: true })
+    //   } else {
+    //     this.setState({ editMode: false })
+    //   }
+    // }
   }
 
-  enableEditMode() {
-    this.props.history.push('/home/rule-engine?edit=true')
-  }
+  // enableEditMode() {
+  //   this.props.history.push('/home/rule-engine?edit=true')
+  // }
 
-  handleChange(e) {
-    console.log(e.target.value);
-    const {
-      startTime,
-      endTime,
-      legalPurchaseAge,
-      maxDeliveriesPerMonth,
-      possesionOverall,
-      possesionIMFL,
-      possesionFMFL,
-      possesionBeer,
-      possesionLiquor
-    } = this.state
+  // handleChange(e) {
+  //   console.log(e.target.value);
+  //   const {
+  //     startTime,
+  //     endTime,
+  //     legalPurchaseAge,
+  //     maxDeliveriesPerMonth,
+  //     possesionOverall,
+  //     possesionIMFL,
+  //     possesionFMFL,
+  //     possesionBeer,
+  //     possesionLiquor
+  //   } = this.state
 
 
-    this.setState({ [e.target.name]: e.target.value })
-    // () => {
+  //   this.setState({ [e.target.name]: e.target.value })
+  //   // () => {
     //   if (
     //     startTime.length &&
     //     endTime.length &&
@@ -122,38 +135,40 @@ class RuleManagement extends React.Component {
       // if (!e.target.value.length) {
       //   this.setState({ canSubmit: false })
       // }
-  }
+  //}
 
-  handleSubmit() {
-    const {
-      dryDay,
-      legalPurchaseAge,
-      maxDeliveriesPerMonth,
-      maxDeliveriesPerWeek,
-      possesionOverall,
-      possesionIMFL,
-      possesionFMFL,
-      possesionBeer,
-      possesionLiquor
-    } = this.state
+  // handleSubmit() {
+  //   const {
+  //     // dryDay,
+  //     // legalPurchaseAge,
+  //     // maxDeliveriesPerMonth,
+  //     // maxDeliveriesPerWeek,
+  //     // possesionOverall,
+  //     // possesionIMFL,
+  //     // possesionFMFL,
+  //     // possesionBeer,
+  //     // possesionLiquor
+  //   } = this.state
 
-    // const { startTime, endTime } = this.timeData.getData()
-    // console.log(startTime, endTime);
-    if (
-      dryDay.length &&
-      legalPurchaseAge.length &&
-      maxDeliveriesPerMonth.length &&
-      maxDeliveriesPerWeek.length &&
-      possesionOverall.length &&
-      possesionIMFL.length &&
-      possesionFMFL.length &&
-      possesionBeer.length &&
-      possesionLiquor.length
-    ) {
-      this.props.actions.updateStateExciseRules({})
-    }
-  }
+  //   // const { startTime, endTime } = this.timeData.getData()
+  //   // console.log(startTime, endTime);
+  //   if (
+  //     dryDay.length &&
+  //     legalPurchaseAge.length &&
+  //     maxDeliveriesPerMonth.length &&
+  //     maxDeliveriesPerWeek.length &&
+  //     possesionOverall.length &&
+  //     possesionIMFL.length &&
+  //     possesionFMFL.length &&
+  //     possesionBeer.length &&
+  //     possesionLiquor.length
+  //   ) {
+  //     this.props.actions.updateStateExciseRules({})
+  //   }
+  // }
   render() {
+    console.log("render props", this.props.rulesData, "state", this.state)
+    const  { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions } = this.state
     return (
       <div id="rule-engine">
         <PageHeader pageName="Rule Engine" />
@@ -179,7 +194,7 @@ class RuleManagement extends React.Component {
                   <Label icon="info">
                     Legal Purchage Age
                   </Label>
-                  <input type="number" />
+                  <input type="number" value={legalPurchaseAge} />
                 </div>
 
                 <div className="possession" style={{ marginTop: '20px' }}>
@@ -187,10 +202,10 @@ class RuleManagement extends React.Component {
                     Possession Limits
                   </Label>
                   {
-                    this.possessionLimits.map(item => (
+                    possessionLimits.map(item => (
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <p>{item.name}</p>
-                        <input className="small" type="text" />
+                        <p>{item.type}</p>
+                        <input className="small" type="text" value={item.volume} />
                       </div>
                     ))
                   }
@@ -238,12 +253,21 @@ class RuleManagement extends React.Component {
               <Label>Daily Restrictions</Label>
             </div>
             {
-              this.days.map(item => (
+              timeRestrictions.map(item => (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <p style={{ width: '110px' }}>{item.label}</p>
-                  <input style={{ margin: '0 20px 10px 0' }} className="small" type="text" />
+                  <p style={{ width: '110px' }}>{item.weekday_name}</p>
+                  <input 
+                    style={{ margin: '0 20px 10px 0' }} 
+                    className="small" type="text" 
+                    value={moment(item.start_time).format('h:mm a')}
+                  />
                   <p>to</p>
-                  <input style={{ margin: '0 0 10px 20px' }} className="small" type="text" />
+                  <input 
+                    style={{ margin: '0 0 10px 20px' }} 
+                    className="small" 
+                    type="text" 
+                    value={moment(item.end_time).format('h:mm a')}
+                  />
                 </div>
               ))
             }
@@ -334,10 +358,15 @@ class RuleManagement extends React.Component {
                   <td>21:00 PM</td>
                   <td>No</td>
                   <td>
-                    {/* <Icon name="edit" /> */}
+                    <Icon name="edit" />
                     <Icon name="cross-red" color="#3d70b2" />
                   </td>
                 </tr>
+                {/* {
+                  this.zoneRestrictions.map((item) => {
+
+                  })
+                } */}
               </tbody>
             </table>
 

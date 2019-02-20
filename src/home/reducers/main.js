@@ -9,6 +9,7 @@ const initialState = {
   loadingDSODetail: true,
   loadingRetailerList: true,
   loadingRetailerDetail: true,
+  loadingRules: true,
   inProgressCount: 0,
   historyOTTPCount: 0,
   retailerListCount: 0,
@@ -17,6 +18,7 @@ const initialState = {
   historyOTTPData: [],
   squadMembersData: [],
   retailerList: [],
+  rulesData: [],
   DSOList: [],
   DSODetail: [],
   retailerDetail: [],
@@ -69,6 +71,13 @@ const actionsMap = {
       loadingRetailerDetail: false,
       retailerDetail: action.data,
       // DSODetailCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_RULES]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingRules: false,
+      rulesData: action.data
     })
   },
 

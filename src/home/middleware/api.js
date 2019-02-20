@@ -53,6 +53,16 @@ export function fetchDSODetails(action) {
     .then(json => json)
 }
 
+export function fetchRules(action) {
+  return POST({
+    api: 'http://192.168.5.86:8085/ruleEngine/listRules',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
 export function fetchRetailerList(action) {
   return POST({
     api: 'http://192.168.5.86:8086/livered/listDso',
