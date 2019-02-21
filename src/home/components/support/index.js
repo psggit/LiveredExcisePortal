@@ -1,147 +1,36 @@
-import React from "react";
-import "./support.scss";
-import { POST } from "@utils/fetch";
+import React from "react"
+import './support.scss'
+import Icon from "@components/icon"
+import PageHeader from '@components/pageheader'
 
 class Support extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      reason: "",
-      message: "",
-      ottpId: ""
-    };
-    this.reasons = [
-      {
-        text: "Wrong product(s) delivered / Product(s) missing",
-        value: 0
-      },
-      {
-        text: "Product(s) delivered late",
-        value: 1
-      },
-      {
-        text: "Proper packaging absent",
-        value: 2
-      },
-      {
-        text: "MRP violation",
-        value: 3
-      },
-      {
-        text: "Product(s) damaged/ tampered/ spurious",
-        value: 4
-      },
-      {
-        text: "Inappropriate behaviour by agent",
-        value: 5
-      }
-    ];
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
-  }
-
-  componentDidMount() {
-    const queryParam = location.pathname.split("/")
-    console.log("path", location.search, queryParam)
-    this.setState({ ottpId: queryParam[queryParam.length - 1] });
-  }
-
-  handleMessageChange(e) {
-    //console.log("message", e.target.value)
-    this.setState({ message: e.target.value });
-  }
-
-  handleChange() {
-    console.log("change", document.getElementById("reason").value);
-    const selectedReasonIdx = parseInt(document.getElementById("reason").value);
-    console.log(
-      "selected reason",
-      this.reasons.find(item => item.value === selectedReasonIdx).text
-    );
-    this.setState({
-      reason: this.reasons.find(item => item.value === selectedReasonIdx).text
-    });
-  }
-
-  handleSubmit() {
-    console.log("inside submit", this.state);
-    const { message, ottpId, reason } = this.state;
-    POST({
-      api: "http://192.168.5.86:8087/livered/createComplaints",
-      //apiBase: "api1",
-      handleError: false,
-      prependBaseUrl: false,
-      data: { 
-        complaint_message: message, 
-        ottp_id: ottpId, 
-        reason 
-      }
-    })
-      .then((json) => {
-        location.href="/complaint-success"
-      })
-      .catch((error) => {
-        location.href="/complaint-failure"
-      });
-  }
-
   render() {
     return (
-      <div id="support" className="container">
-        <div className="main-header">
-          Excise Department
-          {/* <span>
-            of Pondicherry
-          </span> */}
-        </div>
+      <div id="support">
+        {
+          this.props.isLoggedIn &&
+          <PageHeader pageName="Support" />
+        }
         <div className="body">
-          <div className="header">
-            <p className="title">Grievances & Complaints</p>
-            <p className="sub-title">Ref OTTP ID# {this.state.ottpId}</p>
-          </div>
+          <p className="title-text">For any support, please contact us</p>
           <div className="content">
-            <div className="form-group">
-              <label>Please select a reason</label>
-              <select id="reason" onChange={() => this.handleChange()}>
-                <option value="" disabled selected>
-                  Choose a reason
-                </option>
-                {this.reasons.map(item => {
-                  return <option value={item.value}>{item.text}</option>;
-                })}
-              </select>
+            <div>
+              {/* <Icon name="" /> */}
+              <p>00 800 1008110</p>
             </div>
-            <div className="form-group">
-              <label>Message</label>
-              <div>
-                <textarea
-                  placeholder="Write a message"
-                  value={this.state.message}
-                  onChange={e => this.handleMessageChange(e)}
-                />
-              </div>
-            </div>
-            <div className="form-group">
-              <button onClick={() => this.handleSubmit()}>Submit</button>
+            <div>
+              {/* <Icon name="" /> */}
+              <p>support@livered.com</p>
             </div>
           </div>
           <div className="footer">
-            <div>
-              <p className="text">For any other support, please contact us</p>
-              <p className="ottp-id">00 800 1008110</p>
-            </div>
-            <div>
-              <p className="text" style={{ color: "#4a90e2" }}>
-                Operating hours
-              </p>
-              <p className="text">Mon - Fri (09:00 AM - 18:00 PM)</p>
-            </div>
+            <p className="title">Operating hours</p>
+            <p className="footer-text">9:00 AM to 18:00 PM from Monday to Friday, Closed on Saturday and Sunday</p>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Support;
+export default Support

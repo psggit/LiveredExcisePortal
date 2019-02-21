@@ -91,7 +91,7 @@ import RetailersList from './home/components/retailers-list'
 import RetailerDetail2 from './home/components/retailer-detail2'
 import WithFilters from './home/components/with-filters'
 import RuleManagement from './home/components/rule-engine'
-import Support from './home/components/support'
+import Complaints from './home/components/complaints'
 import SuccessPage from './home/components/complaint-success'
 import FailurePage from './home/components/complaint-failure'
 import GeoFences from './home/components/geofences'
@@ -106,6 +106,7 @@ import configureStore from './home/store/configure-store'
 import rootSaga from './home/middleware/saga'
 import ConsumerManagement from "./home/components/consumer-list"
 import ConsumerComplaints from "./home/components/consumer-complaints"
+import Support from "./home/components/support/index"
 
 const history = createHistory()
 
@@ -117,7 +118,8 @@ class App extends React.Component {
     super()
     this.state = {
       currentRoute: location.pathname.split('/')[2] || 'live-ottp',
-      key: 0
+      key: 0,
+      isLoggedIn: true
     }
 
     this.checkUserLoggedIn = this.checkUserLoggedIn.bind(this)
@@ -182,7 +184,7 @@ class App extends React.Component {
             <Route exact path="/complaint-success" component={SuccessPage} />
             <Route exact path="/complaint-failure" component={FailurePage} />
             {/* <Route path="/home" component={Home} /> */}
-            <Route path='/complaints' component={Support} />
+            <Route path='/complaints' component={Complaints} />
             {
               location.pathname.includes("home") &&
               <div style={{
@@ -201,12 +203,15 @@ class App extends React.Component {
                   history={history}
                 />
                 <div>
-                  <SideMenu
-                    history={history}
-                    menuItems={menuItems}
-                    menuItemsMap={menuItemsMap}
-                    currentRoute={this.state.currentRoute}
-                  />
+                  {
+                    this.state.isLoggedIn &&
+                    <SideMenu
+                      history={history}
+                      menuItems={menuItems}
+                      menuItemsMap={menuItemsMap}
+                      currentRoute={this.state.currentRoute}
+                    />
+                  }
                   <div
                     style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 60px)', overflow: 'auto' }}
                     key={this.state.key}
@@ -216,6 +221,12 @@ class App extends React.Component {
                         exact
                         path="/home/live-orders"
                         render={props => <LiveOTTPList {...props} />}
+                      />
+
+                      <Route 
+                        exact 
+                        path="/home/support" 
+                        render={props => <Support {...props} isLoggedIn={this.state.isLoggedIn} className={`${this.state.isLoggedIn ? 'hideSideMenu' : undefined}`} />}
                       />
 
                       <Route

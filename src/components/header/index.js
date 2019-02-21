@@ -1,34 +1,34 @@
-import React from 'react'
-import './header.scss'
-import Icon from './../icon'
-import Dialog from "./../dialog"
-import Button from './../button'
-import { POST } from '@utils/fetch'
+import React from "react";
+import "./header.scss";
+import Icon from "./../icon";
+import Dialog from "./../dialog";
+import Button from "./../button";
+import { POST } from "@utils/fetch";
 
 class Header extends React.Component {
   constructor() {
-    super()
+    super();
     this.state = {
       showLogoutModal: false
-    }
-    this.logout = this.logout.bind(this)
-    this.mountModal = this.mountModal.bind(this)
-    this.unMountModal = this.unMountModal.bind(this)
-    this.openDropdown = this.openDropdown.bind(this)
+    };
+    this.logout = this.logout.bind(this);
+    this.mountModal = this.mountModal.bind(this);
+    this.unMountModal = this.unMountModal.bind(this);
+    this.openDropdown = this.openDropdown.bind(this);
   }
 
   mountModal() {
-    this.setState({ showLogoutModal: true })
+    this.setState({ showLogoutModal: true });
   }
 
   unMountModal() {
-    console.log("unmount modal")
-    this.setState({ showLogoutModal: false })
+    console.log("unmount modal");
+    this.setState({ showLogoutModal: false });
   }
 
   openDropdown() {
-    console.log("open dropdown")  
-    this.setState({ showDropdown: !this.state.showDropdown })
+    console.log("open dropdown");
+    this.setState({ showDropdown: !this.state.showDropdown });
   }
 
   // logout() {
@@ -37,37 +37,39 @@ class Header extends React.Component {
   // }
 
   logout() {
-    this.setState({ showLogoutModal: false })
+    this.setState({ showLogoutModal: false });
     POST({
-      api: '/retailer/auth/user/logout',
-      apiBase: 'api1',
+      api: "/retailer/auth/user/logout",
+      apiBase: "api1",
       handleError: false,
       cors: true
     })
-      .then((response) => {
+      .then(response => {
         if (response.status !== 200) {
-          console.log(`Looks like there was a problem. Status Code: ${response.status}`)
-          localStorage.clear()
-          location.href = '/'
-          return
+          console.log(
+            `Looks like there was a problem. Status Code: ${response.status}`
+          );
+          localStorage.clear();
+          location.href = "/";
+          return;
         }
-        response.json().then((data) => {
-          localStorage.clear()
-          location.href = '/'
-        })
-    })
-    .catch((err) => {
-      console.log('Fetch Error :-S', err)
-      localStorage.clear()
-      location.href = '/'
-    })
-}
+        response.json().then(data => {
+          localStorage.clear();
+          location.href = "/";
+        });
+      })
+      .catch(err => {
+        console.log("Fetch Error :-S", err);
+        localStorage.clear();
+        location.href = "/";
+      });
+  }
 
   render() {
-    const{ showLogoutModal, showDropdown } = this.state
+    const { showLogoutModal, showDropdown } = this.state;
     return (
       <div className="header">
-      {/* {
+        {/* {
         this.props.isLoggedIn
         ? (
           <div className="upper">
@@ -78,72 +80,62 @@ class Header extends React.Component {
         )
         : ''
       } */}
-      <div className="lower">
-        <div className="brand">
-          <Icon name="excise-logo" />
-          
-          <div className="brand--name">
-            Excise Department<br />
-            {/* <span>
+        <div className="lower">
+          <div className="brand">
+            <Icon name="excise-logo" />
+
+            <div className="brand--name">
+              Excise Department
+              <br />
+              {/* <span>
             of Pondicherry
             </span> */}
-          </div>
-        </div>
-
-       {
-         this.props.isLoggedIn
-         ? (
-          <div className="header--items">
-          {/* <div className="item">
-            <Icon name="support" />
-            <span>
-              Support
-            </span>
-          </div> */}
-
-          <div className="item" onClick={this.openDropdown}>
-            <Icon name="account" />
-            <span>
-              Account Settings
-            </span>
-            <Icon name="down-arrow" />
-            <div className={`dropdown-menu ${showDropdown ? 'show' : 'hide'}`} >
-              <div onClick={() => this.mountModal()} className="menu-item os s9">Logout</div>
             </div>
           </div>
+
+          {this.props.isLoggedIn ? (
+            <div className="header--items">
+              <div className="item">
+                <Icon name="support" />
+                <span>Support</span>
+              </div>
+
+              <div className="item" onClick={this.openDropdown}>
+                <Icon name="account" />
+                <span>Account Settings</span>
+                <Icon name="down-arrow" />
+                <div
+                  className={`dropdown-menu ${showDropdown ? "show" : "hide"}`}
+                >
+                  <div
+                    onClick={() => this.mountModal()}
+                    className="menu-item os s9"
+                  >
+                    Logout
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-         )
-         : ''
-       }
-      </div>
-      {
-        showLogoutModal &&
-        <Dialog
-          title="Do you want to logout?"
-          actions={[
-            (
-              <Button
-                onClick={() => this.unMountModal()}
-                secondary
-              >
-              No
+        {showLogoutModal && (
+          <Dialog
+            title="Do you want to logout?"
+            actions={[
+              <Button onClick={() => this.unMountModal()} secondary>
+                No
+              </Button>,
+              <Button onClick={() => this.logout()} primary>
+                Yes
               </Button>
-            ),
-            (
-              <Button
-                onClick={() => this.logout()}
-                primary
-              >
-              Yes
-              </Button>
-            )
-          ]}
-        >
-        </Dialog>
-      }
+            ]}
+          />
+        )}
       </div>
-    )
+    );
   }
 }
 
-export default Header
+export default Header;
