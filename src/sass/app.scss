@@ -128,3 +128,27 @@ label {
   font-size: 12px;
   margin-top: 5px;
 }
+
+.nav {
+  li {
+    list-style-type: none;
+    float: left;
+    margin-right: 30px;
+    padding-bottom: 10px;
+    
+  }
+
+  a {
+    color: #000;
+    text-decoration:none;
+  }
+
+  li.active {
+    color: #3d70b2;
+    border-bottom: 2px solid #3d70b2;
+  }
+
+  li.active a {
+    color:#3d70b2;
+  }
+}

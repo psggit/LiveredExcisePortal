@@ -43,13 +43,15 @@ class ConsumerComplaints extends React.Component {
 
     this.state = {
       activePage: 1,
-      limit: 10
+      limit: 10,
+      activeTab: 'consumer-complaints'
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.setQueryParamas = this.setQueryParamas.bind(this)
     this.defaultData = this.defaultData.bind(this)
+    this.setActiveTab = this.setActiveTab.bind(this)
   }
 
   componentDidMount() {
@@ -58,6 +60,10 @@ class ConsumerComplaints extends React.Component {
     } else {
       this.defaultData();
     }
+  }
+
+  setActiveTab(activeTabName) {
+    this.setState({ activeTab: activeTabName })
   }
 
   setQueryParamas() {
@@ -158,16 +164,25 @@ class ConsumerComplaints extends React.Component {
   // }
 
   render() {
+    const { activeTab } = this.state
     return (
       <Fragment>
         <PageHeader pageName="Consumer Complaints" />
-        <div style={{display: 'flex'}}>
-          <a href="/home/consumers">
-            Consumer Log
-          </a>
-          <a href="/consumer-complaints">
-            Consumer Complaints
-          </a>
+        <div style={{display: 'flex', marginBottom: '20px'}}>
+          <ul className="nav">
+            <li 
+              onClick={() => this.setActiveTab("consumer")} 
+              className={`${activeTab === "consumers" ? 'active' : ''}`}
+            >
+              <a href="/home/consumers">Consumer Log</a>
+            </li>
+            <li 
+              onClick={() => this.setActiveTab("consumer-complaints")} 
+              className={`${activeTab === "consumer-complaints" ? 'active' : ''}`}
+            >
+              <a href="/home/consumer-complaints">Consumer Complaints</a>
+            </li>
+          </ul>
         </div>
         <div style={{
           display: 'flex',
