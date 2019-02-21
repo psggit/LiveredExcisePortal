@@ -49,6 +49,7 @@ class RuleManagement extends React.Component {
       // editMode: false
     }
 
+    this.updateZoneRestrictions = this.updateZoneRestrictions.bind(this)
     //this.handleChange = this.handleChange.bind(this)
     //this.handleSubmit = this.handleSubmit.bind(this)
     //this.enableEditMode = this.enableEditMode.bind(this)
@@ -95,6 +96,10 @@ class RuleManagement extends React.Component {
     //     this.setState({ editMode: false })
     //   }
     // }
+  }
+
+  updateZoneRestrictions(id) {
+    console.log("id", id)
   }
 
   // enableEditMode() {
@@ -167,16 +172,16 @@ class RuleManagement extends React.Component {
   //   }
   // }
   render() {
-    console.log("render props", this.props.rulesData, "state", this.state)
+    //console.log("render props", this.props.rulesData, "state", this.state)
     const  { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions } = this.state
     return (
       <div id="rule-engine">
         <PageHeader pageName="Rule Engine" />
-        {
+        {/* {
           this.state.editMode &&
           <p style={{ fontSize: '16px', fontWeight: '500', color: '#152935' }}>EDIT RULE ENGINE</p>
-        }
-        {
+        } */}
+        {/* {
           !this.state.editMode &&
           <div style={{ textAlign: 'right' }} >
             <Button onClick={this.enableEditMode} primary>
@@ -186,7 +191,7 @@ class RuleManagement extends React.Component {
               <span style={{ marginLeft: '5px' }}>Edit Rules</span>
             </Button>
           </div>
-        }
+        } */}
           <Collpasible title="Customer Restrictions">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div>
@@ -351,7 +356,7 @@ class RuleManagement extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                {/* <tr>
                   <td>Secunderabad</td>
                   <td>05-12-2018</td>
                   <td>11:00 AM to </td>
@@ -361,12 +366,20 @@ class RuleManagement extends React.Component {
                     <Icon name="edit" />
                     <Icon name="cross-red" color="#3d70b2" />
                   </td>
-                </tr>
-                {/* {
-                  this.zoneRestrictions.map((item) => {
-
+                </tr> */}
+                {
+                  zoneRestrictions.map((item) => {
+                    return (
+                      <tr onClick={() => this.updateZoneRestrictions(`${item.city_id !== undefined ? `city_${item.id}` : `state_${item.id}`}`)}>
+                        <td>{item.id}</td>
+                        <td>{moment(item.date).format('DD/MM/YYYY')}</td>
+                        <td>{moment(item.from_time).format('h:mm a')}</td>
+                        <td>{moment(item.to_time).format('h:mm a')}</td>
+                        <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
+                      </tr>
+                    )
                   })
-                } */}
+                }
               </tbody>
             </table>
 
