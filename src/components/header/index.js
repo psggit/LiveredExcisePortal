@@ -15,6 +15,7 @@ class Header extends React.Component {
     this.mountModal = this.mountModal.bind(this);
     this.unMountModal = this.unMountModal.bind(this);
     this.openDropdown = this.openDropdown.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
 
   mountModal() {
@@ -65,6 +66,11 @@ class Header extends React.Component {
       });
   }
 
+  handleClick() {
+    console.log("click")
+    location.href="/home/support"
+  }
+
   render() {
     const { showLogoutModal, showDropdown } = this.state;
     return (
@@ -95,7 +101,7 @@ class Header extends React.Component {
 
           {this.props.isLoggedIn ? (
             <div className="header--items">
-              <div className="item">
+              <div className="item" onClick={this.handleClick}>
                 <Icon name="support" />
                 <span>Support</span>
               </div>

@@ -31,6 +31,7 @@ class Login extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePassword = this.handlePassword.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleKeyPress(e) {
@@ -95,6 +96,10 @@ class Login extends React.Component {
     //   [errName]: validateEmail({ fieldName: 'Email ID', fieldValue: e.target.value }),
     // })
     this.setState({ email: e.target.value, showLoginErr: false });
+  }
+
+  handleClick() {
+    location.href="/home/support/"
   }
 
   render() {
@@ -196,6 +201,18 @@ class Login extends React.Component {
             </p>
           )}
         </div>
+        <p style={{
+            position: 'absolute',
+            top: 'calc(50% + 180px)',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            marginTop: '24px',
+            cursor: 'pointer'
+          }}
+          onClick={this.handleClick}
+        >
+          Having trouble? Contact Support
+        </p>
       </React.Fragment>
     );
   }
