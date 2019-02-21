@@ -25,7 +25,7 @@ class Support extends React.Component {
           </div>
           <div className="footer">
             <p className="title">Operating hours</p>
-            <p className="footer-text">9:00 AM to 18:00 PM from Monday to Friday, Closed on Saturday and Sunday</p>
+            <p className="text">9:00 AM to 18:00 PM from Monday to Friday, Closed on Saturday and Sunday</p>
           </div>
         </div>
       </div>
