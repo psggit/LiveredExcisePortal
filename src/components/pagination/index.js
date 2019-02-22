@@ -90,7 +90,7 @@ class Pagination extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { pageSize, totalItemsCount, activePage } = this.props;
-    if (this.props.activePage !== prevProps.activePage) {
+    if (this.props.activePage !== prevProps.activePage || this.props.totalItemsCount !== prevProps.totalItemsCount) {
       this.setState({
         pager: { 
           activePage,

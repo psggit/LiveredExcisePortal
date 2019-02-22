@@ -25,7 +25,8 @@ class LiveOrdersList extends React.Component {
       activePage: 1,
       dsoList: [],
       limit: 10,
-      mountFilter: false
+      mountFilter: false,
+      filter: []
     }
 
     this.permitStatus = [
@@ -34,8 +35,12 @@ class LiveOrdersList extends React.Component {
         value: 0
       },
       {
-        text: "All",
+        text: "ONGOING EXTENDED",
         value: 1
+      },
+      {
+        text: "All",
+        value: 2
       }
     ]
     this.orderAmount = [
@@ -67,7 +72,7 @@ class LiveOrdersList extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.defaultData = this.defaultData.bind(this)
-    this.filteredData = this.filteredData.bind(this)
+    // this.filteredData = this.filteredData.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.fetchData = this.fetchData.bind(this)
@@ -91,25 +96,44 @@ class LiveOrdersList extends React.Component {
   }
 
   handlePageChange(pagerObj) {
-    this.props.actions.setLoadingAll();
-    clearTimeout(this.timeoutId);
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+    let queryParamsObj = {}
+    this.props.actions.setLoadingAll()
+    clearTimeout(this.timeoutId)
     // const offset = this.state.limit * (pagerObj.activePage - 1);
-    const offset = pagerObj.pageSize * (pagerObj.activePage - 1);
+    const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
     this.setState({
       activePage: pagerObj.activePage,
       //pageOffset: offset,
       limit: pagerObj.pageSize
-    });
-    this.props.actions.fetchInProgressOTTP({
-      limit: pagerObj.pageSize,
-      offset
-    });
+    })
+  
 
-    const queryParamsObj = {
-      activePage: pagerObj.activePage,
-      limit: pagerObj.pageSize
-    };
-
+    if(queryObj.filter && queryObj.filter.length) {
+      queryParamsObj = {
+        activePage: pagerObj.activePage,
+        limit: pagerObj.pageSize,
+        filter: queryObj.filter,
+        //offset
+      }
+      this.props.actions.fetchInProgressOTTP({
+        limit: pagerObj.pageSize,
+        activePage: pagerObj.activePage,
+        offset,
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      queryParamsObj = {
+        activePage: pagerObj.activePage,
+        limit: pagerObj.pageSize
+      }
+      this.props.actions.fetchInProgressOTTP({
+        limit: pagerObj.pageSize,
+        offset
+      })
+    }
+   
     history.pushState(
       queryParamsObj,
       "live orders listing",
@@ -141,50 +165,45 @@ class LiveOrdersList extends React.Component {
   }
 
   setQueryParamas() {
-    const queryUri = location.search.slice(1);
-    const queryObj = getQueryObj(queryUri);
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] });
+      this.setState({ [item[0]]: item[1] })
       // this.filter[item[0]] = item[1]
-    });
-
-    this.props.actions.fetchInProgressOTTP({
-      limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1)
-    });
+    })
+  
+    if(queryObj.filter) {
+      this.props.actions.fetchInProgressOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1),
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      this.props.actions.fetchInProgressOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
   }
 
   defaultData() {
-    // const queryUri = location.search.slice(1).split('=')
-    // const status = queryUri[1]
-    //console.log("default data");
-    this.props.actions.fetchInProgressOTTP({
-      limit: this.state.limit,
-      offset: 0
-    });
-    this.timeoutId = setTimeout(this.defaultData, 30000);
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+    if(queryObj.filter) {
+      this.props.actions.fetchInProgressOTTP({
+        limit: this.state.limit,
+        offset: 0,
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      this.props.actions.fetchInProgressOTTP({
+        limit: this.state.limit,
+        offset: 0,
+      })
+    }
+    this.timeoutId = setTimeout(this.defaultData, 30000)
   }
-
-  filteredData() {
-    // this.props.actions.fetchInProgressOTTP({
-    //   limit: this.pagesLimit,
-    //   offset: 0,
-    //   status: this.filters.status === 'all' ? undefined : this.filters.status
-    // })
-    // this.timeoutId = setTimeout(this.filteredData, 30000)
-  }
-
-  // componentDidUpdate(prevProps) {
-  //   const { filters } = this.props
-  //   this.filters = Object.assign({}, filters)
-  //   if (filters && JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
-  //     this.props.actions.setLoadingAll()
-  //     this.resetPagination()
-  //     clearTimeout(this.timeoutId)
-  //     this.filteredData()
-  //   }
-  // }
 
   componentWillUnmount() {
     clearTimeout(this.timeoutId)
@@ -198,14 +217,22 @@ class LiveOrdersList extends React.Component {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
-  applyFilter(filterObj) {
-    console.log("apply filter", filterObj)
+  applyFilter(filter) {
+    console.log("apply filter")
     this.setState({limit: 10})
+    const queryObj = {
+      limit: 10,
+      offset: 0,
+      activePage: 1,
+      filter: JSON.stringify(filter)
+    }
     this.props.actions.fetchInProgressOTTP({
       limit: 10,
       offset: 0,
-      filter: filterObj.filter
+      filter: filter
     })
+    history.pushState(queryObj, "live orders listing", `/home/live-orders?${getQueryUri(queryObj)}`)
+    this.mountFilterModal()
   }
 
   render() {

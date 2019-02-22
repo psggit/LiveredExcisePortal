@@ -38,7 +38,7 @@ class Filter extends React.Component {
   }
 
   handleChange({value, targetName}) {
-    switch(targetName && value) {
+    switch(targetName) {
     case 'Delivery Operator':
       {
         const filterValue = this.props.dsoList.find(item => item.value === parseInt(value)).text
@@ -55,7 +55,7 @@ class Filter extends React.Component {
 
     case 'Order Amount':
       {
-        const filterValue = this.props.orderAmount.find(item => item.value === parseInt(value))
+        const filterValue = this.props.orderAmount.find(item => item.value === parseInt(value)).text
         if(filterValue !== "All") {
           const range = this.props.orderAmount.find(item => item.value === parseInt(value)).text.split('-')
           this.setState({
@@ -86,9 +86,15 @@ class Filter extends React.Component {
   }
 
   applyFilter() {
-    this.props.applyFilter({
-      filter: this.state
-    })
+    let filterObj = []
+    for (const [key, value] of Object.entries(this.state)) {
+      const item = value
+      if(item.filterby && item.filterby.length) {
+        //console.log("value", item.filterby)
+        filterObj.push(item)
+      }
+    }
+    this.props.applyFilter(filterObj)
   }
 
   render() {
@@ -166,7 +172,7 @@ class Filter extends React.Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="permit-status input-field">
+          {/* <div className="permit-status input-field">
             <Label>
               Permit Status
             </Label>
@@ -175,7 +181,7 @@ class Filter extends React.Component {
               name="Permit Status" 
               onChange={this.handleChange}
             />
-          </div>
+          </div> */}
         </div>
         <Button primary onClick={this.applyFilter}>
           <span
