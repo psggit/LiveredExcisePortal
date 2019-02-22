@@ -20,36 +20,74 @@ import "@sass/style.scss";
 
 class LiveOrdersList extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       activePage: 1,
-      //pageOffset: 0,
+      dsoList: [],
       limit: 10,
       mountFilter: false
-    };
-    this.handlePageChange = this.handlePageChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.defaultData = this.defaultData.bind(this);
-    this.filteredData = this.filteredData.bind(this);
-    this.resetPagination = this.resetPagination.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
-    this.fetchData = this.fetchData.bind(this);
-    this.mountFilterModal = this.mountFilterModal.bind(this);
+    }
+
+    this.permitStatus = [
+      {
+        text: 'ONGOING',
+        value: 0
+      },
+      {
+        text: "All",
+        value: 1
+      }
+    ]
+    this.orderAmount = [
+      {
+        text: "0 - 2000",
+        value: 0
+      },
+      {
+        text: "2000 - 4000",
+        value: 1
+      },
+      {
+        text: "4000 - 6000",
+        value: 2
+      },
+      {
+        text: "6000 - 8000",
+        value: 3
+      },
+      {
+        text: "8000 - 10000",
+        value: 4
+      },
+      {
+        text: "All",
+        value: 5
+      }
+    ]
+    this.handlePageChange = this.handlePageChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+    this.defaultData = this.defaultData.bind(this)
+    this.filteredData = this.filteredData.bind(this)
+    this.resetPagination = this.resetPagination.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.fetchData = this.fetchData.bind(this)
+    this.mountFilterModal = this.mountFilterModal.bind(this)
+    this.fetchData = this.fetchData.bind(this)
+    this.applyFilter = this.applyFilter.bind(this)
   }
 
   handleClick(dataObj) {
     this.props.history.push(
       `/home/live-orders/${dataObj.ottp_info.ottp_id}`,
       dataObj
-    );
+    )
   }
 
   fetchData() {
-    // this.props.actions.fetchInProgressOTTP({
-    //   limit: this.pagesLimit,
-    //   offset,
-    //   status: filters.status === 'all' ? undefined : filters.status
-    // })
+    this.props.actions.fetchDSOList({
+      limit: 10000,
+      offset: 0
+    })
   }
 
   handlePageChange(pagerObj) {
@@ -88,6 +126,17 @@ class LiveOrdersList extends React.Component {
       this.setQueryParamas();
     } else {
       this.defaultData();
+      this.fetchData();
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.DSOList !== prevProps.DSOList) {
+      let dsoList = this.props.DSOList.map((item, i) => {
+        return {text: item.name, value: i}
+      })
+      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
+      this.setState({dsoList})
     }
   }
 
@@ -114,7 +163,6 @@ class LiveOrdersList extends React.Component {
       limit: this.state.limit,
       offset: 0
     });
-
     this.timeoutId = setTimeout(this.defaultData, 30000);
   }
 
@@ -139,81 +187,74 @@ class LiveOrdersList extends React.Component {
   // }
 
   componentWillUnmount() {
-    clearTimeout(this.timeoutId);
+    clearTimeout(this.timeoutId)
   }
 
   handleSearch(searchQuery) {
-    console.log("searched text", searchQuery);
+    console.log("searched text", searchQuery)
   }
 
   mountFilterModal() {
-    this.setState({ mountFilter: !this.state.mountFilter });
+    this.setState({ mountFilter: !this.state.mountFilter })
   }
 
-  applyFilter() {
-    console.log("apply filter");
+  applyFilter(filterObj) {
+    console.log("apply filter", filterObj)
+    this.setState({limit: 10})
+    this.props.actions.fetchInProgressOTTP({
+      limit: 10,
+      offset: 0,
+      filter: filterObj.filter
+    })
   }
 
   render() {
-    const tableHeaderStyle = {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-evenly"
-    };
+    // const tableHeaderStyle = {
+    //   display: "flex",
+    //   alignItems: "center",
+    //   justifyContent: "space-evenly"
+    // };
     return (
       <Fragment>
         <PageHeader pageName="Live Orders" />
-        {/* <div style={{
-          display: 'flex',
-          marginBottom: '20px',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-          }}> */}
-        {/* <Search
+        <div style={{
+          display: "flex",
+          marginBottom: "20px",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }}
+        > 
+          <Search
             placeholder="Search"
             search={this.handleSearch}
-          /> */}
-        {/* <div style={{ marginLeft: '46px', position: 'relative' }}>
+          />
+          <div style={{ marginLeft: '46px', position: 'relative' }}>
             <Button primary onClick={this.mountFilterModal}>
               <Icon name="filter" />
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
             </Button>
             <Filter
               showFilter={this.state.mountFilter}
-              filterName="pastOrders"
+              filterName="liveOrders"
               applyFilter={this.applyFilter}
+              dsoList={this.state.dsoList}
+              orderAmount={this.orderAmount}
+              permitStatus={this.permitStatus}
             >
             </Filter>
-          </div> */}
-        {/* <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div>
-            <Toggle />
-            <span style={{
-              color: '#5a6872',
-              fontSize: '14px',
-              marginLeft: '10px'
-              }}>
-              Delivery enabled
-            </span>
           </div>
-          
-        </div> */}
-        {/* </div> */}
+        </div> 
         {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length > 0 && (
           <div style={{ margin: "10px 0" }}>
             <Pagination
               activePage={this.state.activePage}
               pageSize={this.state.limit}
               totalItemsCount={this.props.inProgressCount}
-              //data={this.data}
-              //pageRangeDisplayed={5}
               onChangePage={this.handlePageChange}
             />
           </div>
         )}
         {
-          //!this.props.loadingInProgressOTTP &&
-          //this.props.inProgressOTTP &&
           <div>
             <table>
               <thead>
@@ -223,7 +264,6 @@ class LiveOrdersList extends React.Component {
                       style={{
                         display: "flex",
                         alignItems: "center"
-                        //justifyContent: 'space-around'
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Permit ID</span>
@@ -242,7 +282,6 @@ class LiveOrdersList extends React.Component {
                       style={{
                         display: "flex",
                         alignItems: "center"
-                        //justifyContent: 'space-around'
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>

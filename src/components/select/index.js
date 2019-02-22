@@ -9,7 +9,7 @@ class Select extends React.Component {
   }
   handleChange(e) {
     // console.log(e.target.value)
-    this.props.onChange(e.target.value)
+    this.props.onChange({value: e.target.value, targetName: e.target.name})
   }
   render() {
     return (
@@ -18,7 +18,11 @@ class Select extends React.Component {
         <select
           placeholder={this.props.placeholder}
           className={`select ${this.props.small ? 'small' : ''}`}
+          name={this.props.name}
           onChange={this.handleChange}>
+          <option value="" disabled selected>
+            Choose a {this.props.name}
+          </option>
         {
           this.props.options.map((item, i) => (
             <option key={i} value={item.value}>{ item.text }</option>

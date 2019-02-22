@@ -202,14 +202,14 @@ class Login extends React.Component {
           )}
         </div>
         <p style={{
-            position: 'absolute',
-            top: 'calc(50% + 180px)',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            marginTop: '24px',
-            cursor: 'pointer'
-          }}
-          onClick={this.handleClick}
+          position: 'absolute',
+          top: 'calc(50% + 180px)',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          marginTop: '24px',
+          cursor: 'pointer'
+        }}
+        onClick={this.handleClick}
         >
           Having trouble? Contact Support
         </p>
