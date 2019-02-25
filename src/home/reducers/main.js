@@ -12,6 +12,7 @@ const initialState = {
   loadingCustomerList: true,
   loadingCustomerComplaints: true,
   loadingRules: true,
+  loadingCityList: true,
   inProgressCount: 0,
   customerComplaintsCount: 0,
   historyOTTPCount: 0,
@@ -21,6 +22,7 @@ const initialState = {
   inProgressOTTP: [],
   historyOTTPData: [],
   squadMembersData: [],
+  cityList: [],
   retailerList: [],
   customerList: [],
   rulesData: [],
@@ -53,6 +55,14 @@ const actionsMap = {
       loadingCustomerList: false,
       customerList: action.data.consumer,
       customerListCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_CITIES_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingCityList: false,
+      cityList: action.data.cities,
+      //customerListCount: action.data.count
     })
   },
   

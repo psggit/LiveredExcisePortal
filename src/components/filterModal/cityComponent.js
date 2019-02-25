@@ -22,6 +22,7 @@ class City extends React.Component {
   }
 
   handleChange(e) {
+    console.log("city change", e.target.value)
     const value = e.target.value
     this.setState({
       city: {
@@ -38,8 +39,9 @@ class City extends React.Component {
           City/Town
         </Label>
         <Select 
-          options={["Bangalore", "Chennai"]} 
+          options={this.props.cityList} 
           name="City"  
+          onChange={e => this.handleChange(e)} 
         />
       </div>
     )

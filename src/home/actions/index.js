@@ -73,3 +73,7 @@ export const updateStateExciseRules = data => ({
   type: ActionTypes.REQUEST_UPDATE_STATE_EXCISE_RULES,
   data
 })
+
+export const fetchCitiesList = (data) => ({
+  type: ActionTypes.REQUEST_FETCH_CITIES_LIST
+})

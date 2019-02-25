@@ -125,6 +125,17 @@ function* fetchSquadMembers(action) {
   }
 }
 
+function* fetchCitiesList(action) {
+  //console.log(action)
+  try {
+    const data = yield call(Api.fetchCitiesList, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_CITIES_LIST, data })
+  } catch (err) {
+    //console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* updateSquadMember(action) {
   console.log(action)
   try {
@@ -244,6 +255,12 @@ function* watchFetchSquadMembers() {
   }
 }
 
+function* watchFetchCitiesList() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_CITIES_LIST, fetchCitiesList)
+  }
+}
+
 function* watchUpdateSquadMember() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_UPDATE_SQUAD_MEMBER, updateSquadMember)
@@ -292,6 +309,7 @@ export default function* rootSaga() {
     fork(watchFetchRetailerDetails),
     fork(watchFetchRules),
     fork(watchFetchConsumerList),
-    fork(watchFetchConsumerComplaints)
+    fork(watchFetchConsumerComplaints),
+    fork(watchFetchCitiesList)
   ]
 }

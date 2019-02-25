@@ -1,4 +1,4 @@
-import { POST } from '@utils/fetch'
+import { POST, GET } from '@utils/fetch'
 
 export function fetchInProgressOTTP(action) {
   return POST({
@@ -39,6 +39,16 @@ export function fetchDSOList(action) {
     handleError: true,
     prependBaseUrl: false,
     data: action.data
+  })
+    .then(json => json)
+}
+
+export function fetchCitiesList(action) {
+  return GET({
+    api: 'http://192.168.5.86:3000/livered/listCities',
+    handleError: true,
+    prependBaseUrl: false,
+    //data: action.data
   })
     .then(json => json)
 }

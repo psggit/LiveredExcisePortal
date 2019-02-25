@@ -24,6 +24,7 @@ class LiveOrdersList extends React.Component {
     this.state = {
       activePage: 1,
       dsoList: [],
+      cityList: [],
       limit: 10,
       mountFilter: false,
       filter: []
@@ -93,6 +94,7 @@ class LiveOrdersList extends React.Component {
       limit: 10000,
       offset: 0
     })
+    this.props.actions.fetchCitiesList({})
   }
 
   handlePageChange(pagerObj) {
@@ -161,6 +163,12 @@ class LiveOrdersList extends React.Component {
       })
       dsoList = [...dsoList, {text: "All", value: dsoList.length}]
       this.setState({dsoList})
+    } else if(this.props.cityList !== prevProps.cityList) {
+      let cityList = this.props.cityList.map((item, i) => {
+        return {text: item.city, value: i}
+      })
+      cityList = [...cityList, {text: "All", value: cityList.length}]
+      this.setState({cityList})
     }
   }
 
@@ -264,6 +272,7 @@ class LiveOrdersList extends React.Component {
               showFilter={this.state.mountFilter}
               filterName="liveOrders"
               applyFilter={this.applyFilter}
+              cityList={this.state.cityList}
               dsoList={this.state.dsoList}
               orderAmount={this.orderAmount}
               permitStatus={this.permitStatus}
