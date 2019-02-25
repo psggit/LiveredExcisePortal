@@ -50,9 +50,9 @@ class DSODetails extends React.Component {
             <div style={{display: 'flex', marginBottom: '36px'}}>
               <LicenseDetails 
                 //type={data.license_type}
-                type={""}
+                type={data.license_type}
                 //status={data.is_active ? 'Active' :  'Inactive'}
-                status={""}
+                status={data.license_status}
                 //validity={data.license_validity}
                 validity={""}
                 //locationsIn={data.locations_in}

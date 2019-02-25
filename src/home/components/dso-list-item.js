@@ -40,9 +40,9 @@ const DSOListItem = ({ data, handleClick }) => {
     <tr onClick={(e) => {handleClick(data)} } className="clickable">
       <td>{ data.name }</td>
       <td>{ data.head_office.city }</td>
-      <td>{ data.locations_in}</td>
-      <td>{ data.license_type}</td>
-      <td></td>
+      <td>{ data.locations_in }</td>
+      <td>{ data.license_type }</td>
+      <td>{ data.license_status ? 'Active' : 'Inactive' }</td>
       {/* <td>{ data.is_active ? 'Active' : 'Inactive'}</td> */}
     </tr>
   )

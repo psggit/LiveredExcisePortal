@@ -12,7 +12,7 @@ const LicenseDetails = ({type, status, validity, locationsIn}) => (
       <p className="label">License Status</p>
       <div style={{display: 'flex', alignItems: 'center'}}>
         <span style={{marginRight: '2px'}}><Icon name="active-indicator" /></span>
-        <p className="value">{status}</p>
+        <p className="value">{status ? 'Active' : 'Inactive'}</p>
       </div>
     </div>
     <div className="item">

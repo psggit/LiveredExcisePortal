@@ -30,32 +30,32 @@ class DSOList extends React.Component {
 
   componentDidMount() {
     if (location.search.length) {
-      this.setQueryParamas();
+      this.setQueryParamas()
     } else {
-      this.defaultData();
+      this.defaultData()
     }
   }
 
   setQueryParamas() {
-    const queryUri = location.search.slice(1);
-    const queryObj = getQueryObj(queryUri);
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] });
+      this.setState({ [item[0]]: item[1] })
       // this.filter[item[0]] = item[1]
     });
 
     this.props.actions.fetchDSOList({
       limit: parseInt(queryObj.limit),
       offset: queryObj.limit * (queryObj.activePage - 1)
-    });
+    })
   }
 
   defaultData() {
     this.props.actions.fetchDSOList({
       limit: this.state.limit,
       offset: 0
-    });
+    })
   }
 
   handleClick(dataObj) {
