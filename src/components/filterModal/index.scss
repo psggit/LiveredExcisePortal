@@ -31,13 +31,12 @@
   } 
 
   .calendar-icon {
-    position: absolute; 
-    right: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  input.small {
-    width: 105px;
+    color: rgba(0, 0, 0, 0);
+    opacity: 1;
+    width: 20px;
+    height: 38px;
+    position: absolute;
+    left : 10px;
+    top: 30px;
   }
 }

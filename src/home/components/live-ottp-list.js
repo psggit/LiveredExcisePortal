@@ -1,22 +1,22 @@
-import React, { Fragment } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { Fragment } from "react"
+import { connect } from "react-redux"
+import { bindActionCreators } from "redux"
 //import Pagination from 'react-js-pagination'
-import * as Actions from "./../actions";
-import LiveOrdersListItem from "./live-ottp-list-item";
-import Loader from "@components/loader";
-import "@sass/_pagination.scss";
-import Button from "@components/button";
-import { pastOrderData } from "./../constants/past-orders-mock";
-import Search from "@components/search";
-import Toggle from "@components/toggle";
-import Icon from "@components/icon";
-import Pagination from "@components/pagination";
-import PageHeader from "@components/pageheader";
-import Filter from "@components/filterModal";
-import Label from "@components/label";
-import { getQueryObj, getQueryUri } from "@utils/url-utils";
-import "@sass/style.scss";
+import * as Actions from "./../actions"
+import LiveOrdersListItem from "./live-ottp-list-item"
+import Loader from "@components/loader"
+import "@sass/_pagination.scss"
+import Button from "@components/button"
+import { pastOrderData } from "./../constants/past-orders-mock"
+import Search from "@components/search"
+import Toggle from "@components/toggle"
+import Icon from "@components/icon"
+import Pagination from "@components/pagination"
+import PageHeader from "@components/pageheader"
+import Filter from "@components/filterModal"
+import Label from "@components/label"
+import { getQueryObj, getQueryUri } from "@utils/url-utils"
+import "@sass/style.scss"
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -77,7 +77,7 @@ class LiveOrdersList extends React.Component {
     this.handleSearch = this.handleSearch.bind(this)
     this.fetchData = this.fetchData.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
-    this.fetchData = this.fetchData.bind(this)
+    //this.fetchData = this.fetchData.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
   }
 
@@ -138,19 +138,19 @@ class LiveOrdersList extends React.Component {
       queryParamsObj,
       "live orders listing",
       `/home/live-orders?${getQueryUri(queryParamsObj)}`
-    );
+    )
   }
 
   resetPagination() {
-    this.setState({ activePage: 1 });
+    this.setState({ activePage: 1 })
   }
 
   componentDidMount() {
     if (location.search.length) {
-      this.setQueryParamas();
+      this.setQueryParamas()
     } else {
-      this.defaultData();
-      this.fetchData();
+      this.defaultData()
+      this.fetchData()
     }
   }
 
@@ -398,18 +398,18 @@ class LiveOrdersList extends React.Component {
                 )}
                 {!this.props.loadingInProgressOTTP &&
                   this.props.inProgressOTTP.length === 0 && (
-                    <tr>
-                      <td style={{ textAlign: "center" }} colSpan="8">
-                        No orders found
-                      </td>
-                    </tr>
-                  )}
+                  <tr>
+                    <td style={{ textAlign: "center" }} colSpan="8">
+                      No orders found
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         }
       </Fragment>
-    );
+    )
   }
 }
 

@@ -22,17 +22,45 @@ class HistoryOrdersList extends React.Component {
     this.state = {
       activePage: 1,
       limit: 10,
+      dsoList: [],
       // pageOffset: 0,
       // data: pastOrderData.data,
       // loading: false,
       mountFilter: false
     }
+    this.orderAmount = [
+      {
+        text: "0 - 2000",
+        value: 0
+      },
+      {
+        text: "2000 - 4000",
+        value: 1
+      },
+      {
+        text: "4000 - 6000",
+        value: 2
+      },
+      {
+        text: "6000 - 8000",
+        value: 3
+      },
+      {
+        text: "8000 - 10000",
+        value: 4
+      },
+      {
+        text: "All",
+        value: 5
+      }
+    ]
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
+    this.fetchData = this.fetchData.bind(this)
   }
 
   handleClick(dataObj) {
@@ -47,23 +75,23 @@ class HistoryOrdersList extends React.Component {
     this.setState({
       activePage: pagerObj.activePage,
       limit: pagerObj.pageSize
-    });
+    })
 
     this.props.actions.fetchHistoryOTTP({
       limit: pagerObj.pageSize,
       offset
-    });
+    })
 
     const queryParamsObj = {
       activePage: pagerObj.activePage,
       limit: pagerObj.pageSize
-    };
+    }
 
     history.pushState(
       queryParamsObj,
       "past orders listing",
       `/home/past-orders?${getQueryUri(queryParamsObj)}`
-    );
+    )
   }
 
   resetPagination() {
@@ -72,70 +100,50 @@ class HistoryOrdersList extends React.Component {
 
   componentDidMount() {
     if (location.search.length) {
-      this.setQueryParamas();
+      this.setQueryParamas()
     } else {
-      this.defaultData();
+      this.defaultData()
+      this.fetchData()
     }
-    // const queryUri = location.search.slice(1)
-    // let today = new Date()
-    // today.setUTCHours(0, 0, 0, 0)
-    // let tommorrow = new Date(today.getTime())
-    // tommorrow.setDate(tommorrow.getDate() + 1)
-    // tommorrow.setUTCHours(0, 0, 0, 0)
-
-    // const queryObj = {}
-
-    // queryUri.split('&')
-    // .map(item => item.split('='))
-    // .forEach(([key, value]) => {
-    //   queryObj[key] = value
-    // })
-
-
-    // this.props.actions.fetchHistoryOTTP({
-    //   limit: this.pagesLimit,
-    //   offset: 0,
-    //   from_date: queryObj.from_date || today,
-    //   to_date: queryObj.to_date || tommorrow,
-    //   status: queryObj.status === 'all' ? undefined : queryObj.status
-    // })
   }
 
   componentDidUpdate(prevProps) {
-    // const { filters } = this.props
-    // if (JSON.stringify(prevProps.filters) !== JSON.stringify(filters)) {
-    //   this.props.actions.setLoadingAll()
-    //   this.resetPagination()
-    //   this.props.actions.fetchHistoryOTTP({
-    //     limit: this.pagesLimit,
-    //     offset: 0,
-    //     from_date: filters.from,
-    //     to_date: filters.to,
-    //     status: filters.status === 'all' ? undefined : filters.status
-    //   })
-    // }
+    if (this.props.DSOList !== prevProps.DSOList) {
+      let dsoList = this.props.DSOList.map((item, i) => {
+        return {text: item.name, value: i}
+      })
+      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
+      this.setState({dsoList})
+    }
   }
 
   setQueryParamas() {
-    const queryUri = location.search.slice(1);
-    const queryObj = getQueryObj(queryUri);
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] });
+      this.setState({ [item[0]]: item[1] })
       // this.filter[item[0]] = item[1]
-    });
+    })
 
     this.props.actions.fetchHistoryOTTP({
       limit: parseInt(queryObj.limit),
       offset: queryObj.limit * (queryObj.activePage - 1)
-    });
+    })
   }
 
   defaultData() {
     this.props.actions.fetchHistoryOTTP({
       limit: this.state.limit,
       offset: 0
-    });
+    })
+  }
+
+  fetchData() {
+    this.props.actions.fetchDSOList({
+      limit: 10000,
+      offset: 0
+    })
   }
 
   handleSearch(searchQuery) {
@@ -154,7 +162,7 @@ class HistoryOrdersList extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Past Orders" />
-        {/* <div style={{
+        <div style={{
           display: 'flex',
           marginBottom: '20px',
           justifyContent: 'space-between',
@@ -173,10 +181,13 @@ class HistoryOrdersList extends React.Component {
               showFilter={this.state.mountFilter}
               filterName="pastOrders"
               applyFilter={this.applyFilter}
+              dsoList={this.state.dsoList}
+              orderAmount={this.orderAmount}
+              //permitStatus={this.permitStatus}
             >
             </Filter>
           </div>
-        </div> */}
+        </div>
         {!this.props.loadingHistoryOTTP && this.props.historyOTTPData.length > 0 && (
           <div style={{ margin: "10px 0" }}>
             <Pagination

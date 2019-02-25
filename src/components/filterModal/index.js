@@ -16,6 +16,8 @@ class Filter extends React.Component {
     super()
     //this.handleChange = this.handleChange.bind(this)
     this.state = {
+      fromDate: "",
+      toDate: ""
       // dso: {
       //   filterby: "",
       //   value: ""
@@ -31,9 +33,11 @@ class Filter extends React.Component {
     }
 
     this.applyFilter = this.applyFilter.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  handleChange({value, targetName}) {
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value})
     //switch(targetName) {
     // case 'Delivery Operator':
     //   {
@@ -99,7 +103,7 @@ class Filter extends React.Component {
     const retailer = this.retailerState.getData().retailer
     filterObj.push(orderAmount, dso, city, retailer)
     filterObj = filterObj.filter((item) => item.value && item.value !== "All")
-    // console.log("object", filterObj)
+    console.log("object", filterObj, this.state.fromDate, this.state.toDate)
     this.props.applyFilter(filterObj)
   }
 
@@ -110,28 +114,35 @@ class Filter extends React.Component {
         <div style={{ margin: '20px 0' }}>
           {
             this.props.filterName === "pastOrders" &&
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                position: 'relative'
-              }}
-            >
-              <div className="input-field">
+            <div>
+              <div style={{position: 'relative'}} className="input-field">
+                <span className="calendar-icon">
+                  <Icon name="calendar" />
+                </span>
                 <Label>
                   From
                 </Label>
-                <input className="small" type="text" />
+                <input 
+                  type="date" 
+                  max="9999-12-31" 
+                  name="fromDate"
+                  onChange={this.handleChange}
+                />
               </div>
-              <div className="input-field">
+              <div style={{position: 'relative'}} className="input-field">
+                <span className="calendar-icon">
+                  <Icon name="calendar" />
+                </span>
                 <Label>
                   To
                 </Label>
-                <input className="small" type="text" />
+                <input 
+                  type="date" 
+                  max="9999-12-31" 
+                  name="toDate"
+                  onChange={this.handleChange}
+                />
               </div>
-              <span className="calendar-icon">
-                <Icon name="calendar" />
-              </span>
             </div>
           }
           {/* <div className="city input-field">
