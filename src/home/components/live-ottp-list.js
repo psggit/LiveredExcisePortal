@@ -164,10 +164,14 @@ class LiveOrdersList extends React.Component {
       dsoList = [...dsoList, {text: "All", value: dsoList.length}]
       this.setState({dsoList})
     } else if(this.props.cityList !== prevProps.cityList) {
-      let cityList = this.props.cityList.map((item, i) => {
-        return {text: item.city, value: i}
+      let max = 0
+      let cityList = this.props.cityList.map((item) => {
+        if (parseInt(item.id) > max) {
+          max = item.id
+        }
+        return {text: item.city, value: item.id}
       })
-      cityList = [...cityList, {text: "All", value: cityList.length}]
+      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
       this.setState({cityList})
     }
   }

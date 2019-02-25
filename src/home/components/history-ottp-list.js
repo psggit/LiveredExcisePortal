@@ -23,6 +23,7 @@ class HistoryOrdersList extends React.Component {
       activePage: 1,
       limit: 10,
       dsoList: [],
+      cityList: [],
       // pageOffset: 0,
       // data: pastOrderData.data,
       // loading: false,
@@ -114,6 +115,16 @@ class HistoryOrdersList extends React.Component {
       })
       dsoList = [...dsoList, {text: "All", value: dsoList.length}]
       this.setState({dsoList})
+    } else if(this.props.cityList !== prevProps.cityList) {
+      let max = 0
+      let cityList = this.props.cityList.map((item) => {
+        if (parseInt(item.id) > max) {
+          max = item.id
+        }
+        return {text: item.city, value: item.id}
+      })
+      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
+      this.setState({cityList})
     }
   }
 
@@ -144,6 +155,7 @@ class HistoryOrdersList extends React.Component {
       limit: 10000,
       offset: 0
     })
+    this.props.actions.fetchCitiesList({})
   }
 
   handleSearch(searchQuery) {
@@ -182,6 +194,7 @@ class HistoryOrdersList extends React.Component {
               filterName="pastOrders"
               applyFilter={this.applyFilter}
               dsoList={this.state.dsoList}
+              cityList={this.state.cityList}
               orderAmount={this.orderAmount}
               //permitStatus={this.permitStatus}
             >
