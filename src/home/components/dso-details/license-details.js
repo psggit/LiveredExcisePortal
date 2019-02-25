@@ -1,6 +1,7 @@
 import React from "react"
 import "./dso-detail.scss"
 import Icon from "@components/icon"
+import Moment from "moment"
 
 const LicenseDetails = ({type, status, validity, locationsIn}) => (
   <div className="dso-detail-card">
@@ -17,7 +18,7 @@ const LicenseDetails = ({type, status, validity, locationsIn}) => (
     </div>
     <div className="item">
       <p className="label">License Validity</p>
-      <p className="value">{validity}</p>
+      <p className="value">{ Moment(validity).format('DD/MM/YYYY') }</p>
     </div>
     <div className="item">
       <p className="label">Locations present in</p>

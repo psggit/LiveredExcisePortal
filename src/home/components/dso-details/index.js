@@ -54,9 +54,9 @@ class DSODetails extends React.Component {
                 //status={data.is_active ? 'Active' :  'Inactive'}
                 status={data.license_status}
                 //validity={data.license_validity}
-                validity={""}
+                validity={data.license_expiry}
                 //locationsIn={data.locations_in}
-                locationsIn={""}
+                locationsIn={data.locations}
               />
               <HeadOfficeDetails
                 name={data.head_office.contact.name}
