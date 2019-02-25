@@ -95,12 +95,11 @@ class Filter extends React.Component {
 
     const orderAmount = this.orderAmountState.getData().orderAmount
     const dso = this.dsoListState.getData().dso
-    const permitStatus = this.permitStatusState.getData().permitStatus
     const city = this.cityState.getData().city
     const retailer = this.retailerState.getData().retailer
-    filterObj.push(orderAmount, dso, permitStatus, city, retailer)
-    filterObj = filterObj.filter((item) => item.value !== "All")
-    console.log("object", filterObj)
+    filterObj.push(orderAmount, dso, city, retailer)
+    filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+    // console.log("object", filterObj)
     this.props.applyFilter(filterObj)
   }
 
@@ -185,10 +184,10 @@ class Filter extends React.Component {
             orderAmount={this.props.orderAmount}  
             ref={(node) => { this.orderAmountState = node }}
           />
-          <PermitStatus
+          {/* <PermitStatus
             permitStatus={this.props.permitStatus}  
             ref={(node) => { this.permitStatusState = node }}
-          />
+          /> */}
           {/* <div className="permit-status input-field">
             <Label>
               Permit Status
