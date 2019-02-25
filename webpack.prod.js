@@ -8,7 +8,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   optimization: {
     splitChunks: {
-      cacheGroups: {
+      cacheGroups: {  
         styles: {
           name: 'styles',
           test: /\.s?[ac]ss$/,

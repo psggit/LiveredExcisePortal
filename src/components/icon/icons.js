@@ -258,7 +258,7 @@ export default {
   ),
   'down': (
     <svg width="10px" height="5px" viewBox="0 0 10 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Component/Dropdown/Active" transform="translate(-192.000000, -18.000000)" fill="#3D70B2">
                 <polygon id="Shape" transform="translate(197.000000, 20.500000) scale(1, -1) translate(-197.000000, -20.500000) " points="192 23 197 18 202 23"></polygon>
             </g>
@@ -267,7 +267,7 @@ export default {
   ),
   'edit': (
     <svg width="14px" height="14px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Rule-Engine" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rule-Engine" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="04-Rule-Engine-Edit" transform="translate(-1247.000000, -1426.000000)" fill="#fff">
                 <g id="Group-2" transform="translate(310.000000, 288.000000)">
                     <g id="Group-3" transform="translate(937.000000, 1138.000000)">
@@ -281,7 +281,7 @@ export default {
   ),
   'info': (
     <svg width="15px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Icon/UI/info" fill="#5AAAFA">
                 <path d="M12,1.77635684e-15 C18.627,1.77635684e-15 24,5.373 24,12 C24,18.627 18.627,24 12,24 C5.373,24 0,18.627 0,12 C0,5.373 5.373,1.77635684e-15 12,1.77635684e-15 Z M12,8.57142857 C12.9467739,8.57142857 13.7142857,7.80391671 13.7142857,6.85714286 C13.7142857,5.910369 12.9467739,5.14285714 12,5.14285714 C11.0532261,5.14285714 10.2857143,5.910369 10.2857143,6.85714286 C10.2857143,7.80391671 11.0532261,8.57142857 12,8.57142857 Z M13.7142857,10.2857143 L8.57142857,10.2857143 L8.57142857,12 L10.2857143,12 L10.2857143,17.1428571 L8.57142857,17.1428571 L8.57142857,18.8571429 L15.4285714,18.8571429 L15.4285714,17.1428571 L13.7142857,17.1428571 L13.7142857,10.2857143 Z" id="Shape-Copy-8"></path>
             </g>
@@ -290,7 +290,7 @@ export default {
   ),
   'cross-red': (
     <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Rule-Engine" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rule-Engine" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="04-Rule-Engine-Edit" transform="translate(-1308.000000, -1426.000000)" fill="#D0021B">
                 <g id="Group-2" transform="translate(310.000000, 288.000000)">
                     <g id="Fill-7" transform="translate(998.000000, 1138.000000)">
@@ -303,7 +303,7 @@ export default {
   ),
   'checkbox': (
     <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-        <g id="Rule-Engine" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rule-Engine" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="04-Rule-Engine-Edit" transform="translate(-761.000000, -2185.000000)">
                 <g id="Group-2" transform="translate(310.000000, 288.000000)">
                     <g id="Element/Checkbox/Selected" transform="translate(451.000000, 1897.000000)">
@@ -317,7 +317,7 @@ export default {
   ),
   'leftArrow': (
     <svg width="9px" height="14px" viewBox="0 0 9 14" version="1.1">
-        <g id="Account-Settings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Account-Settings" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Audit-Log" transform="translate(-1248.000000, -386.000000)" fill="#5A6872">
                 <g id="Group-2" transform="translate(273.000000, 310.000000)">
                     <g id="Table" transform="translate(0.000000, 70.000000)">
@@ -338,7 +338,7 @@ export default {
   ),
   'rightArrow': (
     <svg width="8px" height="14px" viewBox="0 0 8 14" version="1.1">
-        <g id="Account-Settings" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Account-Settings" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Audit-Log" transform="translate(-1350.000000, -386.000000)" fill="#5A6872">
                 <g id="Group-2" transform="translate(273.000000, 310.000000)">
                     <g id="Table" transform="translate(0.000000, 70.000000)">
@@ -359,8 +359,8 @@ export default {
   ),
   'calendar': (
     <svg width="14px" height="16px" viewBox="0 0 14 16" version="1.1">
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-            <g id="UI-Icon/calendar/$brand-01" fill="#3D70B2" fill-rule="nonzero">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+            <g id="UI-Icon/calendar/$brand-01" fill="#3D70B2" fillRule="nonzero">
                 <path d="M0,5 L14,5 L14,6 L0,6 L0,5 Z M3,0 L4,0 L4,4 L3,4 L3,0 Z M10,0 L11,0 L11,4 L10,4 L10,0 Z M0,2.5 C-8.32667268e-17,1.67157288 0.671572875,1 1.5,1 L12.5,1 C13.3284271,1 14,1.67157288 14,2.5 L14,14.5 C14,15.3284271 13.3284271,16 12.5,16 L1.5,16 C0.671572875,16 1.66533454e-16,15.3284271 0,14.5 L0,2.5 Z M1,2.5 L1,14.5 C1,14.7761424 1.22385763,15 1.5,15 L12.5,15 C12.7761424,15 13,14.7761424 13,14.5 L13,2.5 C13,2.22385763 12.7761424,2 12.5,2 L1.5,2 C1.22385763,2 1,2.22385763 1,2.5 Z" id="square"></path>
             </g>
         </g>
@@ -368,7 +368,7 @@ export default {
   ),
   'expired': (
     <svg width="8px" height="8px" viewBox="0 0 8 8" version="1.1">
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Component/Data-Table/Tall/Default" transform="translate(-840.000000, -141.000000)" fill="#D0021B">
                 <g id="Data-Table---Tall" transform="translate(5.000000, 0.000000)">
                     <g id="Columns" transform="translate(13.000000, 9.000000)">
@@ -392,7 +392,7 @@ export default {
                         <g id="Flag" transform="translate(1.000000, 54.000000)">
                             <g transform="translate(0.000000, 193.000000)" id="Shape">
                                 <polygon points="0 0 18 0 18 18 0 18"></polygon>
-                                <polygon fill="#8BC34A" fill-rule="nonzero" points="10.8 4.5 10.5 3 3.75 3 3.75 15.75 5.25 15.75 5.25 10.5 9.45 10.5 9.75 12 15 12 15 4.5"></polygon>
+                                <polygon fill="#8BC34A" fillRule="nonzero" points="10.8 4.5 10.5 3 3.75 3 3.75 15.75 5.25 15.75 5.25 10.5 9.45 10.5 9.75 12 15 12 15 4.5"></polygon>
                             </g>
                         </g>
                     </g>
@@ -416,7 +416,7 @@ export default {
               <g id="Complaints-screen---success" transform="translate(-150.000000, -241.000000)">
                   <g id="Group-2" transform="translate(19.000000, 241.000000)">
                       <g id="Success" transform="translate(131.000000, 0.000000)">
-                          <g id="Group" stroke="#417505" stroke-width="4">
+                          <g id="Group" stroke="#417505" strokeWidth="4">
                               <g id="Group-3">
                                   <g id="PaymentSuccess">
                                       <circle id="Oval" cx="30" cy="30" r="28"></circle>
@@ -436,7 +436,7 @@ export default {
             <g id="Complaints-screen---failure" transform="translate(-150.000000, -241.000000)">
                 <g id="Group-2" transform="translate(19.000000, 241.000000)">
                     <g id="Group-4" transform="translate(131.000000, 0.000000)">
-                        <g id="Group" stroke="#D0021B" stroke-width="4">
+                        <g id="Group" stroke="#D0021B" strokeWidth="4">
                             <g id="Group-3">
                                 <g id="PaymentSuccess">
                                     <circle id="Oval" cx="30" cy="30" r="28"></circle>

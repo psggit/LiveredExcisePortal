@@ -4,96 +4,103 @@ import Label from "../label"
 import Select from "../select"
 import Icon from "../icon"
 import './index.scss'
+import OrderAmount from "./orderAmount"
+import DeliveryOperator from "./deliveryOperator"
+import PermitStatus from "./permitStatus"
+import City from "./cityComponent"
+import Retailer from "./retailerComponent"
 
 class Filter extends React.Component {
 
   constructor() {
     super()
-    this.handleChange = this.handleChange.bind(this)
+    //this.handleChange = this.handleChange.bind(this)
     this.state = {
-      dso: {
-        filterby: "",
-        value: ""
-      },
-      retailer: {
-        filterby: "",
-        value: ""
-      },
-      orderAmount: {
-        filterby: "",
-        lowerrange: 0,
-        upperrange: 0
-      },
-      permitStatus: {
-        filterby: "",
-        value: ""
-      },
-      city: {
-        filterby: "",
-        value: ""
-      }
+      // dso: {
+      //   filterby: "",
+      //   value: ""
+      // },
+      // retailer: {
+      //   filterby: "",
+      //   value: ""
+      // },
+      // permitStatus: {
+      //   filterby: "",
+      //   value: ""
+      // }
     }
 
     this.applyFilter = this.applyFilter.bind(this)
   }
 
   handleChange({value, targetName}) {
-    switch(targetName) {
-    case 'Delivery Operator':
-      {
-        const filterValue = this.props.dsoList.find(item => item.value === parseInt(value)).text
-        if(filterValue !== "All") {
-          this.setState({
-            dso: {
-              filterby: targetName,
-              value: filterValue
-            }
-          })
-        }
-      }
-      break;
+    //switch(targetName) {
+    // case 'Delivery Operator':
+    //   {
+    //     const filterValue = this.props.dsoList.find(item => item.value === parseInt(value)).text
+    //     if(filterValue !== "All") {
+    //       this.setState({
+    //         dso: {
+    //           filterby: targetName,
+    //           value: filterValue
+    //         }
+    //       })
+    //     }
+    //   }
+    //   break;
 
-    case 'Order Amount':
-      {
-        const filterValue = this.props.orderAmount.find(item => item.value === parseInt(value)).text
-        if(filterValue !== "All") {
-          const range = this.props.orderAmount.find(item => item.value === parseInt(value)).text.split('-')
-          this.setState({
-            orderAmount: {
-              filterby: targetName,
-              lowerrange: parseInt(range[0]),
-              upperrange: parseInt(range[1])
-            }
-          })
-        }
-      }
-      break;
+    // case 'Order Amount':
+    //   {
+    //     const filterValue = this.props.orderAmount.find(item => item.value === parseInt(value)).text
+    //     if(filterValue !== "All") {
+    //       const range = this.props.orderAmount.find(item => item.value === parseInt(value)).text.split('-')
+    //       this.setState({
+    //         orderAmount: {
+    //           filterby: targetName,
+    //           lowerrange: parseInt(range[0]),
+    //           upperrange: parseInt(range[1])
+    //         }
+    //       })
+    //     }
+    //   }
+    //   break;
 
-    case 'Permit Status':
-      {
-        const filterValue = this.props.permitStatus.find(item => item.value === parseInt(value)).text
-        if(filterValue !== "All") {
-          this.setState({
-            permitStatus: {
-              filterby: targetName,
-              value: this.props.permitStatus.find(item => item.value === parseInt(value)).text
-            }
-          })
-        }
-      }
-      break;
-    }
+    // case 'Permit Status':
+    //   {
+    //     const filterValue = this.props.permitStatus.find(item => item.value === parseInt(value)).text
+    //     if(filterValue !== "All") {
+    //       this.setState({
+    //         permitStatus: {
+    //           filterby: targetName,
+    //           value: this.props.permitStatus.find(item => item.value === parseInt(value)).text
+    //         }
+    //       })
+    //     }
+    //   }
+    //   break;
+    // }
   }
 
   applyFilter() {
+    // let filterObj = []
+    // for (const [key, value] of Object.entries(this.state)) {
+    //   const item = value
+    //   if(item.filterby && item.filterby.length) {
+    //     //console.log("value", item.filterby)
+    //     filterObj.push(item)
+    //   }
+    // }
+
     let filterObj = []
-    for (const [key, value] of Object.entries(this.state)) {
-      const item = value
-      if(item.filterby && item.filterby.length) {
-        //console.log("value", item.filterby)
-        filterObj.push(item)
-      }
-    }
+
+    const orderAmount = this.orderAmountState.getData().orderAmount
+    const dso = this.dsoListState.getData().dso
+    const permitStatus = this.permitStatusState.getData().permitStatus
+    const city = this.cityState.getData().city
+    const retailer = this.retailerState.getData().retailer
+    filterObj.push(orderAmount, dso, permitStatus, city, retailer)
+    filterObj = filterObj.filter((item) => item.value !== "All")
+    console.log("object", filterObj)
     this.props.applyFilter(filterObj)
   }
 
@@ -128,7 +135,7 @@ class Filter extends React.Component {
               </span>
             </div>
           }
-          <div className="city input-field">
+          {/* <div className="city input-field">
             <Label>
               City/Town
             </Label>
@@ -136,14 +143,14 @@ class Filter extends React.Component {
               options={["Bangalore", "Chennai"]} 
               name="City"  
             />
-          </div>
+          </div> */}
           {/* <div className="zone input-field">
             <Label>
               Zone
               </Label>
             <Select options={[]} />
           </div> */}
-          <div className="delivery-operator input-field">
+          {/* <div className="delivery-operator input-field">
             <Label>
               Delivery Operator
             </Label>
@@ -152,8 +159,16 @@ class Filter extends React.Component {
               options={this.props.dsoList} 
               onChange={this.handleChange}
             />
-          </div>
-          <div className="retailer input-field">
+          </div> */}
+          <City 
+            cityList={this.props.cityList}  
+            ref={(node) => { this.cityState = node }}
+          />
+          <DeliveryOperator 
+            dsoList={this.props.dsoList}  
+            ref={(node) => { this.dsoListState = node }}
+          />
+          {/* <div className="retailer input-field">
             <Label>
               Retailer
             </Label>
@@ -161,17 +176,19 @@ class Filter extends React.Component {
               options={[]}
               name="Retailer"  
             />
-          </div>
-          <div className="order-amount input-field">
-            <Label>
-              Order Amount
-            </Label>
-            <Select 
-              options={this.props.orderAmount}
-              name="Order Amount" 
-              onChange={this.handleChange}
-            />
-          </div>
+          </div> */}
+          <Retailer 
+            retailerList={this.props.retailerList}  
+            ref={(node) => { this.retailerState = node }}
+          />
+          <OrderAmount 
+            orderAmount={this.props.orderAmount}  
+            ref={(node) => { this.orderAmountState = node }}
+          />
+          <PermitStatus
+            permitStatus={this.props.permitStatus}  
+            ref={(node) => { this.permitStatusState = node }}
+          />
           {/* <div className="permit-status input-field">
             <Label>
               Permit Status

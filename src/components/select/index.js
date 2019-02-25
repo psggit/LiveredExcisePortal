@@ -9,7 +9,7 @@ class Select extends React.Component {
   }
   handleChange(e) {
     // console.log(e.target.value)
-    this.props.onChange({value: e.target.value, targetName: e.target.name})
+    this.props.onChange(e)
   }
   render() {
     return (
