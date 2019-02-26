@@ -137,7 +137,7 @@ class DSOList extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Delivery Service Operators" />
-        <div style={{
+        {/* <div style={{
           display: 'flex',
           marginBottom: '20px',
           justifyContent: 'space-between',
@@ -154,7 +154,7 @@ class DSOList extends React.Component {
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
             </Button>
           </div>
-        </div>
+        </div> */}
         {
           !this.props.loadingDSOList && this.props.DSOList.length > 0 && 
           (
@@ -175,7 +175,7 @@ class DSOList extends React.Component {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>HQ</th>
+                <th>Head Quaters</th>
                 <th>Location Servicable</th>
                 <th>License Type</th>
                 <th>License Status</th>

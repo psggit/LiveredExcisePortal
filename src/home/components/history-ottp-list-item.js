@@ -42,7 +42,8 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
       <td style={{width: '100px'}}>{ moment(data.ottp_info.issued_at).format("DD/MM/YYYY, h:mm A") }</td>
       <td>{ data.dso.name }</td>
       <td>{ data.retailer.name }</td>
-      <td>Chennai</td>
+      {/* <td>Chennai</td> */}
+      <td></td>
       <td>{ data.order.total }</td>
       <td>{ data.order.total_volume }</td>
       <td>

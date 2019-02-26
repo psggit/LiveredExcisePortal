@@ -184,7 +184,7 @@ class ConsumerComplaints extends React.Component {
             </li>
           </ul>
         </div>
-        <div style={{
+        {/* <div style={{
           display: 'flex',
           marginBottom: '20px',
           justifyContent: 'space-between',
@@ -201,7 +201,7 @@ class ConsumerComplaints extends React.Component {
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
             </Button>
           </div>
-        </div>
+        </div> */}
         {
           !this.props.loadingCustomerComplaints && this.props.customerComplaints.length > 0 && 
           (
