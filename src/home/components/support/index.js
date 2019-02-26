@@ -15,11 +15,11 @@ class Support extends React.Component {
           <p className="title-text">For any support, please contact us</p>
           <div className="content">
             <div>
-              {/* <Icon name="" /> */}
+              <Icon name="callButton" />
               <p>00 800 1008110</p>
             </div>
             <div>
-              {/* <Icon name="" /> */}
+              <Icon name="mailButton" />
               <p>support@livered.com</p>
             </div>
           </div>

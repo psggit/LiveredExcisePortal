@@ -9,7 +9,8 @@ const ConsumerComplaintsItem = ({data}) => {
       <td>{ Moment(data.date_time).format('h:mm A') }</td>
       <td>{ data.phone_number }</td>
       <td>{ data.age }</td>
-      <td>{ data.address}</td>
+      <td>{ data.city }</td>
+      {/* <td>{ data.address}</td> */}
       {/* <td>{ data.license_type}</td> */}
       {/* <td></td> */}
       {/* <td></td> */}

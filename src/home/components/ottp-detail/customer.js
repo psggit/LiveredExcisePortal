@@ -1,10 +1,28 @@
 import React from 'react'
 import './ottp-detail.scss'
+import Icon from "@components/icon"
 
-const OttpDetailCustomer = ({ age, address, phone }) => (
+const OttpDetailCustomer = ({ age, address, phone, name }) => (
   <div className="ottp-detail-card">
+
     <div className="item">
       <h4>Customer Details</h4>
+      <div className="row">
+        <div>
+          <p className="label">Name</p>
+          <p className="value">{name}</p>
+        </div>
+        <div>
+          <div className="icon">
+            <span><Icon name="green-flag" /></span>
+            <span className="label">Verified With</span>
+          </div>
+          <p className="value">PAN Card</p>
+        </div>
+      </div>
+    </div>
+
+    <div className="item">
       <p className="label">Age</p>
       <p className="value">{age}</p>
     </div>
@@ -16,10 +34,10 @@ const OttpDetailCustomer = ({ age, address, phone }) => (
       </p>
     </div>
 
-    <div className="item">
+    {/* <div className="item">
       <p className="label">Phone No.</p>
       <p className="value">{phone}</p>
-    </div>
+    </div> */}
   </div>
 )
 

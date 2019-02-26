@@ -114,13 +114,14 @@ class OTTPDetail extends Component {
                 age={data.consumer.age}
                 address={data.consumer.address}
                 phone={data.consumer.phone}
+                name={data.consumer.name}
               />
               <OttpDetailDeliveryAgent
                 age={data.delivery_agent.age}
                 name={data.delivery_agent.name}
                 phone={data.delivery_agent.phone_number}
-                vehicleLicenseNo={data.delivery_agent.license_number}
-                driverLicenseNo={data.delivery_agent.vehicle_number}
+                vehicleLicenseNo={data.delivery_agent.vehicle_number}
+                driverLicenseNo={data.delivery_agent.license_number}
               />
               <OttpDetailOrder
                 order={data.order}

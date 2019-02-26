@@ -26,13 +26,13 @@ class Filter extends React.Component {
     const dso = this.dsoListState.getData().dso
     const city = this.cityState.getData().city
     const retailer = this.retailerState.getData().retailer
-    const fromDate = this.fromDateState.getData().fromDate
-    const toDate = this.toDateState.getData().toDate
     
     if (this.props.filterName !== "pastOrders") {
       filterObj.push(orderAmount, dso, city, retailer)
       filterObj = filterObj.filter((item) => item.value && item.value !== "All")
     } else {
+      const fromDate = this.fromDateState.getData().fromDate
+      const toDate = this.toDateState.getData().toDate
       filterObj.push(orderAmount, dso, city, retailer)
       filterObj = filterObj.filter((item) => item.value && item.value !== "All")
       if(fromDate.filterby) {

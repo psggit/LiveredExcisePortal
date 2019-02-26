@@ -33,7 +33,8 @@ const OttpDetailDeliveryAgent = ({name, age, phone, vehicleLicenseNo, driverLice
 
         <div style={{ width: '50%' }}>
           <p className="label">Verified with</p>
-          <p className="value">Drivers License <br/>PAN Card</p>
+          <p></p>
+          {/* <p className="value">Drivers License <br/>PAN Card</p> */}
         </div>
       </div>
     </div>

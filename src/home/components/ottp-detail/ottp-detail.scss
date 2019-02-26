@@ -10,6 +10,21 @@
     margin-bottom: 8px;
   }
 
+  .row {
+    display: flex;
+    justify-content: space-between;
+
+    span {
+      margin-right: 3px;
+    }
+
+    &:nth-child(2) {
+      .icon {
+        display: flex;
+      }
+    }
+  }
+
   .label {
     font-size: 13px;
     color: #4a90e2;
