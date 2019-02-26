@@ -102,6 +102,7 @@ class HistoryOrdersList extends React.Component {
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
+      this.fetchData()
     } else {
       this.defaultData()
       this.fetchData()
@@ -166,8 +167,21 @@ class HistoryOrdersList extends React.Component {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
-  applyFilter() {
-    console.log("apply filter")
+  applyFilter(filter) {
+    this.setState({limit: 10})
+    const queryObj = {
+      limit: 10,
+      offset: 0,
+      activePage: 1,
+      filter: JSON.stringify(filter)
+    }
+    this.props.actions.fetchHistoryOTTP({
+      limit: 10,
+      offset: 0,
+      filter: filter
+    })
+    history.pushState(queryObj, "live orders listing", `/home/past-orders?${getQueryUri(queryObj)}`)
+    this.mountFilterModal()
   }
 
   render() {

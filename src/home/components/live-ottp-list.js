@@ -150,6 +150,7 @@ class LiveOrdersList extends React.Component {
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
+      this.fetchData()
     } else {
       this.defaultData()
       this.fetchData()
