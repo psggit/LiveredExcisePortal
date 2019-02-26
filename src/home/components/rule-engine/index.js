@@ -34,6 +34,7 @@ class RuleManagement extends React.Component {
       timeRestrictions: [],
       legalPurchaseAge: "",
       zoneRestrictions: [],
+      permitRules: {}
       // dryDays: [],
       // dryDay: '2018-08-10',
       // legalPurchaseAge: '21',
@@ -85,6 +86,7 @@ class RuleManagement extends React.Component {
         timeRestrictions: timeRestrictions,
         legalPurchaseAge: this.props.rulesData.consumer_min_age,
         possessionLimits: this.props.rulesData.possession_limit,
+        permitRules: this.props.rulesData.permit_rules,
         zoneRestrictions: this.props.rulesData.city_special_days.concat(this.props.rulesData.state_special_days)
       })
     }
@@ -173,7 +175,7 @@ class RuleManagement extends React.Component {
   // }
   render() {
     //console.log("render props", this.props.rulesData, "state", this.state)
-    const  { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions } = this.state
+    const  { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions, permitRules } = this.state
     return (
       <div id="rule-engine">
         <PageHeader pageName="Rule Engine" />
@@ -192,91 +194,102 @@ class RuleManagement extends React.Component {
             </Button>
           </div>
         } */}
-          <Collpasible title="Customer Restrictions">
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div>
-                <div className="legal-age">
-                  <Label icon="info">
-                    Legal Purchage Age
-                  </Label>
-                  <input type="number" value={legalPurchaseAge} />
-                </div>
-
-                <div className="possession" style={{ marginTop: '20px' }}>
-                  <Label icon="info">
-                    Possession Limits
-                  </Label>
-                  {
-                    possessionLimits.map(item => (
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <p>{item.type}</p>
-                        <input className="small" type="text" value={item.volume} />
-                      </div>
-                    ))
-                  }
-                </div>
-
+        <Collpasible title="Customer Restrictions">
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div>
+              <div className="legal-age">
+                <Label icon="info">
+                  Legal Purchage Age
+                </Label>
+                <input type="number" value={legalPurchaseAge} />
               </div>
 
-              {/* <div style={{ marginLeft: '77px' }}>
-                <div>
-                  <Label icon="info">Velocity Check (per week)</Label>
-                  <input type="text" className="small" />
-                </div>
+              <div className="possession" style={{ marginTop: '20px' }}>
+                <Label icon="info">
+                  Possession Limits
+                </Label>
+                {
+                  possessionLimits.map(item => (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <p>{item.type}</p>
+                      <input className="small" type="text" value={item.volume} />
+                    </div>
+                  ))
+                }
+              </div>
 
-                <div style={{ marginTop: '30px' }}>
-                  <Label icon="info">Amount Check (per week)</Label>
-                  <input type="text" className="small" />
-                </div>
-              </div> */}
             </div>
-          </Collpasible>
 
-          <Collpasible title="Permit Rules">
-            <div style={{ display: 'inline-block', marginRight: '20px' }} className="permit-time-validity">
-              <Label icon="info">
-                Permit Time Validity
-              </Label>
-              <input type="text" />
-            </div>
-            <div style={{ display: 'inline-block' }} className="cost">
-              <Label icon="info">
-                Cost/Permit
-              </Label>
-              <input type="text" className="small" />
-            </div>
-            <div className="late-fee">
-              <Label icon="info">
-                Late Fee
-              </Label>
-              <input type="text" className="small" />
-            </div>
-          </Collpasible>
+            {/* <div style={{ marginLeft: '77px' }}>
+              <div>
+                <Label icon="info">Velocity Check (per week)</Label>
+                <input type="text" className="small" />
+              </div>
 
-          <Collpasible title="Time Restrictions">
-            <div>
-              <Label>Daily Restrictions</Label>
-            </div>
-            {
-              timeRestrictions.map(item => (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <p style={{ width: '110px' }}>{item.weekday_name}</p>
-                  <input 
-                    style={{ margin: '0 20px 10px 0' }} 
-                    className="small" type="text" 
-                    value={moment(item.start_time).format('h:mm a')}
-                  />
-                  <p>to</p>
-                  <input 
-                    style={{ margin: '0 0 10px 20px' }} 
-                    className="small" 
-                    type="text" 
-                    value={moment(item.end_time).format('h:mm a')}
-                  />
-                </div>
-              ))
-            }
-          </Collpasible>
+              <div style={{ marginTop: '30px' }}>
+                <Label icon="info">Amount Check (per week)</Label>
+                <input type="text" className="small" />
+              </div>
+            </div> */}
+          </div>
+        </Collpasible>
+
+        <Collpasible title="Permit Rules">
+          <div style={{ display: 'inline-block', marginRight: '20px' }} className="permit-time-validity">
+            <Label icon="info">
+              Permit Time Validity
+            </Label>
+            <input
+              type="text"
+              value={`${permitRules.permit_time} mins`}
+            />
+          </div>
+          <div style={{ display: 'inline-block' }} className="cost">
+            <Label icon="info">
+              Cost/Permit
+            </Label>
+            <input
+              type="text"
+              className="small"
+              value={`₹ ${permitRules.permit_cost}`}
+            />
+          </div>
+          <div className="late-fee">
+            <Label icon="info">
+              Late Fee
+            </Label>
+            <input
+              type="text"
+              className="small"
+              value={`₹ ${permitRules.late_fee}`}
+            />
+          </div>
+        </Collpasible>
+
+        <Collpasible title="Time Restrictions">
+          <div>
+            <Label>Daily Restrictions</Label>
+          </div>
+          {
+            timeRestrictions.map((item, i) => {
+              return <div style={{ display: 'flex', alignItems: 'center' }} key={i}>
+                <p style={{ width: '110px' }}>{item.weekday_name}</p>
+                <input
+                  style={{ margin: '0 20px 10px 0' }}
+                  className="small" type="text"
+                  value={moment(item.start_time).format('h:mm a')}
+                />
+                <p>to</p>
+                <input
+                  style={{ margin: '0 0 10px 20px' }}
+                  className="small"
+                  type="text"
+                  value={moment(item.end_time).format('h:mm a')}
+                />
+              </div>
+            })
+          }
+        </Collpasible>
 
 
           {/* <Collpasible title="Zone Restrictions">
@@ -343,82 +356,82 @@ class RuleManagement extends React.Component {
             </div>
           </Collpasible> */}
 
-          <Collpasible title="Special Restrictions">
-            <table>
-              <thead>
-                <tr>
-                  <th><Label>Zone</Label></th>
-                  <th><Label>On</Label></th>
-                  <th><Label>From</Label></th>
-                  <th><Label>To</Label></th>
-                  <th><Label>Repeat</Label></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {/* <tr>
-                  <td>Secunderabad</td>
-                  <td>05-12-2018</td>
-                  <td>11:00 AM to </td>
-                  <td>21:00 PM</td>
-                  <td>No</td>
-                  <td>
-                    <Icon name="edit" />
-                    <Icon name="cross-red" color="#3d70b2" />
-                  </td>
-                </tr> */}
-                {
-                  zoneRestrictions.map((item) => {
-                    return (
-                      <tr onClick={() => this.updateZoneRestrictions(`${item.city_id !== undefined ? `city_${item.id}` : `state_${item.id}`}`)}>
-                        <td>{item.id}</td>
-                        <td>{moment(item.date).format('DD/MM/YYYY')}</td>
-                        <td>{moment(item.from_time).format('h:mm a')}</td>
-                        <td>{moment(item.to_time).format('h:mm a')}</td>
-                        <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+        <Collpasible title="Special Restrictions">
+          <table>
+            <thead>
+              <tr>
+                <th><Label>Zone</Label></th>
+                <th><Label>On</Label></th>
+                <th><Label>From</Label></th>
+                <th><Label>To</Label></th>
+                <th><Label>Repeat</Label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* <tr>
+                <td>Secunderabad</td>
+                <td>05-12-2018</td>
+                <td>11:00 AM to </td>
+                <td>21:00 PM</td>
+                <td>No</td>
+                <td>
+                  <Icon name="edit" />
+                  <Icon name="cross-red" color="#3d70b2" />
+                </td>
+              </tr> */}
+              {
+                zoneRestrictions.map((item, i) => {
+                  return (
+                    <tr onClick={() => this.updateZoneRestrictions(`${item.city_id !== undefined ? `city_${item.id}` : `state_${item.id}`}`)} key={i}>
+                      <td>{item.id}</td>
+                      <td>{moment(item.date).format('DD/MM/YYYY')}</td>
+                      <td>{moment(item.from_time).format('h:mm a')}</td>
+                      <td>{moment(item.to_time).format('h:mm a')}</td>
+                      <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
+                    </tr>
+                  )
+                })
+              }
+            </tbody>
+          </table>
 
-            {/* <div>
-              <Label icon="info">Restricting Delivery</Label>
-              <div style={{ display: 'inline-block' }}>
+          {/* <div>
+            <Label icon="info">Restricting Delivery</Label>
+            <div style={{ display: 'inline-block' }}>
+              <Select options={[]} />
+            </div>
+
+            <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+              <div style={{ display: 'flex', alignItems: 'center', marginLeft: '40px' }}>
+                <p style={{ width: '100px' }}>Choose day</p>
                 <Select options={[]} />
               </div>
+              
+              <div style={{ display: 'flex', alignItems: 'center', marginLeft: '40px' }}>
+                <p style={{ width: '100px' }}>Time</p>
+                <input className="small" type="text" />
+                <p style={{ margin: '20px 30px' }}>to</p>
+                <input className="small" type="text" />
+              </div>
 
-              <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
-                <div style={{ display: 'flex', alignItems: 'center', marginLeft: '40px' }}>
-                  <p style={{ width: '100px' }}>Choose day</p>
-                  <Select options={[]} />
-                </div>
-                
-                <div style={{ display: 'flex', alignItems: 'center', marginLeft: '40px' }}>
-                  <p style={{ width: '100px' }}>Time</p>
-                  <input className="small" type="text" />
-                  <p style={{ margin: '20px 30px' }}>to</p>
-                  <input className="small" type="text" />
-                </div>
-
-                <div style={{ marginLeft: '140px', display: 'flex', alignItems: 'center' }}>
-                  <div>
-                    <Checkbox />
-                  </div>
-                  <p style={{ marginLeft: '10px' }}>Repeat</p>
-                  <div style={{ margin: '0 90px' }}>
-                    <Select small options={[]} />
-                  </div>
-                </div>
-
-                <div style={{ marginLeft: '140px', display: 'flex', alignItems: 'center' }}>
+              <div style={{ marginLeft: '140px', display: 'flex', alignItems: 'center' }}>
+                <div>
                   <Checkbox />
-                  <p style={{ marginLeft: '10px' }}>Don't Repeat</p>
+                </div>
+                <p style={{ marginLeft: '10px' }}>Repeat</p>
+                <div style={{ margin: '0 90px' }}>
+                  <Select small options={[]} />
                 </div>
               </div>
-            </div> */}
-          </Collpasible>
+
+              <div style={{ marginLeft: '140px', display: 'flex', alignItems: 'center' }}>
+                <Checkbox />
+                <p style={{ marginLeft: '10px' }}>Don't Repeat</p>
+              </div>
+            </div>
+          </div> */}
+        </Collpasible>
       </div>
     )
   }
