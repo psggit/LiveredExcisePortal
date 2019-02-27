@@ -37,6 +37,7 @@ class HistoryOrdersList extends React.Component {
     this.mountFilterModal = this.mountFilterModal.bind(this)
     this.fetchDropDownData = this.fetchDropDownData.bind(this)
     this.fetchHistoryOttps = this.fetchHistoryOttps.bind(this)
+    this.resetFilter = this.resetFilter.bind(this)
   }
 
   handleClick(dataObj) {
@@ -201,6 +202,10 @@ class HistoryOrdersList extends React.Component {
     this.mountFilterModal()
   }
 
+  resetFilter() {
+    this.clearSearchResults()
+  }
+
   render() {
     return (
       <Fragment>
@@ -218,6 +223,12 @@ class HistoryOrdersList extends React.Component {
             clearSearch={this.clearSearchResults}
           />
           <div style={{ marginLeft: '46px', position: 'relative' }}>
+            <span style={{ marginRight: '10px' }}>
+              <Button primary onClick={this.resetFilter}>
+                <Icon name="filter" />
+                <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Reset Filter</span>
+              </Button>
+            </span>
             <Button primary onClick={this.mountFilterModal}>
               <Icon name="filter" />
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
