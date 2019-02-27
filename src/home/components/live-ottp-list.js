@@ -287,7 +287,6 @@ class LiveOrdersList extends React.Component {
                     </div>
                   </th>
                   <th>Date Issued</th>
-                  {/* <th>Time issued</th> */}
                   <th>
                     <div
                       style={{

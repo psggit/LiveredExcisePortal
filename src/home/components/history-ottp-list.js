@@ -44,32 +44,9 @@ class HistoryOrdersList extends React.Component {
   }
 
   handlePageChange(pagerObj) {
-    // this.props.actions.setLoadingAll()
-    // const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
-
-    // this.setState({
-    //   activePage: pagerObj.activePage,
-    //   limit: pagerObj.pageSize
-    // })
-
-    // this.props.actions.fetchHistoryOTTP({
-    //   limit: pagerObj.pageSize,
-    //   offset
-    // })
-
-    // const queryParamsObj = {
-    //   activePage: pagerObj.activePage,
-    //   limit: pagerObj.pageSize
-    // }
-
-    // history.pushState(
-    //   queryParamsObj,
-    //   "past orders listing",
-    //   `/home/past-orders?${getQueryUri(queryParamsObj)}`
-    // )
-
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
+
     let queryParamsObj = {}
     this.props.actions.setLoadingAll()
     clearTimeout(this.timeoutId)
@@ -180,7 +157,7 @@ class HistoryOrdersList extends React.Component {
   }
 
   handleSearch(searchQuery) {
-    console.log("searched text", searchQuery)
+    //console.log("searched text", searchQuery)
     const filterObj = {
       filterby: "OttpId",
       value: searchQuery

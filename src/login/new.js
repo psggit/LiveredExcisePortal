@@ -1,16 +1,15 @@
-import React from "react";
-import Button from "@components/button/index.js";
-import { Api } from "@utils/config";
-import "@sass/_animation.scss";
-import { POST } from "@utils/fetch";
-import { createSession } from "./session";
-import Notify from "@components/notification";
-import Header from "@components/header";
-import { validateEmail, validateTextField } from "@utils/validators";
+import React from "react"
+import Button from "@components/button/index.js"
+import "@sass/_animation.scss"
+import { POST } from "@utils/fetch"
+import { createSession } from "./session"
+import Notify from "@components/notification"
+import Header from "@components/header"
+import { validateEmail, validateTextField } from "@utils/validators"
 
 class Login extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       email: "",
       password: "",
@@ -24,7 +23,7 @@ class Login extends React.Component {
         value: "",
         status: false
       }
-    };
+    }
 
     this.handleLogin = this.handleLogin.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -35,28 +34,26 @@ class Login extends React.Component {
 
   handleKeyPress(e) {
     if (e.keyCode === 13) {
-      this.handleLogin();
+      this.handleLogin()
     }
   }
 
   handleLogin() {
-    const { email, password } = this.state;
-    // console.log("email", emailErr, "passwd", passwordErr)
+    const { email, password } = this.state
     const emailErr = validateEmail({
       fieldName: "Email ID",
       fieldValue: email
-    });
-    this.setState({ emailErr });
+    })
+    this.setState({ emailErr })
 
     const passwordErr = validateTextField({
       fieldName: "Password",
       fieldValue: password
-    });
-    this.setState({ passwordErr });
+    })
+    this.setState({ passwordErr })
 
     if (!emailErr.status && !passwordErr.status) {
-      console.log("success login");
-      this.setState({ isSubmitting: true });
+      this.setState({ isSubmitting: true })
       POST({
         api: "/retailer/auth/login",
         apiBase: "api1",
@@ -65,20 +62,20 @@ class Login extends React.Component {
       })
         .then((json) => {
           if (json.data) {
-            Notify(JSON.parse(json.data).message, "warning");
+            Notify(JSON.parse(json.data).message, "warning")
           } else {
-            createSession(json);
-            window.location.href = "/home/live-ottp";
+            createSession(json)
+            window.location.href = "/home/live-ottp"
           }
         })
         .catch((error) => {
-          this.setState({ showLoginErr: true });
-        });
+          this.setState({ showLoginErr: true })
+        })
     }
   }
 
   handlePassword(e) {
-    this.setState({ password: e.target.value, showLoginErr: false });
+    this.setState({ password: e.target.value, showLoginErr: false })
     // const errName = `${e.target.name}Err`
 
     // this.setState({
@@ -94,7 +91,7 @@ class Login extends React.Component {
     //   [e.target.name]: e.target.value,
     //   [errName]: validateEmail({ fieldName: 'Email ID', fieldValue: e.target.value }),
     // })
-    this.setState({ email: e.target.value, showLoginErr: false });
+    this.setState({ email: e.target.value, showLoginErr: false })
   }
 
   handleClick() {
@@ -105,8 +102,8 @@ class Login extends React.Component {
     const submittingStyle = {
       cursor: "progress",
       opacity: "0.7"
-    };
-    const { emailErr, passwordErr } = this.state;
+    }
+    const { emailErr, passwordErr } = this.state
     return (
       <React.Fragment>
         <Header isLoggedIn={false} />
@@ -213,8 +210,8 @@ class Login extends React.Component {
           Having trouble? Contact Support
         </p>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default Login;
+export default Login

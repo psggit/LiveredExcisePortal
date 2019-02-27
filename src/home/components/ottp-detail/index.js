@@ -11,21 +11,6 @@ import OttpDetailCustomer from './customer';
 import OttpDetailDeliveryAgent from './delivery-agent';
 import OttpDetailOrder from './order';
 
-function getTimeDiff(d2) {
-  const d1 = new Date()
-  return Math.round(
-    (d1 - new Date(d2)) / 60000
-  )
-}
-function Moment(time) {
-  return {
-    format: function(format) {
-      return moment(time).format('MMM Do YY, h:mm a')
-    }
-  }
-}
-
-
 class OTTPDetail extends Component {
   constructor() {
     super()
@@ -63,8 +48,6 @@ class OTTPDetail extends Component {
   }
 
   render() {
-    // const { actions, OTTPDetailData } = this.props
-    // console.log("props", this.props.history)
     const data = this.props.OTTPDetailData
     return (
       <div>

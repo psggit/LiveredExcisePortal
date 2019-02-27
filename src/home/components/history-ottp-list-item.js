@@ -28,5 +28,4 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
   )
 }
 
-
 export default HistoryOrdersListItem

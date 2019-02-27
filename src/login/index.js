@@ -1,11 +1,9 @@
 import React from 'react'
 import Button from '@components/button/index.js'
-import { Api } from '@utils/config'
 import '@sass/_animation.scss'
 import { POST } from '@utils/fetch'
 import { createSession } from './session'
 import Notify from '@components/notification'
-import loginBg from '@images/login-bg.jpg'
 import Header from '@components/header';
 
 class Login extends React.Component {
@@ -95,23 +93,23 @@ class Login extends React.Component {
     }
 
     return (
-     <React.Fragment>
-      <Header isLoggedIn={false} />
-      <div style={{
-            backgroundColor: '#fff',
-            border: '1px solid #d9d9d9',
-            width: '100%',
-            maxWidth: '400px',
-            margin: '0 auto',
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            overflow: 'hidden'
-          }}>
+      <React.Fragment>
+        <Header isLoggedIn={false} />
+        <div style={{
+          backgroundColor: '#fff',
+          border: '1px solid #d9d9d9',
+          width: '100%',
+          maxWidth: '400px',
+          margin: '0 auto',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          overflow: 'hidden'
+        }}>
           <h3 style={{ fontSize: '24px', color: '#444', textAlign: 'center', lineHeight: '54px', fontWeight: '600', borderBottom: '1px solid #d9d9d9' }}>Login</h3>
-           <div style={{ padding :'40px' }}>
-           {
+          <div style={{ padding: '40px' }}>
+            {
               !this.state.showOTPField &&
               <React.Fragment>
                 <div className="form-group">
@@ -168,9 +166,9 @@ class Login extends React.Component {
                 </div>
               </React.Fragment>
             }
-           </div>
           </div>
-     </React.Fragment>
+        </div>
+      </React.Fragment>
     )
   }
 }

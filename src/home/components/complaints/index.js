@@ -4,12 +4,12 @@ import { POST } from "@utils/fetch";
 
 class Complaints extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       reason: "",
       message: "",
       ottpId: ""
-    };
+    }
     this.reasons = [
       {
         text: "Wrong product(s) delivered / Product(s) missing",
@@ -35,38 +35,38 @@ class Complaints extends React.Component {
         text: "Inappropriate behaviour by agent",
         value: 5
       }
-    ];
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleMessageChange = this.handleMessageChange.bind(this);
+    ]
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleMessageChange = this.handleMessageChange.bind(this)
   }
 
   componentDidMount() {
     const queryParam = location.pathname.split("/")
-    console.log("path", location.search, queryParam)
-    this.setState({ ottpId: queryParam[queryParam.length - 1] });
+    //console.log("path", location.search, queryParam)
+    this.setState({ ottpId: queryParam[queryParam.length - 1] })
   }
 
   handleMessageChange(e) {
     //console.log("message", e.target.value)
-    this.setState({ message: e.target.value });
+    this.setState({ message: e.target.value })
   }
 
   handleChange() {
-    console.log("change", document.getElementById("reason").value);
-    const selectedReasonIdx = parseInt(document.getElementById("reason").value);
-    console.log(
-      "selected reason",
-      this.reasons.find(item => item.value === selectedReasonIdx).text
-    );
+    //console.log("change", document.getElementById("reason").value);
+    const selectedReasonIdx = parseInt(document.getElementById("reason").value)
+    // console.log(
+    //   "selected reason",
+    //   this.reasons.find(item => item.value === selectedReasonIdx).text
+    // )
     this.setState({
       reason: this.reasons.find(item => item.value === selectedReasonIdx).text
-    });
+    })
   }
 
   handleSubmit() {
-    console.log("inside submit", this.state);
-    const { message, ottpId, reason } = this.state;
+    console.log("inside submit", this.state)
+    const { message, ottpId, reason } = this.state
     POST({
       api: "http://192.168.5.86:8087/livered/createComplaints",
       //apiBase: "api1",
@@ -83,7 +83,7 @@ class Complaints extends React.Component {
       })
       .catch((error) => {
         location.href="/complaint-failure"
-      });
+      })
   }
 
   render() {
@@ -140,8 +140,8 @@ class Complaints extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Complaints;
+export default Complaints

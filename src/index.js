@@ -112,7 +112,6 @@ class App extends React.Component {
       key: 0,
       isLoggedIn: true
     }
-
     this.checkUserLoggedIn = this.checkUserLoggedIn.bind(this)
   }
 
@@ -121,16 +120,6 @@ class App extends React.Component {
       const { key } = this.state
       this.setState({ key: key + 1 })
     })
-  }
-
-  componentWillMount() {
-    // console.log(localStorage.getItem('hasura-id'))
-    // if (!localStorage.getItem('hasura-id')) {
-    //   location.href = '/login'
-    // } else{
-    //   location.href = '/home/live-ottp'
-    // }
-    //this.checkUserLoggedIn()
   }
 
   checkUserLoggedIn() {
@@ -163,7 +152,6 @@ class App extends React.Component {
         }
       })
   }
-
 
   render() {
     return (
@@ -242,16 +230,6 @@ class App extends React.Component {
 
                       <Route
                         exact
-                        path="/home/user-management"
-                        render={
-                          props => (
-                            <UserManagement {...props} />
-                          )
-                        }
-                      />
-
-                      <Route
-                        exact
                         path="/home/consumers"
                         render={
                           props => (
@@ -276,16 +254,6 @@ class App extends React.Component {
                         render={
                           props => (
                             <RuleManagement {...props} />
-                          )
-                        }
-                      />
-
-                      <Route
-                        exact
-                        path="/home/geofences"
-                        render={
-                          props => (
-                            <GeoFences {...props} />
                           )
                         }
                       />

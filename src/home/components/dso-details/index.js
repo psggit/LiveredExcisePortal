@@ -49,13 +49,9 @@ class DSODetails extends React.Component {
             </div>
             <div style={{display: 'flex', marginBottom: '36px'}}>
               <LicenseDetails 
-                //type={data.license_type}
                 type={data.license_type}
-                //status={data.is_active ? 'Active' :  'Inactive'}
                 status={data.license_status}
-                //validity={data.license_validity}
                 validity={data.license_expiry}
-                //locationsIn={data.locations_in}
                 locationsIn={data.locations}
               />
               <HeadOfficeDetails
@@ -73,25 +69,12 @@ class DSODetails extends React.Component {
                 address={data.regional_office.address}
               />
             </div>
-            {/* <div style={headerStyle} >
-              ACTIVITY
-            </div>
-            <div style={{display: 'flex', background: '#fff', width: '100%'}}>
-              <div>
-                
-              </div>
-              <div>
-                
-              </div>
-            </div> */}
           </div>
         }
       </React.Fragment>
     )
   }
 }
-
-// export default DSODetails
 
 const mapStateToProps = state => state.main
 

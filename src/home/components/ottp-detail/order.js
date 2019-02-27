@@ -1,21 +1,6 @@
 import React from 'react'
 import './ottp-detail.scss'
 
-const data = [
-  {
-    volume: '3.1 L FMFL',
-    price: 'Rs/- 5800'
-  },
-  {
-    volume: '3.1 L IMFL',
-    price: 'Rs/- 800'
-  },
-  {
-    volume: '3.1 L Beer',
-    price: 'Rs/- 400'
-  }
-]
-
 const OttpDetailOrder = ({ order }) => (
   <div className="ottp-detail-card">
     <div className="item">

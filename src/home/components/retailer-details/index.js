@@ -1,5 +1,4 @@
 import React from "react"
-import Icon from "@components/icon"
 import OutletDetail from "./outlet-detail"
 import OutletAddressDetail from "./outlet-address-detail"
 import OutletContactDetail from "./outlet-contact-detail"
@@ -14,7 +13,6 @@ class RetailerDetail extends React.Component {
     return (
       <React.Fragment>
         <div style={{display: 'flex', marginBottom: '60px'}}>
-          {/* <Icon name="cross"/> */}
           <p 
             style={{
               fontSize: '22px',
@@ -55,7 +53,7 @@ class RetailerDetail extends React.Component {
             mobile={data.contact}
           />
         </div>
-        </React.Fragment>
+      </React.Fragment>
     )
   }
 }
