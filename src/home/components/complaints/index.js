@@ -8,8 +8,10 @@ class Complaints extends React.Component {
     this.state = {
       reason: "",
       message: "",
-      ottpId: ""
+      ottpId: "",
+      count: 150
     }
+    this.characterLimit = 150
     this.reasons = [
       {
         text: "Wrong product(s) delivered / Product(s) missing",
@@ -49,7 +51,14 @@ class Complaints extends React.Component {
 
   handleMessageChange(e) {
     //console.log("message", e.target.value)
-    this.setState({ message: e.target.value })
+    //this.setState({ message: e.target.value })
+    const message = e.target.value
+    message.length > this.characterLimit
+    ? e.preventDefault()
+    : this.setState({
+        message,
+        count: this.characterLimit - message.length
+      })
   }
 
   handleChange() {
@@ -120,6 +129,7 @@ class Complaints extends React.Component {
                   value={this.state.message}
                   onChange={e => this.handleMessageChange(e)}
                 />
+                <p className="os s9"><span id="char_count">{this.state.count}</span> characters {this.state.count < this.characterLimit ? 'remaining' : ''}</p>
               </div>
             </div>
             <div className="form-group">
