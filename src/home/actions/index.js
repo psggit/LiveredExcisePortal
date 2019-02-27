@@ -50,28 +50,8 @@ export const fetchOTTPDetail = data => ({
   data
 })
 
-export const fetchSquadMembers = data => ({
-  type: ActionTypes.REQUEST_FETCH_SQUAD_MEMBERS,
-  data
-})
-
-export const addSquadMember = data => ({
-  type: ActionTypes.REQUEST_ADD_SQUAD_MEMBER,
-  data
-})
-
-export const updateSquadMember = data => ({
-  type: ActionTypes.REQUEST_UPDATE_SQUAD_MEMBER,
-  data
-})
-
 export const setLoadingAll = () => ({
   type: ActionTypes.REQUEST_SET_LOADING_ALL
-})
-
-export const updateStateExciseRules = data => ({
-  type: ActionTypes.REQUEST_UPDATE_STATE_EXCISE_RULES,
-  data
 })
 
 export const fetchCitiesList = (data) => ({
