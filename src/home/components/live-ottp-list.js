@@ -39,6 +39,63 @@ class LiveOrdersList extends React.Component {
     this.resetFilter = this.resetFilter.bind(this)
   }
 
+  componentDidMount() {
+    if (location.search.length) {
+      this.setQueryParamas()
+      this.fetchDropDownData()
+    } else {
+      this.fetchLiveOttps()
+      this.fetchDropDownData()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.DSOList !== prevProps.DSOList) {
+      let dsoList = this.props.DSOList.map((item, i) => {
+        return {text: item.name, value: i}
+      })
+      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
+      this.setState({dsoList})
+    } else if(this.props.cityList !== prevProps.cityList) {
+      let max = 0
+      let cityList = this.props.cityList.map((item) => {
+        if (parseInt(item.id) > max) {
+          max = item.id
+        }
+        return {text: item.city, value: item.id}
+      })
+      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
+      this.setState({cityList})
+    }
+  }
+
+  setQueryParamas() {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
+    Object.entries(queryObj).forEach((item) => {
+      this.setState({ [item[0]]: item[1] })
+    })
+  
+    if(queryObj.filter) {
+      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
+      if(filter.find(item => item.filterby === "OttpId")) {
+        this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
+      }
+      this.props.actions.fetchInProgressOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1),
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      this.props.actions.fetchInProgressOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
+  }
+
+
   handleClick(dataObj) {
     this.props.history.push(
       `/home/live-orders/${dataObj.ottp_info.ottp_id}`,
@@ -98,62 +155,6 @@ class LiveOrdersList extends React.Component {
 
   resetPagination() {
     this.setState({ activePage: 1 })
-  }
-
-  componentDidMount() {
-    if (location.search.length) {
-      this.setQueryParamas()
-      this.fetchDropDownData()
-    } else {
-      this.fetchLiveOttps()
-      this.fetchDropDownData()
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.DSOList !== prevProps.DSOList) {
-      let dsoList = this.props.DSOList.map((item, i) => {
-        return {text: item.name, value: i}
-      })
-      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
-      this.setState({dsoList})
-    } else if(this.props.cityList !== prevProps.cityList) {
-      let max = 0
-      let cityList = this.props.cityList.map((item) => {
-        if (parseInt(item.id) > max) {
-          max = item.id
-        }
-        return {text: item.city, value: item.id}
-      })
-      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
-      this.setState({cityList})
-    }
-  }
-
-  setQueryParamas() {
-    const queryUri = location.search.slice(1)
-    const queryObj = getQueryObj(queryUri)
-
-    Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] })
-    })
-  
-    if(queryObj.filter) {
-      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "OttpId")) {
-        this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
-      }
-      this.props.actions.fetchInProgressOTTP({
-        limit: parseInt(queryObj.limit),
-        offset: queryObj.limit * (queryObj.activePage - 1),
-        filter: JSON.parse(decodeURIComponent(queryObj.filter))
-      })
-    } else {
-      this.props.actions.fetchInProgressOTTP({
-        limit: parseInt(queryObj.limit),
-        offset: queryObj.limit * (queryObj.activePage - 1)
-      })
-    }
   }
 
   fetchLiveOttps() {

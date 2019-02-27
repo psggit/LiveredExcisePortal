@@ -40,51 +40,6 @@ class HistoryOrdersList extends React.Component {
     this.resetFilter = this.resetFilter.bind(this)
   }
 
-  handleClick(dataObj) {
-    this.props.history.push(`/home/past-orders/${dataObj.ottp_info.ottp_id}`, dataObj)
-  }
-
-  handlePageChange(pagerObj) {
-    const queryUri = location.search.slice(1)
-    const queryObj = getQueryObj(queryUri)
-
-    let queryParamsObj = {}
-    this.props.actions.setLoadingAll()
-    clearTimeout(this.timeoutId)
-    const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
-    this.setState({
-      activePage: pagerObj.activePage,
-      limit: pagerObj.pageSize
-    })
-
-    if(queryObj.filter && queryObj.filter.length) {
-      queryParamsObj = {
-        activePage: pagerObj.activePage,
-        limit: pagerObj.pageSize,
-        filter: queryObj.filter
-      }
-      this.props.actions.fetchHistoryOTTP({
-        limit: pagerObj.pageSize,
-        activePage: pagerObj.activePage,
-        offset,
-        filter: JSON.parse(decodeURIComponent(queryObj.filter))
-      })
-    } else {
-      queryParamsObj = {
-        activePage: pagerObj.activePage,
-        limit: pagerObj.pageSize
-      }
-      this.props.actions.fetchHistoryOTTP({
-        limit: pagerObj.pageSize,
-        offset
-      })
-    }
-  }
-
-  resetPagination() {
-    this.setState({ activePage: 1 })
-  }
-
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
@@ -139,7 +94,52 @@ class HistoryOrdersList extends React.Component {
         offset: queryObj.limit * (queryObj.activePage - 1)
       })
     }
+  }
 
+
+  handleClick(dataObj) {
+    this.props.history.push(`/home/past-orders/${dataObj.ottp_info.ottp_id}`, dataObj)
+  }
+
+  handlePageChange(pagerObj) {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
+    let queryParamsObj = {}
+    this.props.actions.setLoadingAll()
+    clearTimeout(this.timeoutId)
+    const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
+    this.setState({
+      activePage: pagerObj.activePage,
+      limit: pagerObj.pageSize
+    })
+
+    if(queryObj.filter && queryObj.filter.length) {
+      queryParamsObj = {
+        activePage: pagerObj.activePage,
+        limit: pagerObj.pageSize,
+        filter: queryObj.filter
+      }
+      this.props.actions.fetchHistoryOTTP({
+        limit: pagerObj.pageSize,
+        activePage: pagerObj.activePage,
+        offset,
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      queryParamsObj = {
+        activePage: pagerObj.activePage,
+        limit: pagerObj.pageSize
+      }
+      this.props.actions.fetchHistoryOTTP({
+        limit: pagerObj.pageSize,
+        offset
+      })
+    }
+  }
+
+  resetPagination() {
+    this.setState({ activePage: 1 })
   }
 
   fetchHistoryOttps() {

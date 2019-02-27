@@ -10,7 +10,7 @@ class Search extends React.Component {
     this.state = {
       searchQuery: ''
     }
-    console.log("search props", this.props)
+    //console.log("search props", this.props)
     this.setSearchQuery = this.setSearchQuery.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)

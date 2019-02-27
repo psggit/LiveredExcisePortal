@@ -2,8 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
-import ConsumerListItem from './customer-list-item'
-import { getQueryObj, getQueryUri } from "@utils/url-utils";
+import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import Pagination from '@components/pagination'
 import Loader from '@components/loader'
 //import { dsoList } from './../constants/dso-list'

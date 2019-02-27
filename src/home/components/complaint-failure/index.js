@@ -1,7 +1,6 @@
 import React from "react"
 import "./../complaint-success/complaint-success.scss"
 import Icon from "@components/icon"
-import Button from "../../../components/button";
 
 class complaintFailure extends React.Component {
   constructor() {

@@ -45,13 +45,10 @@ class Complaints extends React.Component {
 
   componentDidMount() {
     const queryParam = location.pathname.split("/")
-    //console.log("path", location.search, queryParam)
     this.setState({ ottpId: queryParam[queryParam.length - 1] })
   }
 
   handleMessageChange(e) {
-    //console.log("message", e.target.value)
-    //this.setState({ message: e.target.value })
     const message = e.target.value
     message.length > this.characterLimit
     ? e.preventDefault()
@@ -62,19 +59,13 @@ class Complaints extends React.Component {
   }
 
   handleChange() {
-    //console.log("change", document.getElementById("reason").value);
     const selectedReasonIdx = parseInt(document.getElementById("reason").value)
-    // console.log(
-    //   "selected reason",
-    //   this.reasons.find(item => item.value === selectedReasonIdx).text
-    // )
     this.setState({
       reason: this.reasons.find(item => item.value === selectedReasonIdx).text
     })
   }
 
   handleSubmit() {
-    console.log("inside submit", this.state)
     const { message, ottpId, reason } = this.state
     POST({
       api: "http://192.168.5.86:8087/livered/createComplaints",

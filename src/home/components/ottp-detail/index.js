@@ -18,6 +18,15 @@ class OTTPDetail extends Component {
     this.openGmap = this.openGmap.bind(this)
     this.unmountOrderDetail = this.unmountOrderDetail.bind(this)
   }
+  
+  componentDidMount() {
+    const { ottpId } = this.props.match.params
+    this.props.actions.fetchOTTPDetail({
+      ottp_info: {
+        ottp_id: ottpId
+      }
+    })
+  }
 
   handleClick() {
     this.props.unmountOrderDetail()
@@ -31,15 +40,6 @@ class OTTPDetail extends Component {
       customerGps: OTTPDetailData.customer_gps,
       retailerGps: OTTPDetailData.store_gps
     }))
-  }
-
-  componentDidMount() {
-    const { ottpId } = this.props.match.params
-    this.props.actions.fetchOTTPDetail({
-      ottp_info: {
-        ottp_id: ottpId
-      }
-    })
   }
 
   unmountOrderDetail() {
