@@ -13,6 +13,7 @@ import PageHeader from "@components/pageheader"
 import Filter from "@components/filterModal"
 import Search from "@components/search"
 import Button from "@components/button"
+import {orderAmount} from "./../constants/static-data"
 
 class HistoryOrdersList extends React.Component {
   constructor() {
@@ -22,13 +23,16 @@ class HistoryOrdersList extends React.Component {
       limit: 10,
       dsoList: [],
       cityList: [],
-      mountFilter: false
+      mountFilter: false,
+      filter: [],
+      OttpId: ""
     }
   
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.clearSearchResults = this.clearSearchResults.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
     this.fetchDropDownData = this.fetchDropDownData.bind(this)
@@ -40,29 +44,63 @@ class HistoryOrdersList extends React.Component {
   }
 
   handlePageChange(pagerObj) {
-    this.props.actions.setLoadingAll()
-    const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
+    // this.props.actions.setLoadingAll()
+    // const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
 
+    // this.setState({
+    //   activePage: pagerObj.activePage,
+    //   limit: pagerObj.pageSize
+    // })
+
+    // this.props.actions.fetchHistoryOTTP({
+    //   limit: pagerObj.pageSize,
+    //   offset
+    // })
+
+    // const queryParamsObj = {
+    //   activePage: pagerObj.activePage,
+    //   limit: pagerObj.pageSize
+    // }
+
+    // history.pushState(
+    //   queryParamsObj,
+    //   "past orders listing",
+    //   `/home/past-orders?${getQueryUri(queryParamsObj)}`
+    // )
+
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+    let queryParamsObj = {}
+    this.props.actions.setLoadingAll()
+    clearTimeout(this.timeoutId)
+    const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
     this.setState({
       activePage: pagerObj.activePage,
       limit: pagerObj.pageSize
     })
 
-    this.props.actions.fetchHistoryOTTP({
-      limit: pagerObj.pageSize,
-      offset
-    })
-
-    const queryParamsObj = {
-      activePage: pagerObj.activePage,
-      limit: pagerObj.pageSize
+    if(queryObj.filter && queryObj.filter.length) {
+      queryParamsObj = {
+        activePage: pagerObj.activePage,
+        limit: pagerObj.pageSize,
+        filter: queryObj.filter
+      }
+      this.props.actions.fetchHistoryOTTP({
+        limit: pagerObj.pageSize,
+        activePage: pagerObj.activePage,
+        offset,
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      queryParamsObj = {
+        activePage: pagerObj.activePage,
+        limit: pagerObj.pageSize
+      }
+      this.props.actions.fetchHistoryOTTP({
+        limit: pagerObj.pageSize,
+        offset
+      })
     }
-
-    history.pushState(
-      queryParamsObj,
-      "past orders listing",
-      `/home/past-orders?${getQueryUri(queryParamsObj)}`
-    )
   }
 
   resetPagination() {
@@ -107,10 +145,23 @@ class HistoryOrdersList extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    this.props.actions.fetchHistoryOTTP({
-      limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1)
-    })
+    if(queryObj.filter) {
+      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
+      if(filter.find(item => item.filterby === "OttpId")) {
+        this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
+      }
+      this.props.actions.fetchHistoryOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1),
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      this.props.actions.fetchHistoryOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
+
   }
 
   fetchHistoryOttps() {
@@ -130,10 +181,30 @@ class HistoryOrdersList extends React.Component {
 
   handleSearch(searchQuery) {
     console.log("searched text", searchQuery)
+    const filterObj = {
+      filterby: "OttpId",
+      value: searchQuery
+    }
+    const urlParams = {
+      limit: 10,
+      activePage: 1,
+      filter: JSON.stringify([filterObj])
+    }
+    this.props.actions.fetchHistoryOTTP({
+      limit: 10,
+      offset: 0,
+      filter: [filterObj]
+    })
+    history.pushState(urlParams, "past orders listing", `/home/past-orders?${(getQueryUri(urlParams))}`)
   }
 
   mountFilterModal() {
     this.setState({ mountFilter: !this.state.mountFilter })
+  }
+
+  clearSearchResults() {
+    this.fetchHistoryOttps()
+    this.props.history.push(`/home/past-orders`)
   }
 
   applyFilter(filter) {
@@ -166,6 +237,8 @@ class HistoryOrdersList extends React.Component {
           <Search
             placeholder="Search"
             search={this.handleSearch}
+            searchText={this.state.OttpId}
+            clearSearch={this.clearSearchResults}
           />
           <div style={{ marginLeft: '46px', position: 'relative' }}>
             <Button primary onClick={this.mountFilterModal}>
@@ -178,12 +251,12 @@ class HistoryOrdersList extends React.Component {
               applyFilter={this.applyFilter}
               dsoList={this.state.dsoList}
               cityList={this.state.cityList}
-              orderAmount={this.orderAmount}
+              orderAmount={orderAmount}
             >
             </Filter>
           </div>
         </div>
-        {!this.props.loadingHistoryOTTP && this.props.historyOTTPData.length > 0 && (
+        {!this.props.loadingHistoryOTTP && this.props.historyOTTPData.length > 1 && (
           <div style={{ margin: "10px 0" }}>
             <Pagination
               activePage={this.state.activePage}

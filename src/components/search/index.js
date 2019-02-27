@@ -10,16 +10,29 @@ class Search extends React.Component {
     this.state = {
       searchQuery: ''
     }
-
+    console.log("search props", this.props)
     this.setSearchQuery = this.setSearchQuery.bind(this)
     this.clearSearch = this.clearSearch.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+  }
+
+  componentDidMount() {
+    //console.log("search comp props", this.props)
+    this.setState({searchQuery: this.props.searchText ? this.props.searchText : ''})
+  }
+
+  componentDidUpdate(prevProps) {
+    //console.log("search comp update props", this.props)
+    if(this.props.searchText !== prevProps.searchText) {
+      this.setState({searchQuery: this.props.searchText})
+    }
   }
 
   clearSearch() {
     this.setState({
       searchQuery: ''
     })
+    this.props.clearSearch()
   }
 
   setSearchQuery(e) {

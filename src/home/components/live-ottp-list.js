@@ -24,13 +24,15 @@ class LiveOrdersList extends React.Component {
       cityList: [],
       limit: 10,
       mountFilter: false,
-      filter: []
+      filter: [],
+      OttpId: ""
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.fetchLiveOttps = this.fetchLiveOttps.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.clearSearchResults = this.clearSearchResults.bind(this)
     this.fetchDropDownData = this.fetchDropDownData.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
@@ -136,6 +138,10 @@ class LiveOrdersList extends React.Component {
     })
   
     if(queryObj.filter) {
+      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
+      if(filter.find(item => item.filterby === "OttpId")) {
+        this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
+      }
       this.props.actions.fetchInProgressOTTP({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
@@ -172,11 +178,30 @@ class LiveOrdersList extends React.Component {
   }
 
   handleSearch(searchQuery) {
-    console.log("searched text", searchQuery)
+    const filterObj = {
+      filterby: "OttpId",
+      value: searchQuery
+    }
+    const urlParams = {
+      limit: 10,
+      activePage: 1,
+      filter: JSON.stringify([filterObj])
+    }
+    this.props.actions.fetchInProgressOTTP({
+      limit: 10,
+      offset: 0,
+      filter: [filterObj]
+    })
+    history.pushState(urlParams, "live orders listing", `/home/live-orders?${(getQueryUri(urlParams))}`)
   }
 
   mountFilterModal() {
     this.setState({ mountFilter: !this.state.mountFilter })
+  }
+
+  clearSearchResults() {
+    this.fetchLiveOttps()
+    this.props.history.push(`/home/live-orders`)
   }
 
   applyFilter(filter) {
@@ -209,7 +234,9 @@ class LiveOrdersList extends React.Component {
         > 
           <Search
             placeholder="Search"
+            searchText={this.state.OttpId}
             search={this.handleSearch}
+            clearSearch={this.clearSearchResults}
           />
           <div style={{ marginLeft: '46px', position: 'relative' }}>
             <Button primary onClick={this.mountFilterModal}>
@@ -228,7 +255,7 @@ class LiveOrdersList extends React.Component {
             </Filter>
           </div>
         </div> 
-        {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length > 0 && (
+        {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length > 1 && (
           <div style={{ margin: "10px 0" }}>
             <Pagination
               activePage={this.state.activePage}

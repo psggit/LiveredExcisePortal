@@ -5,7 +5,6 @@ import "@sass/_animation.scss";
 import { POST } from "@utils/fetch";
 import { createSession } from "./session";
 import Notify from "@components/notification";
-import loginBg from "@images/login-bg.jpg";
 import Header from "@components/header";
 import { validateEmail, validateTextField } from "@utils/validators";
 
