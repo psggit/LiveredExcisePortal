@@ -1,19 +1,12 @@
 import React from 'react'
-import Card from '@components/card'
-import Button from '@components/button/index'
-import OrderTimeRestriction from '../order-time-restriction'
 import { connect } from 'react-redux'
 import * as Actions from '../../actions'
 import { bindActionCreators } from 'redux'
-import { mountModal, unMountModal } from '@components/ModalBox/utils'
-import setDryDayModal from '../dry-days-modal'
 import PageHeader from '@components/pageheader'
 import Icon from '@components/icon';
 import Collpasible from '@components/collapsible'
 import Label from '@components/label'
 import './rule-engine.scss'
-import Select from '@components/select'
-import Checkbox from '@components/checkbox'
 import moment from "moment"
 
 class RuleManagement extends React.Component {

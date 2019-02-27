@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
 import HistoryOrdersListItem from './history-ottp-list-item'
 import Pagination from '@components/pagination'
-//import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 import { getQueryObj, getQueryUri } from "@utils/url-utils";
 import Icon from "@components/icon"
@@ -18,60 +17,31 @@ import Button from "@components/button"
 class HistoryOrdersList extends React.Component {
   constructor() {
     super()
-    //this.pagesLimit = 10
     this.state = {
       activePage: 1,
       limit: 10,
       dsoList: [],
       cityList: [],
-      // pageOffset: 0,
-      // data: pastOrderData.data,
-      // loading: false,
       mountFilter: false
     }
-    this.orderAmount = [
-      {
-        text: "0 - 2000",
-        value: 0
-      },
-      {
-        text: "2000 - 4000",
-        value: 1
-      },
-      {
-        text: "4000 - 6000",
-        value: 2
-      },
-      {
-        text: "6000 - 8000",
-        value: 3
-      },
-      {
-        text: "8000 - 10000",
-        value: 4
-      },
-      {
-        text: "All",
-        value: 5
-      }
-    ]
+  
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
-    this.fetchData = this.fetchData.bind(this)
+    this.fetchDropDownData = this.fetchDropDownData.bind(this)
+    this.fetchHistoryOttps = this.fetchHistoryOttps.bind(this)
   }
 
   handleClick(dataObj) {
-    console.log("data", dataObj)
     this.props.history.push(`/home/past-orders/${dataObj.ottp_info.ottp_id}`, dataObj)
   }
 
   handlePageChange(pagerObj) {
-    this.props.actions.setLoadingAll();
-    const offset = pagerObj.pageSize * (pagerObj.activePage - 1);
+    this.props.actions.setLoadingAll()
+    const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
 
     this.setState({
       activePage: pagerObj.activePage,
@@ -102,10 +72,10 @@ class HistoryOrdersList extends React.Component {
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
-      this.fetchData()
+      this.fetchDropDownData()
     } else {
-      this.defaultData()
-      this.fetchData()
+      this.fetchHistoryOttps()
+      this.fetchDropDownData()
     }
   }
 
@@ -135,7 +105,6 @@ class HistoryOrdersList extends React.Component {
 
     Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] })
-      // this.filter[item[0]] = item[1]
     })
 
     this.props.actions.fetchHistoryOTTP({
@@ -144,14 +113,14 @@ class HistoryOrdersList extends React.Component {
     })
   }
 
-  defaultData() {
+  fetchHistoryOttps() {
     this.props.actions.fetchHistoryOTTP({
       limit: this.state.limit,
       offset: 0
     })
   }
 
-  fetchData() {
+  fetchDropDownData() {
     this.props.actions.fetchDSOList({
       limit: 10000,
       offset: 0
@@ -180,7 +149,7 @@ class HistoryOrdersList extends React.Component {
       offset: 0,
       filter: filter
     })
-    history.pushState(queryObj, "live orders listing", `/home/past-orders?${getQueryUri(queryObj)}`)
+    history.pushState(queryObj, "past orders listing", `/home/past-orders?${getQueryUri(queryObj)}`)
     this.mountFilterModal()
   }
 
@@ -193,7 +162,7 @@ class HistoryOrdersList extends React.Component {
           marginBottom: '20px',
           justifyContent: 'space-between',
           alignItems: 'center'
-          }}>
+        }}>
           <Search
             placeholder="Search"
             search={this.handleSearch}
@@ -210,7 +179,6 @@ class HistoryOrdersList extends React.Component {
               dsoList={this.state.dsoList}
               cityList={this.state.cityList}
               orderAmount={this.orderAmount}
-              //permitStatus={this.permitStatus}
             >
             </Filter>
           </div>
@@ -221,8 +189,6 @@ class HistoryOrdersList extends React.Component {
               activePage={this.state.activePage}
               pageSize={this.state.limit}
               totalItemsCount={this.props.historyOTTPCount}
-              //data={this.data}
-              //pageRangeDisplayed={5}
               onChangePage={this.handlePageChange}
             />
           </div>
@@ -236,7 +202,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Permit ID</span>
@@ -253,7 +218,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Time</span>
@@ -264,7 +228,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Delivery Operator</span>
@@ -281,7 +244,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Retailer</span>
@@ -298,7 +260,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>City/Town</span>
@@ -309,7 +270,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Order Amount</span>
@@ -326,7 +286,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Volume (ml)</span>
@@ -343,7 +302,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Permit Status</span>
@@ -360,7 +318,6 @@ class HistoryOrdersList extends React.Component {
                     style={{
                       display: 'flex',
                       alignItems: 'center',
-                      //justifyContent: 'space-around'
                     }}
                   >
                     <span style={{marginRight: '5px'}}>Customer Age Verification</span>
@@ -402,18 +359,6 @@ class HistoryOrdersList extends React.Component {
             </tbody>
           </table>
         </div>
-        {/* {
-          !this.props.loadingHistoryOTTP && this.props.historyOTTPData.length
-          ? <Pagination
-            activePage={this.state.activePage}
-            itemsCountPerPage={this.pagesLimit}
-            totalItemsCount={this.props.historyOTTPCount}
-            pageRangeDisplayed={5}
-            onChange={this.handlePageChange}
-          />
-          : ''
-        } */}
-
       </Fragment>
     )
   }

@@ -5,7 +5,6 @@ import * as Actions from './../actions'
 import DSOListItem from './dso-list-item'
 import { getQueryObj, getQueryUri } from "@utils/url-utils";
 import Pagination from '@components/pagination'
-import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 //import { dsoList } from './../constants/dso-list'
 import Search from '@components/search'

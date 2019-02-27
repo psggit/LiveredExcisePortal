@@ -28,7 +28,6 @@ import * as Actions from './../actions'
 import ConsumerListItem from './customer-list-item'
 import { getQueryObj, getQueryUri } from "@utils/url-utils";
 import Pagination from '@components/pagination'
-import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 //import { dsoList } from './../constants/dso-list'
 import Search from '@components/search'
@@ -256,10 +255,9 @@ class ConsumerManagement extends React.Component {
                 this.props.customerList &&
                 this.props.customerList.map((item,i) => {
                   return  <ConsumerListItem
-                            //handleClick={this.handleClick}
-                            key={i}
-                            data={item}
-                          />
+                    key={i}
+                    data={item}
+                  />
                 })
               }
               {

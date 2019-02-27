@@ -1,20 +1,17 @@
 import React, { Fragment } from "react"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-//import Pagination from 'react-js-pagination'
 import * as Actions from "./../actions"
 import LiveOrdersListItem from "./live-ottp-list-item"
 import Loader from "@components/loader"
-import "@sass/_pagination.scss"
 import Button from "@components/button"
-import { pastOrderData } from "./../constants/past-orders-mock"
+//import { pastOrderData } from "./../constants/past-orders-mock"
+import { orderAmount } from "./../constants/static-data"
 import Search from "@components/search"
-import Toggle from "@components/toggle"
 import Icon from "@components/icon"
 import Pagination from "@components/pagination"
 import PageHeader from "@components/pageheader"
 import Filter from "@components/filterModal"
-import Label from "@components/label"
 import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import "@sass/style.scss"
 
@@ -29,56 +26,13 @@ class LiveOrdersList extends React.Component {
       mountFilter: false,
       filter: []
     }
-
-    this.permitStatus = [
-      {
-        text: 'ONGOING',
-        value: 0
-      },
-      {
-        text: "ONGOING EXTENDED",
-        value: 1
-      },
-      {
-        text: "All",
-        value: 2
-      }
-    ]
-    this.orderAmount = [
-      {
-        text: "0 - 2000",
-        value: 0
-      },
-      {
-        text: "2000 - 4000",
-        value: 1
-      },
-      {
-        text: "4000 - 6000",
-        value: 2
-      },
-      {
-        text: "6000 - 8000",
-        value: 3
-      },
-      {
-        text: "8000 - 10000",
-        value: 4
-      },
-      {
-        text: "All",
-        value: 5
-      }
-    ]
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.defaultData = this.defaultData.bind(this)
-    // this.filteredData = this.filteredData.bind(this)
+    this.fetchLiveOttps = this.fetchLiveOttps.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
-    this.fetchData = this.fetchData.bind(this)
+    this.fetchDropDownData = this.fetchDropDownData.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
-    //this.fetchData = this.fetchData.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
   }
 
@@ -89,7 +43,7 @@ class LiveOrdersList extends React.Component {
     )
   }
 
-  fetchData() {
+  fetchDropDownData() {
     this.props.actions.fetchDSOList({
       limit: 10000,
       offset: 0
@@ -103,21 +57,17 @@ class LiveOrdersList extends React.Component {
     let queryParamsObj = {}
     this.props.actions.setLoadingAll()
     clearTimeout(this.timeoutId)
-    // const offset = this.state.limit * (pagerObj.activePage - 1);
     const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
     this.setState({
       activePage: pagerObj.activePage,
-      //pageOffset: offset,
       limit: pagerObj.pageSize
     })
-  
 
     if(queryObj.filter && queryObj.filter.length) {
       queryParamsObj = {
         activePage: pagerObj.activePage,
         limit: pagerObj.pageSize,
-        filter: queryObj.filter,
-        //offset
+        filter: queryObj.filter
       }
       this.props.actions.fetchInProgressOTTP({
         limit: pagerObj.pageSize,
@@ -150,10 +100,10 @@ class LiveOrdersList extends React.Component {
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
-      this.fetchData()
+      this.fetchDropDownData()
     } else {
-      this.defaultData()
-      this.fetchData()
+      this.fetchLiveOttps()
+      this.fetchDropDownData()
     }
   }
 
@@ -183,7 +133,6 @@ class LiveOrdersList extends React.Component {
 
     Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] })
-      // this.filter[item[0]] = item[1]
     })
   
     if(queryObj.filter) {
@@ -200,7 +149,7 @@ class LiveOrdersList extends React.Component {
     }
   }
 
-  defaultData() {
+  fetchLiveOttps() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
     if(queryObj.filter) {
@@ -231,7 +180,6 @@ class LiveOrdersList extends React.Component {
   }
 
   applyFilter(filter) {
-    console.log("apply filter")
     this.setState({limit: 10})
     const queryObj = {
       limit: 10,
@@ -249,11 +197,6 @@ class LiveOrdersList extends React.Component {
   }
 
   render() {
-    // const tableHeaderStyle = {
-    //   display: "flex",
-    //   alignItems: "center",
-    //   justifyContent: "space-evenly"
-    // };
     return (
       <Fragment>
         <PageHeader pageName="Live Orders" />
@@ -279,8 +222,8 @@ class LiveOrdersList extends React.Component {
               applyFilter={this.applyFilter}
               cityList={this.state.cityList}
               dsoList={this.state.dsoList}
-              orderAmount={this.orderAmount}
-              permitStatus={this.permitStatus}
+              orderAmount={orderAmount}
+              //permitStatus={this.permitStatus}
             >
             </Filter>
           </div>
@@ -341,7 +284,6 @@ class LiveOrdersList extends React.Component {
                       style={{
                         display: "flex",
                         alignItems: "center"
-                        //justifyContent: 'space-around'
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Retailer</span>
@@ -359,7 +301,6 @@ class LiveOrdersList extends React.Component {
                       style={{
                         display: "flex",
                         alignItems: "center"
-                        //justifyContent: 'space-around'
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Order Amount</span>
@@ -376,7 +317,6 @@ class LiveOrdersList extends React.Component {
                       style={{
                         display: "flex",
                         alignItems: "center"
-                        //justifyContent: 'space-around'
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Permit Status</span>
@@ -427,13 +367,13 @@ class LiveOrdersList extends React.Component {
   }
 }
 
-const mapStateToProps = state => state.main;
+const mapStateToProps = state => state.main
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(Actions, dispatch)
-});
+})
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LiveOrdersList);
+)(LiveOrdersList)

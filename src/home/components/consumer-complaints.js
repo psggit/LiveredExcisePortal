@@ -28,12 +28,8 @@ import * as Actions from './../actions'
 import ConsumerListItem from './customer-list-item'
 import { getQueryObj, getQueryUri } from "@utils/url-utils";
 import Pagination from '@components/pagination'
-import '@sass/_pagination.scss'
 import Loader from '@components/loader'
 //import { dsoList } from './../constants/dso-list'
-import Search from '@components/search'
-import Icon from '@components/icon'
-import Button from '@components/button'
 import PageHeader from '@components/pageheader'
 import ConsumerComplaintsItem from "./consumer-complaints-item"
 

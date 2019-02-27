@@ -7,11 +7,9 @@ const ConsumerListItem = ({data}) => {
       <td>{ data.phone }</td>
       <td>{ data.age }</td>
       <td>{ data.address}</td>
-      {/* <td>{ data.license_type}</td> */}
+      <td>{ data.city }</td>
       <td></td>
       <td></td>
-      <td></td>
-      {/* <td>{ data.is_active ? 'Active' : 'Inactive'}</td> */}
     </tr>
   )
 }
