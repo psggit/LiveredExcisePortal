@@ -7,6 +7,7 @@ import Pagination from '@components/pagination'
 import Search from '@components/search'
 import PageHeader from '@components/pageheader'
 import Loader from "@components/loader"
+import Icon from "@components/icon"
 //import { retailersList } from './../constants/retailers-list'
 
 class RetailersList extends React.Component {
@@ -114,9 +115,57 @@ class RetailersList extends React.Component {
                 <th>Name</th>
                 <th>City/Town</th>
                 <th>Address</th>
-                <th>License Type</th>
+                {/* <th>License Type</th>
                 <th>License Status</th>
-                <th>Service Status</th>
+                <th>Service Status</th> */}
+                <th>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center"
+                    }}
+                  >
+                    <span style={{ marginRight: "5px" }}>License Type</span>
+                    <span className="info" style={{ position: "relative" }}>
+                      <Icon name="info" />
+                      <span className="tooltip-text">
+                        Type of license acquired by Authorized Retailer
+                      </span>
+                    </span>
+                  </div>
+                </th>
+                <th>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center"
+                    }}
+                  >
+                    <span style={{ marginRight: "5px" }}>License Status</span>
+                    <span className="info" style={{ position: "relative" }}>
+                      <Icon name="info" />
+                      <span className="tooltip-text">
+                        Current status of Retailer’s license 
+                      </span>
+                    </span>
+                  </div>
+                </th>
+                <th>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center"
+                    }}
+                  >
+                    <span style={{ marginRight: "5px" }}>Service Status</span>
+                    <span className="info" style={{ position: "relative" }}>
+                      <Icon name="info" />
+                      <span className="tooltip-text">
+                        Current status of Retailer if their service is enabled or disabled
+                      </span>
+                    </span>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>

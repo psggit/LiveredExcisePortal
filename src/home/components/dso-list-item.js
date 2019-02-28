@@ -8,6 +8,7 @@ const DSOListItem = ({ data, handleClick }) => {
       <td>{ data.locations }</td>
       <td>{ data.license_type }</td>
       <td>{ data.license_status ? 'Active' : 'Inactive' }</td>
+      <td>{ data.is_active ? 'Enabled' : 'Disabled' }</td>
     </tr>
   )
 }

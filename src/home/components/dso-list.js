@@ -8,6 +8,7 @@ import Pagination from '@components/pagination'
 import Loader from '@components/loader'
 //import { dsoList } from './../constants/dso-list'
 import PageHeader from '@components/pageheader'
+import Icon from "@components/icon"
 
 class DSOList extends React.Component {
   constructor() {
@@ -111,8 +112,56 @@ class DSOList extends React.Component {
                 <th>Name</th>
                 <th>Head Quaters</th>
                 <th>Location Servicable</th>
-                <th>License Type</th>
-                <th>License Status</th>
+                {/* <th>License Type</th>
+                <th>License Status</th> */}
+                <th>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center"
+                    }}
+                  >
+                    <span style={{ marginRight: "5px" }}>License Type</span>
+                    <span className="info" style={{ position: "relative" }}>
+                      <Icon name="info" />
+                      <span className="tooltip-text">
+                      Current status of Delivery Operator if their service is enabled or disabled
+                      </span>
+                    </span>
+                  </div>
+                </th>
+                <th>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center"
+                    }}
+                  >
+                    <span style={{ marginRight: "5px" }}>License Status</span>
+                    <span className="info" style={{ position: "relative" }}>
+                      <Icon name="info" />
+                      <span className="tooltip-text">
+                        Current status of Delivery Operator if their service is enabled or disabled
+                      </span>
+                    </span>
+                  </div>
+                </th>
+                <th>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center"
+                    }}
+                  >
+                    <span style={{ marginRight: "5px" }}>Delivery Service Status</span>
+                    <span className="info" style={{ position: "relative" }}>
+                      <Icon name="info" />
+                      <span className="tooltip-text">
+                        Current status of Delivery Operator if their service is enabled or disabled
+                      </span>
+                    </span>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>
