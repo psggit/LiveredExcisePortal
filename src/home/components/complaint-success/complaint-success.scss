@@ -12,13 +12,18 @@
   &.container .body {
     width: 100%;
     height: calc(100vh - 50px);
-    background: #f9f9f9;
+    background: #fff;
   }
 
   .content {
     padding:28px;
     width:100%;
     text-align:center;
+    background: #f9f9f9;
+    height: calc(100% - 177px);
+  }
+
+  .content .success, .content .failure-text {
     position:absolute;
     top:50%;
     left:50%;
@@ -29,7 +34,6 @@
     font-weight: normal;
     line-height: 1.4;
     text-align: center;
-
   }
 
   .content .header {
@@ -39,7 +43,7 @@
     color: #417505;
   }
 
-  .content.failure .header {
+  .content.failure-container .header {
     font-size: 18px;
     font-weight: 600;
     /* line-height: 1.4; */
@@ -68,6 +72,10 @@
     margin-top: 15px;
   }
 
+  button:focus {
+    outline: none;
+  }
+
   .footer{
     display: flex;
     flex-direction: column;
@@ -76,6 +84,7 @@
     bottom: 0px;
     position: absolute;
     width: 100%;
+    height: 177px;
   }
 
   .footer div:first-child {

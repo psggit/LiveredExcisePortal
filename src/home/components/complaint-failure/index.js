@@ -8,7 +8,7 @@ class complaintFailure extends React.Component {
   }
 
   handleClick() {
-    location.href="/support"
+    location.href="/complaints"
   }
 
   render() {
@@ -21,10 +21,12 @@ class complaintFailure extends React.Component {
           </span> */}
         </div>
         <div className="body">
-          <div className="content failure">
-            <Icon name="failure" />
-            <p className="header text">Something went wrong!</p>
-            <button onClick={this.handleClick}>Try again</button>
+          <div className="content failure-container">
+            <div className="failure-text">
+              <Icon name="failure" />
+              <p className="header text">Something went wrong!</p>
+              <button onClick={this.handleClick}>Try again</button>
+            </div>
           </div>
           <div className="footer">
             <div>

@@ -12,6 +12,7 @@
     letter-spacing: -0.2px;
     color: #ffffff;
     padding: 18px 33px;
+    //height: 66px;
   }
 
   &.container .body {
@@ -35,11 +36,13 @@
 
   .body .header {
     padding: 14px 33px;
+    height: 66px;
   }
 
   .body .content {
     padding: 14px 33px;
     background: #f9f9f9;
+    height: calc(100% - 66px - 177px);
   }
 
   label {
@@ -109,6 +112,7 @@
     flex-direction: column;
     text-align: center;
     padding: 20px 50px;
+    height: 177px;
   }
 
   .footer div:first-child {

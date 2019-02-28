@@ -158,7 +158,7 @@ class App extends React.Component {
       <Provider store={config.store}>
         <Router history={history}>
           <div>
-            <Route exact path="/" component={Login} />
+            {/* <Route exact path="/" component={Login} /> */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/complaint-success" component={SuccessPage} />
             <Route exact path="/complaint-failure" component={FailurePage} />

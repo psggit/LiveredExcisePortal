@@ -18,9 +18,11 @@ class complaintSuccess extends React.Component {
         </div>
         <div className="body">
           <div className="content">
-            <Icon name="success" />
-            <p className="header text">Thank you!</p>
-            <p className="sub-header text">We'll look into it ASAP</p>
+            <div className="success">
+              <Icon name="success" />
+              <p className="header text">Thank you!</p>
+              <p className="sub-header text">We'll look into it ASAP</p>
+            </div>
           </div>
           <div className="footer">
             <div>
