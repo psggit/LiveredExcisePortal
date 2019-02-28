@@ -28,12 +28,12 @@ class LiveOrdersList extends React.Component {
       OttpId: ""
     }
     this.handlePageChange = this.handlePageChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleRowClick = this.handleRowClick.bind(this)
     this.fetchLiveOttps = this.fetchLiveOttps.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.clearSearchResults = this.clearSearchResults.bind(this)
-    this.fetchDropDownData = this.fetchDropDownData.bind(this)
+    this.fetchFilterDropDownData = this.fetchFilterDropDownData.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
@@ -42,10 +42,10 @@ class LiveOrdersList extends React.Component {
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
-      this.fetchDropDownData()
+      this.fetchFilterDropDownData()
     } else {
       this.fetchLiveOttps()
-      this.fetchDropDownData()
+      this.fetchFilterDropDownData()
     }
   }
 
@@ -96,14 +96,14 @@ class LiveOrdersList extends React.Component {
   }
 
 
-  handleClick(dataObj) {
+  handleRowClick(dataObj) {
     this.props.history.push(
       `/home/live-orders/${dataObj.ottp_info.ottp_id}`,
       dataObj
     )
   }
 
-  fetchDropDownData() {
+  fetchFilterDropDownData() {
     this.props.actions.fetchDSOList({
       limit: 10000,
       offset: 0
@@ -376,9 +376,7 @@ class LiveOrdersList extends React.Component {
                   this.props.inProgressOTTP &&
                   this.props.inProgressOTTP.map(item => (
                     <LiveOrdersListItem
-                      handleClick={this.handleClick}
-                      handleOrderAssign={this.openAssignOrderModal}
-                      handleShowNotes={this.handleShowNotes}
+                      handleClick={this.handleRowClick}
                       key={item.ottp_info.ottp_id}
                       data={item}
                     />

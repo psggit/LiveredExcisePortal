@@ -28,15 +28,15 @@ class RetailerDetail extends React.Component {
     const data = this.props.history.location.state
     return (
       <React.Fragment>
-        <div 
+        <div
           style={{
-            display: 'flex', 
-            marginBottom: '60px', 
-            justifyContent: 'space-between', 
+            display: 'flex',
+            marginBottom: '60px',
+            justifyContent: 'space-between',
             alignItems: 'baseline'
           }}
         >
-          <p 
+          <p
             style={{
               fontSize: '22px',
               letterSpacing: '0.3px',
@@ -47,20 +47,20 @@ class RetailerDetail extends React.Component {
           </p>
           <p>
             {data.is_active ? <Icon name="active-indicator" /> : <Icon name="expired" />}
-            <span 
-              style={{ 
-                display: 'inline-block', 
-                fontSize: '14px', 
-                marginLeft: '5px', 
-                marginBottom: '20px', 
-                textTransform: 'uppercase' 
+            <span
+              style={{
+                display: 'inline-block',
+                fontSize: '14px',
+                marginLeft: '5px',
+                marginBottom: '20px',
+                textTransform: 'uppercase'
               }}
             >
               {data.is_active ? "Service Enabled" : "Service Disabled"}
             </span>
           </p>
         </div>
-        <div 
+        <div
           style={{
             background: '#f0f3f6',
             fontSize: '16px',
@@ -72,14 +72,14 @@ class RetailerDetail extends React.Component {
         >
           BASIC INFORMATION
         </div>
-        <div style={{display: 'flex'}}>
-          <OutletDetail 
+        <div style={{ display: 'flex' }}>
+          <OutletDetail
             // storeCode={data.code}
             storeCode=""
             licenseType={data.license_type}
             licenseStatus={data.license_status ? 'Active' : 'Inactive'}
             licenceValidity={data.license_expiry}
-            // licenceValidity={data.licence_validity}
+          // licenceValidity={data.licence_validity}
           />
           <OutletContactDetail
             outletsCount={data.number_of_outlets}
@@ -97,19 +97,19 @@ class RetailerDetail extends React.Component {
           !this.props.loadingOutletList &&
           this.props.outletList.length > 0 &&
           <React.Fragment>
-          <div
-            style={{
-              background: '#f0f3f6',
-              fontSize: '16px',
-              lineHeight: '1.13',
-              color: '#152935',
-              padding: '20px 30px',
-              border: '1px solid #dfe3e6',
-              marginTop: '36px'
-            }}
-          >
-            OUTLETS
-          </div>
+            <div
+              style={{
+                background: '#f0f3f6',
+                fontSize: '16px',
+                lineHeight: '1.13',
+                color: '#152935',
+                padding: '20px 30px',
+                border: '1px solid #dfe3e6',
+                marginTop: '36px'
+              }}
+            >
+              OUTLETS
+            </div>
             <div>
               <table>
                 <thead>
@@ -124,10 +124,10 @@ class RetailerDetail extends React.Component {
                   {
                     this.props.outletList.map(item => (
                       <tr key={item.outlet_code}>
-                        <td>{ item.outlet_name }</td>
-                        <td>{ item.city }</td>
-                        <td>{ item.address }</td>
-                        <td>{ item.outlet_code }</td>
+                        <td>{item.outlet_name}</td>
+                        <td>{item.city}</td>
+                        <td>{item.address}</td>
+                        <td>{item.outlet_code}</td>
                       </tr>
                     ))}
                 </tbody>

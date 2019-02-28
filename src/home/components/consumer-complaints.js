@@ -19,50 +19,50 @@ class ConsumerComplaints extends React.Component {
       activeTab: 'consumer-complaints'
     }
     this.handlePageChange = this.handlePageChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    //this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
-    this.setQueryParamas = this.setQueryParamas.bind(this)
-    this.defaultData = this.defaultData.bind(this)
+    //this.setQueryParamas = this.setQueryParamas.bind(this)
+    this.fetchConsumerComplaintList = this.fetchConsumerComplaintList.bind(this)
     this.setActiveTab = this.setActiveTab.bind(this)
   }
 
   componentDidMount() {
-    if (location.search.length) {
-      this.setQueryParamas()
-    } else {
-      this.defaultData()
-    }
+    // if (location.search.length) {
+    //   this.setQueryParamas()
+    // } else {
+    this.fetchConsumerComplaintList()
+    //}
   }
 
   setActiveTab(activeTabName) {
     this.setState({ activeTab: activeTabName })
   }
 
-  setQueryParamas() {
-    const queryUri = location.search.slice(1)
-    const queryObj = getQueryObj(queryUri)
+  // setQueryParamas() {
+  //   const queryUri = location.search.slice(1)
+  //   const queryObj = getQueryObj(queryUri)
 
-    Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] })
-      // this.filter[item[0]] = item[1]
-    })
+  //   Object.entries(queryObj).forEach((item) => {
+  //     this.setState({ [item[0]]: item[1] })
+  //     // this.filter[item[0]] = item[1]
+  //   })
 
-    this.props.actions.fetchConsumerComplaints({
-      limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1)
-    })
-  }
+  //   this.props.actions.fetchConsumerComplaints({
+  //     limit: parseInt(queryObj.limit),
+  //     offset: queryObj.limit * (queryObj.activePage - 1)
+  //   })
+  // }
 
-  defaultData() {
+  fetchConsumerComplaintList() {
     this.props.actions.fetchConsumerComplaints({
       limit: this.state.limit,
       offset: 0
     })
   }
 
-  handleClick(dataObj) {
-    this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
-  }
+  // handleClick(dataObj) {
+  //   this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
+  // }
 
   handlePageChange(pagerObj) {
     this.props.actions.setLoadingAll()

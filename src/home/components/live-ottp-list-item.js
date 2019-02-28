@@ -16,5 +16,4 @@ const LiveOrdersListItem = ({ data, handleClick }) => {
   )
 }
 
-
 export default LiveOrdersListItem

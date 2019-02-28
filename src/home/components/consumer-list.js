@@ -18,45 +18,45 @@ class ConsumerManagement extends React.Component {
       activeTab: 'consumers'
     }
     this.handlePageChange = this.handlePageChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    //this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
-    this.setQueryParamas = this.setQueryParamas.bind(this)
-    this.defaultData = this.defaultData.bind(this)
+    //this.setQueryParamas = this.setQueryParamas.bind(this)
+    this.fetchConsumerList = this.fetchConsumerList.bind(this)
     this.setActiveTab = this.setActiveTab.bind(this)
   }
 
   componentDidMount() {
-    if (location.search.length) {
-      this.setQueryParamas()
-    } else {
-      this.defaultData()
-    }
+    // if (location.search.length) {
+    //   this.setQueryParamas()
+    // } else {
+    this.fetchConsumerList()
+    //}
   }
 
-  setQueryParamas() {
-    const queryUri = location.search.slice(1)
-    const queryObj = getQueryObj(queryUri)
+  // setQueryParamas() {
+  //   const queryUri = location.search.slice(1)
+  //   const queryObj = getQueryObj(queryUri)
 
-    Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] })
-    })
+  //   Object.entries(queryObj).forEach((item) => {
+  //     this.setState({ [item[0]]: item[1] })
+  //   })
 
-    this.props.actions.fetchDSOList({
-      limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1)
-    })
-  }
+  //   this.props.actions.fetchDSOList({
+  //     limit: parseInt(queryObj.limit),
+  //     offset: queryObj.limit * (queryObj.activePage - 1)
+  //   })
+  // }
 
-  defaultData() {
+  fetchConsumerList() {
     this.props.actions.fetchConsumerList({
       limit: this.state.limit,
       offset: 0
     })
   }
 
-  handleClick(dataObj) {
-    this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
-  }
+  // handleClick(dataObj) {
+  //   this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
+  // }
 
   handlePageChange(pagerObj) {
     this.props.actions.setLoadingAll()

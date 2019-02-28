@@ -32,7 +32,7 @@ class RuleManagement extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Rule engine mounted")
+    // console.log("Rule engine mounted")
     this.props.actions.fetchRules({
       state_short_name: "TN"
     }) 
@@ -53,9 +53,9 @@ class RuleManagement extends React.Component {
     }
   }
 
-  updateZoneRestrictions(id) {
-    console.log("id", id)
-  }
+  // updateZoneRestrictions(id) {
+  //   console.log("id", id)
+  // }
 
   render() {
     //console.log("render props", this.props.rulesData, "state", this.state)

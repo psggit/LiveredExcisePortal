@@ -19,42 +19,42 @@ class DSOList extends React.Component {
       limit: 10
     }
     this.handlePageChange = this.handlePageChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleRowClick = this.handleRowClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
-    this.setQueryParamas = this.setQueryParamas.bind(this)
-    this.defaultData = this.defaultData.bind(this)
+    //this.setQueryParamas = this.setQueryParamas.bind(this)
+    this.fetchDsoList = this.fetchDsoList.bind(this)
   }
 
   componentDidMount() {
-    if (location.search.length) {
-      this.setQueryParamas()
-    } else {
-      this.defaultData()
-    }
+    // if (location.search.length) {
+    //   this.setQueryParamas()
+    // } else {
+      this.fetchDsoList()
+    //}
   }
 
-  setQueryParamas() {
-    const queryUri = location.search.slice(1)
-    const queryObj = getQueryObj(queryUri)
+  // setQueryParamas() {
+  //   const queryUri = location.search.slice(1)
+  //   const queryObj = getQueryObj(queryUri)
 
-    Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] })
-    })
+  //   Object.entries(queryObj).forEach((item) => {
+  //     this.setState({ [item[0]]: item[1] })
+  //   })
 
-    this.props.actions.fetchDSOList({
-      limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1)
-    })
-  }
+  //   this.props.actions.fetchDSOList({
+  //     limit: parseInt(queryObj.limit),
+  //     offset: queryObj.limit * (queryObj.activePage - 1)
+  //   })
+  // }
 
-  defaultData() {
+  fetchDsoList() {
     this.props.actions.fetchDSOList({
       limit: this.state.limit,
       offset: 0
     })
   }
 
-  handleClick(dataObj) {
+  handleRowClick(dataObj) {
     this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
   }
 
@@ -112,8 +112,6 @@ class DSOList extends React.Component {
                 <th>Name</th>
                 <th>Head Quaters</th>
                 <th>Location Servicable</th>
-                {/* <th>License Type</th>
-                <th>License Status</th> */}
                 <th>
                   <div
                     style={{
@@ -170,7 +168,7 @@ class DSOList extends React.Component {
                 this.props.DSOList &&
                 this.props.DSOList.map(item => (
                   <DSOListItem
-                    handleClick={this.handleClick}
+                    handleClick={this.handleRowClick}
                     key={item.id}
                     data={item}
                   />

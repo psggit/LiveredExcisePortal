@@ -2,7 +2,6 @@ import React from "react"
 import Moment from "moment"
 
 const ConsumerComplaintsItem = ({data}) => {
-  //console.log("data", data)
   return (
     <tr>
       <td>{ Moment(data.date_time).format('DD/MM/YYYY') }</td>

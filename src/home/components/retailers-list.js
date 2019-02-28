@@ -56,7 +56,6 @@ class RetailersList extends React.Component {
   }
 
   handleClick(dataObj) {
-    console.log("props in retaier", dataObj)
     this.props.history.push(`/home/retailers/${dataObj.retailer_id}`, dataObj)
   }
 
@@ -115,9 +114,6 @@ class RetailersList extends React.Component {
                 <th>Name</th>
                 <th>City/Town</th>
                 <th>Address</th>
-                {/* <th>License Type</th>
-                <th>License Status</th>
-                <th>Service Status</th> */}
                 <th>
                   <div
                     style={{

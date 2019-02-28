@@ -29,13 +29,13 @@ class HistoryOrdersList extends React.Component {
     }
   
     this.handlePageChange = this.handlePageChange.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleRowClick = this.handleRowClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.clearSearchResults = this.clearSearchResults.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
-    this.fetchDropDownData = this.fetchDropDownData.bind(this)
+    this.fetchFilterDropDownData = this.fetchFilterDropDownData.bind(this)
     this.fetchHistoryOttps = this.fetchHistoryOttps.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
   }
@@ -43,10 +43,10 @@ class HistoryOrdersList extends React.Component {
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
-      this.fetchDropDownData()
+      this.fetchFilterDropDownData()
     } else {
       this.fetchHistoryOttps()
-      this.fetchDropDownData()
+      this.fetchFilterDropDownData()
     }
   }
 
@@ -97,7 +97,7 @@ class HistoryOrdersList extends React.Component {
   }
 
 
-  handleClick(dataObj) {
+  handleRowClick(dataObj) {
     this.props.history.push(`/home/past-orders/${dataObj.ottp_info.ottp_id}`, dataObj)
   }
 
@@ -149,7 +149,7 @@ class HistoryOrdersList extends React.Component {
     })
   }
 
-  fetchDropDownData() {
+  fetchFilterDropDownData() {
     this.props.actions.fetchDSOList({
       limit: 10000,
       offset: 0
@@ -399,7 +399,7 @@ class HistoryOrdersList extends React.Component {
               this.props.historyOTTPData &&
               this.props.historyOTTPData.map(item => (
                 <HistoryOrdersListItem
-                  handleClick={this.handleClick}
+                  handleClick={this.handleRowClick}
                   key={item.ottp_info.ottp_id }
                   data={item}
                 />
