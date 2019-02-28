@@ -132,12 +132,12 @@ class ConsumerManagement extends React.Component {
           <table>
             <thead>
               <tr>
-                <th>PhoneNumber</th>
+                <th>Name</th>
                 <th>Age</th>
                 <th>Address</th>
                 <th>City/Town</th>
-                <th>Total Orders</th>
-                <th>Weekly Orders(Avg)</th>
+                {/* <th>Total Orders</th>
+                <th>Weekly Orders(Avg)</th> */}
               </tr>
             </thead>
             <tbody>

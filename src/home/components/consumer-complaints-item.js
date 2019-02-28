@@ -6,11 +6,11 @@ const ConsumerComplaintsItem = ({data}) => {
   return (
     <tr>
       <td>{ Moment(data.date_time).format('DD/MM/YYYY') }</td>
-      <td>{ Moment(data.date_time).format('h:mm A') }</td>
-      <td>{ data.phone_number }</td>
+      <td style={{width: '70px'}}>{ Moment(data.date_time).format('h:mm A') }</td>
+      <td style={{width: '180px'}}>{ data.name }</td>
       <td>{ data.age }</td>
       <td>{ data.city }</td>
-      <td>{data.reason}</td>
+      <td style={{width: '100px'}}>{data.reason}</td>
       <td>{data.complaint_message}</td>
     </tr>
   )

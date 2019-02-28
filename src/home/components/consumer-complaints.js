@@ -133,11 +133,11 @@ class ConsumerComplaints extends React.Component {
             <thead>
               <tr>
                 <th>Date</th>
-                <th>Time</th>
-                <th>PhoneNumber</th>
+                <th style={{width: '70px'}}>Time</th>
+                <th style={{width: '180px'}}>Name</th>
                 <th>Age</th>
                 <th>City/Town</th>
-                <th>Type</th>
+                <th style={{width: '100px'}}>Type</th>
                 <th>Description</th>
               </tr>
             </thead>

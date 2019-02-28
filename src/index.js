@@ -108,7 +108,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentRoute: location.pathname.split('/')[2] || 'live-ottp',
+      currentRoute: location.pathname.split('/')[2] || 'live-orders',
       key: 0,
       isLoggedIn: true
     }
@@ -117,8 +117,9 @@ class App extends React.Component {
 
   componentDidMount() {
     history.listen((loction) => {
+      const newRoute = location.pathname.split('/')[2]
       const { key } = this.state
-      this.setState({ key: key + 1 })
+      this.setState({ key: key + 1, currentRoute: newRoute })
     })
   }
 
