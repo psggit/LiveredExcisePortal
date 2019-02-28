@@ -6,7 +6,8 @@ import RetailersListItem from './retailer-list-item'
 import Pagination from '@components/pagination'
 import Search from '@components/search'
 import PageHeader from '@components/pageheader'
-import { retailersList } from './../constants/retailers-list'
+import Loader from "@components/loader"
+//import { retailersList } from './../constants/retailers-list'
 
 class RetailersList extends React.Component {
   constructor() {
@@ -15,6 +16,7 @@ class RetailersList extends React.Component {
       activePage: 1,
       limit: 10
     }
+    this.state_short_name = "TN"
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.resetPagination = this.resetPagination.bind(this)
@@ -33,26 +35,28 @@ class RetailersList extends React.Component {
     const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] });
+      this.setState({ [item[0]]: item[1] })
       // this.filter[item[0]] = item[1]
     })
 
     this.props.actions.fetchRetailerList({
       limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1)
+      offset: queryObj.limit * (queryObj.activePage - 1),
+      state_short_name: this.state_short_name
     })
   }
 
   defaultData() {
     this.props.actions.fetchRetailerList({
       limit: this.state.limit,
-      offset: 0
+      offset: 0,
+      state_short_name: this.state_short_name
     })
   }
 
   handleClick(dataObj) {
-    //console.log("props", this.props)
-    this.props.history.push(`/home/retailers/${dataObj.id}`, dataObj)
+    console.log("props in retaier", dataObj)
+    this.props.history.push(`/home/retailers/${dataObj.retailer_id}`, dataObj)
   }
 
   handlePageChange(pagerObj) {
@@ -66,7 +70,8 @@ class RetailersList extends React.Component {
 
     this.props.actions.fetchRetailerList({
       limit: pagerObj.pageSize,
-      offset
+      offset,
+      state_short_name: this.state_short_name
     })
 
     const queryParamsObj = {
@@ -76,8 +81,8 @@ class RetailersList extends React.Component {
 
     history.pushState(
       queryParamsObj,
-      "past orders listing",
-      `/home/past-orders?${getQueryUri(queryParamsObj)}`
+      "retailers listing",
+      `/home/retailers?${getQueryUri(queryParamsObj)}`
     )
   }
 
@@ -89,20 +94,8 @@ class RetailersList extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Retailers" />
-        <div style={{
-          display: 'flex',
-          marginBottom: '20px',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-        >
-          <Search
-            placeholder="Search"
-            search={this.handleSearch}
-          />
-        </div>
         {
-          !this.props.loadingRetailerList && this.props.retailerList.length > 0 && 
+          !this.props.loadingRetailerList && this.props.retailerList.length > 1 &&
           (
             <div style={{ margin: "10px 0" }}>
               <Pagination
@@ -120,22 +113,39 @@ class RetailersList extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>City/Town</th>
-                {/* <th>Application status</th> */}
                 <th>Address</th>
                 <th>License Type</th>
                 <th>License Status</th>
+                <th>Service Status</th>
               </tr>
             </thead>
             <tbody>
               {
-                retailersList.map(item => (
+                !this.props.loadingRetailerList &&
+                this.props.retailerList &&
+                this.props.retailerList.map(item => (
                   <RetailersListItem
                     handleClick={this.handleClick}
-                    key={item.id}
+                    key={item.retailer_id}
                     data={item}
                   />
                 ))
               }
+              {this.props.loadingRetailerList && (
+                <tr>
+                  <td colSpan="8">
+                    <Loader />
+                  </td>
+                </tr>
+              )}
+              {!this.props.loadingRetailerList &&
+                this.props.retailerList.length === 0 && (
+                <tr>
+                  <td style={{ textAlign: "center" }} colSpan="8">
+                    No retailers found
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

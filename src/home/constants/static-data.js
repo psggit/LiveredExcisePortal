@@ -24,3 +24,14 @@ export const orderAmount = [
     value: 5
   }
 ]
+
+// export const stateList = [
+//   "tamilnadu" = {
+//     name: "tamilnadu",
+//     short_name: "TN"
+//   },
+//   "tamilnadu" : {
+//     name: "tamilnadu",
+//     short_name: "TN"
+//   }
+// ]

@@ -73,9 +73,19 @@ export function fetchRules(action) {
     .then(json => json)
 }
 
+export function fetchOutletList(action) {
+  return POST({
+    api: 'http://192.168.5.86:3001/livered/listOutlets',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
 export function fetchRetailerList(action) {
   return POST({
-    api: 'http://192.168.5.86:8086/livered/listDso',
+    api: 'http://192.168.5.86:3001/livered/listRetailers',
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -85,7 +95,7 @@ export function fetchRetailerList(action) {
 
 export function fetchRetailerDetails(action) {
   return POST({
-    api: 'http://192.168.5.86:8086/livered/dsoDetails',
+    api: 'http://192.168.5.86:3001/livered/retailerDetails',
     handleError: true,
     prependBaseUrl: false,
     data: action.data

@@ -1,6 +1,7 @@
 import React from "react"
 import "./retailer-detail.scss"
 import Icon from "@components/icon"
+import Moment from "moment"
 
 const OutletDetail = ({storeCode, licenseType, licenseStatus, licenceValidity}) => (
   <div className="outlet-detail-card">
@@ -21,7 +22,7 @@ const OutletDetail = ({storeCode, licenseType, licenseStatus, licenceValidity}) 
     </div>
     <div className="item">
       <p className="label">License Validity</p>
-      <p className="value">{licenceValidity}</p>
+      <p className="value">{Moment(licenceValidity).format('DD/MM/YYYY')}</p>
     </div>
   </div>
 )

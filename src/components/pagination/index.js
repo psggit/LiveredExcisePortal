@@ -58,24 +58,8 @@ class Pagination extends React.Component {
     this.updatePageSize = this.updatePageSize.bind(this)
   }
 
-  // componentWillMount() {
-  //   const { pageSize, totalItemsCount, activePage } = this.props;
-
-  //   if (activePage) {
-  //     this.setState({
-  //       pager: { 
-  //         activePage,
-  //         totalItemsCount,
-  //         pageSize
-  //       },
-  //       active: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
-  //     });
-  //   }
-  // }
-
   componentDidMount() {
     const { pageSize, totalItemsCount, activePage } = this.props;
-    console.log("props", this.props)
     if (activePage) {
       this.setState({
         pager: { 
@@ -102,28 +86,8 @@ class Pagination extends React.Component {
     }
   }
 
-  // setPage(page) {
-  //   //console.log("activePage", page)
-  //   var { pageSize, totalItemsCount, activePage } = this.props;
-   
-  //   if (page < 1 || page > (totalItemsCount/pageSize)) {
-  //     return;
-  //   }
-  //   let newPager = { ...this.state.pager };    
-  //   newPager.activePage = activePage;                       
-  //   this.setState({ pager: newPager });
-
-  //   this.props.onChangePage(this.state.pager);
-  // }
-
   updateActivePage(activePage) {
-    // console.log("activePage", activePage)
     const { pageSize, totalItemsCount } = this.props;
-    // console.log("active page", activePage, this.props, this.props.data)
-  
-    // if (activePage < 1 || activePage > ((totalItemsCount / pageSize) + 1)) {
-    //   return;
-    // }
 
     if (Number.isInteger(totalItemsCount / pageSize)) {
       if (activePage < 1 || activePage > ((totalItemsCount / pageSize))) {
@@ -139,28 +103,25 @@ class Pagination extends React.Component {
     newPager.activePage = activePage;                       
     this.setState({
       pager: newPager,
-      //active: this.pageSizeOptions.find(item => item.value === pageSize.toString()).value
       activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
     },
     () => {
       this.props.onChangePage(this.state.pager)
-    });
+    })
   }
 
   updatePageSize(e) {
-    //console.log("page size", e.target.value)
     const selectedValue = this.pageSizeOptions.find(item => item.value === e.target.value).text
     const { totalItemsCount, activePage } = this.props
     if (activePage < 1) {
-      //console.log("if", activePage < 1, selectedValue > totalItemsCount, selectedValue, totalItemsCount)
       return;
     }
-    let newPager = { ...this.state.pager };    
-    newPager.pageSize =  parseInt(selectedValue);
-    newPager.activePage =  1;                              
+    let newPager = { ...this.state.pager }
+    newPager.pageSize =  parseInt(selectedValue)
+    newPager.activePage =  1                           
     this.setState({ pager: newPager, activePageSize: e.target.value }, () => {
       this.props.onChangePage(this.state.pager)
-    });
+    })
   }
 
   render() {
@@ -192,7 +153,7 @@ class Pagination extends React.Component {
             >
               {
                 this.pageSizeOptions.map((item, i) => {
-                  return <option value={item.value}>{item.text}</option>
+                  return <option key={i} value={item.value}>{item.text}</option>
                 })
               }
             </select>

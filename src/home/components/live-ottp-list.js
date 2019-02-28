@@ -247,8 +247,7 @@ class LiveOrdersList extends React.Component {
           <div style={{ marginLeft: '46px', position: 'relative' }}>
             <span style={{ marginRight: '10px' }}>
               <Button primary onClick={this.resetFilter}>
-                <Icon name="filter" />
-                <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Reset Filter</span>
+                <span>Reset Filter</span>
               </Button>
             </span>
             <Button primary onClick={this.mountFilterModal}>
@@ -377,7 +376,7 @@ class LiveOrdersList extends React.Component {
                       handleClick={this.handleClick}
                       handleOrderAssign={this.openAssignOrderModal}
                       handleShowNotes={this.handleShowNotes}
-                      key={item.ottp_id}
+                      key={item.ottp_info.ottp_id}
                       data={item}
                     />
                   ))}

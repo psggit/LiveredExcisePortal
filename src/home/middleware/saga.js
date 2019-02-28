@@ -74,6 +74,16 @@ function* fetchDSODetails(action) {
   }
 }
 
+function* fetchOutletList(action) {
+  try {
+    const data = yield call(Api.fetchOutletList, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_OUTLETS_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchRetailerList(action) {
   try {
     const data = yield call(Api.fetchRetailerList, action)
@@ -183,6 +193,12 @@ function* watchFetchDSODetails() {
   }
 }
 
+function* watchFetchOutletList() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_OUTLETS_LIST, fetchOutletList)
+  }
+}
+
 function* watchFetchRetailerList() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_LIST, fetchRetailerList)
@@ -234,6 +250,7 @@ export default function* rootSaga() {
     fork(watchFetchRules),
     fork(watchFetchConsumerList),
     fork(watchFetchConsumerComplaints),
-    fork(watchFetchCitiesList)
+    fork(watchFetchCitiesList),
+    fork(watchFetchOutletList)
   ]
 }

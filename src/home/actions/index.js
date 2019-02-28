@@ -45,6 +45,11 @@ export const fetchRetailerDetails = data => ({
   data
 })
 
+export const fetchOutletList = data => ({
+  type: ActionTypes.REQUEST_FETCH_OUTLETS_LIST,
+  data
+})
+
 export const fetchOTTPDetail = data => ({
   type: ActionTypes.REQUEST_FETCH_OTTP_DETAIL,
   data
