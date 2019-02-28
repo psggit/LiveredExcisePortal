@@ -173,6 +173,7 @@ class HistoryOrdersList extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
+    this.setState({filter: [filterObj]})
     history.pushState(urlParams, "past orders listing", `/home/past-orders?${(getQueryUri(urlParams))}`)
   }
 
@@ -181,12 +182,14 @@ class HistoryOrdersList extends React.Component {
   }
 
   clearSearchResults() {
-    this.fetchHistoryOttps()
-    this.props.history.push(`/home/past-orders`)
+    if(this.state.filter.length > 0) {
+      this.fetchHistoryOttps()
+      this.props.history.push(`/home/past-orders`)
+    }
   }
 
   applyFilter(filter) {
-    this.setState({limit: 10})
+    this.setState({limit: 10, filter})
     const queryObj = {
       limit: 10,
       offset: 0,
@@ -397,7 +400,7 @@ class HistoryOrdersList extends React.Component {
               this.props.historyOTTPData.map(item => (
                 <HistoryOrdersListItem
                   handleClick={this.handleClick}
-                  key={item.ottp_id}
+                  key={item.ottp_info.ottp_id }
                   data={item}
                 />
               ))}

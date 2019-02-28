@@ -194,6 +194,7 @@ class LiveOrdersList extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
+    this.setState({filter: [filterObj]})
     history.pushState(urlParams, "live orders listing", `/home/live-orders?${(getQueryUri(urlParams))}`)
   }
 
@@ -202,8 +203,10 @@ class LiveOrdersList extends React.Component {
   }
 
   clearSearchResults() {
-    this.fetchLiveOttps()
-    this.props.history.push(`/home/live-orders`)
+    if(this.state.filter.length > 0) {
+      this.fetchLiveOttps()
+      this.props.history.push(`/home/live-orders`)
+    }
   }
 
   resetFilter() {
@@ -211,7 +214,7 @@ class LiveOrdersList extends React.Component {
   }
 
   applyFilter(filter) {
-    this.setState({limit: 10})
+    this.setState({limit: 10, filter})
     const queryObj = {
       limit: 10,
       offset: 0,
