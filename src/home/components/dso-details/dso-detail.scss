@@ -4,6 +4,10 @@
   border: 1px solid #e2e5e8;
   background-color: #fff;
 
+  .item {
+    word-wrap: break-word;
+  }
+
   .label {
     font-size: 13px;
     line-height: 1.5;
