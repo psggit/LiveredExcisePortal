@@ -1,6 +1,6 @@
-import React from "react";
-import "./complaints.scss";
-import { POST } from "@utils/fetch";
+import React from "react"
+import "./complaints.scss"
+import { POST } from "@utils/fetch"
 
 class Complaints extends React.Component {
   constructor() {

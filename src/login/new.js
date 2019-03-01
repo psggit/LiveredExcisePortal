@@ -65,7 +65,7 @@ class Login extends React.Component {
             Notify(JSON.parse(json.data).message, "warning")
           } else {
             createSession(json)
-            window.location.href = "/home"
+            window.location.href = "/home/overview"
           }
         })
         .catch((error) => {

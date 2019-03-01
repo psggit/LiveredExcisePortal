@@ -108,7 +108,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentRoute: location.pathname.split('/')[2] || 'live-orders',
+      currentRoute: location.pathname.split('/')[2] || 'overview',
       key: 0,
       isLoggedIn: true
     }

@@ -7,9 +7,9 @@ import { mountModal } from '@components/ModalBox/utils'
 import moment from 'moment'
 import '@sass/order-detail.scss'
 import Icon from '@components/icon'
-import OttpDetailCustomer from './customer';
-import OttpDetailDeliveryAgent from './delivery-agent';
-import OttpDetailOrder from './order';
+import OttpDetailCustomer from './customer'
+import OttpDetailDeliveryAgent from './delivery-agent'
+import OttpDetailOrder from './order'
 
 class OTTPDetail extends Component {
   constructor() {

@@ -30,7 +30,6 @@ class LiveOrdersList extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
     this.fetchLiveOttps = this.fetchLiveOttps.bind(this)
-    this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.clearSearchResults = this.clearSearchResults.bind(this)
     this.fetchFilterDropDownData = this.fetchFilterDropDownData.bind(this)
@@ -69,6 +68,9 @@ class LiveOrdersList extends React.Component {
     }
   }
 
+  /**
+    * Gets the url parameters and fetches inProgressOttp
+    */
   setQueryParamas() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
@@ -95,7 +97,11 @@ class LiveOrdersList extends React.Component {
     }
   }
 
-
+  /**
+   * On clicking each liveOrder it takes to detailed view of that particular order 
+   * @param {object} dataObj - Passed from liveOttpListItem 
+   * @param {string} dataObj.ottp_id - To get the details of clicked live order
+   **/
   handleRowClick(dataObj) {
     this.props.history.push(
       `/home/live-orders/${dataObj.ottp_info.ottp_id}`,
@@ -103,6 +109,9 @@ class LiveOrdersList extends React.Component {
     )
   }
 
+  /**
+   * Fetches DsoList and CityList to list in filter dropdown
+   */
   fetchFilterDropDownData() {
     this.props.actions.fetchDSOList({
       limit: 10000,
@@ -111,6 +120,12 @@ class LiveOrdersList extends React.Component {
     this.props.actions.fetchCitiesList({})
   }
 
+  /**
+   * Navigates to next page
+   * @param {object} pagerObj - Passed from pagination component
+   * @param {Integer} pagerObj.activePage - Used to calculate the offset to fetch next set of live orders 
+   * @param {Integer} pagerObj.pageSize - Used as limit to fetch next set of live orders
+   */
   handlePageChange(pagerObj) {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
@@ -153,10 +168,9 @@ class LiveOrdersList extends React.Component {
     )
   }
 
-  resetPagination() {
-    this.setState({ activePage: 1 })
-  }
-
+  /**
+   * Fetches the live orders of given limit and offset
+   */
   fetchLiveOttps() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
@@ -172,13 +186,20 @@ class LiveOrdersList extends React.Component {
         offset: 0,
       })
     }
-    this.timeoutId = setTimeout(this.defaultData, 30000)
+    this.timeoutId = setTimeout(this.fetchLiveOttps, 30000)
   }
 
+  /**
+   * Clears the timer on unmounting the component
+   */
   componentWillUnmount() {
     clearTimeout(this.timeoutId)
   }
 
+  /**
+   * Fetches the live order of given OttpId
+   * @param {string} searchQuery - OttpId passed from searchComponent used for filtering the live orders
+   */
   handleSearch(searchQuery) {
     const filterObj = {
       filterby: "OttpId",
@@ -198,10 +219,16 @@ class LiveOrdersList extends React.Component {
     history.pushState(urlParams, "live orders listing", `/home/live-orders?${(getQueryUri(urlParams))}`)
   }
 
+  /**
+   * Toggles[mount and unmounts] the filter component
+   */
   mountFilterModal() {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
+  /**
+   * Clears the applied filter/search and renders all the live orders
+   */
   clearSearchResults() {
     if(this.state.filter.length > 0) {
       this.fetchLiveOttps()
@@ -209,10 +236,17 @@ class LiveOrdersList extends React.Component {
     }
   }
 
+  /**
+   * Clears the filter
+   */
   resetFilter() {
     this.clearSearchResults()
   }
 
+  /**
+   * Fetches the filtered live orders
+   * @param {array of object} filter - Passed form FilterModal component
+   */
   applyFilter(filter) {
     this.setState({limit: 10, filter})
     const queryObj = {
