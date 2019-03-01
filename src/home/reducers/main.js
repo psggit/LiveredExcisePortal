@@ -87,7 +87,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_DSO_DETAILS]: (state, action) => {
     return Object.assign({}, state, {
       loadingDSODetail: false,
-      DSODetail: action.data,
+      DSODetail: action.data.dso,
       // DSODetailCount: action.data.count
     })
   },

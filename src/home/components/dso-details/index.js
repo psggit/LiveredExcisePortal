@@ -14,7 +14,7 @@ class DSODetails extends React.Component {
   componentDidMount() {
     const { dsoId } = this.props.match.params
     this.props.actions.fetchDSODetails({
-      id: dsoId
+      dso_id: dsoId
     })
   }
 
@@ -28,6 +28,7 @@ class DSODetails extends React.Component {
       border: '1px solid #dfe3e6'
     }
     const data = this.props.DSODetail
+    console.log("dso detail", data)
     return (
       <React.Fragment>
         {
@@ -41,7 +42,7 @@ class DSODetails extends React.Component {
                   color: '#152935'
                 }}
               >
-                {data.name}
+                {data.dso_name}
               </p>
             </div>
             <div style={headerStyle} >
@@ -49,9 +50,8 @@ class DSODetails extends React.Component {
             </div>
             <div style={{display: 'flex', marginBottom: '36px'}}>
               <LicenseDetails 
-                type={data.license_type}
-                status={data.license_status}
-                validity={data.license_expiry}
+                status={data.is_validated}
+                dateOfValidation={""}
                 locationsIn={data.locations}
               />
               <HeadOfficeDetails
