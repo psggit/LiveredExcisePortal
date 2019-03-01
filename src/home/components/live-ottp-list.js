@@ -276,7 +276,7 @@ class LiveOrdersList extends React.Component {
         }}
         > 
           <Search
-            placeholder="Search"
+            placeholder="Search by permit Id"
             searchText={this.state.OttpId}
             search={this.handleSearch}
             clearSearch={this.clearSearchResults}

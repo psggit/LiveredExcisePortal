@@ -35,7 +35,7 @@ export function fetchOTTPDetail(action) {
 
 export function fetchDSOList(action) {
   return POST({
-    api: 'http://192.168.5.86:8086/livered/listDso',
+    api: 'http://192.168.5.86:3002/livered/listDso',
     handleError: true,
     prependBaseUrl: false,
     data: action.data

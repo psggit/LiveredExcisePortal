@@ -52,14 +52,14 @@ class Pagination extends React.Component {
         text: "1",
         value: "10"
       }
-    ];
+    ]
 
     this.updateActivePage = this.updateActivePage.bind(this)
     this.updatePageSize = this.updatePageSize.bind(this)
   }
 
   componentDidMount() {
-    const { pageSize, totalItemsCount, activePage } = this.props;
+    const { pageSize, totalItemsCount, activePage } = this.props
     if (activePage) {
       this.setState({
         pager: { 
@@ -68,7 +68,7 @@ class Pagination extends React.Component {
           pageSize
         },
         activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
-      });
+      })
     }
   }
 
@@ -82,25 +82,25 @@ class Pagination extends React.Component {
           pageSize
         },
         activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
-      });
+      })
     }
   }
 
   updateActivePage(activePage) {
-    const { pageSize, totalItemsCount } = this.props;
+    const { pageSize, totalItemsCount } = this.props
 
     if (Number.isInteger(totalItemsCount / pageSize)) {
       if (activePage < 1 || activePage > ((totalItemsCount / pageSize))) {
-        return;
+        return
       }
     } else {
       if (activePage < 1 || activePage > ((totalItemsCount / pageSize) + 1)) {
-        return;
+        return
       }
     }
   
-    let newPager = { ...this.state.pager };    
-    newPager.activePage = activePage;                       
+    let newPager = { ...this.state.pager } 
+    newPager.activePage = activePage                       
     this.setState({
       pager: newPager,
       activePageSize: this.pageSizeOptions.find(item => item.text === pageSize.toString()).value
@@ -114,7 +114,7 @@ class Pagination extends React.Component {
     const selectedValue = this.pageSizeOptions.find(item => item.value === e.target.value).text
     const { totalItemsCount, activePage } = this.props
     if (activePage < 1) {
-      return;
+      return
     }
     let newPager = { ...this.state.pager }
     newPager.pageSize =  parseInt(selectedValue)
@@ -173,11 +173,11 @@ class Pagination extends React.Component {
        
         <div >
           <span style={{
-              marginRight: '20px',
-              fontSize: '12px',
-              lineHeight: '1.25',
-              color: '#5a6872'
-            }}
+            marginRight: '20px',
+            fontSize: '12px',
+            lineHeight: '1.25',
+            color: '#5a6872'
+          }}
           > 
             {activePage} of {Math.ceil(totalItemsCount/pageSize)} pages 
           </span>

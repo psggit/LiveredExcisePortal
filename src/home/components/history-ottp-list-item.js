@@ -4,9 +4,8 @@ import Icon from '@components/icon'
 
 /**
  * Returns row for past orders table
- * @param {object} props Component props
- * @param {object} props.data - each past order details
- * @param {function} props.handleClick - Row click callback function
+ * @param {object} data - past order details
+ * @param {function} handleClick - Row click callback function
  */
 const HistoryOrdersListItem = ({ data, handleClick }) => {
   return (

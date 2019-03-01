@@ -21,6 +21,7 @@ class DSOList extends React.Component {
       dsoName: "",
       filter: []
     }
+    this.state_short_name = "TN"
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
     this.setQueryParamas = this.setQueryParamas.bind(this)
@@ -56,11 +57,13 @@ class DSOList extends React.Component {
       this.props.actions.fetchDSOList({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
+        state_short_name: this.state_short_name,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
     } else {
       this.props.actions.fetchDSOList({
         limit: parseInt(queryObj.limit),
+        state_short_name: this.state_short_name,
         offset: queryObj.limit * (queryObj.activePage - 1)
       })
     }
@@ -72,6 +75,7 @@ class DSOList extends React.Component {
   fetchDsoList() {
     this.props.actions.fetchDSOList({
       limit: this.state.limit,
+      state_short_name: this.state_short_name,
       offset: 0
     })
   }
@@ -102,6 +106,7 @@ class DSOList extends React.Component {
 
     this.props.actions.fetchDSOList({
       limit: pagerObj.pageSize,
+      state_short_name: this.state_short_name,
       offset
     })
 
@@ -112,7 +117,7 @@ class DSOList extends React.Component {
 
     history.pushState(
       queryParamsObj,
-      "past orders listing",
+      "dso listing",
       `/home/delivery-operators?${getQueryUri(queryParamsObj)}`
     )
   }
@@ -146,6 +151,7 @@ class DSOList extends React.Component {
     this.props.actions.fetchDSOList({
       limit: 10,
       offset: 0,
+      state_short_name: this.state_short_name,
       filter: [filterObj]
     })
     this.setState({filter: [filterObj]})
@@ -161,7 +167,7 @@ class DSOList extends React.Component {
         }}
         > 
           <Search
-            placeholder="Search"
+            placeholder="Search by Name"
             searchText={this.state.dsoName}
             search={this.handleSearch}
             clearSearch={this.clearSearchResults}
@@ -244,7 +250,7 @@ class DSOList extends React.Component {
                 this.props.DSOList.map(item => (
                   <DSOListItem
                     handleClick={this.handleRowClick}
-                    key={item.id}
+                    key={item.dso_id}
                     data={item}
                   />
                 ))

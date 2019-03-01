@@ -3,9 +3,8 @@ import Moment from 'moment'
 
 /**
  * Returns row for live orders table
- * @param {object} props Component props
- * @param {object} props.data - each live order details
- * @param {function} props.handleClick - Row click callback function
+ * @param {object} data - live order details
+ * @param {function} handleClick - Row click callback function
  */
 const LiveOrdersListItem = ({ data, handleClick }) => {
   return (

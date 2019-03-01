@@ -3,10 +3,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../actions'
 import ConsumerListItem from './customer-list-item'
-import { getQueryObj, getQueryUri } from "@utils/url-utils";
+import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import Pagination from '@components/pagination'
 import Loader from '@components/loader'
 import PageHeader from '@components/pageheader'
+import Search from "@components/search"
 
 class ConsumerManagement extends React.Component {
   constructor() {
@@ -15,38 +16,58 @@ class ConsumerManagement extends React.Component {
     this.state = {
       activePage: 1,
       limit: 10,
-      activeTab: 'consumers'
+      activeTab: 'consumers',
+      cityName: "",
+      filter: []
     }
     this.handlePageChange = this.handlePageChange.bind(this)
-    //this.handleClick = this.handleClick.bind(this)
-    this.resetPagination = this.resetPagination.bind(this)
-    //this.setQueryParamas = this.setQueryParamas.bind(this)
+    this.setQueryParamas = this.setQueryParamas.bind(this)
     this.fetchConsumerList = this.fetchConsumerList.bind(this)
     this.setActiveTab = this.setActiveTab.bind(this)
+    this.clearSearchResults = this.clearSearchResults.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount() {
-    // if (location.search.length) {
-    //   this.setQueryParamas()
-    // } else {
-    this.fetchConsumerList()
-    //}
+    if (location.search.length) {
+      this.setQueryParamas()
+    } else {
+      this.fetchConsumerList()
+    }
   }
 
-  // setQueryParamas() {
-  //   const queryUri = location.search.slice(1)
-  //   const queryObj = getQueryObj(queryUri)
+  /**
+    * Gets the url parameters and fetches consumer list
+    */
+  setQueryParamas() {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
 
-  //   Object.entries(queryObj).forEach((item) => {
-  //     this.setState({ [item[0]]: item[1] })
-  //   })
+    Object.entries(queryObj).forEach((item) => {
+      this.setState({ [item[0]]: item[1] })
+    })
 
-  //   this.props.actions.fetchDSOList({
-  //     limit: parseInt(queryObj.limit),
-  //     offset: queryObj.limit * (queryObj.activePage - 1)
-  //   })
-  // }
+    if(queryObj.filter) {
+      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
+      if(filter.find(item => item.filterby === "CityName")) {
+        this.setState({cityName: filter.find(item => item.filterby === "CityName").value})
+      }
+      this.props.actions.fetchConsumerList({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1),
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      this.props.actions.fetchConsumerList({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
+  }
 
+  /**
+   * Fetches the consumer list of given limit and offset
+   */
   fetchConsumerList() {
     this.props.actions.fetchConsumerList({
       limit: this.state.limit,
@@ -54,10 +75,12 @@ class ConsumerManagement extends React.Component {
     })
   }
 
-  // handleClick(dataObj) {
-  //   this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
-  // }
-
+  /**
+   * Navigates to next page
+   * @param {object} pagerObj - Passed from pagination component
+   * @param {Integer} pagerObj.activePage - Used to calculate the offset to fetch next set of consumers
+   * @param {Integer} pagerObj.pageSize - Used as limit to fetch next set of consumers
+   */
   handlePageChange(pagerObj) {
     this.props.actions.setLoadingAll()
     const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
@@ -67,7 +90,7 @@ class ConsumerManagement extends React.Component {
       limit: pagerObj.pageSize
     })
 
-    this.props.actions.fetchDSOList({
+    this.props.actions.fetchConsumerList({
       limit: pagerObj.pageSize,
       offset
     })
@@ -79,15 +102,50 @@ class ConsumerManagement extends React.Component {
 
     history.pushState(
       queryParamsObj,
-      "past orders listing",
-      `/home/delivery-operators?${getQueryUri(queryParamsObj)}`
+      "consumer listing",
+      `/home/consumers?${getQueryUri(queryParamsObj)}`
     )
   }
 
-  resetPagination() {
-    this.setState({ activePage: 1 })
+  /**
+   * Clears the applied filter/search and renders all the consumers
+   */
+  clearSearchResults() {
+    if(this.state.filter.length > 0) {
+      this.fetchConsumerList()
+      this.props.history.push(`/home/consumers`)
+    }
   }
 
+
+  /**
+   * Fetches the consumer details of given city name
+   * @param {string} searchQuery - cityName passed from searchComponent, used for filtering the consumer list
+   */
+  handleSearch(searchQuery) {
+    //console.log("searched text", searchQuery)
+    const filterObj = {
+      filterby: "CityName",
+      value: searchQuery
+    }
+    const urlParams = {
+      limit: 10,
+      activePage: 1,
+      filter: JSON.stringify([filterObj])
+    }
+    this.props.actions.fetchConsumerList({
+      limit: 10,
+      offset: 0,
+      filter: [filterObj]
+    })
+    this.setState({filter: [filterObj]})
+    history.pushState(urlParams, "consumer listing", `/home/consumers?${(getQueryUri(urlParams))}`)
+  }
+
+  /**
+   * Used to highlight the active tab
+   * @param {String} activeTabName - Indicates the active tab name
+   */
   setActiveTab(activeTabName) {
     this.setState({ activeTab: activeTabName })
   }
@@ -121,13 +179,23 @@ class ConsumerManagement extends React.Component {
                 activePage={this.state.activePage}
                 pageSize={this.state.limit}
                 totalItemsCount={this.props.customerListCount}
-                //data={this.data}
-                //pageRangeDisplayed={5}
                 onChangePage={this.handlePageChange}
               />
             </div>
           )
         }
+        <div style={{
+          marginBottom: "20px",
+          marginTop: "26px"
+        }}
+        > 
+          <Search
+            placeholder="Search by City/Town"
+            searchText={this.state.cityName}
+            search={this.handleSearch}
+            clearSearch={this.clearSearchResults}
+          />
+        </div>
         <div style={{ width: '100%' }}>
           <table>
             <thead>
@@ -167,7 +235,7 @@ class ConsumerManagement extends React.Component {
                 (
                   <tr>
                     <td style={{ textAlign: "center" }} colSpan="9">
-                      No orders found
+                      No consumers found
                     </td>
                   </tr>
                 )

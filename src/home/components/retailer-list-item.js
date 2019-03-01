@@ -1,5 +1,10 @@
 import React from 'react'
 
+/**
+ * Returns row for retailers table
+ * @param {object} data - retailer details
+ * @param {function} handleClick - Row click callback function
+ */
 const RetailerListItem = ({ data, handleClick }) => {
   return (
     <tr onClick={ () => {handleClick(data)} } className="clickable">

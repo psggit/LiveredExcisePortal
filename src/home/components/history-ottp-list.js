@@ -248,7 +248,7 @@ class HistoryOrdersList extends React.Component {
           alignItems: 'center'
         }}>
           <Search
-            placeholder="Search"
+            placeholder="Search by permit Id"
             search={this.handleSearch}
             searchText={this.state.OttpId}
             clearSearch={this.clearSearchResults}
