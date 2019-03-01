@@ -3,11 +3,11 @@ import "./retailer-detail.scss"
 import Icon from "@components/icon"
 import Moment from "moment"
 
-const OutletDetail = ({storeCode, licenseType, licenseStatus, licenceValidity}) => (
+const OutletDetail = ({retailerId, licenseType, licenseStatus, licenceValidity}) => (
   <div className="outlet-detail-card">
     <div className="item">
-      <p className="label">Store Code</p>
-      <p className="value">{storeCode}</p>
+      <p className="label">Retailer Id</p>
+      <p className="value">{retailerId}</p>
     </div>
     <div className="item">
       <p className="label">License Type</p>

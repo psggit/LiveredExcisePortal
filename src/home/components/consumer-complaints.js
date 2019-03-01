@@ -234,7 +234,7 @@ class ConsumerComplaints extends React.Component {
                 )
               }
               {
-                !this.props.loadingCustomerList &&
+                !this.props.loadingCustomerComplaints &&
                 this.props.customerComplaints.length === 0 && 
                 (
                   <tr>

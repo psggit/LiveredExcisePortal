@@ -86,7 +86,7 @@ class DSOList extends React.Component {
    * @param {string} dataObj.id - Used to get the details of clicked dso
    **/
   handleRowClick(dataObj) {
-    this.props.history.push(`/home/delivery-operators/${dataObj.id}`, dataObj)
+    this.props.history.push(`/home/delivery-operators/${dataObj.dso_id}`, dataObj)
   }
 
   /**
@@ -192,7 +192,7 @@ class DSOList extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>Head Quaters</th>
-                <th>Location Servicable</th>
+                <th>Locations Servicable</th>
                 <th>
                   <div
                     style={{
@@ -200,16 +200,16 @@ class DSOList extends React.Component {
                       alignItems: "center"
                     }}
                   >
-                    <span style={{ marginRight: "5px" }}>License Type</span>
+                    <span style={{ marginRight: "5px" }}>Validation Status</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
-                      Current status of Delivery Operator if their service is enabled or disabled
+                      Status Delivery Service Operator 
                       </span>
                     </span>
                   </div>
                 </th>
-                <th>
+                {/* <th>
                   <div
                     style={{
                       display: "flex",
@@ -224,7 +224,7 @@ class DSOList extends React.Component {
                       </span>
                     </span>
                   </div>
-                </th>
+                </th> */}
                 <th>
                   <div
                     style={{

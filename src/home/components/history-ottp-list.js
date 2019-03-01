@@ -255,7 +255,7 @@ class HistoryOrdersList extends React.Component {
           />
           <div style={{ marginLeft: '46px', position: 'relative' }}>
             <span style={{ marginRight: '10px' }}>
-              <Button primary onClick={this.resetFilter}>
+              <Button secondary onClick={this.resetFilter}>
                 <span>Reset Filter</span>
               </Button>
             </span>

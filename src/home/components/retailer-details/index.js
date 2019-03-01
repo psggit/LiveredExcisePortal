@@ -75,7 +75,7 @@ class RetailerDetail extends React.Component {
         <div style={{ display: 'flex' }}>
           <OutletDetail
             // storeCode={data.code}
-            storeCode=""
+            retailerId={data.retailer_id}
             licenseType={data.license_type}
             licenseStatus={data.license_status ? 'Active' : 'Inactive'}
             licenceValidity={data.license_expiry}
@@ -115,9 +115,9 @@ class RetailerDetail extends React.Component {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Date Issued</th>
                     <th>City/Town</th>
                     <th>Address</th>
+                    <th>Outlet Code</th>
                   </tr>
                 </thead>
                 <tbody>

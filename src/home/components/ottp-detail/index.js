@@ -89,6 +89,7 @@ class OTTPDetail extends Component {
                 address={data.consumer.address}
                 phone={data.consumer.phone}
                 name={data.consumer.name}
+                //verified=""
               />
               <OttpDetailDeliveryAgent
                 age={data.delivery_agent.age}

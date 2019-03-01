@@ -1,6 +1,10 @@
 import React from "react"
 import Moment from "moment"
 
+/**
+ * Returns row for customer complaints table
+ * @param {object} data - Customer complaint details
+ */
 const ConsumerComplaintsItem = ({data}) => {
   return (
     <tr>

@@ -56,7 +56,7 @@ class RuleManagement extends React.Component {
     return (
       <div id="rule-engine">
         <PageHeader pageName="Rule Engine" />
-        <Collpasible title="Customer Restrictions">
+        <Collpasible title="CUSTOMER RESTRICTIONS">
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
               <div className="legal-age">
@@ -83,7 +83,7 @@ class RuleManagement extends React.Component {
           </div>
         </Collpasible>
 
-        <Collpasible title="Permit Rules">
+        <Collpasible title="PERMIT RULES">
           <div style={{ display: 'inline-block', marginRight: '20px' }} className="permit-time-validity">
             <Label icon="info">
               Permit Time Validity
@@ -115,7 +115,7 @@ class RuleManagement extends React.Component {
           </div>
         </Collpasible>
 
-        <Collpasible title="Time Restrictions">
+        <Collpasible title="TIME RESTRICTIONS">
           <div>
             <Label>Daily Restrictions</Label>
           </div>
@@ -139,7 +139,7 @@ class RuleManagement extends React.Component {
             })
           }
         </Collpasible>
-        <Collpasible title="Special Restrictions">
+        <Collpasible title="SPECIAL RESTRICTIONS">
           <table>
             <thead>
               <tr>
@@ -148,6 +148,7 @@ class RuleManagement extends React.Component {
                 <th><Label>From</Label></th>
                 <th><Label>To</Label></th>
                 <th><Label>Repeat</Label></th>
+                <th><Label>Reason</Label></th>
                 <th></th>
               </tr>
             </thead>
@@ -161,6 +162,7 @@ class RuleManagement extends React.Component {
                       <td>{moment(item.from_time).format('h:mm a')}</td>
                       <td>{moment(item.to_time).format('h:mm a')}</td>
                       <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
+                      <td>{item.reason}</td>
                     </tr>
                   )
                 })

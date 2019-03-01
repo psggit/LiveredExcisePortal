@@ -55,7 +55,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_CONSUMER_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingCustomerList: false,
-      customerList: action.data.consumer,
+      customerList: action.data.consumers,
       customerListCount: action.data.count
     })
   },

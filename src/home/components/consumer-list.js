@@ -202,8 +202,8 @@ class ConsumerManagement extends React.Component {
               <tr>
                 <th>Name</th>
                 <th>Age</th>
-                <th>Address</th>
                 <th>City/Town</th>
+                <th>Address</th>
                 {/* <th>Total Orders</th>
                 <th>Weekly Orders(Avg)</th> */}
               </tr>

@@ -29,7 +29,7 @@ table tbody {
   background-color: #fff;
 }
 
-table tbody tr:hover {
+table tbody tr.clickable:hover {
   background-color: rgba(85, 150, 230, 0.1);
   td {
     border-bottom: 1px solid #5596e6;

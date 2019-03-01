@@ -55,7 +55,7 @@ export function fetchCitiesList(action) {
 
 export function fetchDSODetails(action) {
   return POST({
-    api: 'http://192.168.5.86:8086/livered/dsoDetails',
+    api: 'http://192.168.5.86:3002/livered/dsoDetails',
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -105,7 +105,7 @@ export function fetchRetailerDetails(action) {
 
 export function fetchConsumerList(action) {
   return POST({
-    api: 'http://192.168.5.86:8087/livered/listConsumers',
+    api: 'http://192.168.5.86:3003/livered/listConsumers',
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -115,7 +115,7 @@ export function fetchConsumerList(action) {
 
 export function fetchConsumerComplaints(action) {
   return POST({
-    api: 'http://192.168.5.86:8087/livered/listComplaints',
+    api: 'http://192.168.5.86:3003/livered/listComplaints',
     handleError: true,
     prependBaseUrl: false,
     data: action.data
