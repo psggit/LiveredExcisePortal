@@ -69,7 +69,7 @@ class LiveOrdersList extends React.Component {
   }
 
   /**
-    * Gets the url parameters and fetches inProgressOttp
+    * Gets the url parameters and fetches live ottps
     */
   setQueryParamas() {
     const queryUri = location.search.slice(1)
@@ -98,7 +98,7 @@ class LiveOrdersList extends React.Component {
   }
 
   /**
-   * On clicking each liveOrder it takes to detailed view of that particular order 
+   * On clicking each liveOrder it takes to detailed view page of that particular order 
    * @param {object} dataObj - Passed from liveOttpListItem 
    * @param {string} dataObj.ottp_id - Used to get the details of clicked live order
    **/

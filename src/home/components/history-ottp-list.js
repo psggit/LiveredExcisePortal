@@ -99,7 +99,7 @@ class HistoryOrdersList extends React.Component {
   }
 
   /**
-   * On clicking each pastorder it takes to detailed view of that particular order 
+   * On clicking each pastorder it takes to detailed view page of that particular order 
    * @param {object} dataObj - Passed from historyOttpListItem 
    * @param {string} dataObj.ottp_id - Used to get the details of clicked past order
    **/
