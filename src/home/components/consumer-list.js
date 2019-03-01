@@ -171,6 +171,18 @@ class ConsumerManagement extends React.Component {
             </li>
           </ul>
         </div>
+        <div style={{
+          marginBottom: "20px",
+          marginTop: "26px"
+        }}
+        > 
+          <Search
+            placeholder="Search by City/Town"
+            searchText={this.state.cityName}
+            search={this.handleSearch}
+            clearSearch={this.clearSearchResults}
+          />
+        </div>
         {
           !this.props.loadingConsumerList && this.props.customerList.length > 0 && 
           (
@@ -184,18 +196,6 @@ class ConsumerManagement extends React.Component {
             </div>
           )
         }
-        <div style={{
-          marginBottom: "20px",
-          marginTop: "26px"
-        }}
-        > 
-          <Search
-            placeholder="Search by City/Town"
-            searchText={this.state.cityName}
-            search={this.handleSearch}
-            clearSearch={this.clearSearchResults}
-          />
-        </div>
         <div style={{ width: '100%' }}>
           <table>
             <thead>

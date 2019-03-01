@@ -27,8 +27,6 @@ class RuleManagement extends React.Component {
       zoneRestrictions: [],
       permitRules: {}
     }
-
-    this.updateZoneRestrictions = this.updateZoneRestrictions.bind(this)
   }
 
   componentDidMount() {
@@ -53,12 +51,7 @@ class RuleManagement extends React.Component {
     }
   }
 
-  // updateZoneRestrictions(id) {
-  //   console.log("id", id)
-  // }
-
   render() {
-    //console.log("render props", this.props.rulesData, "state", this.state)
     const  { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions, permitRules } = this.state
     return (
       <div id="rule-engine">

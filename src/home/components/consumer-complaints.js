@@ -173,6 +173,18 @@ class ConsumerComplaints extends React.Component {
             </li>
           </ul>
         </div>
+        <div style={{
+          marginBottom: "20px",
+          marginTop: "26px"
+        }}
+        > 
+          <Search
+            placeholder="Search by reason type"
+            searchText={this.state.reason}
+            search={this.handleSearch}
+            clearSearch={this.clearSearchResults}
+          />
+        </div>
         {
           !this.props.loadingCustomerComplaints && this.props.customerComplaints.length > 0 && 
           (
@@ -186,18 +198,6 @@ class ConsumerComplaints extends React.Component {
             </div>
           )
         }
-        <div style={{
-          marginBottom: "20px",
-          marginTop: "26px"
-        }}
-        > 
-          <Search
-            placeholder="Search by reason type"
-            searchText={this.state.reason}
-            search={this.handleSearch}
-            clearSearch={this.clearSearchResults}
-          />
-        </div>
         <div style={{ width: '100%' }}>
           <table>
             <thead>
