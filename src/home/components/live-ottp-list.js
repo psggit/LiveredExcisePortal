@@ -100,7 +100,7 @@ class LiveOrdersList extends React.Component {
   /**
    * On clicking each liveOrder it takes to detailed view of that particular order 
    * @param {object} dataObj - Passed from liveOttpListItem 
-   * @param {string} dataObj.ottp_id - To get the details of clicked live order
+   * @param {string} dataObj.ottp_id - Used to get the details of clicked live order
    **/
   handleRowClick(dataObj) {
     this.props.history.push(
@@ -169,7 +169,7 @@ class LiveOrdersList extends React.Component {
   }
 
   /**
-   * Fetches the live orders of given limit and offset
+   * Fetches the live orders of given limit and offset for every 30 secs
    */
   fetchLiveOttps() {
     const queryUri = location.search.slice(1)
@@ -198,7 +198,7 @@ class LiveOrdersList extends React.Component {
 
   /**
    * Fetches the live order of given OttpId
-   * @param {string} searchQuery - OttpId passed from searchComponent used for filtering the live orders
+   * @param {string} searchQuery - OttpId passed from searchComponent, used for filtering the live orders
    */
   handleSearch(searchQuery) {
     const filterObj = {

@@ -30,7 +30,6 @@ class HistoryOrdersList extends React.Component {
   
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
-    this.resetPagination = this.resetPagination.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.clearSearchResults = this.clearSearchResults.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
@@ -70,6 +69,9 @@ class HistoryOrdersList extends React.Component {
     }
   }
 
+  /**
+    * Gets the url parameters and fetches pastOrder Ottps
+    */
   setQueryParamas() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
@@ -96,11 +98,21 @@ class HistoryOrdersList extends React.Component {
     }
   }
 
-
+  /**
+   * On clicking each pastorder it takes to detailed view of that particular order 
+   * @param {object} dataObj - Passed from historyOttpListItem 
+   * @param {string} dataObj.ottp_id - Used to get the details of clicked past order
+   **/
   handleRowClick(dataObj) {
     this.props.history.push(`/home/past-orders/${dataObj.ottp_info.ottp_id}`, dataObj)
   }
 
+  /**
+   * Navigates to next page
+   * @param {object} pagerObj - Passed from pagination component
+   * @param {Integer} pagerObj.activePage - Used to calculate the offset to fetch next set of past orders 
+   * @param {Integer} pagerObj.pageSize - Used as limit to fetch next set of past orders
+   */
   handlePageChange(pagerObj) {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
@@ -138,10 +150,9 @@ class HistoryOrdersList extends React.Component {
     }
   }
 
-  resetPagination() {
-    this.setState({ activePage: 1 })
-  }
-
+  /**
+   * Fetches the past orders of given limit and offset
+   */
   fetchHistoryOttps() {
     this.props.actions.fetchHistoryOTTP({
       limit: this.state.limit,
@@ -149,6 +160,9 @@ class HistoryOrdersList extends React.Component {
     })
   }
 
+  /**
+   * Fetches DsoList and CityList to list in filter dropdown
+   */
   fetchFilterDropDownData() {
     this.props.actions.fetchDSOList({
       limit: 10000,
@@ -157,6 +171,10 @@ class HistoryOrdersList extends React.Component {
     this.props.actions.fetchCitiesList({})
   }
 
+  /**
+   * Fetches the past order of given OttpId
+   * @param {string} searchQuery - OttpId passed from searchComponent, used for filtering the past orders
+   */
   handleSearch(searchQuery) {
     //console.log("searched text", searchQuery)
     const filterObj = {
@@ -177,10 +195,16 @@ class HistoryOrdersList extends React.Component {
     history.pushState(urlParams, "past orders listing", `/home/past-orders?${(getQueryUri(urlParams))}`)
   }
 
+  /**
+   * Toggles[mount and unmounts] the filter component
+   */
   mountFilterModal() {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
+  /**
+   * Clears the applied filter/search and renders all the past orders
+   */
   clearSearchResults() {
     if(this.state.filter.length > 0) {
       this.fetchHistoryOttps()
@@ -188,6 +212,10 @@ class HistoryOrdersList extends React.Component {
     }
   }
 
+  /**
+   * Fetches the filtered past orders
+   * @param {array of object} filter - Passed form FilterModal component
+   */
   applyFilter(filter) {
     this.setState({limit: 10, filter})
     const queryObj = {
