@@ -7,29 +7,29 @@ import { POST } from "@utils/fetch";
 
 class Header extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       showLogoutModal: false
-    };
-    this.logout = this.logout.bind(this);
-    this.mountModal = this.mountModal.bind(this);
-    this.unMountModal = this.unMountModal.bind(this);
-    this.openDropdown = this.openDropdown.bind(this);
+    }
+    this.logout = this.logout.bind(this)
+    this.mountModal = this.mountModal.bind(this)
+    this.unMountModal = this.unMountModal.bind(this)
+    this.openDropdown = this.openDropdown.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
   mountModal() {
-    this.setState({ showLogoutModal: true });
+    this.setState({ showLogoutModal: true })
   }
 
   unMountModal() {
-    console.log("unmount modal");
-    this.setState({ showLogoutModal: false });
+    console.log("unmount modal")
+    this.setState({ showLogoutModal: false })
   }
 
   openDropdown() {
-    console.log("open dropdown");
-    this.setState({ showDropdown: !this.state.showDropdown });
+    console.log("open dropdown")
+    this.setState({ showDropdown: !this.state.showDropdown })
   }
 
   // logout() {
@@ -38,7 +38,7 @@ class Header extends React.Component {
   // }
 
   logout() {
-    this.setState({ showLogoutModal: false });
+    this.setState({ showLogoutModal: false })
     POST({
       api: "/retailer/auth/user/logout",
       apiBase: "api1",
@@ -49,21 +49,21 @@ class Header extends React.Component {
         if (response.status !== 200) {
           console.log(
             `Looks like there was a problem. Status Code: ${response.status}`
-          );
-          localStorage.clear();
-          location.href = "/";
-          return;
+          )
+          localStorage.clear()
+          location.href = "/"
+          return
         }
         response.json().then(data => {
-          localStorage.clear();
-          location.href = "/";
-        });
+          localStorage.clear()
+          location.href = "/"
+        })
       })
       .catch(err => {
-        console.log("Fetch Error :-S", err);
-        localStorage.clear();
-        location.href = "/";
-      });
+        console.log("Fetch Error :-S", err)
+        localStorage.clear()
+        location.href = "/"
+      })
   }
 
   handleClick() {
@@ -72,7 +72,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { showLogoutModal, showDropdown } = this.state;
+    const { showLogoutModal, showDropdown } = this.state
     return (
       <div className="header">
         {/* {
@@ -108,11 +108,17 @@ class Header extends React.Component {
 
               <div className="item" onClick={this.openDropdown}>
                 <Icon name="account" />
-                <span>Account Settings</span>
+                <span>My Account</span>
                 <Icon name="down-arrow" />
                 <div
                   className={`dropdown-menu ${showDropdown ? "show" : "hide"}`}
                 >
+                  <div
+                    //onClick={() => this.mountModal()}
+                    className="menu-item os s9"
+                  >
+                    Account Settings
+                  </div>
                   <div
                     onClick={() => this.mountModal()}
                     className="menu-item os s9"
