@@ -51,7 +51,7 @@ class DSODetails extends React.Component {
             <div style={{display: 'flex', marginBottom: '36px'}}>
               <LicenseDetails 
                 status={data.is_validated}
-                dateOfValidation={""}
+                dateOfValidation={data.validation_date}
                 locationsIn={data.locations}
               />
               <HeadOfficeDetails
