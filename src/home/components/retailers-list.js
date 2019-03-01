@@ -8,6 +8,7 @@ import Search from '@components/search'
 import PageHeader from '@components/pageheader'
 import Loader from "@components/loader"
 import Icon from "@components/icon"
+import { getQueryObj, getQueryUri } from "@utils/url-utils"
 //import { retailersList } from './../constants/retailers-list'
 
 class RetailersList extends React.Component {
@@ -15,39 +16,62 @@ class RetailersList extends React.Component {
     super()
     this.state = {
       activePage: 1,
-      limit: 10
+      limit: 10,
+      retailerName: "",
+      filter: []
     }
     this.state_short_name = "TN"
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
-    this.resetPagination = this.resetPagination.bind(this)
+    this.fetchRetailersList = this.fetchRetailersList.bind(this)
+    this.setQueryParamas = this.setQueryParamas.bind(this)
+    this.clearSearchResults = this.clearSearchResults.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
   }
 
   componentDidMount() {
     if (location.search.length) {
       this.setQueryParamas()
     } else {
-      this.defaultData()
+      this.fetchRetailersList()
     }
   }
 
+  /**
+    * Gets the url parameters and fetches retailer list
+    */
   setQueryParamas() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] })
-      // this.filter[item[0]] = item[1]
     })
 
-    this.props.actions.fetchRetailerList({
-      limit: parseInt(queryObj.limit),
-      offset: queryObj.limit * (queryObj.activePage - 1),
-      state_short_name: this.state_short_name
-    })
+    if(queryObj.filter) {
+      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
+      if(filter.find(item => item.filterby === "RetailerName")) {
+        this.setState({retailerName: filter.find(item => item.filterby === "RetailerName").value})
+      }
+      this.props.actions.fetchRetailerList({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1),
+        state_short_name: this.state_short_name,
+        filter: JSON.parse(decodeURIComponent(queryObj.filter))
+      })
+    } else {
+      this.props.actions.fetchRetailerList({
+        limit: parseInt(queryObj.limit),
+        state_short_name: this.state_short_name,
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
   }
 
-  defaultData() {
+  /**
+   * Fetches the retailer list of given limit and offset
+   */
+  fetchRetailersList() {
     this.props.actions.fetchRetailerList({
       limit: this.state.limit,
       offset: 0,
@@ -55,10 +79,21 @@ class RetailersList extends React.Component {
     })
   }
 
+  /**
+   * On clicking each retailer it takes to detailed view page of that retailer
+   * @param {object} dataObj - Passed from retailerListItem 
+   * @param {string} dataObj.retailer_id - Used to get the details of clicked retailer
+   **/
   handleClick(dataObj) {
     this.props.history.push(`/home/retailers/${dataObj.retailer_id}`, dataObj)
   }
 
+  /**
+   * Navigates to next page
+   * @param {object} pagerObj - Passed from pagination component
+   * @param {Integer} pagerObj.activePage - Used to calculate the offset to fetch next set of retailers
+   * @param {Integer} pagerObj.pageSize - Used as limit to fetch next set of retailers
+   */
   handlePageChange(pagerObj) {
     this.props.actions.setLoadingAll()
     const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
@@ -86,14 +121,56 @@ class RetailersList extends React.Component {
     )
   }
 
-  resetPagination() {
-    this.setState({ activePage: 1 })
+  /**
+   * Clears the applied filter/search and renders all the retailers
+   */
+  clearSearchResults() {
+    if(this.state.filter.length > 0) {
+      this.fetchRetailersList()
+      this.props.history.push(`/home/retailers`)
+    }
+  }
+
+
+  /**
+   * Fetches the retailer details of given name
+   * @param {string} searchQuery - retailerName passed from searchComponent, used for filtering the retailer list
+   */
+  handleSearch(searchQuery) {
+    //console.log("searched text", searchQuery)
+    const filterObj = {
+      filterby: "RetailerName",
+      value: searchQuery
+    }
+    const urlParams = {
+      limit: 10,
+      activePage: 1,
+      filter: JSON.stringify([filterObj])
+    }
+    this.props.actions.fetchRetailerList({
+      limit: 10,
+      offset: 0,
+      filter: [filterObj]
+    })
+    this.setState({filter: [filterObj]})
+    history.pushState(urlParams, "retailer listing", `/home/retailers?${(getQueryUri(urlParams))}`)
   }
 
   render() {
     return (
       <Fragment>
         <PageHeader pageName="Retailers" />
+        <div style={{
+          marginBottom: "20px"
+        }}
+        > 
+          <Search
+            placeholder="Search"
+            searchText={this.state.retailerName}
+            search={this.handleSearch}
+            clearSearch={this.clearSearchResults}
+          />
+        </div>
         {
           !this.props.loadingRetailerList && this.props.retailerList.length > 1 &&
           (

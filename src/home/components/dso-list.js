@@ -157,10 +157,7 @@ class DSOList extends React.Component {
       <Fragment>
         <PageHeader pageName="Delivery Service Operators" />
         <div style={{
-          display: "flex",
-          marginBottom: "20px",
-          justifyContent: "space-between",
-          alignItems: "center"
+          marginBottom: "20px"
         }}
         > 
           <Search
