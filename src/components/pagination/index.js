@@ -17,41 +17,41 @@ class Pagination extends React.Component {
         value: "1"
       },
       {
-        text: "9",
+        text: "50",
         value: "2"
       },
       {
-        text: "8",
+        text: "100",
         value: "3"
       },
-      {
-        text: "7",
-        value: "4"
-      },
-      {
-        text: "6",
-        value: "5"
-      },
-      {
-        text: "5",
-        value: "6"
-      },
-      {
-        text: "4",
-        value: "7"
-      },
-      {
-        text: "3",
-        value: "8"
-      },
-      {
-        text: "2",
-        value: "9"
-      },
-      {
-        text: "1",
-        value: "10"
-      }
+      // {
+      //   text: "7",
+      //   value: "4"
+      // },
+      // {
+      //   text: "6",
+      //   value: "5"
+      // },
+      // {
+      //   text: "5",
+      //   value: "6"
+      // },
+      // {
+      //   text: "4",
+      //   value: "7"
+      // },
+      // {
+      //   text: "3",
+      //   value: "8"
+      // },
+      // {
+      //   text: "2",
+      //   value: "9"
+      // },
+      // {
+      //   text: "1",
+      //   value: "10"
+      // }
     ]
 
     this.updateActivePage = this.updateActivePage.bind(this)

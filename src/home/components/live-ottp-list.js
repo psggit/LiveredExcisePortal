@@ -14,6 +14,7 @@ import PageHeader from "@components/pageheader"
 import Filter from "@components/filterModal"
 import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import "@sass/style.scss"
+import FilteredParams from "@components/filteredParams"
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -25,7 +26,8 @@ class LiveOrdersList extends React.Component {
       limit: 10,
       mountFilter: false,
       filter: [],
-      OttpId: ""
+      OttpId: "",
+      isFilterApplied: false
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
@@ -51,7 +53,7 @@ class LiveOrdersList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return {text: item.name, value: i}
+        return {text: item.dso_name, value: i}
       })
       dsoList = [...dsoList, {text: "All", value: dsoList.length}]
       this.setState({dsoList})
@@ -84,6 +86,7 @@ class LiveOrdersList extends React.Component {
       if(filter.find(item => item.filterby === "OttpId")) {
         this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
       }
+      this.setState({isFilterApplied: true, filter: JSON.parse(decodeURIComponent(queryObj.filter))})
       this.props.actions.fetchInProgressOTTP({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
@@ -233,6 +236,7 @@ class LiveOrdersList extends React.Component {
     if(this.state.filter.length > 0) {
       this.fetchLiveOttps()
       this.props.history.push(`/home/live-orders`)
+      this.setState({isFilterApplied: false})
     }
   }
 
@@ -248,7 +252,7 @@ class LiveOrdersList extends React.Component {
    * @param {array of object} filter - Passed form FilterModal component
    */
   applyFilter(filter) {
-    this.setState({limit: 10, filter})
+    this.setState({limit: 10, filter, isFilterApplied: true})
     const queryObj = {
       limit: 10,
       offset: 0,
@@ -303,6 +307,10 @@ class LiveOrdersList extends React.Component {
             </Filter>
           </div>
         </div> 
+        {
+          this.state.isFilterApplied &&
+          <FilteredParams data={this.state.filter} />
+        }
         {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length > 1 && (
           <div style={{ margin: "10px 0" }}>
             <Pagination
