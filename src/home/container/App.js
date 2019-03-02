@@ -80,7 +80,7 @@ class App extends React.Component {
     return (
       <Router history={history}>
         <div>
-          <Route path='/support' component={Support} />
+          {/* <Route path='/support' component={Support} /> */}
           {
             location.pathname.includes("home") &&
             <div style={{

@@ -95,7 +95,7 @@ class Login extends React.Component {
   }
 
   handleClick() {
-    location.href="/home/support/"
+    location.href="/home/support"
   }
 
   render() {

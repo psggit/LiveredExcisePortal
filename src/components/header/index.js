@@ -51,18 +51,18 @@ class Header extends React.Component {
             `Looks like there was a problem. Status Code: ${response.status}`
           )
           localStorage.clear()
-          location.href = "/"
+          location.href = "/login"
           return
         }
         response.json().then(data => {
           localStorage.clear()
-          location.href = "/"
+          location.href = "/login"
         })
       })
       .catch(err => {
         console.log("Fetch Error :-S", err)
         localStorage.clear()
-        location.href = "/"
+        location.href = "/login"
       })
   }
 

@@ -1,0 +1,93 @@
+#supportForm {
+  .main-container {
+    display: flex;
+    margin-top: 40px;
+
+    .ticket-form {
+      width: 60%;
+      padding: 21px 30px;
+      background: #fff;
+      max-width: 705px;
+    }
+
+    .contact-details {
+      width: 40%;
+      text-align: -webkit-center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      
+      p {
+        font-size: 18px;
+      }
+      
+      .icon {
+        margin-top: 30px;
+      }
+
+      .contact-link {
+        font-size: 24px;
+        border-bottom: 1px solid #000;
+      }
+
+      // .submit {
+      //   margin-bottom: 20px;
+      // }
+
+      .footer {
+        margin-top: 40px;
+        // p {
+        //   font-size: 18px;
+        //   line-height: 1.5;
+        //   text-align: center;
+        // }
+        .title {
+          color: #4a90e2;
+        }
+        .text {
+          color: #000;
+        }
+      }
+    }
+
+    input[type='text'] {
+      margin-bottom: 20px;
+    }
+
+    .confirmation-text {
+      display: flex;
+      margin-right: 5px; 
+      align-items: center;
+    }
+
+    .submit {
+      margin-top: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 0px;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    textarea {
+      width: 100%;
+      border: 0;
+      padding: 10px 10px;
+      height: 150px;
+      max-height: 150px;
+      color: #222;
+      font-size: 14px;
+    }
+
+    textarea:focus {
+      outline: 0;
+    }
+  }
+}

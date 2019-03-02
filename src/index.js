@@ -97,7 +97,7 @@ import configureStore from './home/store/configure-store'
 import rootSaga from './home/middleware/saga'
 import ConsumerManagement from "./home/components/consumer-list"
 import ConsumerComplaints from "./home/components/consumer-complaints"
-import Support from "./home/components/support/index"
+import Support from "./home/components/supportWithForm/"
 
 const history = createHistory()
 
@@ -155,6 +155,25 @@ class App extends React.Component {
   }
 
   render() {
+    const mainDivStyleWithSideMenu = {
+      display: 'inline-block', 
+      width: 'calc(100% - 250px)', 
+      verticalAlign: 'top', 
+      padding: '60px', 
+      backgroundColor: '#f5f7fa', 
+      height: 'calc(100vh - 60px)', 
+      overflow: 'auto' 
+    }
+
+    const mainDivStyleWithoutSideMenu = {
+      display: 'inline-block', 
+      width: '100%', 
+      verticalAlign: 'top', 
+      padding: '60px', 
+      backgroundColor: '#f5f7fa', 
+      height: 'calc(100vh - 60px)', 
+      overflow: 'auto' 
+    }
     return (
       <Provider store={config.store}>
         <Router history={history}>
@@ -189,7 +208,7 @@ class App extends React.Component {
                     />
                   }
                   <div
-                    style={{ display: 'inline-block', width: 'calc(100% - 250px)', verticalAlign: 'top', padding: '60px', backgroundColor: '#f5f7fa', height: 'calc(100vh - 60px)', overflow: 'auto' }}
+                    style={this.state.isLoggedIn ? mainDivStyleWithSideMenu : mainDivStyleWithoutSideMenu}
                     key={this.state.key}
                   >
                     <Switch>

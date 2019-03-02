@@ -1,5 +1,5 @@
 import React from "react"
-import './support.scss'
+import './supportWithoutForm.scss'
 import Icon from "@components/icon"
 import PageHeader from '@components/pageheader'
 
