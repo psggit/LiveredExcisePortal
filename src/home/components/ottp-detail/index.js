@@ -14,37 +14,25 @@ import OttpDetailOrder from './order'
 class OTTPDetail extends Component {
   constructor() {
     super()
-    this.handleClick = this.handleClick.bind(this)
-    this.openGmap = this.openGmap.bind(this)
-    this.unmountOrderDetail = this.unmountOrderDetail.bind(this)
+    this.fetchOrderDetails = this.fetchOrderDetails.bind(this)
+    // this.openGmap = this.openGmap.bind(this)
+    // this.unmountOrderDetail = this.unmountOrderDetail.bind(this)
   }
   
   componentDidMount() {
+    this.fetchOrderDetails()
+  }
+
+  /**
+   * Fetches live/past orders details of given ottpId
+   */
+  fetchOrderDetails() {
     const { ottpId } = this.props.match.params
     this.props.actions.fetchOTTPDetail({
       ottp_info: {
         ottp_id: ottpId
       }
     })
-  }
-
-  handleClick() {
-    this.props.unmountOrderDetail()
-  }
-
-  openGmap() {
-    const { ottpId } = this.props.match.params
-    const { OTTPDetailData } = this.props
-    mountModal(ShowGmap({
-      id: ottpId,
-      customerGps: OTTPDetailData.customer_gps,
-      retailerGps: OTTPDetailData.store_gps
-    }))
-  }
-
-  unmountOrderDetail() {
-    this.props.history.goBack()
-    this.props.actions.setLoadingAll()
   }
 
   render() {
@@ -54,7 +42,6 @@ class OTTPDetail extends Component {
         {
           !this.props.loadingOTTPDetail &&
           <div>
-            {/* <p style={{ position: 'relative', top: '-30px', fontSize: '14px'  }}>Back to Live Orders</p> */}
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <div>
                 <p style={{ fontSize: '12px', marginBottom: '5px' }}>PERMIT ID</p>

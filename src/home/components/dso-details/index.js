@@ -9,9 +9,18 @@ import { bindActionCreators } from 'redux'
 class DSODetails extends React.Component {
   constructor() {
     super()
+
+    this.fetchDsoDetails = this.fetchDsoDetails.bind(this)
   }
 
   componentDidMount() {
+    this.fetchDsoDetails()
+  }
+
+  /**
+   * Fetches dso details of given dso_id
+   */
+  fetchDsoDetails() {
     const { dsoId } = this.props.match.params
     this.props.actions.fetchDSODetails({
       dso_id: dsoId
@@ -28,7 +37,7 @@ class DSODetails extends React.Component {
       border: '1px solid #dfe3e6'
     }
     const data = this.props.DSODetail
-    console.log("dso detail", data)
+
     return (
       <React.Fragment>
         {

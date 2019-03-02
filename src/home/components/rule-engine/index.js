@@ -27,10 +27,14 @@ class RuleManagement extends React.Component {
       zoneRestrictions: [],
       permitRules: {}
     }
+
+    this.formatResponse = this.formatResponse.bind(this)
   }
 
+  /**
+   * Fetches rules of given state_short_name
+   */
   componentDidMount() {
-    // console.log("Rule engine mounted")
     this.props.actions.fetchRules({
       state_short_name: "TN"
     }) 
@@ -38,17 +42,28 @@ class RuleManagement extends React.Component {
 
   componentDidUpdate(prevProps) {
     if(this.props.rulesData !== prevProps.rulesData) {
-      const timeRestrictions = this.props.rulesData.time_restrictions.map((item) => {
-        return {...item, weekday_name: this.days.find(dayItem => dayItem.value === item.weekday_id).label }
-      })
-      this.setState({
-        timeRestrictions: timeRestrictions,
-        legalPurchaseAge: this.props.rulesData.consumer_min_age,
-        possessionLimits: this.props.rulesData.possession_limit,
-        permitRules: this.props.rulesData.permit_rules,
-        zoneRestrictions: this.props.rulesData.city_special_days.concat(this.props.rulesData.state_special_days)
-      })
+      this.formatResponse()
     }
+  }
+
+  /**
+   * Map's weekday_id and get weekday_label and initializes state
+   */
+  formatResponse() {
+    const timeRestrictions = this.props.rulesData.time_restrictions.map((item) => {
+      return {...item, weekday_name: this.days.find(dayItem => dayItem.value === item.weekday_id).label }
+    })
+    this.setState({
+      timeRestrictions: timeRestrictions,
+      legalPurchaseAge: this.props.rulesData.consumer_min_age,
+      possessionLimits: this.props.rulesData.possession_limit,
+      permitRules: this.props.rulesData.permit_rules,
+      zoneRestrictions: this.props.rulesData.city_special_days.concat(this.props.rulesData.state_special_days)
+    })
+  }
+
+  updateZoneRestrictions(id) {
+    console.log("zone id", id)
   }
 
   render() {

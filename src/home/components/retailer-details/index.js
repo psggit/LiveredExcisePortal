@@ -10,9 +10,18 @@ import Icon from "@components/icon"
 class RetailerDetail extends React.Component {
   constructor() {
     super()
+
+    this.fetchData = this.fetchData.bind(this)
   }
 
   componentDidMount() {
+    this.fetchData()
+  }
+
+  /**
+   * Fetches the retailer and outlet details of given retailerId
+   */
+  fetchData() {
     const { retailerId } = this.props.match.params
     this.props.actions.fetchRetailerDetails({
       retailer_id: retailerId
@@ -74,16 +83,13 @@ class RetailerDetail extends React.Component {
         </div>
         <div style={{ display: 'flex' }}>
           <OutletDetail
-            // storeCode={data.code}
             retailerId={data.retailer_id}
             licenseType={data.license_type}
             licenseStatus={data.license_status ? 'Active' : 'Inactive'}
             licenceValidity={data.license_expiry}
-          // licenceValidity={data.licence_validity}
           />
           <OutletContactDetail
             outletsCount={data.number_of_outlets}
-            // city={data.city}
             name={data.name}
             email={data.email}
             mobile={data.mobile_number}
