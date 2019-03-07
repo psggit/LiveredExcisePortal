@@ -114,6 +114,27 @@ function* fetchOTTPDetail(action) {
   }
 }
 
+function* fetchRevenueDetails(action) {
+  try {
+    const data = yield call(Api.fetchRevenueDetails, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_REVENUE_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
+function* fetchPermitDetails(action) {
+  try {
+    const data = yield call(Api.fetchPermitDetails, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_PERMIT_LIST, data })
+  } catch (err) {
+    console.log(err)
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
+
 function* fetchRules(action) {
   try {
     const data = yield call(Api.fetchRules, action)
@@ -193,6 +214,17 @@ function* watchFetchDSODetails() {
   }
 }
 
+function* watchFetchRevenueDetails() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_REVENUE_LIST, fetchRevenueDetails)
+  }
+}
+
+function* watchFetchPermitDetails() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_PERMIT_LIST, fetchPermitDetails)
+  }
+}
 function* watchFetchOutletList() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_OUTLETS_LIST, fetchOutletList)
@@ -251,6 +283,8 @@ export default function* rootSaga() {
     fork(watchFetchConsumerList),
     fork(watchFetchConsumerComplaints),
     fork(watchFetchCitiesList),
-    fork(watchFetchOutletList)
+    fork(watchFetchOutletList),
+    fork(watchFetchRevenueDetails),
+    fork(watchFetchPermitDetails)
   ]
 }

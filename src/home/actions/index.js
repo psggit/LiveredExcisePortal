@@ -62,3 +62,13 @@ export const setLoadingAll = () => ({
 export const fetchCitiesList = (data) => ({
   type: ActionTypes.REQUEST_FETCH_CITIES_LIST
 })
+
+export const fetchPermitDetails = (data) => ({
+  type: ActionTypes.REQUEST_FETCH_PERMIT_LIST,
+  data
+})
+
+export const fetchRevenueDetails = (data) => ({
+  type: ActionTypes.REQUEST_FETCH_REVENUE_LIST,
+  data
+})

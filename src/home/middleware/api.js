@@ -122,3 +122,23 @@ export function fetchConsumerComplaints(action) {
   })
     .then(json => json)
 }
+
+export function fetchRevenueDetails(action) {
+  return POST({
+    api: 'http://192.168.5.86:3003/livered/listComplaints',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
+export function fetchPermitDetails(action) {
+  return POST({
+    api: 'http://192.168.5.86:3003/livered/listComplaints',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}

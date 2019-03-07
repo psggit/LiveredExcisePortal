@@ -13,6 +13,8 @@ const initialState = {
   loadingRules: true,
   loadingCityList: true,
   loadingOutletList: true,
+  loadingPermitList: true,
+  loadingRevenueList: true,
   inProgressCount: 0,
   customerComplaintsCount: 0,
   historyOTTPCount: 0,
@@ -30,6 +32,8 @@ const initialState = {
   DSODetail: [],
   retailerDetail: [],
   customerComplaints: [],
+  revenueList: [],
+  permitList: [],
   OTTPDetailData: {}
 }
 
@@ -110,6 +114,22 @@ const actionsMap = {
     return Object.assign({}, state, {
       loadingRetailerDetail: false,
       retailerDetail: action.data,
+      // DSODetailCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_PERMIT_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingPermitList: false,
+      permitList: action.data,
+      // DSODetailCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_REVENUE_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingRevenueList: false,
+      revenueList: action.data,
       // DSODetailCount: action.data.count
     })
   },

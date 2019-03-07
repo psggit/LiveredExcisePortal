@@ -22,6 +22,7 @@ class Overview extends React.Component {
       mountFilter: false,
       dsoList: [],
       cityList: [],
+      filter: [],
       permitLabels:  [
         Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
         Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
@@ -51,10 +52,44 @@ class Overview extends React.Component {
     this.mountFilterModal = this.mountFilterModal.bind(this)
     this.fetchFilterDropDownData = this.fetchFilterDropDownData.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
+    this.fetchDefaultData = this.fetchDefaultData.bind(this)
+    this.resetFilter = this.resetFilter.bind(this)
   }
 
   componentDidMount() {
-    this.fetchFilterDropDownData()
+    if(location.search.length) {
+      this.fetchFilterDropDownData()
+      this.setQueryParamas()
+    } else {
+      this.fetchFilterDropDownData()
+      this.fetchDefaultData()
+    }
+  }
+
+   /**
+    * Gets the url parameters and fetches data
+    */
+   setQueryParamas() {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
+    Object.entries(queryObj).forEach((item) => {
+      this.setState({ [item[0]]: item[1] })
+    })
+
+    if(queryObj.filter) {
+      const filter = JSON.parse(decodeURIComponent(queryObj.filter))
+      this.setState({isFilterApplied: true,  filter: JSON.parse(decodeURIComponent(queryObj.filter))})
+      if(queryObj.activeTab === permits) {
+        this.props.actions.fetchPermitDetails({
+          filter: JSON.parse(decodeURIComponent(queryObj.filter))
+        })
+      } else {
+        this.props.actions.fetchPermitDetails({
+          filter: JSON.parse(decodeURIComponent(queryObj.filter))
+        })
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -89,11 +124,38 @@ class Overview extends React.Component {
   }
 
   /**
+   * Fetches the permits details 
+   */
+  fetchDefaultData() {
+    this.props.actions.fetchPermitDetails({
+      //filter: JSON.parse(decodeURIComponent(queryObj.filter))
+    })
+  }
+
+  /**
    * Used to highlight the active tab
    * @param {String} activeTabName - Indicates the active tab name
    */
   setActiveTab(activeTab) {
+    if(activeTab === "permits") {
+      console.log("permits tab")
+      //this.props.actions.fetchPermitDetails()
+    } else {
+      console.log("revenue tab")
+      //this.props.actions.fetchRevenueDetails()
+    }
     this.setState({ activeTab})
+  }
+
+  /**
+   * Clears the applied filter
+   */
+  resetFilter() {
+    if(this.state.filter.length > 0) {
+      this.fetchDefaultData()
+      this.props.history.push(`/home/overview`)
+      this.setState({isFilterApplied: false})
+    }
   }
 
   /**
@@ -115,7 +177,8 @@ class Overview extends React.Component {
   applyFilter(filter) {
     this.setState({filter, isFilterApplied: true})
     const queryObj = {
-      filter: JSON.stringify(filter)
+      filter: JSON.stringify(filter),
+      activeTab: this.state.activeTab
     }
     // this.props.actions.fetchInProgressOTTP({
     //   // limit: 10,
