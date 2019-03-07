@@ -97,7 +97,8 @@ import configureStore from './home/store/configure-store'
 import rootSaga from './home/middleware/saga'
 import ConsumerManagement from "./home/components/consumer-list"
 import ConsumerComplaints from "./home/components/consumer-complaints"
-import Support from "./home/components/supportWithForm/"
+import SupportWithForm from "./home/components/supportWithForm/"
+import SupportWithoutForm from "./home/components/supportWithoutForm/"
 import Overview from "./home/components/overview"
 
 const history = createHistory()
@@ -219,11 +220,23 @@ class App extends React.Component {
                         render={props => <LiveOTTPList {...props} />}
                       />
 
-                      <Route 
-                        exact 
-                        path="/home/support" 
-                        render={props => <Support {...props} isLoggedIn={this.state.isLoggedIn} className={`${this.state.isLoggedIn ? 'hideSideMenu' : undefined}`} />}
-                      />
+                      {
+                        this.state.isLoggedIn &&
+                        <Route 
+                          exact 
+                          path="/home/support" 
+                          render={props => <SupportWithForm {...props} isLoggedIn={this.state.isLoggedIn} />}
+                        />
+                      }
+
+                      {
+                        !this.state.isLoggedIn &&
+                        <Route 
+                         exact 
+                         path="/home/support" 
+                         render={props => <SupportWithoutForm {...props} isLoggedIn={this.state.isLoggedIn} />}
+                       />
+                      }
 
                       <Route
                         exact

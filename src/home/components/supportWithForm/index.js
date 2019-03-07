@@ -123,7 +123,7 @@ class SupportForm extends React.Component {
   }
 
   render() {
-    const {name, email, designation, urgencyLevel, reason, message, designationErr, nameErr, emailErr} = this.state
+    const {designationErr, nameErr, emailErr} = this.state
     console.log("state", this.state)
     return (
       <div id="supportForm">

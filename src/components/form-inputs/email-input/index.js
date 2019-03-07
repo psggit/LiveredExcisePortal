@@ -7,10 +7,9 @@ class EmailInput extends React.Component {
 
   validateEmail({fieldName, fieldValue}) {
     let fieldStatus = {}
-    
     const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    console.log("regex", emailRegex.test(fieldValue))
-    if (fieldValue.trim().length == 0) {
+    
+    if (fieldValue.trim().length === 0) {
       fieldStatus = {
         status: true,
         value: `${fieldName} is required`,
