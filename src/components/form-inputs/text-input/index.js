@@ -7,26 +7,32 @@ class TextInput extends React.Component {
     super()
   }
 
-  validateTextField({fieldName, fieldValue}) {
+  validateTextField({event, fieldName, fieldValue}) {
     let fieldStatus = {}
-    
-    if (fieldValue.trim().length === 0) {
-      fieldStatus = {
-        status: true,
-        value: `${fieldName} is required`,
-        fieldName,
-        fieldValue
+    const keyCode = event.keyCode ? event.keyCode :  event.which
+    console.log("event code", event.which)
+    if(keyCode !== 32) {
+      if (fieldValue.trim().length === 0) {
+        fieldStatus = {
+          status: true,
+          value: `${fieldName} is required`,
+          fieldName,
+          fieldValue
+        }
+      } else {
+        fieldStatus = {
+          status: false,
+          value: '',
+          fieldName,
+          fieldValue
+        }
       }
+      
+      this.props.onChange(fieldStatus)
+  
     } else {
-      fieldStatus = {
-        status: false,
-        value: '',
-        fieldName,
-        fieldValue
-      }
+      event.preventDefault()
     }
-
-    this.props.onChange(fieldStatus)
   }
 
   render() {
@@ -35,7 +41,8 @@ class TextInput extends React.Component {
         name={this.props.name} 
         type="text"
         autoComplete="off"
-        onChange={(e) => this.validateTextField({fieldName: this.props.name, fieldValue: e.target.value})}
+        onKeyPress={e => this.validateTextField({event: e, fieldName: this.props.name, fieldValue: e.target.value})}
+        //onChange={(e) => this.validateTextField({fieldName: this.props.name, fieldValue: e.target.value})}
       />
     )
   }

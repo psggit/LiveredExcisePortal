@@ -201,7 +201,15 @@ class Login extends React.Component {
             </p>
           )}
         </div>
-        <p style={{ textAlign: "center", marginTop: "24px" }}>Having trouble? Contact Support</p>
+        <p style={{ 
+            textAlign: "center", 
+            marginTop: "24px",
+            cursor: "pointer",
+          }}
+          onClick={this.handleClick}
+        >
+          Having trouble? Contact Support
+        </p>
         </div>
       </React.Fragment>
     )

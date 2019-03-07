@@ -5,33 +5,38 @@ class EmailInput extends React.Component {
     super()
   }
 
-  validateEmail({fieldName, fieldValue}) {
+  validateEmail({event, fieldName, fieldValue}) {
     let fieldStatus = {}
     const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    
-    if (fieldValue.trim().length === 0) {
-      fieldStatus = {
-        status: true,
-        value: `${fieldName} is required`,
-        fieldName,
-        fieldValue
+    const keyCode = event.keyCode ? event.keyCode : event.which
+
+    if(keyCode !== 32) {
+      if (fieldValue.trim().length === 0) {
+        fieldStatus = {
+          status: true,
+          value: `${fieldName} is required`,
+          fieldName,
+          fieldValue
+        }
+      } else if (!emailRegex.test(fieldValue)) {
+        fieldStatus = {
+          status: true,
+          value: `${fieldName} is invalid`,
+          fieldName,
+          fieldValue
+        }
+      } else {
+        fieldStatus = {
+          status: false,
+          value: '',
+          fieldName,
+          fieldValue
+        }
       }
-    } else if (!emailRegex.test(fieldValue)) {
-      fieldStatus = {
-        status: true,
-        value: `${fieldName} is invalid`,
-        fieldName,
-        fieldValue
-      }
+      this.props.onChange(fieldStatus)
     } else {
-      fieldStatus = {
-        status: false,
-        value: '',
-        fieldName,
-        fieldValue
-      }
-    }
-    this.props.onChange(fieldStatus)
+      event.preventDefault()
+    } 
   }
 
   render() {
@@ -40,7 +45,8 @@ class EmailInput extends React.Component {
         name={this.props.name} 
         type="text"
         autoComplete="off"
-        onChange={(e) => this.validateEmail({fieldName: this.props.name, fieldValue: e.target.value})}
+        onKeyPress={e => this.validateEmail({event: e, fieldName: this.props.name, fieldValue: e.target.value})}
+        //onChange={(e) => this.validateEmail({fieldName: this.props.name, fieldValue: e.target.value})}
       />
     )
   }
