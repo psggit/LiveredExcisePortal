@@ -33,11 +33,20 @@ class LineChartGraph extends React.Component {
         bodyFontColor: "#000",
         titleFontColor: "#5a6872",
         yPadding: 5,
-        xPadding: 15
+        xPadding: 15,
+        mode: 'index',
+        intersect: false
+      },
+      hover: {
+        mode: 'index',
+        intersect: false
       },
       legend: {
         display: false
       },
+      //responsive: true,
+      //maintainAspectRatio: false,
+      //aspectRatio: 2,
       scales: {
         yAxes: [
           {
