@@ -44,8 +44,9 @@
 
 function getAPIObj() {
   // console.log(BASE_URL)
+  console.log(process.env.BASE_URL)
   const baseHost = process.env.BASE_URL
-
+ 
   return {
     //livered: '192.168.5.86:8084',
     api1: 'https://api1.' + baseHost,

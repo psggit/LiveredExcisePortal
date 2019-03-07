@@ -22,25 +22,53 @@ class Filter extends React.Component {
   applyFilter() {
     let filterObj = []
 
-    const orderAmount = this.orderAmountState.getData().orderAmount
+    if(this.props.filterName !== "overview") {
+      const orderAmount = this.orderAmountState.getData().orderAmount
+      const retailer = this.retailerState.getData().retailer
+    }
+   
     const dso = this.dsoListState.getData().dso
     const city = this.cityState.getData().city
-    const retailer = this.retailerState.getData().retailer
     
-    if (this.props.filterName !== "pastOrders") {
-      filterObj.push(orderAmount, dso, city, retailer)
-      filterObj = filterObj.filter((item) => item.value && item.value !== "All")
-    } else {
-      const fromDate = this.fromDateState.getData().fromDate
-      const toDate = this.toDateState.getData().toDate
-      filterObj.push(orderAmount, dso, city, retailer)
-      filterObj = filterObj.filter((item) => item.value && item.value !== "All")
-      if(fromDate.filterby) {
-        filterObj.push(fromDate)
-      }
-      if(toDate.filterby) {
-        filterObj.push(toDate)
-      }
+    
+    // if (this.props.filterName !== "pastOrders") {
+    //   filterObj.push(orderAmount, dso, city, retailer)
+    //   filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+    // } else if (this.props.filterName === "overview") {
+    // } else {
+    //   const fromDate = this.fromDateState.getData().fromDate
+    //   const toDate = this.toDateState.getData().toDate
+    //   filterObj.push(orderAmount, dso, city, retailer)
+    //   filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+    //   if(fromDate.filterby) {
+    //     filterObj.push(fromDate)
+    //   }
+    //   if(toDate.filterby) {
+    //     filterObj.push(toDate)
+    //   }
+    // }
+
+    switch(this.props.filterName) {
+      case 'liveOrders':
+        filterObj.push(orderAmount, dso, city, retailer)
+        filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+      break;
+      case 'pastOrders':
+        const fromDate = this.fromDateState.getData().fromDate
+        const toDate = this.toDateState.getData().toDate
+        filterObj.push(orderAmount, dso, city, retailer)
+        filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+        if(fromDate.filterby) {
+          filterObj.push(fromDate)
+        }
+        if(toDate.filterby) {
+          filterObj.push(toDate)
+        }
+      break;
+      case 'overview':
+        filterObj.push(dso, city)
+        filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+      break;
     }
     this.props.applyFilter(filterObj)
   }
@@ -65,14 +93,19 @@ class Filter extends React.Component {
             dsoList={this.props.dsoList}  
             ref={(node) => { this.dsoListState = node }}
           />
-          <Retailer 
-            retailerList={this.props.retailerList}  
-            ref={(node) => { this.retailerState = node }}
-          />
-          <OrderAmount 
-            orderAmount={this.props.orderAmount}  
-            ref={(node) => { this.orderAmountState = node }}
-          />
+          {
+            this.props.filterName !== "overview" &&
+            <div>
+               <Retailer 
+                retailerList={this.props.retailerList}  
+                ref={(node) => { this.retailerState = node }}
+              />
+              <OrderAmount 
+                orderAmount={this.props.orderAmount}  
+                ref={(node) => { this.orderAmountState = node }}
+              />
+            </div>
+          }
         </div>
         <Button primary onClick={this.applyFilter}>
           <span

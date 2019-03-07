@@ -109,15 +109,19 @@ class Login extends React.Component {
         <Header isLoggedIn={false} />
         <div
           style={{
-            backgroundColor: "#fff",
-            border: "1px solid #d9d9d9",
-            width: "100%",
-            maxWidth: "400px",
-            margin: "0 auto",
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
+            width: "400px",
+            margin: "0 auto"
+          }}
+        >
+        <div
+          style={{
+            backgroundColor: "#fff",
+            border: "1px solid #d9d9d9",
+            width: "100%",
             overflow: "hidden"
           }}
         >
@@ -197,18 +201,8 @@ class Login extends React.Component {
             </p>
           )}
         </div>
-        <p style={{
-          position: 'absolute',
-          top: 'calc(50% + 180px)',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          marginTop: '24px',
-          cursor: 'pointer'
-        }}
-        onClick={this.handleClick}
-        >
-          Having trouble? Contact Support
-        </p>
+        <p style={{ textAlign: "center", marginTop: "24px" }}>Having trouble? Contact Support</p>
+        </div>
       </React.Fragment>
     )
   }

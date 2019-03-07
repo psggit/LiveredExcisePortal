@@ -158,7 +158,7 @@ class ConsumerManagement extends React.Component {
         <div style={{display: 'flex', marginBottom: '40px', marginTop: '4px'}}>
           <ul className="nav">
             <li 
-              onClick={() => this.setActiveTab("consumer")} 
+              onClick={() => this.setActiveTab("consumers")} 
               className={`${activeTab === "consumers" ? 'active' : ''}`}
             >
               <a href="/home/consumers">Consumer Log</a>

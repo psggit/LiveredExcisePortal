@@ -20,14 +20,17 @@ class Select extends React.Component {
           className={`select ${this.props.small ? 'small' : ''}`}
           name={this.props.name}
           onChange={this.handleChange}>
-          <option value="" disabled selected>
-            Choose a {this.props.name}
-          </option>
-        {
-          this.props.options.map((item, i) => (
-            <option key={i} value={item.value}>{ item.text }</option>
-          ))
-        }
+          {
+            this.props.name &&
+            <option value="" disabled selected>
+              Choose a {this.props.name}
+            </option>
+          }
+          {
+            this.props.options.map((item, i) => (
+              <option key={i} value={item.value}>{ item.text }</option>
+            ))
+          }
       </select>
       </div>
     )

@@ -98,6 +98,7 @@ import rootSaga from './home/middleware/saga'
 import ConsumerManagement from "./home/components/consumer-list"
 import ConsumerComplaints from "./home/components/consumer-complaints"
 import Support from "./home/components/supportWithForm/"
+import Overview from "./home/components/overview"
 
 const history = createHistory()
 
@@ -222,6 +223,12 @@ class App extends React.Component {
                         exact 
                         path="/home/support" 
                         render={props => <Support {...props} isLoggedIn={this.state.isLoggedIn} className={`${this.state.isLoggedIn ? 'hideSideMenu' : undefined}`} />}
+                      />
+
+                      <Route
+                        exact
+                        path="/home/overview"
+                        component={Overview}
                       />
 
                       <Route
