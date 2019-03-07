@@ -67,7 +67,7 @@ class Overview extends React.Component {
   }
 
    /**
-    * Gets the url parameters and fetches data
+    * Gets the url parameters and fetches data to be plotted
     */
    setQueryParamas() {
     const queryUri = location.search.slice(1)
