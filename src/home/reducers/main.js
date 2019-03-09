@@ -121,7 +121,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_PERMIT_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingPermitList: false,
-      permitList: action.data,
+      permitList: action.data.overview.stats,
       // DSODetailCount: action.data.count
     })
   },
@@ -129,7 +129,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_REVENUE_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingRevenueList: false,
-      revenueList: action.data,
+      revenueList: action.data.overview.stats,
       // DSODetailCount: action.data.count
     })
   },

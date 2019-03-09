@@ -18,17 +18,20 @@ class Overview extends React.Component {
     super()
     this.state = {
       activeTab: "permits",
-      dayInterval: "Last 7 days",
+      //dayInterval: "Last 7 days",
       mountFilter: false,
       dsoList: [],
       cityList: [],
       filter: [],
-      permitLabels:  [
-        Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
-        Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
-        Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY")
+      filteredPermitLabels:  [
+        // Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
+        // Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
+        // Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY")
       ],
-      permitValues: [280, 250, 340]
+      //permitValues: [280, 250, 340]
+      filteredPermitValues: [],
+      filteredRevenueLabels: [],
+      filteredRevenueValues: []
     }
 
     // used to filter the graph data
@@ -46,7 +49,7 @@ class Overview extends React.Component {
         value: 2
       }
     ]
-
+    this.defaultDays = 7
     this.setActiveTab = this.setActiveTab.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.mountFilterModal = this.mountFilterModal.bind(this)
@@ -67,7 +70,7 @@ class Overview extends React.Component {
   }
 
    /**
-    * Gets the url parameters and fetches data to be plotted
+    * Gets the url parameters and fetches the data to be plotted
     */
    setQueryParamas() {
     const queryUri = location.search.slice(1)
@@ -80,13 +83,19 @@ class Overview extends React.Component {
     if(queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
       this.setState({isFilterApplied: true,  filter: JSON.parse(decodeURIComponent(queryObj.filter))})
-      if(queryObj.activeTab === permits) {
+      if(queryObj.activeTab === "permits") {
         this.props.actions.fetchPermitDetails({
           filter: JSON.parse(decodeURIComponent(queryObj.filter))
         })
       } else {
         this.props.actions.fetchPermitDetails({
-          filter: JSON.parse(decodeURIComponent(queryObj.filter))
+          filter: [
+            {
+              "filterby": "None",
+              "value": ""
+            }
+          ]
+          //filter: JSON.parse(decodeURIComponent(queryObj.filter))
         })
       }
     }
@@ -109,6 +118,32 @@ class Overview extends React.Component {
       })
       cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
       this.setState({cityList})
+    } else if(this.props.permitList !== prevProps.permitList) {
+      let permitLabels = [], permitValues = []
+      this.props.permitList.map((item, i) => {
+        permitLabels[i] = Moment(item.date).format("DD/MM/YYYY") 
+        permitValues[i] = parseInt(item.permits)
+      })
+      this.permitLabels = permitLabels
+      this.permitValues = permitValues
+      console.log(permitLabels.slice(Math.max(permitLabels.length - this.defaultDays, 0)))
+      this.setState({ 
+        filteredPermitLabels: permitLabels.slice(Math.max(permitLabels.length - this.defaultDays, 0)), 
+        filteredPermitValues: permitValues.slice(Math.max(permitValues.length - this.defaultDays, 0))
+      })
+    } else if(this.props.revenueList !== prevProps.revenueList) {
+      let revenueLabels = [], revenueValues = []
+      this.props.revenueList.map((item, i) => {
+        revenueLabels[i] = Moment(item.date).format("DD/MM/YYYY")
+        revenueValues[i] = parseInt(item.revenue)
+      })
+      this.revenueLabels = revenueLabels
+      this.revenueValues = revenueValues
+      console.log(revenueLabels.slice(Math.max(revenueLabels.length - this.defaultDays, 0)))
+      this.setState({
+        filteredRevenueLabels: revenueLabels.slice(Math.max(revenueLabels.length - this.defaultDays, 0)), 
+        filteredRevenueValues: revenueValues.slice(Math.max(revenueValues.length - this.defaultDays, 0))
+      })
     }
   }
 
@@ -128,6 +163,12 @@ class Overview extends React.Component {
    */
   fetchDefaultData() {
     this.props.actions.fetchPermitDetails({
+      filter: [
+        {
+          "filterby": "None",
+          "value": ""
+        }
+      ]
       //filter: JSON.parse(decodeURIComponent(queryObj.filter))
     })
   }
@@ -139,10 +180,25 @@ class Overview extends React.Component {
   setActiveTab(activeTab) {
     if(activeTab === "permits") {
       console.log("permits tab")
-      //this.props.actions.fetchPermitDetails()
+      this.props.actions.fetchPermitDetails({
+        filter: [
+          {
+            "filterby": "None",
+            "value": ""
+          }
+        ]
+      })
     } else {
       console.log("revenue tab")
-      //this.props.actions.fetchRevenueDetails()
+      history.pushState(null, "Revenue", "/home/overview")
+      this.props.actions.fetchRevenueDetails({
+        filter: [
+          {
+            "filterby": "None",
+            "value": ""
+          }
+        ]
+      })
     }
     this.setState({ activeTab})
   }
@@ -165,9 +221,53 @@ class Overview extends React.Component {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
+  /**
+   * On change of days, sets the filter data
+   */
   handleChange(e) {
-    this.setState({dayInterval: this.options.find((item) => item.value === parseInt(e.target.value)).text})
-    console.log("handle change", this.options.find((item) => item.value === parseInt(e.target.value)).text)
+    switch(this.options.find((item) => item.value === parseInt(e.target.value)).text) {
+      case 'Last 7 days':
+        if(this.state.activeTab === "permits") {
+          this.setState({ 
+            filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - 7, 0)), 
+            filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - 7, 0))
+          })
+        } else {
+          this.setState({
+            filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - 7, 0)), 
+            filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - 7, 0))
+          })
+        }
+      break;
+
+      case 'Last 14 days':
+        if(this.state.activeTab === "permits") {
+          this.setState({ 
+            filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - 14, 0)), 
+            filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - 14, 0))
+          })
+        } else {
+          this.setState({
+            filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - 14, 0)), 
+            filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - 14, 0))
+          })
+        }
+      break;
+
+      case 'Last 21 days':
+        if(this.state.activeTab === "permits") {
+          this.setState({ 
+            filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - 21, 0)), 
+            filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - 21, 0))
+          })
+        } else {
+          this.setState({
+            filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - 21, 0)), 
+            filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - 21, 0))
+          })
+        }
+      break;
+    }
   }
 
   /**
@@ -180,11 +280,16 @@ class Overview extends React.Component {
       filter: JSON.stringify(filter),
       activeTab: this.state.activeTab
     }
-    // this.props.actions.fetchInProgressOTTP({
-    //   // limit: 10,
-    //   // offset: 0,
-    //   filter: filter
-    // })
+    if(this.state.activeTab === "permits") {
+      this.props.actions.fetchPermitDetails({
+        filter: filter
+      })
+    } else {
+      this.props.actions.fetchRevenueDetails({
+        filter: filter
+      })
+    }
+ 
     history.pushState(queryObj, "overview", `/home/overview?${getQueryUri(queryObj)}`)
     this.mountFilterModal()
   }
@@ -245,8 +350,8 @@ class Overview extends React.Component {
           {
             activeTab === "permits" &&
             <LineChart 
-              labels={this.state.permitLabels} 
-              values={this.state.permitValues} 
+              labels={this.state.filteredPermitLabels} 
+              values={this.state.filteredPermitValues} 
               xLabel="TIME DURATION"
               yLabel="PERMITS (NO.)"
               tooltipText="PERMITS"
@@ -255,8 +360,8 @@ class Overview extends React.Component {
           {
             activeTab === "revenue" &&
             <LineChart 
-              labels={this.state.permitLabels} 
-              values={this.state.permitValues} 
+              labels={this.state.filteredRevenueLabels} 
+              values={this.state.filteredRevenueValues} 
               xLabel="TIME DURATION"
               yLabel="REVENUE (IN LAKHS)"
               tooltipText="REVENUE"

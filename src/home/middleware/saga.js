@@ -115,6 +115,7 @@ function* fetchOTTPDetail(action) {
 }
 
 function* fetchRevenueDetails(action) {
+  console.log("fetch revenue details")
   try {
     const data = yield call(Api.fetchRevenueDetails, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_REVENUE_LIST, data })
@@ -125,6 +126,7 @@ function* fetchRevenueDetails(action) {
 }
 
 function* fetchPermitDetails(action) {
+  console.log("fetch revenue details")
   try {
     const data = yield call(Api.fetchPermitDetails, action)
     yield put({ type: ActionTypes.SUCCESS_FETCH_PERMIT_LIST, data })
@@ -215,6 +217,7 @@ function* watchFetchDSODetails() {
 }
 
 function* watchFetchRevenueDetails() {
+  //console.log("hello")
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_REVENUE_LIST, fetchRevenueDetails)
   }

@@ -44,8 +44,8 @@ class LineChartGraph extends React.Component {
       legend: {
         display: false
       },
-      //responsive: true,
-      //maintainAspectRatio: false,
+      responsive: true,
+      maintainAspectRatio: true,
       //aspectRatio: 2,
       scales: {
         yAxes: [
@@ -69,7 +69,9 @@ class LineChartGraph extends React.Component {
       }
     }
     return(
-      <Line ref="chart" data={data} options={options} />
+      <div style={{height: '400px', maxHeight: '400px'}}> 
+        <Line ref="chart" data={data} options={options} height={0}/>
+      </div>
     )
   }
 }

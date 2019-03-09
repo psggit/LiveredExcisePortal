@@ -125,7 +125,7 @@ export function fetchConsumerComplaints(action) {
 
 export function fetchRevenueDetails(action) {
   return POST({
-    api: 'http://192.168.5.86:3003/livered/listComplaints',
+    api: 'http://192.168.5.86:3004/livered/revenueOverview',
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -135,7 +135,7 @@ export function fetchRevenueDetails(action) {
 
 export function fetchPermitDetails(action) {
   return POST({
-    api: 'http://192.168.5.86:3003/livered/listComplaints',
+    api: 'http://192.168.5.86:3000/livered/ottpOverview',
     handleError: true,
     prependBaseUrl: false,
     data: action.data
