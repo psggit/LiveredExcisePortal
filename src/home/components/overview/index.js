@@ -222,6 +222,10 @@ class Overview extends React.Component {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
+  /**
+   * Sets the labels and values based on activeTab and noOfDays 
+   * @param {Integer} noOfDays - Used to filter the labels and values
+   */
   setLabelsAndValues(noOfDays) {
     if(this.state.activeTab === "permits") {
       this.setState({ 
