@@ -2,12 +2,20 @@ import React from 'react'
 import './label.scss'
 import Icon from './../icon'
 
-const Label = ({ children, color, icon }) => {
+const Label = ({ children, color, icon, tooltipText }) => {
   return (
     <p className="label">
       { children }
       {
-        icon ? <Icon name={icon} /> : ''
+        icon 
+        ?
+          <span className="info"  style={{ position: "relative" }}>
+            <Icon name={icon} /> 
+            <span className="tooltip-text">
+              {tooltipText}
+            </span>
+          </span>
+        : ''
       }
     </p>
   )

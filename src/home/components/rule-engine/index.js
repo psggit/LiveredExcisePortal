@@ -71,18 +71,27 @@ class RuleManagement extends React.Component {
     return (
       <div id="rule-engine">
         <PageHeader pageName="Rule Engine" />
-        <Collpasible title="CUSTOMER RESTRICTIONS">
+        <Collpasible 
+          title="CUSTOMER RESTRICTIONS"
+          tooltipText="User/customer needs to fulfil the following criteria to place an order"
+        >
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <div>
               <div className="legal-age">
-                <Label icon="info">
+                <Label 
+                  icon="info"
+                  tooltipText="Minimum legal age limit to place an order"
+                >
                   Legal Purchage Age
                 </Label>
                 <input type="number" value={legalPurchaseAge} />
               </div>
 
               <div className="possession" style={{ marginTop: '20px' }}>
-                <Label icon="info">
+                <Label 
+                  icon="info"
+                  tooltipText="The quantity of liquor that an individual can possess at any given time"
+                >
                   Possession Limits
                 </Label>
                 {
@@ -98,9 +107,15 @@ class RuleManagement extends React.Component {
           </div>
         </Collpasible>
 
-        <Collpasible title="PERMIT RULES">
+        <Collpasible 
+          title="PERMIT RULES"
+          tooltipText="Fulfiling certain criteria while generating a permit"
+        >
           <div style={{ display: 'inline-block', marginRight: '20px' }} className="permit-time-validity">
-            <Label icon="info">
+            <Label 
+              icon="info"
+              tooltipText="The validity of a single OTTP generated per order"
+            >
               Permit Time Validity
             </Label>
             <input
@@ -109,7 +124,10 @@ class RuleManagement extends React.Component {
             />
           </div>
           <div style={{ display: 'inline-block' }} className="cost">
-            <Label icon="info">
+            <Label 
+              icon="info"
+              tooltipText="The amount charged per OTTP per order"
+            >
               Cost/Permit
             </Label>
             <input
@@ -119,7 +137,10 @@ class RuleManagement extends React.Component {
             />
           </div>
           <div className="late-fee">
-            <Label icon="info">
+            <Label 
+              icon="info"
+              tooltipText="In case of extension, late fee is charged per OTTP per order"
+            >
               Late Fee
             </Label>
             <input
@@ -130,7 +151,10 @@ class RuleManagement extends React.Component {
           </div>
         </Collpasible>
 
-        <Collpasible title="TIME RESTRICTIONS">
+        <Collpasible 
+          title="TIME RESTRICTIONS"
+          tooltipText="The time range within which the delivery is active every day"
+        >
           <div>
             <Label>Daily Restrictions</Label>
           </div>
@@ -154,7 +178,10 @@ class RuleManagement extends React.Component {
             })
           }
         </Collpasible>
-        <Collpasible title="SPECIAL RESTRICTIONS">
+        <Collpasible 
+          title="SPECIAL RESTRICTIONS"
+          tooltipText="To restrict delivery with 48 hour intimation on certain days due to emergencies, as listed by the state"
+        >
           <table>
             <thead>
               <tr>

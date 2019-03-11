@@ -401,6 +401,22 @@ class LiveOrdersList extends React.Component {
                         alignItems: "center"
                       }}
                     >
+                      <span style={{ marginRight: "5px" }}>Volume (Litres)</span>
+                      <span className="info" style={{ position: "relative" }}>
+                        <Icon name="info" />
+                        <span className="tooltip-text">
+                          Total volume of alcoholic beverages  
+                        </span>
+                      </span>
+                    </div>
+                  </th>
+                  <th>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center"
+                      }}
+                    >
                       <span style={{ marginRight: "5px" }}>Permit Status</span>
                       <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
@@ -410,7 +426,7 @@ class LiveOrdersList extends React.Component {
                       </span>
                     </div>
                   </th>
-                  <th />
+                  <th/>
                 </tr>
               </thead>
               <tbody>

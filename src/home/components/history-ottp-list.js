@@ -391,7 +391,7 @@ class HistoryOrdersList extends React.Component {
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
-                        Unique One Time Transport Permit Number
+                        Total volume of alcoholic beverages
                       </span>
                     </span>
                   </div>
@@ -407,7 +407,7 @@ class HistoryOrdersList extends React.Component {
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
-                        Validity status of a single Permit ID
+                        Validity status of a single Permit ID (Active/Expired)
                       </span>
                     </span>
                   </div>
@@ -423,7 +423,7 @@ class HistoryOrdersList extends React.Component {
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
-                        Unique One Time Transport Permit Number
+                        Age verified for legal drinking age with proof of a valid government ID
                       </span>
                     </span>
                   </div>

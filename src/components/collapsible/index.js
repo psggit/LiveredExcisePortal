@@ -24,8 +24,11 @@ class Collapsible extends React.Component {
               <span>
                 { this.props.title }
               </span>
-              <span style={{ position: 'relative', top: '7px', marginLeft: '12px' }}>
+              <span className="info" style={{ position: 'relative', top: '7px', marginLeft: '12px' }}>
                 <Icon name="info" />
+                <span className="tooltip-text" style={{ top: '40px' }}>
+                  {this.props.tooltipText} 
+                </span>
               </span>
             </div>
             <Icon name="down" />

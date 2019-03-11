@@ -1,7 +1,7 @@
 .tooltip-text {
   display: none;
   box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
+  background-color: #fff;
   top: 30px;
   left: -93px;
   position: absolute;
@@ -25,9 +25,11 @@
 .tooltip-text::after {
   content: "";
   position: absolute;
-  bottom: 100%;
-  left: 50%;
-  margin-left: -5px;
+  top: -10px;
+  /* bottom: 100%; */
+  //left: 48%;
+  left: 95px;
+  /* margin-left: -5px; */
   border-width: 5px;
   border-style: solid;
   border-color: transparent transparent #fff transparent;
