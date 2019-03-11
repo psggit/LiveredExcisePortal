@@ -9,7 +9,8 @@ class Retailer extends React.Component {
     this.state = {
       retailer: {
         filterby: "",
-        value: ""
+        value: "",
+        idx: ""
       }
     }
 
@@ -26,7 +27,8 @@ class Retailer extends React.Component {
     this.setState({
       retailer: {
         filterby: e.target.name,
-        value: this.props.retailerList.find(item => item.value === parseInt(value)).text
+        value: this.props.retailerList.find(item => item.value === parseInt(value)).text,
+        idx: e.target.value
       }
     })
   }

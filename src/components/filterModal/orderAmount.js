@@ -11,7 +11,8 @@ class OrderAmount extends React.Component {
         filterby: "",
         value: "",
         lowerrange: 0,
-        upperrange: 0
+        upperrange: 0,
+        idx: ""
       },
     }
 
@@ -31,7 +32,8 @@ class OrderAmount extends React.Component {
         filterby: e.target.name,
         value:  this.props.orderAmount.find(item => item.value === parseInt(value)).text,
         lowerrange: parseInt(range[0]),
-        upperrange: parseInt(range[1])
+        upperrange: parseInt(range[1]),
+        idx: e.target.value
       }
     })
   }
@@ -45,7 +47,8 @@ class OrderAmount extends React.Component {
         <Select 
           options={this.props.orderAmount}
           name="Order Amount" 
-          onChange={e => this.handleChange(e)} 
+          onChange={e => this.handleChange(e)}
+          value={this.props.selectedOrderAmntIdx}
         />
       </div>
     )

@@ -9,7 +9,8 @@ class DeliveryOperator extends React.Component {
     this.state = {
       dso: {
         filterby: "",
-        value: ""
+        value: "",
+        idx: ""
       }
     }
 
@@ -26,7 +27,8 @@ class DeliveryOperator extends React.Component {
     this.setState({
       dso: {
         filterby: e.target.name,
-        value: this.props.dsoList.find(item => item.value === parseInt(value)).text
+        value: this.props.dsoList.find(item => item.value === parseInt(value)).text,
+        idx: e.target.value
       }
     })
   }
@@ -41,6 +43,7 @@ class DeliveryOperator extends React.Component {
           options={this.props.dsoList}
           name="Delivery Operator" 
           onChange={e => this.handleChange(e)} 
+          value={this.props.selectedDsoIdx}
         />
       </div>
     )

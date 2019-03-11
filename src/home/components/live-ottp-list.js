@@ -15,6 +15,7 @@ import Filter from "@components/filterModal"
 import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import "@sass/style.scss"
 import FilteredParams from "@components/filteredParams"
+import { format } from "url";
 
 class LiveOrdersList extends React.Component {
   constructor() {
@@ -27,7 +28,11 @@ class LiveOrdersList extends React.Component {
       mountFilter: false,
       filter: [],
       OttpId: "",
-      isFilterApplied: false
+      isFilterApplied: false,
+      selectedCityIdx: "",
+      selectedDsoIdx: "",
+      //selectedRetailerIdx: "",
+      selectedOrderAmntIdx: ""
     }
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
@@ -38,6 +43,7 @@ class LiveOrdersList extends React.Component {
     this.mountFilterModal = this.mountFilterModal.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
+    this.setSelectedDropDownValue = this.setSelectedDropDownValue.bind(this)
   }
 
   componentDidMount() {
@@ -71,6 +77,33 @@ class LiveOrdersList extends React.Component {
   }
 
   /**
+   * Sets the dropdown field with selected value
+   * @param {String} name - selected dropdown field name
+   * @param {String} value - selected dropdown field index
+   */
+  setFilteredFieldState(name, value) {
+    const selectedFieldIdx = `selected${name}Idx`
+    this.setState({ [selectedFieldIdx]: value })
+  }
+
+  /**
+   * Sets the filtered dropdown value on page reload
+   */
+  setSelectedDropDownValue(item) {
+    switch(item.filterby) {
+      case 'City':
+        this.setFilteredFieldState('City', item.idx)
+      break;
+      case 'Delivery Operator':
+        this.setFilteredFieldState('Dso', item.idx)
+      break;
+      case 'Order Amount':
+        this.setFilteredFieldState('OrderAmnt', item.idx)
+      break;
+    }
+  }
+
+  /**
     * Gets the url parameters and fetches live ottps
     */
   setQueryParamas() {
@@ -86,6 +119,11 @@ class LiveOrdersList extends React.Component {
       if(filter.find(item => item.filterby === "OttpId")) {
         this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
       }
+
+      filter.map((item) => {
+        this.setSelectedDropDownValue(item)
+      })
+
       this.setState({isFilterApplied: true, filter: JSON.parse(decodeURIComponent(queryObj.filter))})
       this.props.actions.fetchInProgressOTTP({
         limit: parseInt(queryObj.limit),
@@ -98,6 +136,8 @@ class LiveOrdersList extends React.Component {
         offset: queryObj.limit * (queryObj.activePage - 1)
       })
     }
+
+    this.timeoutId = setTimeout(this.setQueryParamas, 30000)
   }
 
   /**
@@ -302,6 +342,9 @@ class LiveOrdersList extends React.Component {
               cityList={this.state.cityList}
               dsoList={this.state.dsoList}
               orderAmount={orderAmount}
+              selectedCityIdx={this.state.selectedCityIdx}
+              selectedDsoIdx={this.state.selectedDsoIdx}
+              selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
               //permitStatus={this.permitStatus}
             >
             </Filter>
@@ -405,7 +448,7 @@ class LiveOrdersList extends React.Component {
                       <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
                         <span className="tooltip-text">
-                          Total volume of alcoholic beverages  
+                          Total volume of alcoholic beverages
                         </span>
                       </span>
                     </div>
@@ -441,7 +484,7 @@ class LiveOrdersList extends React.Component {
                   ))}
                 {this.props.loadingInProgressOTTP && (
                   <tr>
-                    <td colSpan="8">
+                    <td colSpan="9">
                       <Loader />
                     </td>
                   </tr>

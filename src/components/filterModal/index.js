@@ -21,10 +21,10 @@ class Filter extends React.Component {
 
   applyFilter() {
     let filterObj = []
-
+    let orderAmount, retailer;
     if(this.props.filterName !== "overview") {
-      const orderAmount = this.orderAmountState.getData().orderAmount
-      const retailer = this.retailerState.getData().retailer
+      orderAmount = this.orderAmountState.getData().orderAmount
+      retailer = this.retailerState.getData().retailer
     }
    
     const dso = this.dsoListState.getData().dso
@@ -88,21 +88,24 @@ class Filter extends React.Component {
           <City 
             cityList={this.props.cityList}  
             ref={(node) => { this.cityState = node }}
+            selectedCityIdx={this.props.selectedCityIdx}
           />
           <DeliveryOperator 
             dsoList={this.props.dsoList}  
             ref={(node) => { this.dsoListState = node }}
+            selectedDsoIdx={this.props.selectedDsoIdx}
           />
           {
             this.props.filterName !== "overview" &&
             <div>
-               <Retailer 
+              <Retailer 
                 retailerList={this.props.retailerList}  
                 ref={(node) => { this.retailerState = node }}
               />
               <OrderAmount 
                 orderAmount={this.props.orderAmount}  
                 ref={(node) => { this.orderAmountState = node }}
+                selectedOrderAmntIdx={this.props.selectedOrderAmntIdx}
               />
             </div>
           }

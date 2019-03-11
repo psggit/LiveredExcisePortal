@@ -15,8 +15,12 @@ const FilteredParams = ({data}) => {
             <div key={i}>
               <span style={{margin: '0px 10px', fontSize: '12px'}}>|</span>
               {
-                item.filterby !== "Order Amount" && 
+                item.filterby !== "Order Amount" && item.filterby !== "City" &&
                 <span style={textStyle}>{item.value}</span>
+              }
+              {
+                item.filterby === "City" &&
+                <span style={textStyle}>{ item.cityName }</span>
               }
               {
                 item.filterby === "Order Amount" && 

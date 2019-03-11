@@ -9,7 +9,9 @@ class City extends React.Component {
     this.state = {
       city: {
         filterby: "",
-        value: ""
+        value: "",
+        cityName: "",
+        idx: ""
       }
     }
 
@@ -27,7 +29,9 @@ class City extends React.Component {
     this.setState({
       city: {
         filterby: e.target.name,
-        value: this.props.cityList.find(item => item.value === parseInt(value)).text
+        value: value.toString(),
+        idx: e.target.value,
+        cityName: this.props.cityList.find(item => item.value === parseInt(value)).text
       }
     })
   }
@@ -42,6 +46,7 @@ class City extends React.Component {
           options={this.props.cityList} 
           name="City"  
           onChange={e => this.handleChange(e)} 
+          value={this.props.selectedCityIdx}
         />
       </div>
     )
