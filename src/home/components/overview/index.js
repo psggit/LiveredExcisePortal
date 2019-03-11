@@ -57,6 +57,7 @@ class Overview extends React.Component {
     this.applyFilter = this.applyFilter.bind(this)
     this.fetchDefaultData = this.fetchDefaultData.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
+    this.setLabelsAndValues = this.setLabelsAndValues.bind(this)
   }
 
   componentDidMount() {
@@ -221,51 +222,35 @@ class Overview extends React.Component {
     this.setState({ mountFilter: !this.state.mountFilter })
   }
 
+  setLabelsAndValues(noOfDays) {
+    if(this.state.activeTab === "permits") {
+      this.setState({ 
+        filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - noOfDays, 0)), 
+        filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - noOfDays, 0))
+      })
+    } else {
+      this.setState({
+        filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - noOfDays, 0)), 
+        filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - noOfDays, 0))
+      })
+    }
+  }
+
   /**
    * On change of days, sets the filter data
    */
   handleChange(e) {
     switch(this.options.find((item) => item.value === parseInt(e.target.value)).text) {
       case 'Last 7 days':
-        if(this.state.activeTab === "permits") {
-          this.setState({ 
-            filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - 7, 0)), 
-            filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - 7, 0))
-          })
-        } else {
-          this.setState({
-            filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - 7, 0)), 
-            filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - 7, 0))
-          })
-        }
+        this.setLabelsAndValues(7)
       break;
 
       case 'Last 14 days':
-        if(this.state.activeTab === "permits") {
-          this.setState({ 
-            filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - 14, 0)), 
-            filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - 14, 0))
-          })
-        } else {
-          this.setState({
-            filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - 14, 0)), 
-            filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - 14, 0))
-          })
-        }
+        this.setLabelsAndValues(14)
       break;
 
       case 'Last 21 days':
-        if(this.state.activeTab === "permits") {
-          this.setState({ 
-            filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - 21, 0)), 
-            filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - 21, 0))
-          })
-        } else {
-          this.setState({
-            filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - 21, 0)), 
-            filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - 21, 0))
-          })
-        }
+        this.setLabelsAndValues(21)
       break;
     }
   }
