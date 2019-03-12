@@ -82,8 +82,8 @@ class Filter extends React.Component {
           {
             this.props.filterName === "pastOrders" &&
             <div>
-              <FromDate ref={(node) => {this.fromDateState = node}} />
-              <ToDate ref={(node) => {this.toDateState = node}} />
+              <FromDate ref={(node) => {this.fromDateState = node}} fromDate={this.props.fromDate} />
+              <ToDate ref={(node) => {this.toDateState = node}} toDate={this.props.toDate} />
             </div>
           }
           <City 
@@ -102,6 +102,7 @@ class Filter extends React.Component {
               <Retailer 
                 retailerList={this.props.retailerList}  
                 ref={(node) => { this.retailerState = node }}
+                selectedRetailerIdx={this.props.selectedRetailerIdx}
               />
               <OrderAmount 
                 orderAmount={this.props.orderAmount}  

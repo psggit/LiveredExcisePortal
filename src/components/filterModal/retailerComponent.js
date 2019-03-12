@@ -43,7 +43,7 @@ class Retailer extends React.Component {
           options={this.props.retailerList} 
           name="Retailer"  
           onChange={e => this.handleChange(e)} 
-          //value={parseInt(this.props.selectedCityIdx)}  
+          value={1}  
         />
       </div>
     )

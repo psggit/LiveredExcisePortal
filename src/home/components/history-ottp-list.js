@@ -24,10 +24,17 @@ class HistoryOrdersList extends React.Component {
       limit: 10,
       dsoList: [],
       cityList: [],
+      retailerList: [],
       mountFilter: false,
       filter: [],
       OttpId: "",
-      isFilterApplied: false
+      isFilterApplied: false,
+      selectedCityIdx: "",
+      selectedDsoIdx: "",
+      selectedRetailerIdx: "",
+      selectedOrderAmntIdx: "",
+      fromDate: "",
+      toDate: ""
     }
   
     this.handlePageChange = this.handlePageChange.bind(this)
@@ -39,6 +46,8 @@ class HistoryOrdersList extends React.Component {
     this.fetchFilterDropDownData = this.fetchFilterDropDownData.bind(this)
     this.fetchHistoryOttps = this.fetchHistoryOttps.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
+    this.setSelectedDropDownValue = this.setSelectedDropDownValue.bind(this)
+    this.setFilteredFieldState = this.setFilteredFieldState.bind(this)
   }
 
   componentDidMount() {
@@ -68,6 +77,54 @@ class HistoryOrdersList extends React.Component {
       })
       cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
       this.setState({cityList})
+    } else if(this.props.retailerList !== prevProps.retailerList) {
+      let retailerList = this.props.retailerList.map((item, i) => {
+        return {text: item.name, value: i}
+      })
+      retailerList = [...retailerList, {text: "All", value: retailerList.length}]
+      this.setState({retailerList})
+    }
+  }
+
+  /**
+   * Sets the dropdown field with selected value
+   * @param {String} name - selected dropdown field name
+   * @param {String} value - selected dropdown field index
+   */
+  setFilteredFieldState(fieldName, value) {
+    if(fieldName !== "FromDate" && fieldName !== "ToDate") {
+      const selectedFieldIdx = `selected${fieldName}Idx`
+      this.setState({ [selectedFieldIdx]: value })
+    } else if(fieldName === "FromDate") {
+      this.setState({ fromDate: value})
+    } else if (fieldName === "ToDate") {
+      this.setState({ toDate: value})
+    }
+  }
+
+  /**
+   * Sets the filtered dropdown value on page reload
+   */
+  setSelectedDropDownValue(item) {
+    switch(item.filterby) {
+      case 'City':
+        this.setFilteredFieldState('City', item.idx)
+      break;
+      case 'Delivery Operator':
+        this.setFilteredFieldState('Dso', item.idx)
+      break;
+      case 'Order Amount':
+        this.setFilteredFieldState('OrderAmnt', item.idx)
+      break;
+      case 'Retailer':
+        this.setFilteredFieldState('Retailer', item.idx)
+      break;
+      case 'From':
+        this.setFilteredFieldState('FromDate', item.value)
+      break;
+      case 'To':
+        this.setFilteredFieldState('ToDate', item.value)
+      break;
     }
   }
 
@@ -87,6 +144,11 @@ class HistoryOrdersList extends React.Component {
       if(filter.find(item => item.filterby === "OttpId")) {
         this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
       }
+
+      filter.map((item) => {
+        this.setSelectedDropDownValue(item)
+      })
+
       this.setState({isFilterApplied: true,  filter: JSON.parse(decodeURIComponent(queryObj.filter))})
       this.props.actions.fetchHistoryOTTP({
         limit: parseInt(queryObj.limit),
@@ -172,6 +234,11 @@ class HistoryOrdersList extends React.Component {
       offset: 0
     })
     this.props.actions.fetchCitiesList({})
+    this.props.actions.fetchRetailerList({
+      limit: 10000,
+      offset: 0,
+      state_short_name: "TN"
+    })
   }
 
   /**
@@ -274,6 +341,13 @@ class HistoryOrdersList extends React.Component {
               dsoList={this.state.dsoList}
               cityList={this.state.cityList}
               orderAmount={orderAmount}
+              retailerList={this.state.retailerList}
+              selectedCityIdx={this.state.selectedCityIdx}
+              selectedDsoIdx={this.state.selectedDsoIdx}
+              selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
+              selectedRetailerIdx={this.state.selectedRetailerIdx}
+              fromDate={this.state.fromDate}
+              toDate={this.state.toDate}
             >
             </Filter>
           </div>

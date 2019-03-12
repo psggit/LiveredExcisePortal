@@ -1,6 +1,7 @@
 import React from "react"
 import Label from "../label"
 import Icon from "../icon"
+import Moment from "moment"
 
 class FromDate extends React.Component {
   constructor() {
@@ -45,6 +46,7 @@ class FromDate extends React.Component {
           max="9999-12-31" 
           name="fromDate"
           onChange={this.handleChange}
+          value={Moment(this.props.fromDate).format("YYYY-MM-DD")}
         />
       </div>
     )

@@ -1,6 +1,7 @@
 import React from "react"
 import Label from "../label"
 import Icon from "../icon"
+import Moment from "moment"
 
 class ToDate extends React.Component {
   constructor() {
@@ -32,6 +33,7 @@ class ToDate extends React.Component {
   }
 
   render() {
+    console.log("props", this.props)
     return(
       <div style={{position: 'relative'}} className="input-field">
         <span className="calendar-icon">
@@ -45,6 +47,7 @@ class ToDate extends React.Component {
           max="9999-12-31" 
           name="toDate"
           onChange={this.handleChange}
+          value={this.props.toDate ? this.props.toDate : this.state.toDate.value}
         />
       </div>
     )

@@ -32,7 +32,7 @@ class LiveOrdersList extends React.Component {
       isFilterApplied: false,
       selectedCityIdx: "",
       selectedDsoIdx: "",
-      //selectedRetailerIdx: "",
+      selectedRetailerIdx: "",
       selectedOrderAmntIdx: ""
     }
     this.handlePageChange = this.handlePageChange.bind(this)
@@ -45,6 +45,7 @@ class LiveOrdersList extends React.Component {
     this.applyFilter = this.applyFilter.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
     this.setSelectedDropDownValue = this.setSelectedDropDownValue.bind(this)
+    this.setFilteredFieldState = this.setFilteredFieldState.bind(this)
   }
 
   componentDidMount() {
@@ -106,6 +107,9 @@ class LiveOrdersList extends React.Component {
       break;
       case 'Order Amount':
         this.setFilteredFieldState('OrderAmnt', item.idx)
+      break;
+      case 'Retailer':
+        this.setFilteredFieldState('Retailer', item.idx)
       break;
     }
   }
@@ -358,6 +362,7 @@ class LiveOrdersList extends React.Component {
               selectedCityIdx={this.state.selectedCityIdx}
               selectedDsoIdx={this.state.selectedDsoIdx}
               selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
+              selectedRetailerIdx={this.state.selectedRetailerIdx}
               //permitStatus={this.permitStatus}
             >
             </Filter>
