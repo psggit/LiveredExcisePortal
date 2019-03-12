@@ -37,6 +37,7 @@ class City extends React.Component {
   }
 
   render() {
+    console.log("value", this.props.selectedCityIdx)
     return(
       <div className="city input-field">
         <Label>
@@ -46,7 +47,7 @@ class City extends React.Component {
           options={this.props.cityList} 
           name="City"  
           onChange={e => this.handleChange(e)} 
-          value={this.props.selectedCityIdx}
+          value={parseInt(this.props.selectedCityIdx)}
         />
       </div>
     )

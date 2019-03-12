@@ -40,8 +40,10 @@ class Retailer extends React.Component {
           Retailer
         </Label>
         <Select 
-          options={["Bangalore", "Chennai"]} 
+          options={this.props.retailerList} 
           name="Retailer"  
+          onChange={e => this.handleChange(e)} 
+          //value={parseInt(this.props.selectedCityIdx)}  
         />
       </div>
     )

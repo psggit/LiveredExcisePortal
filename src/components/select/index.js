@@ -20,8 +20,9 @@ class Select extends React.Component {
           className={`select ${this.props.small ? 'small' : ''}`}
           name={this.props.name}
           onChange={this.handleChange}>
+          value={this.props.value ? this.props.value : ''}
           {
-            this.props.name &&
+            this.props.name && !this.props.value &&
             <option value="" disabled selected>
               Choose a {this.props.name}
             </option>

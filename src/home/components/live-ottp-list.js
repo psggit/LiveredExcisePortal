@@ -24,6 +24,7 @@ class LiveOrdersList extends React.Component {
       activePage: 1,
       dsoList: [],
       cityList: [],
+      retailerList: [],
       limit: 10,
       mountFilter: false,
       filter: [],
@@ -73,6 +74,12 @@ class LiveOrdersList extends React.Component {
       })
       cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
       this.setState({cityList})
+    } else if(this.props.retailerList !== prevProps.retailerList) {
+      let retailerList = this.props.retailerList.map((item, i) => {
+        return {text: item.name, value: i}
+      })
+      retailerList = [...retailerList, {text: "All", value: retailerList.length}]
+      this.setState({retailerList})
     }
   }
 
@@ -161,6 +168,11 @@ class LiveOrdersList extends React.Component {
       offset: 0
     })
     this.props.actions.fetchCitiesList({})
+    this.props.actions.fetchRetailerList({
+      limit: 10000,
+      offset: 0,
+      state_short_name: "TN"
+    })
   }
 
   /**
@@ -342,6 +354,7 @@ class LiveOrdersList extends React.Component {
               cityList={this.state.cityList}
               dsoList={this.state.dsoList}
               orderAmount={orderAmount}
+              retailerList={this.state.retailerList}
               selectedCityIdx={this.state.selectedCityIdx}
               selectedDsoIdx={this.state.selectedDsoIdx}
               selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
@@ -492,7 +505,7 @@ class LiveOrdersList extends React.Component {
                 {!this.props.loadingInProgressOTTP &&
                   this.props.inProgressOTTP.length === 0 && (
                   <tr>
-                    <td style={{ textAlign: "center" }} colSpan="8">
+                    <td style={{ textAlign: "center" }} colSpan="9">
                       No orders found
                     </td>
                   </tr>
