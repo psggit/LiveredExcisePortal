@@ -4,8 +4,10 @@ import Icon from './../icon'
 
 const Label = ({ children, color, icon, tooltipText }) => {
   return (
-    <p className="label">
-      { children }
+    <div style={{display: 'flex', alignItems: 'center'}}>
+      <p className="label" style={{marginRight: '10px'}}>
+        { children }
+      </p>
       {
         icon 
         ?
@@ -17,7 +19,7 @@ const Label = ({ children, color, icon, tooltipText }) => {
           </span>
         : ''
       }
-    </p>
+    </div>
   )
 }
 

@@ -136,7 +136,7 @@ class RuleManagement extends React.Component {
               value={`₹ ${permitRules.permit_cost}`}
             />
           </div>
-          <div className="late-fee">
+          <div className="late-fee" style={{marginTop: '20px'}}>
             <Label 
               icon="info"
               tooltipText="In case of extension, late fee is charged per OTTP per order"

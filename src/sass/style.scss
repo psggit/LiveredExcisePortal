@@ -18,19 +18,15 @@
 
 .info:hover .tooltip-text {
   display: block;
-  // opacity: 1;
-  // transition: all ease-in .6s;
+  //margin: 0 auto;
 }
 
 .tooltip-text::after {
   content: "";
   position: absolute;
   top: -10px;
-  /* bottom: 100%; */
-  //left: 48%;
   left: 95px;
-  /* margin-left: -5px; */
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent #333 transparent;
 }

@@ -406,7 +406,7 @@ class LiveOrdersList extends React.Component {
                       }}
                     >
                       <span style={{ marginRight: "5px" }}>Permit ID</span>
-                      <span className="info" style={{ position: "relative" }}>
+                      <span className="info" style={{ position: "relative", display: "inline-block" }}>
                         <Icon name="info" />
                         <span className="tooltip-text">
                           Unique One Time Transport Permit Number
