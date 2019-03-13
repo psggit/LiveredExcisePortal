@@ -130,7 +130,7 @@ class HistoryOrdersList extends React.Component {
 
   /**
     * Gets the url parameters and fetches pastOrder Ottps
-    */
+  **/
   setQueryParamas() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
@@ -288,17 +288,29 @@ class HistoryOrdersList extends React.Component {
    * @param {array of object} filter - Passed form FilterModal component
    */
   applyFilter(filter) {
-    this.setState({limit: 10, filter, isFilterApplied: true})
+    let filterArr = filter
+    if(this.state.filter) {
+      filterArr = this.state.filter
+      filter.map((item) => {
+        filterArr.push(item)
+      })
+    }
+    this.setState({
+      limit: 10, 
+      filter: filterArr, 
+      isFilterApplied: true
+    })
+
     const queryObj = {
       limit: 10,
       offset: 0,
       activePage: 1,
-      filter: JSON.stringify(filter)
+      filter: JSON.stringify(filterArr)
     }
     this.props.actions.fetchHistoryOTTP({
       limit: 10,
       offset: 0,
-      filter: filter
+      filter: filterArr
     })
     history.pushState(queryObj, "past orders listing", `/home/past-orders?${getQueryUri(queryObj)}`)
     this.mountFilterModal()

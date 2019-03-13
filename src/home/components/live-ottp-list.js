@@ -118,6 +118,7 @@ class LiveOrdersList extends React.Component {
     * Gets the url parameters and fetches live ottps
     */
   setQueryParamas() {
+    console.log("helo")
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
 
@@ -141,14 +142,13 @@ class LiveOrdersList extends React.Component {
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } else {
-      this.props.actions.fetchInProgressOTTP({
-        limit: parseInt(queryObj.limit),
-        offset: queryObj.limit * (queryObj.activePage - 1)
-      })
-    }
-
-    this.timeoutId = setTimeout(this.setQueryParamas, 30000)
+    } 
+    // else {
+    //   this.props.actions.fetchInProgressOTTP({
+    //     limit: parseInt(queryObj.limit),
+    //     offset: queryObj.limit * (queryObj.activePage - 1)
+    //   })
+    // }   
   }
 
   /**
@@ -308,17 +308,29 @@ class LiveOrdersList extends React.Component {
    * @param {array of object} filter - Passed form FilterModal component
    */
   applyFilter(filter) {
-    this.setState({limit: 10, filter, isFilterApplied: true})
+    let filterArr = filter
+    if(this.state.filter) {
+      filterArr = this.state.filter
+      filter.map((item) => {
+        filterArr.push(item)
+      })
+    }
+
+    this.setState({
+      limit: 10, 
+      filter: filterArr, 
+      isFilterApplied: true
+    })
     const queryObj = {
       limit: 10,
       offset: 0,
       activePage: 1,
-      filter: JSON.stringify(filter)
+      filter: JSON.stringify(filterArr)
     }
     this.props.actions.fetchInProgressOTTP({
       limit: 10,
       offset: 0,
-      filter: filter
+      filter: filterArr
     })
     history.pushState(queryObj, "live orders listing", `/home/live-orders?${getQueryUri(queryObj)}`)
     this.mountFilterModal()

@@ -34,6 +34,7 @@ class DeliveryOperator extends React.Component {
   }
 
   render() {
+    console.log("selected dso index", this.props.selectedDsoIdx)
     return(
       <div className="delivery-operator input-field">
         <Label>

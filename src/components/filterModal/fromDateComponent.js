@@ -46,7 +46,7 @@ class FromDate extends React.Component {
           max="9999-12-31" 
           name="fromDate"
           onChange={this.handleChange}
-          value={Moment(this.props.fromDate).format("YYYY-MM-DD")}
+          value={this.props.fromDate ? this.props.fromDate : this.state.fromDate.value}
         />
       </div>
     )
