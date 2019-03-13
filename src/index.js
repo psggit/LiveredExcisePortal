@@ -110,7 +110,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentRoute: location.pathname.split('/')[2] || 'overview',
+      currentRoute: location.pathname.split('/')[2] || '',
       key: 0,
       isLoggedIn: true
     }
