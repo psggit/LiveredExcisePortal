@@ -118,7 +118,6 @@ class LiveOrdersList extends React.Component {
     * Gets the url parameters and fetches live ottps
     */
   setQueryParamas() {
-    console.log("helo")
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
 

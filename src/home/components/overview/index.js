@@ -18,6 +18,8 @@ class Overview extends React.Component {
     super()
     this.state = {
       activeTab: "permits",
+      selectedCityIdx: "",
+      selectedDsoIdx: "",
       //dayInterval: "Last 7 days",
       mountFilter: false,
       dsoList: [],
@@ -58,6 +60,8 @@ class Overview extends React.Component {
     this.fetchDefaultData = this.fetchDefaultData.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
     this.setLabelsAndValues = this.setLabelsAndValues.bind(this)
+    this.setSelectedDropDownValue = this.setSelectedDropDownValue.bind(this)
+    this.setFilteredFieldState = this.setFilteredFieldState.bind(this)
   }
 
   componentDidMount() {
@@ -84,6 +88,9 @@ class Overview extends React.Component {
     if(queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
       this.setState({isFilterApplied: true,  filter: JSON.parse(decodeURIComponent(queryObj.filter))})
+      filter.map((item) => {
+        this.setSelectedDropDownValue(item)
+      })
       if(queryObj.activeTab === "permits") {
         this.props.actions.fetchPermitDetails({
           filter: JSON.parse(decodeURIComponent(queryObj.filter))
@@ -109,7 +116,7 @@ class Overview extends React.Component {
       })
       dsoList = [...dsoList, {text: "All", value: dsoList.length}]
       this.setState({dsoList})
-    } else if(this.props.cityList !== prevProps.cityList) {
+    } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
       let cityList = this.props.cityList.map((item) => {
         if (parseInt(item.id) > max) {
@@ -119,7 +126,7 @@ class Overview extends React.Component {
       })
       cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
       this.setState({cityList})
-    } else if(this.props.permitList !== prevProps.permitList) {
+    } else if (this.props.permitList !== prevProps.permitList) {
       let permitLabels = [], permitValues = []
       this.props.permitList.map((item, i) => {
         permitLabels[i] = Moment(item.date).format("DD/MM/YYYY") 
@@ -132,7 +139,7 @@ class Overview extends React.Component {
         filteredPermitLabels: permitLabels.slice(Math.max(permitLabels.length - this.defaultDays, 0)), 
         filteredPermitValues: permitValues.slice(Math.max(permitValues.length - this.defaultDays, 0))
       })
-    } else if(this.props.revenueList !== prevProps.revenueList) {
+    } else if (this.props.revenueList !== prevProps.revenueList) {
       let revenueLabels = [], revenueValues = []
       this.props.revenueList.map((item, i) => {
         revenueLabels[i] = Moment(item.date).format("DD/MM/YYYY")
@@ -241,6 +248,30 @@ class Overview extends React.Component {
   }
 
   /**
+   * Sets the dropdown field with selected value
+   * @param {String} name - selected dropdown field name
+   * @param {String} value - selected dropdown field index
+   */
+  setFilteredFieldState(name, value) {
+    const selectedFieldIdx = `selected${name}Idx`
+    this.setState({ [selectedFieldIdx]: value })
+  }
+
+  /**
+   * Sets the filtered dropdown value on page reload
+   */
+  setSelectedDropDownValue(item) {
+    switch(item.filterby) {
+      case 'City':
+        this.setFilteredFieldState('City', item.idx)
+      break;
+      case 'Delivery Operator':
+        this.setFilteredFieldState('Dso', item.idx)
+      break;
+    }
+  }
+
+  /**
    * On change of days, sets the filter data
    */
   handleChange(e) {
@@ -264,18 +295,30 @@ class Overview extends React.Component {
    * @param {array of object} filter - Passed form FilterModal component
    */
   applyFilter(filter) {
-    this.setState({filter, isFilterApplied: true})
+    let filterArr = filter
+    if(this.state.filter) {
+      filterArr = this.state.filter
+      filter.map((item) => {
+        filterArr.push(item)
+      })
+    }
+    
+    this.setState({
+      filter: filterArr, 
+      isFilterApplied: true
+    })
+
     const queryObj = {
-      filter: JSON.stringify(filter),
+      filter: JSON.stringify(filterArr),
       activeTab: this.state.activeTab
     }
     if(this.state.activeTab === "permits") {
       this.props.actions.fetchPermitDetails({
-        filter: filter
+        filter: filterArr
       })
     } else {
       this.props.actions.fetchRevenueDetails({
-        filter: filter
+        filter: filterArr
       })
     }
  
@@ -311,6 +354,8 @@ class Overview extends React.Component {
               applyFilter={this.applyFilter}
               cityList={this.state.cityList}
               dsoList={this.state.dsoList}
+              selectedCityIdx={this.state.selectedCityIdx}
+              selectedDsoIdx={this.state.selectedDsoIdx}
             >
             </Filter>
           </div>
