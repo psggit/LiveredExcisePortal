@@ -135,6 +135,7 @@ class Header extends React.Component {
         {showLogoutModal && (
           <Dialog
             title="Do you want to logout?"
+            onClick={this.unMountModal}
             actions={[
               <Button onClick={() => this.unMountModal()} secondary>
                 No
