@@ -199,7 +199,7 @@ class ConsumerComplaints extends React.Component {
           )
         }
         <div style={{ width: '100%' }}>
-          <table>
+          <table className="logs">
             <thead>
               <tr>
                 <th>Date</th>

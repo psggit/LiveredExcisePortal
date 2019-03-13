@@ -197,7 +197,7 @@ class ConsumerManagement extends React.Component {
           )
         }
         <div style={{ width: '100%' }}>
-          <table>
+          <table className="logs">
             <thead>
               <tr>
                 <th>Name</th>
