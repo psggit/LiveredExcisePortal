@@ -24,7 +24,7 @@ class SupportForm extends React.Component {
       reason: formData.reason,
       urgency: formData.urgencyLevel,
       message: formData.message,
-      confirmation: false
+      confirmation: formData.isConfirmation
     })
   }
 

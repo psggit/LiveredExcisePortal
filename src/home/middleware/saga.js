@@ -166,10 +166,10 @@ function* setLoading(action) {
   }
 }
 
-function* createExciseComplaints(action) {
+function* createComplaints(action) {
   try {
-    const data = yield call(Api.createExciseComplaints, action)
-    yield put({ type: ActionTypes.SUCCESS_CREATE_EXCISE_COMPLAINTS, data })
+    const data = yield call(Api.createComplaints, action)
+    yield put({ type: ActionTypes.SUCCESS_CREATE_COMPLAINTS, data })
     Notify("Submitted complaint", "success")
   } catch (err) {
     console.log(err)
@@ -256,9 +256,9 @@ function* watchFetchRetailerDetails() {
   }
 }
 
-function* watchCreateExciseComplaints() {
+function* watchCreateComplaints() {
   while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_CREATE_EXCISE_COMPLAINTS, createExciseComplaints)
+    yield* takeLatest(ActionTypes.REQUEST_CREATE_COMPLAINTS, createComplaints)
   }
 }
 
@@ -305,6 +305,6 @@ export default function* rootSaga() {
     fork(watchFetchOutletList),
     fork(watchFetchRevenueDetails),
     fork(watchFetchPermitDetails),
-    fork(watchCreateExciseComplaints)
+    fork(watchCreateComplaints)
   ]
 }

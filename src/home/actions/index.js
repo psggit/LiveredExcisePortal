@@ -74,6 +74,6 @@ export const fetchRevenueDetails = (data) => ({
 })
 
 export const createExciseComplaints = (data) => ({
-  type: ActionTypes.REQUEST_CREATE_EXCISE_COMPLAINTS,
+  type: ActionTypes.REQUEST_CREATE_COMPLAINTS,
   data
 })

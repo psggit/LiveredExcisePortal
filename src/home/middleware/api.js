@@ -143,7 +143,7 @@ export function fetchPermitDetails(action) {
     .then(json => json)
 }
 
-export function createExciseComplaints(action) {
+export function createComplaints(action) {
   return POST({
     api: 'http://192.168.5.86:3000/livered/createExciseComplaints',
     handleError: true,
