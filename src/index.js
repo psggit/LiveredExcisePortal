@@ -112,7 +112,7 @@ class App extends React.Component {
     this.state = {
       currentRoute: location.pathname.split('/')[2] || '',
       key: 0,
-      isLoggedIn: true
+      isLoggedIn: false
     }
     this.checkUserLoggedIn = this.checkUserLoggedIn.bind(this)
   }
@@ -234,7 +234,7 @@ class App extends React.Component {
                         <Route 
                          exact 
                          path="/home/support" 
-                         render={props => <SupportWithoutForm {...props} isLoggedIn={this.state.isLoggedIn} />}
+                         render={props => <SupportWithoutForm {...props} />}
                        />
                       }
 

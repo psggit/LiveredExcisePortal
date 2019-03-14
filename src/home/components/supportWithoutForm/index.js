@@ -7,10 +7,6 @@ class Support extends React.Component {
   render() {
     return (
       <div id="support">
-        {
-          this.props.isLoggedIn &&
-          <PageHeader pageName="Support" />
-        }
         <div className="body">
           <p className="title-text">For any support, please contact us</p>
           <div className="content">

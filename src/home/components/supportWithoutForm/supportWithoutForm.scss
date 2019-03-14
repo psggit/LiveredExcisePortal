@@ -21,6 +21,7 @@
       p {
         font-size: 24px;
         border-bottom: 1px solid #000;
+        margin-top: 10px;
       }
     }
 
@@ -29,9 +30,11 @@
         font-size: 16px;
         line-height: 1.5;
         text-align: center;
+        margin-top: 0px;
       }
       .title {
         color: #4a90e2;
+        font-weight: 600;
       }
       .text {
         color: #000;
