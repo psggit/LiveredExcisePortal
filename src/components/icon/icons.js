@@ -482,5 +482,28 @@ export default {
             </g>
         </g>
     </svg>
-  )
+  ),
+  rectangle: (
+    <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
+        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g id="Element/Checkbox/Selected-Copy-2" stroke="#152935" stroke-width="2">
+                <path d="M15.2222222,1 L2.77777778,1 C1.8,1 1,1.8 1,2.77777778 L1,15.2222222 C1,16.2 1.8,17 2.77777778,17 L15.2222222,17 C16.2,17 17,16.2 17,15.2222222 L17,2.77777778 C17,1.8 16.2,1 15.2222222,1 L15.2222222,1 Z" id="Shape"></path>
+            </g>
+        </g>
+    </svg>
+  ),
+ filledRectangle: (
+    <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
+        <g id="Support" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-340.000000, -661.000000)" id="Checkboxes-Group">
+                <g transform="translate(340.000000, 659.000000)">
+                    <g id="Element/Checkbox/Selected" transform="translate(0.000000, 2.000000)">
+                        <path d="M16,0 L2,0 C0.9,0 0,0.9 0,2 L0,16 C0,17.1 0.9,18 2,18 L16,18 C17.1,18 18,17.1 18,16 L18,2 C18,0.9 17.1,0 16,0 L16,0 Z M2,9.19230769 L3.4,7.84615385 L7,11.3076923 L14.6,4 L16,5.34615385 L7,14 L2,9.19230769 Z" id="Shape" fill="#152935"></path>
+                        <polygon id="Path" fill="#FFFFFF" points="2 9.19230769 3.4 7.84615385 7 11.3076923 14.6 4 16 5.34615385 7 14"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </svg>
+ )
 }

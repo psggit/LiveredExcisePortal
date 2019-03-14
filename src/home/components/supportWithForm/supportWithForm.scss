@@ -40,6 +40,7 @@
         font-size: 18px;
         .title {
           color: #4a90e2;
+          font-weight: 600;
         }
         .text {
           color: #000;
@@ -53,8 +54,21 @@
 
     .confirmation-text {
       display: flex;
-      margin-right: 5px; 
-      align-items: center;
+
+      .icon {
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+
+      .text {
+        width: calc(100% - 24px);
+        display: inline-block;
+        cursor: pointer;
+      }
+      // margin-right: 5px; 
+      // align-items: center;
     }
 
     .submit {
