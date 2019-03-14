@@ -112,7 +112,7 @@ class App extends React.Component {
     this.state = {
       currentRoute: location.pathname.split('/')[2] || '',
       key: 0,
-      isLoggedIn: false
+      isLoggedIn: true
     }
     this.checkUserLoggedIn = this.checkUserLoggedIn.bind(this)
   }
