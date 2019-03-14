@@ -45,7 +45,7 @@ class EmailInput extends React.Component {
         name={this.props.name} 
         type="text"
         autoComplete="off"
-        onKeyPress={e => this.validateEmail({event: e, fieldName: this.props.name, fieldValue: e.target.value})}
+        onKeyUp={e => this.validateEmail({event: e, fieldName: this.props.name, fieldValue: e.target.value})}
         //onChange={(e) => this.validateEmail({fieldName: this.props.name, fieldValue: e.target.value})}
       />
     )
