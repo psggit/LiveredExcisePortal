@@ -32,7 +32,7 @@ class SupportForm extends React.Component {
     return (
       <div id="supportForm">
         <PageHeader pageName="Get in touch" />
-        <p>Please share your queries/feedback. Our support team will contact you ASAP</p>
+        <p className="sub-header">Please share your queries/feedback. Our support team will contact you ASAP</p>
         <div className="main-container">
           <div className="ticket-form">
             <SupportTicketForm  ref={(node) => { this.supportForm = node }} handleSubmit={this.handleFormSubmit} />

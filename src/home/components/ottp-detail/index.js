@@ -37,6 +37,7 @@ class OTTPDetail extends Component {
 
   render() {
     const data = this.props.OTTPDetailData
+    console.log("data", data)
     return (
       <div>
         {
@@ -76,7 +77,7 @@ class OTTPDetail extends Component {
                 address={data.consumer.address}
                 phone={data.consumer.phone}
                 name={data.consumer.name}
-                //verified=""
+                verifiedDocs={data.consumer.verification_doc_type}
               />
               <OttpDetailDeliveryAgent
                 age={data.delivery_agent.age}

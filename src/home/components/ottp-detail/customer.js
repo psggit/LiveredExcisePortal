@@ -4,7 +4,6 @@ import Icon from "@components/icon"
 
 const OttpDetailCustomer = ({ age, address, phone, name, verifiedDocs }) => (
   <div className="ottp-detail-card">
-
     <div className="item">
       <h4>Customer Details</h4>
       <div className="row">
@@ -13,13 +12,13 @@ const OttpDetailCustomer = ({ age, address, phone, name, verifiedDocs }) => (
           <p className="value">{name}</p>
         </div>
         {
-          verifiedDocs &&
+          verifiedDocs.length > 0 &&
           <div>
             <div className="icon">
               <span><Icon name="green-flag" /></span>
               <span className="label">Verified With</span>
             </div>
-            <p className="value"></p>
+            <p className="value">{verifiedDocs}</p>
           </div>
         }
       </div>
