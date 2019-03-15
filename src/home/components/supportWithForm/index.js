@@ -16,7 +16,6 @@ class SupportForm extends React.Component {
 
   handleFormSubmit() {
     const formData = this.supportForm.getData()
-    // console.log("submit state", formData)
     this.props.actions.createExciseComplaints({
       name: formData.name,
       email: formData.email,

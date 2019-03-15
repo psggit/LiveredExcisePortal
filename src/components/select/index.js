@@ -6,9 +6,12 @@ class Select extends React.Component {
   constructor() {
     super()
     this.handleChange = this.handleChange.bind(this)
+    this.state = {
+      value: ""
+    }
   }
   handleChange(e) {
-    // console.log(e.target.value)
+    this.setState({value: e.target.value})
     this.props.onChange(e)
   }
   render() {
@@ -20,7 +23,7 @@ class Select extends React.Component {
           className={`select ${this.props.small ? 'small' : ''}`}
           name={this.props.name}
           onChange={this.handleChange}
-          value={this.props.value ? this.props.value : ''}
+          value={this.props.value ? this.props.value : this.state.value}
         >
           {
             this.props.name && !this.props.value &&

@@ -60,13 +60,14 @@ class DSOList extends React.Component {
         state_short_name: this.state_short_name,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } else {
-      this.props.actions.fetchDSOList({
-        limit: parseInt(queryObj.limit),
-        state_short_name: this.state_short_name,
-        offset: queryObj.limit * (queryObj.activePage - 1)
-      })
-    }
+    } 
+    // else {
+    //   this.props.actions.fetchDSOList({
+    //     limit: parseInt(queryObj.limit),
+    //     state_short_name: this.state_short_name,
+    //     offset: queryObj.limit * (queryObj.activePage - 1)
+    //   })
+    // }
   }
 
   /**

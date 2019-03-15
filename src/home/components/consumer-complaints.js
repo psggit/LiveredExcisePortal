@@ -67,12 +67,13 @@ class ConsumerComplaints extends React.Component {
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } else {
-      this.props.actions.fetchConsumerComplaints({
-        limit: parseInt(queryObj.limit),
-        offset: queryObj.limit * (queryObj.activePage - 1)
-      })
-    }
+    } 
+    // else {
+    //   this.props.actions.fetchConsumerComplaints({
+    //     limit: parseInt(queryObj.limit),
+    //     offset: queryObj.limit * (queryObj.activePage - 1)
+    //   })
+    // }
   }
 
   /**

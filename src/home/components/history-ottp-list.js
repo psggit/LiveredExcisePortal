@@ -145,6 +145,7 @@ class HistoryOrdersList extends React.Component {
         this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
       }
 
+      //sets the filtered fields as default value to filter fields
       filter.map((item) => {
         this.setSelectedDropDownValue(item)
       })
@@ -155,12 +156,13 @@ class HistoryOrdersList extends React.Component {
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } else {
-      this.props.actions.fetchHistoryOTTP({
-        limit: parseInt(queryObj.limit),
-        offset: queryObj.limit * (queryObj.activePage - 1)
-      })
-    }
+    } 
+    // else {
+    //   this.props.actions.fetchHistoryOTTP({
+    //     limit: parseInt(queryObj.limit),
+    //     offset: queryObj.limit * (queryObj.activePage - 1)
+    //   })
+    // }
   }
 
   /**
@@ -289,6 +291,8 @@ class HistoryOrdersList extends React.Component {
    */
   applyFilter(filter) {
     let filterArr = filter
+
+    //If filter already applied, then adds the new filter options to it
     if(this.state.filter) {
       filterArr = this.state.filter
       filter.map((item) => {

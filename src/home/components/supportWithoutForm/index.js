@@ -1,7 +1,6 @@
 import React from "react"
 import './supportWithoutForm.scss'
 import Icon from "@components/icon"
-import PageHeader from '@components/pageheader'
 
 class Support extends React.Component {
   render() {

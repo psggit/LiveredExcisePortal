@@ -58,6 +58,9 @@ class LiveOrdersList extends React.Component {
     }
   }
 
+  /**
+   * Formats the dso, city and retailer list to use in filter dropdown
+   */
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
@@ -124,13 +127,14 @@ class LiveOrdersList extends React.Component {
     Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] })
     })
-  
+
     if(queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
       if(filter.find(item => item.filterby === "OttpId")) {
         this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
       }
 
+      //sets the applied filter option as default value filter dropdown
       filter.map((item) => {
         this.setSelectedDropDownValue(item)
       })
@@ -238,7 +242,7 @@ class LiveOrdersList extends React.Component {
         offset: 0,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } else {
+    } else { //on polling, if filter is reset, then fetchs the inProgressOttp
       this.props.actions.fetchInProgressOTTP({
         limit: this.state.limit,
         offset: 0,
@@ -308,6 +312,8 @@ class LiveOrdersList extends React.Component {
    */
   applyFilter(filter) {
     let filterArr = filter
+
+    //If filter already applied, then adds the new filter fields to it
     if(this.state.filter) {
       filterArr = this.state.filter
       filter.map((item) => {
