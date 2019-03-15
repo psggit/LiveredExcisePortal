@@ -66,9 +66,9 @@ class Header extends React.Component {
       })
   }
 
-  handleClick() {
+  handleClick(pageToLoad) {
     console.log("click")
-    location.href="/home/support"
+    location.href=`/home/${pageToLoad}`
   }
 
   render() {
@@ -101,7 +101,7 @@ class Header extends React.Component {
 
           {this.props.isLoggedIn ? (
             <div className="header--items">
-              <div className="item" onClick={this.handleClick}>
+              <div className="item" onClick={() => this.handleClick("support")}>
                 <Icon name="support" />
                 <span>Support</span>
               </div>
@@ -114,7 +114,7 @@ class Header extends React.Component {
                   className={`dropdown-menu ${showDropdown ? "show" : "hide"}`}
                 >
                   <div
-                    //onClick={() => this.mountModal()}
+                    onClick={() => this.handleClick("account")}
                     className="menu-item os s9"
                   >
                     Account Settings

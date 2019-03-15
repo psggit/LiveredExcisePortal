@@ -77,3 +77,8 @@ export const createExciseComplaints = (data) => ({
   type: ActionTypes.REQUEST_CREATE_COMPLAINTS,
   data
 })
+
+export const fetchUsersList = (data) => ({
+  type: ActionTypes.REQUEST_FETCH_USERS_LIST,
+  data
+})

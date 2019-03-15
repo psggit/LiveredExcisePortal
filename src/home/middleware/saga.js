@@ -147,6 +147,15 @@ function* fetchRules(action) {
   }
 }
 
+function* fetchUserList(action) {
+  try {
+    const data = yield call(Api.fetchUserList, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_USERS_LIST, data })
+  } catch (err) {
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchCitiesList(action) {
   //console.log(action)
   try {
@@ -199,6 +208,12 @@ function* watchFetchHistoryOTTP() {
 function* watchFetchRules() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_RULES, fetchRules)
+  }
+}
+
+function* watchFetchUserList() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_USERS_LIST, fetchUserList)
   }
 }
 
@@ -305,6 +320,7 @@ export default function* rootSaga() {
     fork(watchFetchOutletList),
     fork(watchFetchRevenueDetails),
     fork(watchFetchPermitDetails),
-    fork(watchCreateComplaints)
+    fork(watchCreateComplaints),
+    fork(watchFetchUserList)
   ]
 }

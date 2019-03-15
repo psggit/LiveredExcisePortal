@@ -15,6 +15,7 @@ const initialState = {
   loadingOutletList: true,
   loadingPermitList: true,
   loadingRevenueList: true,
+  loadingUserList: true,
   inProgressCount: 0,
   customerComplaintsCount: 0,
   historyOTTPCount: 0,
@@ -25,6 +26,7 @@ const initialState = {
   historyOTTPData: [],
   cityList: [],
   retailerList: [],
+  userList: [],
   customerList: [],
   outletList: [],
   rulesData: [],
@@ -91,6 +93,13 @@ const actionsMap = {
       loadingDSODetail: false,
       DSODetail: action.data.dso,
       // DSODetailCount: action.data.count
+    })
+  },
+
+  [ActionTypes.SUCCESS_FETCH_USERS_LIST]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingUserList: false,
+      userList: action.data,
     })
   },
 

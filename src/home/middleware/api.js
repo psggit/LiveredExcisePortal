@@ -143,6 +143,16 @@ export function fetchPermitDetails(action) {
     .then(json => json)
 }
 
+export function fetchUserList(action) {
+  return POST({
+    api: 'http://192.168.5.86:3000/livered/ottpOverview',
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
 export function createComplaints(action) {
   return POST({
     api: 'http://192.168.5.86:3000/livered/createExciseComplaints',

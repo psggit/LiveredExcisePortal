@@ -100,6 +100,8 @@ import ConsumerComplaints from "./home/components/consumer-complaints"
 import SupportWithForm from "./home/components/supportWithForm/"
 import SupportWithoutForm from "./home/components/supportWithoutForm/"
 import Overview from "./home/components/overview"
+import MyAccount from "./home/components/myaccount"
+import UserPermissions from "./home/components/user-list"
 
 const history = createHistory()
 
@@ -218,6 +220,18 @@ class App extends React.Component {
                         exact
                         path="/home/live-orders"
                         render={props => <LiveOTTPList {...props} />}
+                      />
+
+                      <Route
+                        exact
+                        path="/home/account"
+                        render={props => <MyAccount {...props} />}
+                      />
+
+                      <Route
+                        exact
+                        path="/home/user-permissions"
+                        render={props => <UserPermissions {...props} />}
                       />
 
                       {
