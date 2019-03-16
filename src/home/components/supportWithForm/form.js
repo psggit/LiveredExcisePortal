@@ -53,23 +53,25 @@ class TicketForm extends React.Component {
   }
 
   handleChange(fieldStatusObj) {
-    const errName = `${fieldStatusObj.fieldName}Err`
-    if (!fieldStatusObj.status) {
-      this.setState({
-        [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue,
-        [errName]: {
-          status: fieldStatusObj.status,
-          value: fieldStatusObj.value
-        }
-      })
-    } else {
-      this.setState({
-        [errName]: {
-          status: fieldStatusObj.status,
-          value: fieldStatusObj.value
-        }
-      })
-    }
+    console.log("data", fieldStatusObj)
+    this.setState({ [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue })
+    // const errName = `${fieldStatusObj.fieldName}Err`
+    // if (!fieldStatusObj.status) {
+    //   this.setState({
+    //     [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue,
+    //     [errName]: {
+    //       status: fieldStatusObj.status,
+    //       value: fieldStatusObj.value
+    //     }
+    //   })
+    // } else {
+    //   this.setState({
+    //     [errName]: {
+    //       status: fieldStatusObj.status,
+    //       value: fieldStatusObj.value
+    //     }
+    //   })
+    // }
   }
 
   handleTextareaChange(e) {
@@ -98,6 +100,7 @@ class TicketForm extends React.Component {
 
   render() {
     const { designationErr, nameErr, emailErr } = this.state
+    console.log("state", this.state)
     return (
       <React.Fragment>
         <div className="row">
