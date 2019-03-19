@@ -1,5 +1,6 @@
 import React from "react"
 import "./../form-input.scss"
+import PropTypes from "prop-types"
 
 class TextInput extends React.Component {
 
@@ -43,21 +44,21 @@ class TextInput extends React.Component {
 
   handleChange(evt,fieldName) {
     let fieldStatus = {}
-    if(evt.target.validity.valid || evt.target.validity.valueMissing || evt.target.value.trim().length) {
+    if((evt.target.validity.valid || evt.target.validity.valueMissing) && evt.target.value.trim().length) {
       this.setState({value: evt.target.value})
       fieldStatus = {
         fieldName,
         fieldValue: evt.target.value
       }
       this.props.onChange(fieldStatus)
-    } else {
+    } else { 
       evt.preventDefault()
-      fieldStatus = {
-        fieldName,
-        fieldValue: this.state.value
-      }
-      this.props.onChange(fieldStatus)
-      return false;
+      // fieldStatus = {
+      //   fieldName,
+      //   fieldValue: this.state.value
+      // }
+      // this.props.onChange(fieldStatus)
+      //return false;
     }
   }
 
@@ -74,7 +75,7 @@ class TextInput extends React.Component {
         type="text"
         name={this.props.name}
         autoComplete="off"
-        pattern={ this.props.name === "email" ? `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$` : `^[a-zA-Z0-9]$`}
+        pattern='^[a-zA-Z0-9 ]*$'
         onInput={(e) => this.handleChange(e, this.props.name) }
         value={this.state.value}
         //autocomplete="off"
@@ -85,3 +86,13 @@ class TextInput extends React.Component {
 }
 
 export default TextInput
+
+TextInput.defaultProps = {
+  name: "default",
+  onChange: () => void(0)
+}
+
+TextInput.propTypes = {
+  name: PropTypes.string,
+  onChange: PropTypes.function
+}

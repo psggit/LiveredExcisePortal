@@ -8,8 +8,8 @@ import TextInput from "@components/form-inputs/text-input"
 import EmailInput from "@components/form-inputs/email-input"
 
 class TicketForm extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       name: "",
       email: "",

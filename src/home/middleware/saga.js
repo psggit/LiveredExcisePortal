@@ -179,7 +179,7 @@ function* createComplaints(action) {
   try {
     const data = yield call(Api.createComplaints, action)
     yield put({ type: ActionTypes.SUCCESS_CREATE_COMPLAINTS, data })
-    Notify("Submitted complaint", "success")
+    //Notify("Submitted complaint", "success")
   } catch (err) {
     console.log(err)
   }

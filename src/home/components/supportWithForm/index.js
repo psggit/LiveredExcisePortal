@@ -5,13 +5,18 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as Actions from './../../actions'
 import SupportTicketForm from './form'
+import Dialog from "@components/dialog"
+import Button from "@components/button"
 
 class SupportForm extends React.Component {
 
   constructor() {
     super() 
-
+    this.state = {
+      supportFormKey: 0 //used for restting the form fields
+    }
     this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.unMountModal = this.unMountModal.bind(this)
   }
 
   handleFormSubmit() {
@@ -28,14 +33,25 @@ class SupportForm extends React.Component {
     })
   }
 
+  unMountModal() {
+    this.props.actions.setLoading(
+      'creatingComplaint'
+    )
+    this.setState({supportFormKey: this.state.supportFormKey + 1})
+  }
+
   render() {
+    const {creatingComplaint} = this.props
     return (
-      <div id="supportForm">
+      <div id="supportForm" key={this.state.supportFormKey}>
         <PageHeader pageName="Get in touch" />
         <p className="sub-header">Please share your queries/feedback. Our support team will contact you ASAP</p>
         <div className="main-container">
           <div className="ticket-form">
-            <SupportTicketForm  ref={(node) => { this.supportForm = node }} handleSubmit={this.handleFormSubmit} />
+            <SupportTicketForm  
+              ref={(node) => { this.supportForm = node }} 
+              handleSubmit={this.handleFormSubmit}
+            />
           </div>
           <div className="contact-details">
             <p>You can also reach us via phone/email</p>
@@ -53,6 +69,18 @@ class SupportForm extends React.Component {
             </div>
           </div>
         </div>
+        {!creatingComplaint && (
+          <Dialog
+            title="Your request has been successfully sent"
+            subtitle="You will receive an email confirmation with further details"
+            onClick={this.unMountModal}
+            actions={[
+              <Button onClick={() => this.unMountModal()} secondary>
+                Done
+              </Button>,``
+            ]}
+          />
+        )}
       </div>
     )
   }

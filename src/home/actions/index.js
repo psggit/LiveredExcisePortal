@@ -55,6 +55,11 @@ export const fetchOTTPDetail = data => ({
   data
 })
 
+export const setLoading = (data) => ({
+  type: ActionTypes.REQUEST_SET_LOADING,
+  data
+})
+
 export const setLoadingAll = () => ({
   type: ActionTypes.REQUEST_SET_LOADING_ALL
 })

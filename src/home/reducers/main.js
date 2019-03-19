@@ -16,6 +16,7 @@ const initialState = {
   loadingPermitList: true,
   loadingRevenueList: true,
   loadingUserList: true,
+  creatingComplaint: true,
   inProgressCount: 0,
   customerComplaintsCount: 0,
   historyOTTPCount: 0,
@@ -103,6 +104,12 @@ const actionsMap = {
     })
   },
 
+  [ActionTypes.SUCCESS_CREATE_COMPLAINTS]: (state, action) => {
+    return Object.assign({}, state, {
+      creatingComplaint: false,
+    })
+  },
+
   [ActionTypes.SUCCESS_FETCH_RETAILER_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingRetailerList: false,
@@ -155,6 +162,14 @@ const actionsMap = {
       loadingOTTPDetail: false,
       OTTPDetailData: action.data.ottp
     })
+  },
+
+  [ActionTypes.SUCCESS_SET_LOADING]: (state, action) => {
+    if (action.data) {
+        return Object.assign({}, state, {
+          [action.data]: true
+        })
+    }
   },
 
   [ActionTypes.SUCCESS_SET_LOADING_ALL]: (state, action) => {
