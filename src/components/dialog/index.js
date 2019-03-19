@@ -31,10 +31,13 @@ import Icon from './../icon'
         <div className="dialog--container">
           <div className="dialog--body">
             <div className="header">
-              <div className="column1">
-                <Icon name="calendar" />
-              </div>
-              <div  className="column2">
+              {
+                this.props.icon &&
+                <div className="column1">
+                  <Icon name="calendar" />
+                </div>
+              }
+              <div  className={`column2 ${this.props.icon ? 'text' : undefined}`}>
                 {
                   this.props.title
                   ? (

@@ -71,6 +71,7 @@ class SupportForm extends React.Component {
           <Dialog
             title="Your request has been successfully sent"
             subtitle="You will receive an email confirmation with further details"
+            icon="success"
             onClick={this.unMountModal}
             actions={[
               <Button onClick={() => this.unMountModal()} secondary>
