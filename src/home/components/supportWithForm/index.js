@@ -34,9 +34,7 @@ class SupportForm extends React.Component {
   }
 
   unMountModal() {
-    this.props.actions.setLoading(
-      'creatingComplaint'
-    )
+    this.props.actions.setLoading('creatingComplaint')
     this.setState({supportFormKey: this.state.supportFormKey + 1})
   }
 
