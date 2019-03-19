@@ -9,8 +9,6 @@ class TextInput extends React.Component {
     this.state = {
       value: ""
     }
-    //this.value = ""
-
     this.handleChange = this.handleChange.bind(this)
   }
 
@@ -39,17 +37,17 @@ class TextInput extends React.Component {
   
   //   } else {
   //     event.preventDefault()
+  //     return false;
   //   }
   // }
 
   handleChange(evt,fieldName) {
     let fieldStatus = {}
-    if(evt.target.validity.valid || evt.target.validity.valueMissing) {
+    if(evt.target.validity.valid || evt.target.validity.valueMissing || evt.target.value.trim().length) {
       this.setState({value: evt.target.value})
-      console.log("value", this.value)
       fieldStatus = {
         fieldName,
-        fieldValue: this.value
+        fieldValue: evt.target.value
       }
       this.props.onChange(fieldStatus)
     } else {
@@ -76,7 +74,7 @@ class TextInput extends React.Component {
         type="text"
         name={this.props.name}
         autoComplete="off"
-        pattern="^[A-Za-z0-9]*$"
+        pattern={ this.props.name === "email" ? `[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$` : `^[a-zA-Z0-9]$`}
         onInput={(e) => this.handleChange(e, this.props.name) }
         value={this.state.value}
         //autocomplete="off"

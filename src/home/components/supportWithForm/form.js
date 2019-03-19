@@ -31,6 +31,10 @@ class TicketForm extends React.Component {
       designationErr: {
         status: false,
         value: ""
+      },
+      messageErr: {
+        status: false,
+        value: ""
       }
     }
 
@@ -43,35 +47,36 @@ class TicketForm extends React.Component {
     this.reason = [
       { text: "MRP violation", value: 1 },
       { text: "Late Delivery", value: 2 },
-      { text: "reason3", value: 3 }
+      { text: "reason3", value: 3 },
     ]
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSelectChange = this.handleSelectChange.bind(this)
     this.handleTextareaChange = this.handleTextareaChange.bind(this)
     this.getData = this.getData.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(fieldStatusObj) {
     console.log("data", fieldStatusObj)
-    this.setState({ [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue })
-    // const errName = `${fieldStatusObj.fieldName}Err`
-    // if (!fieldStatusObj.status) {
-    //   this.setState({
-    //     [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue,
-    //     [errName]: {
-    //       status: fieldStatusObj.status,
-    //       value: fieldStatusObj.value
-    //     }
-    //   })
-    // } else {
-    //   this.setState({
-    //     [errName]: {
-    //       status: fieldStatusObj.status,
-    //       value: fieldStatusObj.value
-    //     }
-    //   })
-    // }
+    //this.setState({ [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue })
+    const errName = `${fieldStatusObj.fieldName}Err`
+    if (!fieldStatusObj.status) {
+      this.setState({
+        [fieldStatusObj.fieldName]: fieldStatusObj.fieldValue,
+        [errName]: {
+          status: fieldStatusObj.status,
+          value: fieldStatusObj.value
+        }
+      })
+    } else {
+      this.setState({
+        [errName]: {
+          status: fieldStatusObj.status,
+          value: fieldStatusObj.value
+        }
+      })
+    }
   }
 
   handleTextareaChange(e) {
@@ -98,6 +103,52 @@ class TicketForm extends React.Component {
     return this.state
   }
 
+  isFormValid() {
+    if(this.state.name.length === 0) {
+      this.setState({
+        nameErr: {
+          value: "Name is required",
+          status: true
+        }
+      })
+      return false;
+    }
+    if(this.state.email.length === 0) {
+      this.setState({
+        emailErr: {
+          value: "Email is required",
+          status: true
+        }
+      })
+      return false;
+    }
+    if(this.state.designation.length === 0) {
+      this.setState({
+        designationErr: {
+          value: "Designation is required",
+          status: true
+        }
+      })
+      return false;
+    }
+    if(this.state.message.length === 0) {
+      this.setState({
+        messageErr: {
+          value: "Message is required",
+          status: true
+        }
+      })
+      return false;
+    }
+    return true;
+  }
+
+  handleSubmit() {
+    if(this.isFormValid()) {
+      this.props.handleSubmit()
+    } 
+  }
+
   render() {
     const { designationErr, nameErr, emailErr } = this.state
     console.log("state", this.state)
@@ -117,7 +168,7 @@ class TicketForm extends React.Component {
           <div className="input-field">
             <Label>
               Email address
-              </Label>
+            </Label>
             <EmailInput name="email" onChange={this.handleChange} />
             {
               emailErr.status &&
@@ -182,7 +233,7 @@ class TicketForm extends React.Component {
           <span className="text"> Send me a confirmation email </span>
         </div>
         <div className="submit">
-          <Button primary onClick={this.props.handleSubmit}>Submit</Button>
+          <Button primary onClick={this.handleSubmit}>Submit</Button>
         </div>
       </React.Fragment>
     )
