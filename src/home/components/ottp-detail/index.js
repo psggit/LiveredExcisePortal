@@ -85,6 +85,7 @@ class OTTPDetail extends Component {
                 phone={data.delivery_agent.phone_number}
                 vehicleLicenseNo={data.delivery_agent.vehicle_number}
                 driverLicenseNo={data.delivery_agent.license_number}
+                verifiedDoc={data.delivery_agent.verification_doc}
               />
               <OttpDetailOrder
                 order={data.order}

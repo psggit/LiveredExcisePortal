@@ -32,11 +32,11 @@ class RuleManagement extends React.Component {
   }
 
   /**
-   * Fetches rules of given state_short_name
+   * Fetches rules of given state_id
    */
   componentDidMount() {
     this.props.actions.fetchRules({
-      state_short_name: "TN"
+      state_id: 1
     }) 
   }
 

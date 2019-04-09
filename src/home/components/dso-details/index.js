@@ -1,6 +1,7 @@
 import React from "react"
 import LicenseDetails from "./license-details"
 import HeadOfficeDetails from "./head-office-details"
+import Icon from '@components/icon'
 import RegionalOfficeDetails from './regional-office-details'
 import { connect } from 'react-redux'
 import * as Actions from '../../actions'
@@ -43,7 +44,7 @@ class DSODetails extends React.Component {
         {
           !this.props.loadingDSODetail &&
           <div>
-            <div style={{display: 'flex', marginBottom: '60px'}}>
+            <div style={{display: 'flex', marginBottom: '60px', alignItems: 'center', justifyContent: 'space-between'}}>
               <p 
                 style={{
                   fontSize: '22px',
@@ -53,6 +54,12 @@ class DSODetails extends React.Component {
               >
                 {data.dso_name}
               </p>
+              <div style={{display: 'flex', alignItems: 'center'}}>
+                <span style={{marginRight: '10px'}}>
+                  <Icon name="active-indicator" />
+                </span>
+                <p>{data.is_active ? 'DELIVERY ENABLED' : 'DELIVERY DISABLED' }</p>
+              </div>
             </div>
             <div style={headerStyle} >
               BASIC INFORMATION

@@ -20,7 +20,7 @@ class RetailersList extends React.Component {
       retailerName: "",
       filter: []
     }
-    this.state_short_name = "TN"
+    this.state_id = 1
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.fetchRetailersList = this.fetchRetailersList.bind(this)
@@ -56,13 +56,13 @@ class RetailersList extends React.Component {
       this.props.actions.fetchRetailerList({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
-        state_short_name: this.state_short_name,
+        state_id: this.state_id,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
     } else {
       this.props.actions.fetchRetailerList({
         limit: parseInt(queryObj.limit),
-        state_short_name: this.state_short_name,
+        state_id: this.state_id,
         offset: queryObj.limit * (queryObj.activePage - 1)
       })
     }
@@ -75,7 +75,7 @@ class RetailersList extends React.Component {
     this.props.actions.fetchRetailerList({
       limit: this.state.limit,
       offset: 0,
-      state_short_name: this.state_short_name
+      state_id: this.state_id
     })
   }
 
@@ -106,7 +106,7 @@ class RetailersList extends React.Component {
     this.props.actions.fetchRetailerList({
       limit: pagerObj.pageSize,
       offset,
-      state_short_name: this.state_short_name
+      state_id: this.state_id
     })
 
     const queryParamsObj = {

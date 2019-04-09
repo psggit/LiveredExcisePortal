@@ -25,7 +25,7 @@ class SupportForm extends React.Component {
     this.props.actions.createExciseComplaints({
       name: formData.name,
       email: formData.email,
-      state_short_name: "TN",
+      state_id: 1,
       reason: formData.reason,
       urgency: formData.urgencyLevel,
       message: formData.message,

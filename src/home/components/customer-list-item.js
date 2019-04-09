@@ -10,7 +10,7 @@ const ConsumerListItem = ({data}) => {
       <td>{ data.name }</td>
       <td>{ data.age }</td>
       <td>{ data.city }</td>
-      <td>{ data.address}</td>
+      <td>{ data.address }</td>
     </tr>
   )
 }

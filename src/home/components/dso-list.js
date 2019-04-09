@@ -21,7 +21,7 @@ class DSOList extends React.Component {
       dsoName: "",
       filter: []
     }
-    this.state_short_name = "TN"
+    this.state_id = 1
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
     this.setQueryParamas = this.setQueryParamas.bind(this)
@@ -57,7 +57,7 @@ class DSOList extends React.Component {
       this.props.actions.fetchDSOList({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
-        state_short_name: this.state_short_name,
+        state_id: this.state_id,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
     } 
@@ -76,7 +76,7 @@ class DSOList extends React.Component {
   fetchDsoList() {
     this.props.actions.fetchDSOList({
       limit: this.state.limit,
-      state_short_name: this.state_short_name,
+      state_id: this.state_id,
       offset: 0
     })
   }
@@ -107,7 +107,7 @@ class DSOList extends React.Component {
 
     this.props.actions.fetchDSOList({
       limit: pagerObj.pageSize,
-      state_short_name: this.state_short_name,
+      state_id: this.state_id,
       offset
     })
 
@@ -152,7 +152,7 @@ class DSOList extends React.Component {
     this.props.actions.fetchDSOList({
       limit: 10,
       offset: 0,
-      state_short_name: this.state_short_name,
+      state_id: this.state_id,
       filter: [filterObj]
     })
     this.setState({filter: [filterObj]})

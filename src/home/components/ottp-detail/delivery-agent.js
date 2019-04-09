@@ -1,7 +1,7 @@
 import React from 'react'
 import './ottp-detail.scss'
 
-const OttpDetailDeliveryAgent = ({name, age, phone, vehicleLicenseNo, driverLicenseNo}) => (
+const OttpDetailDeliveryAgent = ({name, age, phone, vehicleLicenseNo, driverLicenseNo, verifiedDoc}) => (
   <div className="ottp-detail-card">
     <div className="item">
       <h4>Delivery Agent</h4>
@@ -33,8 +33,7 @@ const OttpDetailDeliveryAgent = ({name, age, phone, vehicleLicenseNo, driverLice
 
         <div style={{ width: '50%' }}>
           <p className="label">Verified with</p>
-          <p></p>
-          {/* <p className="value">Drivers License <br/>PAN Card</p> */}
+          <p className="value">{verifiedDoc}</p>
         </div>
       </div>
     </div>

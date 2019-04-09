@@ -31,7 +31,7 @@ class HistoryOrdersList extends React.Component {
       isFilterApplied: false,
       selectedCityIdx: "",
       selectedDsoIdx: "",
-      selectedRetailerIdx: "",
+      //selectedRetailerIdx: "",
       selectedOrderAmntIdx: "",
       fromDate: "",
       toDate: ""
@@ -236,11 +236,11 @@ class HistoryOrdersList extends React.Component {
       offset: 0
     })
     this.props.actions.fetchCitiesList({})
-    this.props.actions.fetchRetailerList({
-      limit: 10000,
-      offset: 0,
-      state_short_name: "TN"
-    })
+    // this.props.actions.fetchRetailerList({
+    //   limit: 10000,
+    //   offset: 0,
+    //   state_id: 1
+    // })
   }
 
   /**
@@ -361,7 +361,7 @@ class HistoryOrdersList extends React.Component {
               selectedCityIdx={this.state.selectedCityIdx}
               selectedDsoIdx={this.state.selectedDsoIdx}
               selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
-              selectedRetailerIdx={this.state.selectedRetailerIdx}
+              //selectedRetailerIdx={this.state.selectedRetailerIdx}
               fromDate={this.state.fromDate}
               toDate={this.state.toDate}
             >

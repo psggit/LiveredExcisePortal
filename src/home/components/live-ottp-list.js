@@ -175,11 +175,11 @@ class LiveOrdersList extends React.Component {
       offset: 0
     })
     this.props.actions.fetchCitiesList({})
-    this.props.actions.fetchRetailerList({
-      limit: 10000,
-      offset: 0,
-      state_short_name: "TN"
-    })
+    // this.props.actions.fetchRetailerList({
+    //   limit: 10000,
+    //   offset: 0,
+    //   state_id: 1
+    // })
   }
 
   /**
@@ -379,7 +379,7 @@ class LiveOrdersList extends React.Component {
               selectedCityIdx={this.state.selectedCityIdx}
               selectedDsoIdx={this.state.selectedDsoIdx}
               selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
-              selectedRetailerIdx={this.state.selectedRetailerIdx}
+              //selectedRetailerIdx={this.state.selectedRetailerIdx}
               //permitStatus={this.permitStatus}
             >
             </Filter>

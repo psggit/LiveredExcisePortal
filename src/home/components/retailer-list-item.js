@@ -9,7 +9,7 @@ const RetailerListItem = ({ data, handleClick }) => {
   return (
     <tr onClick={ () => {handleClick(data)} } className="clickable">
       <td>{ data.name }</td>
-      <td>{ data.city_name }</td>
+      <td>{ data.city }</td>
       <td>{ data.primary_address }</td>
       <td>{ data.license_type }</td>
       <td>{ data.license_status ? 'Active' : 'Inactive' }</td>

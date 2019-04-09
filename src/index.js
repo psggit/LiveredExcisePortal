@@ -120,6 +120,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    //this.checkUserLoggedIn()
     history.listen((loction) => {
       const newRoute = location.pathname.split('/')[2]
       const { key } = this.state
@@ -137,6 +138,7 @@ class App extends React.Component {
 
     fetch(`${Api.authUrl}/user/account/info`, fetchOptions)
       .then((response) => {
+        console.log("location", location.pathname)
         if (response.status !== 200) {
           console.log(`Looks like there was a problem. Status Code: ${response.status}`)
           if (location.pathname !== '/login') {
@@ -145,6 +147,7 @@ class App extends React.Component {
           return
         }
         response.json().then((data) => {
+          this.setState({isLoggedIn: true})
           if (!location.pathname.includes('home') && !location.pathname.includes('support')) {
             location.href = '/home/live-ottp'
           }
@@ -198,7 +201,7 @@ class App extends React.Component {
                 overflow: 'auto'
               }}>
                 <Header
-                  isLoggedIn
+                  isLoggedIn={this.state.isLoggedIn}
                   history={history}
                 />
                 <div>
@@ -239,7 +242,7 @@ class App extends React.Component {
                         <Route 
                           exact 
                           path="/home/support" 
-                          render={props => <SupportWithForm {...props} isLoggedIn={this.state.isLoggedIn} />}
+                          render={props => <SupportWithoutForm {...props} isLoggedIn={this.state.isLoggedIn} />}
                         />
                       }
 
