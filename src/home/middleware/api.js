@@ -65,7 +65,7 @@ export function fetchDSODetails(action) {
 
 export function fetchRules(action) {
   return POST({
-    api: 'http://192.168.5.86:8085/ruleEngine/listRules',
+    api: 'http://192.168.5.86:3005/ruleEngine/listRules',
     handleError: true,
     prependBaseUrl: false,
     data: action.data

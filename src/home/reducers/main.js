@@ -153,7 +153,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_RULES]: (state, action) => {
     return Object.assign({}, state, {
       loadingRules: false,
-      rulesData: action.data
+      rulesData: action.data.rules
     })
   },
 

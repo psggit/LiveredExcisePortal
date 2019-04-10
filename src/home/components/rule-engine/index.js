@@ -199,7 +199,7 @@ class RuleManagement extends React.Component {
                 zoneRestrictions.map((item, i) => {
                   return (
                     <tr onClick={() => this.updateZoneRestrictions(`${item.city_id !== undefined ? `city_${item.id}` : `state_${item.id}`}`)} key={i}>
-                      <td>{item.id}</td>
+                      <td>{item.city ? item.city : item.state}</td>
                       <td>{moment(item.date).format('DD/MM/YYYY')}</td>
                       <td>{moment(item.from_time).format('h:mm a')}</td>
                       <td>{moment(item.to_time).format('h:mm a')}</td>
