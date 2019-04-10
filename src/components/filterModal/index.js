@@ -99,11 +99,11 @@ class Filter extends React.Component {
           {
             this.props.filterName !== "overview" &&
             <div>
-              <Retailer 
+              {/* <Retailer 
                 retailerList={this.props.retailerList}  
                 ref={(node) => { this.retailerState = node }}
                 selectedRetailerIdx={this.props.selectedRetailerIdx}
-              />
+              /> */}
               <OrderAmount 
                 orderAmount={this.props.orderAmount}  
                 ref={(node) => { this.orderAmountState = node }}

@@ -12,7 +12,7 @@ const OttpDetailCustomer = ({ age, address, phone, name, verifiedDocs }) => (
           <p className="value">{name}</p>
         </div>
         {
-          verifiedDocs.length > 0 &&
+          verifiedDocs &&
           <div>
             <div className="icon">
               <span><Icon name="green-flag" /></span>

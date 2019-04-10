@@ -15,7 +15,7 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
       <td>{ data.dso.name }</td>
       <td>{ data.retailer.name }</td>
       <td>{ data.consumer.city }</td>
-      <td>{ data.order.total }</td>
+      <td>₹ { data.order.total }</td>
       <td>{ data.order.total_volume }</td>
       <td>
         <div style={{display: 'flex', alignItems: 'center'}}>

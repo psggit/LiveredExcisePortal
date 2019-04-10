@@ -528,7 +528,7 @@ class LiveOrdersList extends React.Component {
                   this.props.inProgressOTTP.length === 0 && (
                   <tr>
                     <td style={{ textAlign: "center" }} colSpan="9">
-                      No orders found
+                      No live orders found
                     </td>
                   </tr>
                 )}

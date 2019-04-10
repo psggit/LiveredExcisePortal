@@ -14,7 +14,7 @@ const LiveOrdersListItem = ({ data, handleClick }) => {
       <td>{ data.dso.name }</td>
       <td>{ data.retailer.name }</td>
       <td>{ data.consumer.city }</td>
-      <td>{ data.order.total }</td>
+      <td>₹ { data.order.total }</td>
       <td>{ data.order.total_volume }</td>
       <td>{ data.ottp_info.status }</td>
       <td>{`valid till ${ Moment(data.ottp_info.expiry_at).format("h:mm A") }`}</td>

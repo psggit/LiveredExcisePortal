@@ -124,6 +124,7 @@ class App extends React.Component {
     history.listen((loction) => {
       const newRoute = location.pathname.split('/')[2]
       const { key } = this.state
+      console.log("key", key)
       this.setState({ key: key + 1, currentRoute: newRoute })
     })
   }

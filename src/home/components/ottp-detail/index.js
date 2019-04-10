@@ -28,6 +28,7 @@ class OTTPDetail extends Component {
    */
   fetchOrderDetails() {
     const { ottpId } = this.props.match.params
+    this.props.actions.setLoading('loadingOTTPDetail')
     this.props.actions.fetchOTTPDetail({
       ottp_info: {
         ottp_id: ottpId

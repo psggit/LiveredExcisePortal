@@ -55,10 +55,10 @@ class DSODetails extends React.Component {
                 {data.dso_name}
               </p>
               <div style={{display: 'flex', alignItems: 'center'}}>
-                <span style={{marginRight: '10px'}}>
+                <span style={{marginRight: '5px', display: 'flex'}}>
                   <Icon name="active-indicator" />
                 </span>
-                <p>{data.is_active ? 'DELIVERY ENABLED' : 'DELIVERY DISABLED' }</p>
+                <span>{data.is_active ? 'DELIVERY ENABLED' : 'DELIVERY DISABLED' }</span>
               </div>
             </div>
             <div style={headerStyle} >
