@@ -97,8 +97,8 @@ class RuleManagement extends React.Component {
                 {
                   possessionLimits.map((item, i) => {
                     return <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <p>{item.type}</p>
-                      <input className="small" type="text" value={item.volume} />
+                      <p>{item.brand_type}</p>
+                      <input className="small" type="text" value={item.volume_limit} />
                     </div>
                   })
                 }

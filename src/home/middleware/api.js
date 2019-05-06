@@ -1,8 +1,10 @@
 import { POST, GET } from '@utils/fetch'
 
+const ipAddress = "192.168.5.84"
+
 export function fetchInProgressOTTP(action) {
   return POST({
-    api: 'http://192.168.5.86:3000/livered/liveOttps',
+    api: `http://${ipAddress}:3000/livered/ottp/liveOttps`,
     // apiBase: 'livered',
     handleError: true,
     prependBaseUrl: false,
@@ -14,7 +16,7 @@ export function fetchInProgressOTTP(action) {
 export function fetchHistoryOTTP(action) {
   return POST({
     //api: '/excisePortal/ottpHistory',
-    api: 'http://192.168.5.86:3000/livered/ottpHistory',
+    api: `http://${ipAddress}:3000/livered/ottp/ottpHistory`,
     //apiBase: 'agamotto',
     handleError: true,
     prependBaseUrl: false,
@@ -25,7 +27,7 @@ export function fetchHistoryOTTP(action) {
 
 export function fetchOTTPDetail(action) {
   return POST({
-    api: 'http://192.168.5.86:3000/livered/ottpDetails',
+    api: `http://${ipAddress}:3000/livered/ottp/ottpDetails`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -35,7 +37,7 @@ export function fetchOTTPDetail(action) {
 
 export function fetchDSOList(action) {
   return POST({
-    api: 'http://192.168.5.86:3002/livered/listDso',
+    api: `http://${ipAddress}:3002/livered/dso/listDso`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -45,7 +47,7 @@ export function fetchDSOList(action) {
 
 export function fetchCitiesList(action) {
   return GET({
-    api: 'http://192.168.5.86:3000/livered/listCities',
+    api: `http://${ipAddress}:3000/livered/ottp/listCities`,
     handleError: true,
     prependBaseUrl: false,
     //data: action.data
@@ -55,7 +57,7 @@ export function fetchCitiesList(action) {
 
 export function fetchDSODetails(action) {
   return POST({
-    api: 'http://192.168.5.86:3002/livered/dsoDetails',
+    api: `http://${ipAddress}:3002/livered/dso/dsoDetails`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -65,7 +67,7 @@ export function fetchDSODetails(action) {
 
 export function fetchRules(action) {
   return POST({
-    api: 'http://192.168.5.86:3005/ruleEngine/listRules',
+    api: `http://${ipAddress}:3005/livered/rules/listRules`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -75,7 +77,7 @@ export function fetchRules(action) {
 
 export function fetchOutletList(action) {
   return POST({
-    api: 'http://192.168.5.86:3001/livered/listOutlets',
+    api: `http://${ipAddress}:3001/livered/retailer/listOutlets`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -85,7 +87,7 @@ export function fetchOutletList(action) {
 
 export function fetchRetailerList(action) {
   return POST({
-    api: 'http://192.168.5.86:3001/livered/listRetailers',
+    api: `http://${ipAddress}:3001/livered/retailer/listRetailers`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -95,7 +97,7 @@ export function fetchRetailerList(action) {
 
 export function fetchRetailerDetails(action) {
   return POST({
-    api: 'http://192.168.5.86:3001/livered/retailerDetails',
+    api: `http://${ipAddress}:3001/livered/retailer/retailerDetails`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -105,7 +107,7 @@ export function fetchRetailerDetails(action) {
 
 export function fetchConsumerList(action) {
   return POST({
-    api: 'http://192.168.5.86:3003/livered/listConsumers',
+    api: `http://${ipAddress}:3003/livered/consumers/listConsumers`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -115,7 +117,7 @@ export function fetchConsumerList(action) {
 
 export function fetchConsumerComplaints(action) {
   return POST({
-    api: 'http://192.168.5.86:3003/livered/listComplaints',
+    api: `http://${ipAddress}:3003/livered/consumers/listComplaints`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -125,7 +127,7 @@ export function fetchConsumerComplaints(action) {
 
 export function fetchRevenueDetails(action) {
   return POST({
-    api: 'http://192.168.5.86:3004/livered/revenueOverview',
+    api: `http://${ipAddress}:3004/livered/credits/revenueOverview`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -135,7 +137,7 @@ export function fetchRevenueDetails(action) {
 
 export function fetchPermitDetails(action) {
   return POST({
-    api: 'http://192.168.5.86:3000/livered/ottpOverview',
+    api: `http://${ipAddress}:3000/livered/ottp/ottpOverview`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -145,7 +147,7 @@ export function fetchPermitDetails(action) {
 
 export function fetchUserList(action) {
   return POST({
-    api: 'http://192.168.5.86:3000/livered/ottpOverview',
+    api: `http://${ipAddress}:3000/livered/ottp/ottpOverview`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -155,7 +157,7 @@ export function fetchUserList(action) {
 
 export function createComplaints(action) {
   return POST({
-    api: 'http://192.168.5.63:3000/livered/createExciseComplaints',
+    api: `http://${ipAddress}:3000/livered/createExciseComplaints`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
