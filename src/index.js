@@ -71,7 +71,7 @@
 import React from 'react'
 import 'babel-polyfill'
 import ReactDOM from "react-dom"
-import createHistory from 'history/createBrowserHistory'
+import { createBrowserHistory as createHistory } from 'history'
 import { Route, Switch } from 'react-router-dom'
 import { Router } from 'react-router'
 import Header from '@components/header'
@@ -148,7 +148,7 @@ class App extends React.Component {
           return
         }
         response.json().then((data) => {
-          this.setState({isLoggedIn: true})
+          this.setState({ isLoggedIn: true })
           if (!location.pathname.includes('home') && !location.pathname.includes('support')) {
             location.href = '/home/live-ottp'
           }
@@ -164,23 +164,23 @@ class App extends React.Component {
 
   render() {
     const mainDivStyleWithSideMenu = {
-      display: 'inline-block', 
-      width: 'calc(100% - 250px)', 
-      verticalAlign: 'top', 
-      padding: '60px', 
-      backgroundColor: '#f5f7fa', 
-      height: 'calc(100vh - 60px)', 
-      overflow: 'auto' 
+      display: 'inline-block',
+      width: 'calc(100% - 250px)',
+      verticalAlign: 'top',
+      padding: '60px',
+      backgroundColor: '#f5f7fa',
+      height: 'calc(100vh - 60px)',
+      overflow: 'auto'
     }
 
     const mainDivStyleWithoutSideMenu = {
-      display: 'inline-block', 
-      width: '100%', 
-      verticalAlign: 'top', 
-      padding: '60px', 
-      backgroundColor: '#f5f7fa', 
-      height: 'calc(100vh - 60px)', 
-      overflow: 'auto' 
+      display: 'inline-block',
+      width: '100%',
+      verticalAlign: 'top',
+      padding: '60px',
+      backgroundColor: '#f5f7fa',
+      height: 'calc(100vh - 60px)',
+      overflow: 'auto'
     }
     return (
       <Provider store={config.store}>
@@ -240,20 +240,20 @@ class App extends React.Component {
 
                       {
                         this.state.isLoggedIn &&
-                        <Route 
-                          exact 
-                          path="/home/support" 
+                        <Route
+                          exact
+                          path="/home/support"
                           render={props => <SupportWithoutForm {...props} isLoggedIn={this.state.isLoggedIn} />}
                         />
                       }
 
                       {
                         !this.state.isLoggedIn &&
-                        <Route 
-                         exact 
-                         path="/home/support" 
-                         render={props => <SupportWithoutForm {...props} />}
-                       />
+                        <Route
+                          exact
+                          path="/home/support"
+                          render={props => <SupportWithoutForm {...props} />}
+                        />
                       }
 
                       <Route
@@ -362,7 +362,7 @@ class App extends React.Component {
             }
           </div>
         </Router>
-      </Provider> 
+      </Provider>
     )
   }
 }

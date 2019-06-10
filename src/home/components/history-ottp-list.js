@@ -7,13 +7,13 @@ import Pagination from '@components/pagination'
 import Loader from '@components/loader'
 import { getQueryObj, getQueryUri } from "@utils/url-utils";
 import Icon from "@components/icon"
-import {pastOrderData} from "./../constants/past-orders-mock"
+import { pastOrderData } from "./../constants/past-orders-mock"
 import "@sass/style.scss"
 import PageHeader from "@components/pageheader"
 import Filter from "@components/filterModal"
 import Search from "@components/search"
 import Button from "@components/button"
-import {orderAmount} from "./../constants/static-data"
+import { orderAmount } from "./../constants/static-data"
 import FilteredParams from "@components/filteredParams"
 
 class HistoryOrdersList extends React.Component {
@@ -36,7 +36,7 @@ class HistoryOrdersList extends React.Component {
       fromDate: "",
       toDate: ""
     }
-  
+
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -63,26 +63,26 @@ class HistoryOrdersList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return {text: item.dso_name, value: i}
+        return { text: item.dso_name, value: i }
       })
-      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
-      this.setState({dsoList})
-    } else if(this.props.cityList !== prevProps.cityList) {
+      dsoList = [...dsoList, { text: "All", value: dsoList.length }]
+      this.setState({ dsoList })
+    } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
       let cityList = this.props.cityList.map((item) => {
         if (parseInt(item.id) > max) {
           max = item.id
         }
-        return {text: item.city, value: item.id}
+        return { text: item.city, value: item.id }
       })
-      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
-      this.setState({cityList})
-    } else if(this.props.retailerList !== prevProps.retailerList) {
+      cityList = [...cityList, { text: "All", value: parseInt(max) + 1 }]
+      this.setState({ cityList })
+    } else if (this.props.retailerList !== prevProps.retailerList) {
       let retailerList = this.props.retailerList.map((item, i) => {
-        return {text: item.name, value: i}
+        return { text: item.name, value: i }
       })
-      retailerList = [...retailerList, {text: "All", value: retailerList.length}]
-      this.setState({retailerList})
+      retailerList = [...retailerList, { text: "All", value: retailerList.length }]
+      this.setState({ retailerList })
     }
   }
 
@@ -92,13 +92,13 @@ class HistoryOrdersList extends React.Component {
    * @param {String} value - selected dropdown field index
    */
   setFilteredFieldState(fieldName, value) {
-    if(fieldName !== "FromDate" && fieldName !== "ToDate") {
+    if (fieldName !== "FromDate" && fieldName !== "ToDate") {
       const selectedFieldIdx = `selected${fieldName}Idx`
       this.setState({ [selectedFieldIdx]: value })
-    } else if(fieldName === "FromDate") {
-      this.setState({ fromDate: value})
+    } else if (fieldName === "FromDate") {
+      this.setState({ fromDate: value })
     } else if (fieldName === "ToDate") {
-      this.setState({ toDate: value})
+      this.setState({ toDate: value })
     }
   }
 
@@ -106,25 +106,25 @@ class HistoryOrdersList extends React.Component {
    * Sets the filtered dropdown value on page reload
    */
   setSelectedDropDownValue(item) {
-    switch(item.filterby) {
+    switch (item.filterby) {
       case 'City':
         this.setFilteredFieldState('City', item.idx)
-      break;
+        break;
       case 'Delivery Operator':
         this.setFilteredFieldState('Dso', item.idx)
-      break;
+        break;
       case 'Order Amount':
         this.setFilteredFieldState('OrderAmnt', item.idx)
-      break;
+        break;
       case 'Retailer':
         this.setFilteredFieldState('Retailer', item.idx)
-      break;
+        break;
       case 'From':
         this.setFilteredFieldState('FromDate', item.value)
-      break;
+        break;
       case 'To':
         this.setFilteredFieldState('ToDate', item.value)
-      break;
+        break;
     }
   }
 
@@ -139,10 +139,10 @@ class HistoryOrdersList extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "OttpId")) {
-        this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
+      if (filter.find(item => item.filterby === "OttpId")) {
+        this.setState({ OttpId: filter.find(item => item.filterby === "OttpId").value })
       }
 
       //sets the filtered fields as default value to filter fields
@@ -150,13 +150,13 @@ class HistoryOrdersList extends React.Component {
         this.setSelectedDropDownValue(item)
       })
 
-      this.setState({isFilterApplied: true,  filter: JSON.parse(decodeURIComponent(queryObj.filter))})
+      this.setState({ isFilterApplied: true, filter: JSON.parse(decodeURIComponent(queryObj.filter)) })
       this.props.actions.fetchHistoryOTTP({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } 
+    }
     // else {
     //   this.props.actions.fetchHistoryOTTP({
     //     limit: parseInt(queryObj.limit),
@@ -193,7 +193,7 @@ class HistoryOrdersList extends React.Component {
       limit: pagerObj.pageSize
     })
 
-    if(queryObj.filter && queryObj.filter.length) {
+    if (queryObj.filter && queryObj.filter.length) {
       queryParamsObj = {
         activePage: pagerObj.activePage,
         limit: pagerObj.pageSize,
@@ -263,7 +263,7 @@ class HistoryOrdersList extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
-    this.setState({filter: [filterObj]})
+    this.setState({ filter: [filterObj] })
     history.pushState(urlParams, "past orders listing", `/home/past-orders?${(getQueryUri(urlParams))}`)
   }
 
@@ -278,10 +278,10 @@ class HistoryOrdersList extends React.Component {
    * Clears the applied filter/search and renders all the past orders
    */
   clearSearchResults() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchHistoryOttps()
       this.props.history.push(`/home/past-orders`)
-      this.setState({isFilterApplied: false})
+      this.setState({ isFilterApplied: false })
     }
   }
 
@@ -293,15 +293,15 @@ class HistoryOrdersList extends React.Component {
     let filterArr = filter
 
     //If filter already applied, then adds the new filter options to it
-    if(this.state.filter) {
+    if (this.state.filter) {
       filterArr = this.state.filter
       filter.map((item) => {
         filterArr.push(item)
       })
     }
     this.setState({
-      limit: 10, 
-      filter: filterArr, 
+      limit: 10,
+      filter: filterArr,
       isFilterApplied: true
     })
 
@@ -387,13 +387,13 @@ class HistoryOrdersList extends React.Component {
             <thead>
               <tr>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Permit ID</span>
+                    <span style={{ marginRight: '5px' }}>Permit ID</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -403,23 +403,23 @@ class HistoryOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Time</span>
+                    <span style={{ marginRight: '5px' }}>Time</span>
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Delivery Operator</span>
+                    <span style={{ marginRight: '5px' }}>Delivery Operator</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -429,13 +429,13 @@ class HistoryOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Retailer</span>
+                    <span style={{ marginRight: '5px' }}>Retailer</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -445,23 +445,23 @@ class HistoryOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>City/Town</span>
+                    <span style={{ marginRight: '5px' }}>City/Town</span>
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Order Amount</span>
+                    <span style={{ marginRight: '5px' }}>Order Amount</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -471,13 +471,13 @@ class HistoryOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Volume (ml)</span>
+                    <span style={{ marginRight: '5px' }}>Volume (Litres)</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -487,13 +487,13 @@ class HistoryOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Permit Status</span>
+                    <span style={{ marginRight: '5px' }}>Permit Status</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -503,13 +503,13 @@ class HistoryOrdersList extends React.Component {
                   </div>
                 </th>
                 <th>
-                  <div 
+                  <div
                     style={{
                       display: 'flex',
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{marginRight: '5px'}}>Customer Age Verification</span>
+                    <span style={{ marginRight: '5px' }}>Customer Age Verification</span>
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
@@ -522,14 +522,14 @@ class HistoryOrdersList extends React.Component {
             </thead>
             <tbody>
               {!this.props.loadingHistoryOTTP &&
-              this.props.historyOTTPData &&
-              this.props.historyOTTPData.map(item => (
-                <HistoryOrdersListItem
-                  handleClick={this.handleRowClick}
-                  key={item.ottp_info.ottp_id }
-                  data={item}
-                />
-              ))}
+                this.props.historyOTTPData &&
+                this.props.historyOTTPData.map(item => (
+                  <HistoryOrdersListItem
+                    handleClick={this.handleRowClick}
+                    key={item.ottp_info.ottp_id}
+                    data={item}
+                  />
+                ))}
               {this.props.loadingHistoryOTTP && (
                 <tr>
                   <td colSpan="9">
@@ -538,13 +538,13 @@ class HistoryOrdersList extends React.Component {
                 </tr>
               )}
               {!this.props.loadingHistoryOTTP &&
-              this.props.historyOTTPData.length === 0 && (
-                <tr>
-                  <td style={{ textAlign: "center" }} colSpan="9">
-                    No orders found
+                this.props.historyOTTPData.length === 0 && (
+                  <tr>
+                    <td style={{ textAlign: "center" }} colSpan="9">
+                      No orders found
                   </td>
-                </tr>
-              )}
+                  </tr>
+                )}
             </tbody>
           </table>
         </div>

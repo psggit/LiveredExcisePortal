@@ -1,10 +1,15 @@
 import { POST, GET } from '@utils/fetch'
 
-const ipAddress = "192.168.5.84"
+// const ipAddress = "192.168.5.84"
+const ottp = "https://fca0bbea.ngrok.io"
+export const dso = "https://007072aa.ngrok.io"
+const credit = "https://df53a98c.ngrok.io"
+const rule = "https://6774026d.ngrok.io"
+
 
 export function fetchInProgressOTTP(action) {
   return POST({
-    api: `http://${ipAddress}:3000/livered/ottp/liveOttps`,
+    api: `${ottp}/livered/ottp/liveOttps`,
     // apiBase: 'livered',
     handleError: true,
     prependBaseUrl: false,
@@ -16,7 +21,7 @@ export function fetchInProgressOTTP(action) {
 export function fetchHistoryOTTP(action) {
   return POST({
     //api: '/excisePortal/ottpHistory',
-    api: `http://${ipAddress}:3000/livered/ottp/ottpHistory`,
+    api: `${ottp}/livered/ottp/ottpHistory`,
     //apiBase: 'agamotto',
     handleError: true,
     prependBaseUrl: false,
@@ -27,7 +32,7 @@ export function fetchHistoryOTTP(action) {
 
 export function fetchOTTPDetail(action) {
   return POST({
-    api: `http://${ipAddress}:3000/livered/ottp/ottpDetails`,
+    api: `${ottp}/livered/ottp/ottpDetails`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -37,7 +42,7 @@ export function fetchOTTPDetail(action) {
 
 export function fetchDSOList(action) {
   return POST({
-    api: `http://${ipAddress}:3002/livered/dso/listDso`,
+    api: `${dso}/livered/dso/listDso`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -47,7 +52,7 @@ export function fetchDSOList(action) {
 
 export function fetchCitiesList(action) {
   return GET({
-    api: `http://${ipAddress}:3000/livered/ottp/listCities`,
+    api: `${ottp}/livered/ottp/listCities`,
     handleError: true,
     prependBaseUrl: false,
     //data: action.data
@@ -57,7 +62,7 @@ export function fetchCitiesList(action) {
 
 export function fetchDSODetails(action) {
   return POST({
-    api: `http://${ipAddress}:3002/livered/dso/dsoDetails`,
+    api: `${dso}/livered/dso/dsoDetails`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -67,7 +72,7 @@ export function fetchDSODetails(action) {
 
 export function fetchRules(action) {
   return POST({
-    api: `http://${ipAddress}:3005/livered/rules/listRules`,
+    api: `${rule}/livered/rules/listRules`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -107,7 +112,7 @@ export function fetchRetailerDetails(action) {
 
 export function fetchConsumerList(action) {
   return POST({
-    api: `http://${ipAddress}:3003/livered/consumers/listConsumers`,
+    api: `${consumer}/livered/consumers/listConsumers`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -117,7 +122,7 @@ export function fetchConsumerList(action) {
 
 export function fetchConsumerComplaints(action) {
   return POST({
-    api: `http://${ipAddress}:3003/livered/consumers/listComplaints`,
+    api: `${consumer}/livered/consumers/listComplaints`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -127,7 +132,7 @@ export function fetchConsumerComplaints(action) {
 
 export function fetchRevenueDetails(action) {
   return POST({
-    api: `http://${ipAddress}:3004/livered/credits/revenueOverview`,
+    api: `${credit}/livered/credits/revenueOverview`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -137,7 +142,7 @@ export function fetchRevenueDetails(action) {
 
 export function fetchPermitDetails(action) {
   return POST({
-    api: `http://${ipAddress}:3000/livered/ottp/ottpOverview`,
+    api: `${ottp}/livered/ottp/ottpOverview`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -147,7 +152,7 @@ export function fetchPermitDetails(action) {
 
 export function fetchUserList(action) {
   return POST({
-    api: `http://${ipAddress}:3000/livered/ottp/ottpOverview`,
+    api: `${ottp}/livered/ottp/ottpOverview`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
@@ -157,7 +162,7 @@ export function fetchUserList(action) {
 
 export function createComplaints(action) {
   return POST({
-    api: `http://${ipAddress}:3000/livered/createExciseComplaints`,
+    api: `${ottp}/livered/createExciseComplaints`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data
