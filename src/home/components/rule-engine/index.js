@@ -85,6 +85,7 @@ class RuleManagement extends React.Component {
               <input
                 className="small"
                 type="text"
+                disabled={true}
                 defaultValue={
                   possessionLimits && possessionLimits.length > 0
                     ? possessionLimits.find((item) => item.brand_type === "IMFL").volume_limit / 1000
@@ -97,6 +98,7 @@ class RuleManagement extends React.Component {
               <input
                 className="small"
                 type="text"
+                disabled={true}
                 defaultValue={
                   possessionLimits && possessionLimits.length > 0
                     ? possessionLimits.find((item) => item.brand_type === "FMFL").volume_limit / 1000
@@ -109,6 +111,7 @@ class RuleManagement extends React.Component {
               <input
                 className="small"
                 type="text"
+                disabled={true}
                 defaultValue={
                   possessionLimits && possessionLimits.length > 0
                     ? possessionLimits.find((item) => item.brand_type === "Beer").volume_limit / 1000
@@ -121,6 +124,7 @@ class RuleManagement extends React.Component {
               <input
                 className="small"
                 type="text"
+                disabled={true}
                 defaultValue={
                   possessionLimits && possessionLimits.length > 0
                     ? possessionLimits.find((item) => item.brand_type === "Wine").volume_limit / 1000
@@ -141,6 +145,7 @@ class RuleManagement extends React.Component {
             </div>
             <input
               type="number"
+              disabled={true}
               defaultValue={legalPurchaseAge}
             />
           </div>
@@ -157,6 +162,7 @@ class RuleManagement extends React.Component {
               </div>
               <input
                 type="text"
+                disabled={true}
                 className="small"
                 value={`₹ ${permitRules && permitRules.length > 0 ? permitRules[0].cancellation_fee : 0}`}
               />
@@ -172,6 +178,7 @@ class RuleManagement extends React.Component {
               </div>
               <input
                 type="text"
+                disabled={true}
                 className="small"
                 value={`₹ ${permitRules && permitRules.length > 0 ? permitRules[0].permit_cost : 0}`}
               />
@@ -184,8 +191,8 @@ class RuleManagement extends React.Component {
                 icon="info"
                 tooltipText="Time range per day within which delivery of liquor is permitted"
               >
-                Time Restrictions
-            </Label>
+                TIME RESTRICTIONS
+              </Label>
             </div>
             <div className="timings">
               {
@@ -195,6 +202,7 @@ class RuleManagement extends React.Component {
                     <input
                       style={{ margin: '10px 20px 10px 0' }}
                       className="small" type="text"
+                      disabled={true}
                       value={moment(item.start_time).format('h:mm a')}
                     />
                     <p>to</p>
@@ -202,6 +210,7 @@ class RuleManagement extends React.Component {
                       style={{ margin: '10px 0 10px 20px' }}
                       className="small"
                       type="text"
+                      disabled={true}
                       value={moment(item.end_time).format('h:mm a')}
                     />
                   </div>
@@ -225,7 +234,7 @@ class RuleManagement extends React.Component {
                   ? <React.Fragment>
                     <thead>
                       <tr>
-                        <th><Label>Zone</Label></th>
+                        <th><Label>City/Town</Label></th>
                         <th><Label>On</Label></th>
                         <th><Label>From</Label></th>
                         <th><Label>To</Label></th>
