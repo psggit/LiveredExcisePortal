@@ -61,6 +61,7 @@ export function fetchCitiesList(action) {
 }
 
 export function fetchDSODetails(action) {
+  console.log("action", action)
   return POST({
     api: `${dso}/livered/dso/dsoDetails`,
     handleError: true,

@@ -37,11 +37,11 @@ class RuleManagement extends React.Component {
   componentDidMount() {
     this.props.actions.fetchRules({
       state_id: 1
-    }) 
+    })
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.rulesData !== prevProps.rulesData) {
+    if (this.props.rulesData !== prevProps.rulesData) {
       this.formatResponse()
     }
   }
@@ -51,167 +51,216 @@ class RuleManagement extends React.Component {
    */
   formatResponse() {
     const timeRestrictions = this.props.rulesData.time_restrictions.map((item) => {
-      return {...item, weekday_name: this.days.find(dayItem => dayItem.value === item.weekday_id).label }
+      return { ...item, weekday_name: this.days.find(dayItem => dayItem.value === item.weekday_id).label }
     })
     this.setState({
       timeRestrictions: timeRestrictions,
-      legalPurchaseAge: this.props.rulesData.consumer_min_age,
+      legalPurchaseAge: this.props.rulesData.consumer_min_age ? this.props.rulesData.consumer_min_age : 0,
       possessionLimits: this.props.rulesData.possession_limit,
       permitRules: this.props.rulesData.permit_rules,
       zoneRestrictions: this.props.rulesData.city_special_days.concat(this.props.rulesData.state_special_days)
     })
   }
 
-  updateZoneRestrictions(id) {
-    console.log("zone id", id)
-  }
-
   render() {
-    const  { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions, permitRules } = this.state
+    const { possessionLimits, timeRestrictions, legalPurchaseAge, zoneRestrictions, permitRules } = this.state
     return (
       <div id="rule-engine">
         <PageHeader pageName="Rule Engine" />
-        <Collpasible 
-          title="CUSTOMER RESTRICTIONS"
-          tooltipText="User/customer needs to fulfil the following criteria to place an order"
-        >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div>
-              <div className="legal-age">
-                <Label 
-                  icon="info"
-                  tooltipText="Minimum legal age limit to place an order"
-                >
-                  Legal Purchage Age
-                </Label>
-                <input type="number" value={legalPurchaseAge} />
-              </div>
-
-              <div className="possession" style={{ marginTop: '20px' }}>
-                <Label 
-                  icon="info"
-                  tooltipText="The quantity of liquor that an individual can possess at any given time"
-                >
-                  Possession Limits
-                </Label>
-                {
-                  possessionLimits.map((item, i) => {
-                    return <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <p>{item.brand_type}</p>
-                      <input className="small" type="text" value={item.volume_limit} />
-                    </div>
-                  })
+        <div style={{ background: '#fff', padding: '30px' }}>
+          <div className="rule--header">
+            <p className="title">Rules</p>
+          </div>
+          <div className="rule--body possession-limit">
+            <div className="title">
+              <Label
+                icon="info"
+                tooltipText="The quantity of liquor that an individual can possess at any given time"
+              >
+                Possession Limits (Litres)
+            </Label>
+            </div>
+            <div className="brand-type">
+              <span>IMFL</span>
+              <input
+                className="small"
+                type="text"
+                defaultValue={
+                  possessionLimits && possessionLimits.length > 0
+                    ? possessionLimits.find((item) => item.brand_type === "IMFL").volume_limit / 1000
+                    : ""
                 }
-              </div>
+              />
+            </div>
+            <div className="brand-type">
+              <span>FMFL</span>
+              <input
+                className="small"
+                type="text"
+                defaultValue={
+                  possessionLimits && possessionLimits.length > 0
+                    ? possessionLimits.find((item) => item.brand_type === "FMFL").volume_limit / 1000
+                    : ""
+                }
+              />
+            </div>
+            <div className="brand-type">
+              <span>Beer</span>
+              <input
+                className="small"
+                type="text"
+                defaultValue={
+                  possessionLimits && possessionLimits.length > 0
+                    ? possessionLimits.find((item) => item.brand_type === "Beer").volume_limit / 1000
+                    : ""
+                }
+              />
+            </div>
+            <div className="brand-type">
+              <span>Wine</span>
+              <input
+                className="small"
+                type="text"
+                defaultValue={
+                  possessionLimits && possessionLimits.length > 0
+                    ? possessionLimits.find((item) => item.brand_type === "Wine").volume_limit / 1000
+                    : ""
+                }
+              />
             </div>
           </div>
-        </Collpasible>
 
-        <Collpasible 
-          title="PERMIT RULES"
-          tooltipText="Fulfiling certain criteria while generating a permit"
-        >
-          <div style={{ display: 'inline-block', marginRight: '20px' }} className="permit-time-validity">
-            <Label 
-              icon="info"
-              tooltipText="The validity of a single OTTP generated per order"
-            >
-              Permit Time Validity
+          <div className="rule--body legal-age">
+            <div className="title">
+              <Label
+                icon="info"
+                tooltipText="Minimum legal age limit to place an order"
+              >
+                Legal Purchage Age
             </Label>
+            </div>
             <input
-              type="text"
-              value={`${permitRules.permit_time} mins`}
+              type="number"
+              defaultValue={legalPurchaseAge}
             />
           </div>
-          <div style={{ display: 'inline-block' }} className="cost">
-            <Label 
-              icon="info"
-              tooltipText="The amount charged per OTTP per order"
-            >
-              Cost/Permit
-            </Label>
-            <input
-              type="text"
-              className="small"
-              value={`₹ ${permitRules.permit_cost}`}
-            />
-          </div>
-          <div className="late-fee" style={{marginTop: '20px'}}>
-            <Label 
-              icon="info"
-              tooltipText="In case of extension, late fee is charged per OTTP per order"
-            >
-              Late Fee
-            </Label>
-            <input
-              type="text"
-              className="small"
-              value={`₹ ${permitRules.late_fee}`}
-            />
-          </div>
-        </Collpasible>
 
-        <Collpasible 
-          title="TIME RESTRICTIONS"
-          tooltipText="The time range within which the delivery is active every day"
-        >
-          <div>
-            <Label>Daily Restrictions</Label>
-          </div>
-          {
-            timeRestrictions.map((item, i) => {
-              return <div style={{ display: 'flex', alignItems: 'center' }} key={i}>
-                <p style={{ width: '110px' }}>{item.weekday_name}</p>
-                <input
-                  style={{ margin: '0 20px 10px 0' }}
-                  className="small" type="text"
-                  value={moment(item.start_time).format('h:mm a')}
-                />
-                <p>to</p>
-                <input
-                  style={{ margin: '0 0 10px 20px' }}
-                  className="small"
-                  type="text"
-                  value={moment(item.end_time).format('h:mm a')}
-                />
+          <div className="rule--body">
+            <div className="cancellation-fee" style={{ margin: '20px 0 40px 0' }}>
+              <div className="title">
+                <Label
+                  icon="info"
+                  tooltipText="In case an OTTP (One Time Transport Permit) is cancelled, a cancellation fee will be charged"
+                >
+                  Cancellation Fee (₹)
+              </Label>
               </div>
-            })
-          }
-        </Collpasible>
-        <Collpasible 
-          title="SPECIAL RESTRICTIONS"
-          tooltipText="To restrict delivery with 48 hour intimation on certain days due to emergencies, as listed by the state"
-        >
-          <table>
-            <thead>
-              <tr>
-                <th><Label>Zone</Label></th>
-                <th><Label>On</Label></th>
-                <th><Label>From</Label></th>
-                <th><Label>To</Label></th>
-                <th><Label>Repeat</Label></th>
-                <th><Label>Reason</Label></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
+              <input
+                type="text"
+                className="small"
+                value={`₹ ${permitRules && permitRules.length > 0 ? permitRules[0].cancellation_fee : 0}`}
+              />
+            </div>
+            <div className="permit-fee" style={{ marginTop: '10px' }}>
+              <div className="title">
+                <Label
+                  icon="info"
+                  tooltipText="Amount charged per OTTP per order"
+                >
+                  Cost/Permit (₹)
+            </Label>
+              </div>
+              <input
+                type="text"
+                className="small"
+                value={`₹ ${permitRules && permitRules.length > 0 ? permitRules[0].permit_cost : 0}`}
+              />
+            </div>
+          </div>
+
+          <div className="rule--body time-restrictions">
+            <div className="title">
+              <Label
+                icon="info"
+                tooltipText="Time range per day within which delivery of liquor is permitted"
+              >
+                Time Restrictions
+            </Label>
+            </div>
+            <div className="timings">
               {
-                zoneRestrictions.map((item, i) => {
-                  return (
-                    <tr onClick={() => this.updateZoneRestrictions(`${item.city_id !== undefined ? `city_${item.id}` : `state_${item.id}`}`)} key={i}>
-                      <td>{item.city ? item.city : item.state}</td>
-                      <td>{moment(item.date).format('DD/MM/YYYY')}</td>
-                      <td>{moment(item.from_time).format('h:mm a')}</td>
-                      <td>{moment(item.to_time).format('h:mm a')}</td>
-                      <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
-                      <td>{item.reason}</td>
-                    </tr>
-                  )
+                timeRestrictions.map((item, i) => {
+                  return <div style={{ display: 'flex', alignItems: 'center' }} key={i}>
+                    <span>{item.weekday_name}</span>
+                    <input
+                      style={{ margin: '10px 20px 10px 0' }}
+                      className="small" type="text"
+                      value={moment(item.start_time).format('h:mm a')}
+                    />
+                    <p>to</p>
+                    <input
+                      style={{ margin: '10px 0 10px 20px' }}
+                      className="small"
+                      type="text"
+                      value={moment(item.end_time).format('h:mm a')}
+                    />
+                  </div>
                 })
               }
-            </tbody>
-          </table>
-        </Collpasible>
+            </div>
+          </div>
+
+          <div className="rule--body">
+            <div className="title">
+              <Label
+                icon="info"
+                tooltipText="Restricting delivery with a minimum of 48 hours of intimation on certain days due to dry days, state emergencies or other requirements"
+              >
+                Special Restrictions
+          </Label>
+            </div>
+            <table>
+              {
+                zoneRestrictions.length > 0
+                  ? <React.Fragment>
+                    <thead>
+                      <tr>
+                        <th><Label>Zone</Label></th>
+                        <th><Label>On</Label></th>
+                        <th><Label>From</Label></th>
+                        <th><Label>To</Label></th>
+                        <th><Label>Repeat</Label></th>
+                        <th><Label>Reason</Label></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        zoneRestrictions.map((item, i) => {
+                          return (
+                            <tr>
+                              <td>{item.city ? item.city : item.state}</td>
+                              <td>{moment(item.date).format('DD/MM/YYYY')}</td>
+                              <td>{moment(item.from_time).format('h:mm a')}</td>
+                              <td>{moment(item.to_time).format('h:mm a')}</td>
+                              <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
+                              <td>{item.reason}</td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </React.Fragment>
+                  : <tbody>
+                    <tr>
+                      <td style={{ textAlign: 'center' }} colSpan='6'>
+                        <p style={{ fontWeight: '16px' }}>No special day found</p>
+                      </td>
+                    </tr>
+                  </tbody>
+              }
+            </table>
+          </div>
+        </div>
       </div>
     )
   }

@@ -44,8 +44,8 @@ class DSODetails extends React.Component {
         {
           !this.props.loadingDSODetail &&
           <div>
-            <div style={{display: 'flex', marginBottom: '60px', alignItems: 'center', justifyContent: 'space-between'}}>
-              <p 
+            <div style={{ display: 'flex', marginBottom: '60px', alignItems: 'center', justifyContent: 'space-between' }}>
+              <p
                 style={{
                   fontSize: '22px',
                   letterSpacing: '0.3px',
@@ -54,18 +54,18 @@ class DSODetails extends React.Component {
               >
                 {data.dso_name}
               </p>
-              <div style={{display: 'flex', alignItems: 'center'}}>
-                <span style={{marginRight: '5px', display: 'flex'}}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <span style={{ marginRight: '5px', display: 'flex' }}>
                   <Icon name="active-indicator" />
                 </span>
-                <span>{data.is_active ? 'DELIVERY ENABLED' : 'DELIVERY DISABLED' }</span>
+                <span>{data.is_active ? 'DELIVERY ENABLED' : 'DELIVERY DISABLED'}</span>
               </div>
             </div>
             <div style={headerStyle} >
               BASIC INFORMATION
             </div>
-            <div style={{display: 'flex', marginBottom: '36px'}}>
-              <LicenseDetails 
+            <div style={{ display: 'flex', marginBottom: '36px' }}>
+              <LicenseDetails
                 status={data.is_validated}
                 dateOfValidation={data.validation_date}
                 locationsIn={data.locations}
@@ -78,11 +78,11 @@ class DSODetails extends React.Component {
                 address={data.head_office.address}
               />
               <RegionalOfficeDetails
-                name={data.regional_office.contact.name}
-                email={data.regional_office.contact.email}
-                mobile={data.regional_office.contact.phone}
-                city={data.regional_office.city}
-                address={data.regional_office.address}
+                name={data.state_details[0].reg_office_contact_name}
+                email={data.state_details[0].reg_office_contact_email}
+                mobile={data.state_details[0].reg_office_contact_phone}
+                city={data.state_details[0].reg_office_city}
+                address={data.state_details[0].reg_office_address}
               />
             </div>
           </div>
