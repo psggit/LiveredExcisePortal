@@ -3,23 +3,29 @@ import "./dso-detail.scss"
 import Icon from "@components/icon"
 import Moment from "moment"
 
-const LicenseDetails = ({status, dateOfValidation, locationsIn}) => (
+const LicenseDetails = ({ licenseType, licenseStatus, licenseExpiry }) => (
   <div className="dso-detail-card">
     <div className="item">
+      <p className="label">License Type</p>
+      <p className="value">{licenseType}</p>
+    </div>
+    <div className="item">
       <p className="label">License Status</p>
-      <p className="value">{status  ? "Validated" : "Not Validated"}</p>
-      {/* <div style={{display: 'flex', alignItems: 'center'}}>
-        <span style={{marginRight: '2px'}}><Icon name="active-indicator" /></span>
-        <p className="value">{status  ? "Validated" : "Not Validated"}</p>
-      </div> */}
+      {/* <p className="value">{licenseStatus  ? "Active" : ""}</p> */}
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <span style={{ marginRight: '2px' }}>
+          {
+            licenseStatus
+              ? <Icon name="active-indicator" />
+              : <Icon name="active-indicator" />
+          }
+        </span>
+        <p className="value">{licenseStatus ? "Active" : "Inactive"}</p>
+      </div>
     </div>
     <div className="item">
-      <p className="label">Date of Validation</p>
-      <p className="value">{ Moment(dateOfValidation).format('DD/MM/YYYY') }</p>
-    </div>
-    <div className="item">
-      <p className="label">Locations present in</p>
-      <p className="value">{locationsIn}</p>
+      <p className="label">License Expiry</p>
+      <p className="value">{Moment(licenseExpiry).format("DD-MM-YYYY")}</p>
     </div>
   </div>
 )

@@ -2,7 +2,8 @@ import React from "react"
 import LicenseDetails from "./license-details"
 import HeadOfficeDetails from "./head-office-details"
 import Icon from '@components/icon'
-import RegionalOfficeDetails from './regional-office-details'
+import HeadOfficeContactDetails from './head-office-contact-details'
+import LocationAndRegionalDetails from "./location-details"
 import { connect } from 'react-redux'
 import * as Actions from '../../actions'
 import { bindActionCreators } from 'redux'
@@ -44,7 +45,7 @@ class DSODetails extends React.Component {
         {
           !this.props.loadingDSODetail &&
           <div>
-            <div style={{ display: 'flex', marginBottom: '60px', alignItems: 'center', justifyContent: 'space-between' }}>
+            <div style={{ marginBottom: '60px' }}>
               <p
                 style={{
                   fontSize: '22px',
@@ -64,26 +65,24 @@ class DSODetails extends React.Component {
             <div style={headerStyle}>
               BASIC INFORMATION
             </div>
-            <div style={{ display: 'flex', marginBottom: '36px' }}>
-              <LicenseDetails
-                status={data.is_validated}
-                dateOfValidation={data.validation_date}
-                locationsIn={data.locations}
-              />
-              <HeadOfficeDetails
-                name={data.head_office.contact.name}
-                email={data.head_office.contact.email}
-                mobile={data.head_office.contact.phone}
-                city={data.head_office.city}
-                address={data.head_office.address}
-              />
-              <RegionalOfficeDetails
-                name={data.state_details[0].reg_office_contact_name}
-                email={data.state_details[0].reg_office_contact_email}
-                mobile={data.state_details[0].reg_office_contact_phone}
-                city={data.state_details[0].reg_office_city}
-                address={data.state_details[0].reg_office_address}
-              />
+            <div style={{ background: '#fff', padding: '20px 30px' }}>
+              <div style={{ display: 'flex', marginBottom: '20px' }}>
+                <LicenseDetails
+                  licenseType={data.license_type}
+                  licenseStatus={data.license_status}
+                  licenseExpiry={data.license_expiry}
+                />
+                <HeadOfficeDetails
+                  city={data.head_office.city}
+                  address={data.head_office.address}
+                />
+                <HeadOfficeContactDetails
+                  name={data.state_details[0].reg_office_contact_name}
+                  email={data.state_details[0].reg_office_contact_email}
+                  mobile={data.state_details[0].reg_office_contact_phone}
+                />
+              </div>
+              <LocationAndRegionalDetails locations={data.state_details} />
             </div>
           </div>
         }

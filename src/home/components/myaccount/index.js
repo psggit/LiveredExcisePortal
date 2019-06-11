@@ -74,25 +74,6 @@ class MyAccount extends React.Component {
             </div>
           </div>
         </div>
-
-        <div className="header">
-          NOTIFICATIONS
-        </div>
-        <div className="notification-container">
-          <p className="label">Channel</p>
-          <div className="channel">
-            <span className="icon">
-              <Icon name="calendar" />
-            </span>
-            <p>Text Message</p>
-          </div>
-          <div className="channel">
-            <span className="icon">
-              <Icon name="calendar" />
-            </span>
-            <p>Email</p>
-          </div>
-        </div>
       </div>
     )
   }

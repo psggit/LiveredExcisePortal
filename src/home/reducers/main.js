@@ -23,6 +23,7 @@ const initialState = {
   auditLogCount: 0,
   historyOTTPCount: 0,
   retailerListCount: 0,
+  userListCount: 0,
   DSOListCount: 0,
   customerListCount: 0,
   inProgressOTTP: [],
@@ -112,6 +113,7 @@ const actionsMap = {
     return Object.assign({}, state, {
       loadingUserList: false,
       userList: action.data.excise_users,
+      userListCount: action.data.count
     })
   },
 

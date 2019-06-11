@@ -1,7 +1,7 @@
 .dso-detail-card {
   width: calc(100% / 3);
-  padding: 20px 30px;
-  border: 1px solid #e2e5e8;
+  padding: 20px 0px;
+  // border: 1px solid #e2e5e8;
   background-color: #fff;
 
   .item {
@@ -43,4 +43,11 @@
 
 .dso-detail-card .item:not(:first-child){
   margin-top: 26px;
+}
+
+.location-details {
+  p.title {
+    color: #4a90e2;
+    margin-bottom: 20px;
+  }
 }

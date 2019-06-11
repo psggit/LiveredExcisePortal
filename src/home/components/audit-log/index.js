@@ -1,40 +1,37 @@
 import React from "react"
 import PageHeader from "@components/pageheader"
-import UserPermissionItem from "./user-item";
+import AuditLogItem from "./auditlog-item";
 import Loader from "@components/loader"
-import Search from "@components/search"
-// import { userList } from "./../constants/user"
+import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import * as Actions from './../../actions'
 import Pagination from "@components/pagination"
-import * as Actions from "./../actions"
-import { getQueryObj, getQueryUri } from "@utils/url-utils"
+import Search from "@components/search"
 
-class UserPermissions extends React.Component {
+class AuditLog extends React.Component {
 
   constructor() {
     super()
-
-    this.filter = [
-      {
-        filterby: "state_id",
-        value: "1"
-      }
-    ]
+    this.filter = [{
+      filterby: "dso_id",
+      value: "SW123"
+    }]
     this.state = {
-      activeTab: "user-permissions",
-      loadingUserList: false,
-      userList: [],
+      activeTab: "audit-log",
+      loadingAuditLog: false,
+      auditLog: [],
+      auditLogCount: 0,
       name: "",
+      activePage: 1,
       limit: 10,
-      filter: this.filter,
-      activePage: 1
+      filter: this.filter
     }
-    this.fetchUsersList = this.fetchUsersList.bind(this)
-    this.handleSearch = this.handleSearch.bind(this)
-    this.clearSearchResults = this.clearSearchResults.bind(this)
-    this.handlePageChange = this.handlePageChange.bind(this)
+    this.fetchAuditLog = this.fetchAuditLog.bind(this)
     this.setActiveTab = this.setActiveTab.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+    this.handlePageChange = this.handlePageChange.bind(this)
+    this.clearSearchResults = this.clearSearchResults.bind(this)
   }
 
   componentDidMount() {
@@ -51,15 +48,15 @@ class UserPermissions extends React.Component {
       })
     }
 
-    this.fetchUsersList({
+    this.fetchAuditLog({
       limit: queryObj.limit ? parseInt(queryObj.limit) : this.state.limit,
       offset: queryObj.activePage ? parseInt(queryObj.limit * (queryObj.activePage - 1)) : 0,
       filter: queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)) : this.state.filter
     })
   }
 
-  fetchUsersList(payload) {
-    this.props.actions.fetchUsersList(payload)
+  fetchAuditLog(payload) {
+    this.props.actions.fetchAuditLog(payload)
   }
 
   handleSearch(searchQuery) {
@@ -89,11 +86,11 @@ class UserPermissions extends React.Component {
     }
     this.setState(payload)
 
-    this.fetchUsersList(payload)
+    this.fetchAuditLog(payload)
     history.pushState(
       urlParams,
-      "userPermissions",
-      `/home/user-permissions?${getQueryUri(urlParams)}`
+      "auditlog",
+      `/home/audit-log?${getQueryUri(urlParams)}`
     )
   }
 
@@ -103,13 +100,21 @@ class UserPermissions extends React.Component {
         filter: this.filter,
         name: ""
       });
-      this.props.history.push(`/home/user-permissions`)
-      this.fetchUsersList({
+      this.props.history.push(`/home/audit-log`)
+      this.fetchAuditLog({
         limit: 10,
         offset: 0,
         filter: this.filter
       })
     }
+  }
+
+  /**
+   * Used to highlight the active tab
+   * @param {String} activeTabName - Indicates the active tab name
+   */
+  setActiveTab(activeTabName) {
+    this.setState({ activeTab: activeTabName })
   }
 
   handlePageChange(pagerObj) {
@@ -120,7 +125,7 @@ class UserPermissions extends React.Component {
       limit: pagerObj.pageSize
     })
     this.props.actions.setLoadingAll()
-    this.fetchUsersList({
+    this.fetchAuditLog({
       limit: pagerObj.pageSize,
       offset: pagerObj.pageSize * (pagerObj.activePage - 1),
       filter: this.state.filter
@@ -140,20 +145,12 @@ class UserPermissions extends React.Component {
     )
   }
 
-  /**
-   * Used to highlight the active tab
-   * @param {String} activeTabName - Indicates the active tab name
-   */
-  setActiveTab(activeTabName) {
-    this.setState({ activeTab: activeTabName })
-  }
-
   render() {
-    const { activeTab, userList } = this.state
-    console.log("user", userList)
+    const { auditLog, auditLogCount } = this.props
+    const { activeTab } = this.state
     return (
-      <div id="userPermissions">
-        <PageHeader pageName="My Account" />
+      <div id="auditLog">
+        <PageHeader pageName="Audit Log" />
         <div style={{ display: 'flex', marginBottom: '40px', marginTop: '4px' }}>
           <ul className="nav">
             <li
@@ -193,7 +190,7 @@ class UserPermissions extends React.Component {
               <Pagination
                 activePage={this.state.activePage}
                 pageSize={this.state.limit}
-                totalItemsCount={this.props.userListCount}
+                totalItemsCount={auditLogCount}
                 onChangePage={this.handlePageChange}
               />
             </div>
@@ -203,10 +200,11 @@ class UserPermissions extends React.Component {
           <table>
             <thead>
               <tr>
-                <th>User Name</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Authentication</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Log Details</th>
+                <th>Module</th>
               </tr>
             </thead>
             <tbody>
@@ -221,28 +219,30 @@ class UserPermissions extends React.Component {
                 ))
               } */}
               {
-                this.props.userList.map(item => (
-                  <UserPermissionItem
-                    key={item.id}
-                    data={item}
-                  />
-                ))
+                auditLog.map((item, i) => {
+                  return (
+                    <AuditLogItem
+                      key={i}
+                      data={item}
+                    />
+                  )
+                })
               }
-              {this.props.loadingUserList && (
+              {this.props.loadingAuditLog && (
                 <tr>
                   <td colSpan="8">
                     <Loader />
                   </td>
                 </tr>
               )}
-              {!this.props.loadingUserList &&
+              {/* {!this.props.loadingUserList &&
                 this.props.userList.length === 0 && (
-                  <tr>
-                    <td style={{ textAlign: "center" }} colSpan="4">
-                      No users found
+                <tr>
+                  <td style={{ textAlign: "center" }} colSpan="4">
+                    No users found
                   </td>
-                  </tr>
-                )}
+                </tr>
+              )} */}
             </tbody>
           </table>
         </div>
@@ -268,6 +268,6 @@ const mapDispatchToProps = (dispatch) => ({
   actions: bindActionCreators(Actions, dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPermissions)
+export default connect(mapStateToProps, mapDispatchToProps)(AuditLog)
 
 //export default UserPermissions
