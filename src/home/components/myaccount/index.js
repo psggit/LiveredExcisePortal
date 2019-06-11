@@ -26,10 +26,10 @@ class MyAccount extends React.Component {
     return (
       <div id="account">
         <PageHeader pageName="My Account" />
-        <div style={{display: 'flex', marginBottom: '40px', marginTop: '4px'}}>
+        <div style={{ display: 'flex', marginBottom: '40px', marginTop: '4px' }}>
           <ul className="nav">
-            <li 
-              onClick={() => this.setActiveTab("my-account")} 
+            <li
+              onClick={() => this.setActiveTab("my-account")}
               className={`${activeTab === "my-account" ? 'active' : ''}`}
             >
               <a href="/home/account">My Account</a>
@@ -39,6 +39,12 @@ class MyAccount extends React.Component {
               className={`${activeTab === "user-permissions" ? 'active' : ''}`}
             >
               <a href="/home/user-permissions">User Permissions</a>
+            </li>
+            <li
+              onClick={() => this.setActiveTab("audit-log")}
+              className={`${activeTab === "audit-log" ? 'active' : ''}`}
+            >
+              <a href="/home/audit-log">Audit Log</a>
             </li>
           </ul>
         </div>

@@ -34,6 +34,7 @@ class DSOList extends React.Component {
     if (location.search.length) {
       this.setQueryParamas()
     } else {
+      this.props.actions.setLoadingAll()
       this.fetchDsoList()
     }
   }
@@ -49,10 +50,10 @@ class DSOList extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "DsoName")) {
-        this.setState({dsoName: filter.find(item => item.filterby === "DsoName").value})
+      if (filter.find(item => item.filterby === "DsoName")) {
+        this.setState({ dsoName: filter.find(item => item.filterby === "DsoName").value })
       }
       this.props.actions.fetchDSOList({
         limit: parseInt(queryObj.limit),
@@ -60,7 +61,7 @@ class DSOList extends React.Component {
         state_id: this.state_id,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } 
+    }
     // else {
     //   this.props.actions.fetchDSOList({
     //     limit: parseInt(queryObj.limit),
@@ -127,7 +128,7 @@ class DSOList extends React.Component {
    * Clears the applied filter/search and renders all the dso's
    */
   clearSearchResults() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchDsoList()
       this.props.history.push(`/home/delivery-operators`)
     }
@@ -155,7 +156,7 @@ class DSOList extends React.Component {
       state_id: this.state_id,
       filter: [filterObj]
     })
-    this.setState({filter: [filterObj]})
+    this.setState({ filter: [filterObj] })
     history.pushState(urlParams, "dso listing", `/home/delivery-operators?${(getQueryUri(urlParams))}`)
   }
 
@@ -166,7 +167,7 @@ class DSOList extends React.Component {
         <div style={{
           marginBottom: "20px"
         }}
-        > 
+        >
           <Search
             placeholder="Search by Name"
             searchText={this.state.dsoName}
@@ -175,7 +176,7 @@ class DSOList extends React.Component {
           />
         </div>
         {
-          !this.props.loadingDSOList && this.props.DSOList.length > 1 && 
+          !this.props.loadingDSOList && this.props.DSOList.length > 1 &&
           (
             <div style={{ margin: "10px 0" }}>
               <Pagination
@@ -205,7 +206,7 @@ class DSOList extends React.Component {
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
-                      Status Delivery Service Operator 
+                        Status Delivery Service Operator
                       </span>
                     </span>
                   </div>
@@ -257,7 +258,7 @@ class DSOList extends React.Component {
                 ))
               }
               {
-                this.props.loadingDSOList && 
+                this.props.loadingDSOList &&
                 (
                   <tr>
                     <td colSpan="9">
@@ -268,7 +269,7 @@ class DSOList extends React.Component {
               }
               {
                 !this.props.loadingDSOList &&
-                this.props.DSOList.length === 0 && 
+                this.props.DSOList.length === 0 &&
                 (
                   <tr>
                     <td style={{ textAlign: "center" }} colSpan="9">

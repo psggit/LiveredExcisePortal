@@ -47,17 +47,17 @@ class ConsumerManagement extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "CityName")) {
-        this.setState({cityName: filter.find(item => item.filterby === "CityName").value})
+      if (filter.find(item => item.filterby === "CityName")) {
+        this.setState({ cityName: filter.find(item => item.filterby === "CityName").value })
       }
       this.props.actions.fetchConsumerList({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } 
+    }
     // else {
     //   this.props.actions.fetchConsumerList({
     //     limit: parseInt(queryObj.limit),
@@ -112,7 +112,7 @@ class ConsumerManagement extends React.Component {
    * Clears the applied filter/search and renders all the consumers
    */
   clearSearchResults() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchConsumerList()
       this.props.history.push(`/home/consumers`)
     }
@@ -139,7 +139,7 @@ class ConsumerManagement extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
-    this.setState({filter: [filterObj]})
+    this.setState({ filter: [filterObj] })
     history.pushState(urlParams, "consumer listing", `/home/consumers?${(getQueryUri(urlParams))}`)
   }
 
@@ -156,10 +156,10 @@ class ConsumerManagement extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Consumer Complaints" />
-        <div style={{display: 'flex', marginBottom: '40px', marginTop: '4px'}}>
+        <div style={{ display: 'flex', marginBottom: '40px', marginTop: '4px' }}>
           <ul className="nav">
-            <li 
-              onClick={() => this.setActiveTab("consumers")} 
+            <li
+              onClick={() => this.setActiveTab("consumers")}
               className={`${activeTab === "consumers" ? 'active' : ''}`}
             >
               <a href="/home/consumers">Consumer Log</a>
@@ -176,7 +176,7 @@ class ConsumerManagement extends React.Component {
           marginBottom: "20px",
           marginTop: "26px"
         }}
-        > 
+        >
           <Search
             placeholder="Search by City/Town"
             searchText={this.state.cityName}
@@ -185,7 +185,6 @@ class ConsumerManagement extends React.Component {
           />
         </div>
         {
-          !this.props.loadingConsumerList && this.props.customerList.length > 0 && 
           (
             <div style={{ margin: "10px 0" }}>
               <Pagination
@@ -213,15 +212,15 @@ class ConsumerManagement extends React.Component {
               {
                 !this.props.loadingCustomerList &&
                 this.props.customerList &&
-                this.props.customerList.map((item,i) => {
-                  return  <ConsumerListItem
+                this.props.customerList.map((item, i) => {
+                  return <ConsumerListItem
                     key={i}
                     data={item}
                   />
                 })
               }
               {
-                this.props.loadingCustomerList && 
+                this.props.loadingCustomerList &&
                 (
                   <tr>
                     <td colSpan="9">
@@ -232,7 +231,7 @@ class ConsumerManagement extends React.Component {
               }
               {
                 !this.props.loadingCustomerList &&
-                this.props.customerList.length === 0 && 
+                this.props.customerList.length === 0 &&
                 (
                   <tr>
                     <td style={{ textAlign: "center" }} colSpan="9">

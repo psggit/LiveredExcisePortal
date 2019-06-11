@@ -1,6 +1,7 @@
 import React from "react"
 import "./complaints.scss"
 import { POST } from "@utils/fetch"
+import { consumer } from "./../../middleware/api"
 
 class Complaints extends React.Component {
   constructor() {
@@ -51,8 +52,8 @@ class Complaints extends React.Component {
   handleMessageChange(e) {
     const message = e.target.value
     message.length > this.characterLimit
-    ? e.preventDefault()
-    : this.setState({
+      ? e.preventDefault()
+      : this.setState({
         message,
         count: this.characterLimit - message.length
       })
@@ -68,21 +69,21 @@ class Complaints extends React.Component {
   handleSubmit() {
     const { message, ottpId, reason } = this.state
     POST({
-      api: "http://192.168.5.86:8087/livered/createComplaints",
+      api: `${consumer}/livered/consumer/createComplaints`,
       //apiBase: "api1",
       handleError: false,
       prependBaseUrl: false,
-      data: { 
-        complaint_message: message, 
-        ottp_id: ottpId, 
-        reason 
+      data: {
+        complaint_message: message,
+        ottp_id: ottpId,
+        reason
       }
     })
       .then((json) => {
-        location.href="/complaint-success"
+        location.href = "/complaint-success"
       })
       .catch((error) => {
-        location.href="/complaint-failure"
+        location.href = "/complaint-failure"
       })
   }
 

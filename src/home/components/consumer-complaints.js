@@ -57,17 +57,17 @@ class ConsumerComplaints extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "Reason")) {
-        this.setState({reason: filter.find(item => item.filterby === "Reason").value})
+      if (filter.find(item => item.filterby === "Reason")) {
+        this.setState({ reason: filter.find(item => item.filterby === "Reason").value })
       }
       this.props.actions.fetchConsumerComplaints({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } 
+    }
     // else {
     //   this.props.actions.fetchConsumerComplaints({
     //     limit: parseInt(queryObj.limit),
@@ -122,7 +122,7 @@ class ConsumerComplaints extends React.Component {
    * Clears the applied filter/search and renders all the consumer complaints
    */
   clearSearchResults() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchConsumerComplaintList()
       this.props.history.push(`/home/consumer-complaints`)
     }
@@ -149,7 +149,7 @@ class ConsumerComplaints extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
-    this.setState({filter: [filterObj]})
+    this.setState({ filter: [filterObj] })
     history.pushState(urlParams, "consumer comaplaints listing", `/home/consumer-complaints?${(getQueryUri(urlParams))}`)
   }
 
@@ -158,16 +158,16 @@ class ConsumerComplaints extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Consumer Complaints" />
-        <div style={{display: 'flex', marginBottom: '20px'}}>
+        <div style={{ display: 'flex', marginBottom: '20px' }}>
           <ul className="nav">
-            <li 
-              onClick={() => this.setActiveTab("consumer")} 
+            <li
+              onClick={() => this.setActiveTab("consumer")}
               className={`${activeTab === "consumers" ? 'active' : ''}`}
             >
               <a href="/home/consumers">Consumer Log</a>
             </li>
-            <li 
-              onClick={() => this.setActiveTab("consumer-complaints")} 
+            <li
+              onClick={() => this.setActiveTab("consumer-complaints")}
               className={`${activeTab === "consumer-complaints" ? 'active' : ''}`}
             >
               <a href="/home/consumer-complaints">Consumer Complaints</a>
@@ -178,7 +178,7 @@ class ConsumerComplaints extends React.Component {
           marginBottom: "20px",
           marginTop: "26px"
         }}
-        > 
+        >
           <Search
             placeholder="Search by reason type"
             searchText={this.state.reason}
@@ -187,7 +187,6 @@ class ConsumerComplaints extends React.Component {
           />
         </div>
         {
-          !this.props.loadingCustomerComplaints && this.props.customerComplaints.length > 0 && 
           (
             <div style={{ margin: "10px 0" }}>
               <Pagination
@@ -204,11 +203,11 @@ class ConsumerComplaints extends React.Component {
             <thead>
               <tr>
                 <th>Date</th>
-                <th style={{width: '70px'}}>Time</th>
-                <th style={{width: '180px'}}>Name</th>
+                <th style={{ width: '70px' }}>Time</th>
+                <th style={{ width: '180px' }}>Name</th>
                 <th>Age</th>
                 <th>City/Town</th>
-                <th style={{width: '100px'}}>Reason Type</th>
+                <th style={{ width: '100px' }}>Reason Type</th>
                 <th>Message</th>
               </tr>
             </thead>
@@ -216,8 +215,8 @@ class ConsumerComplaints extends React.Component {
               {
                 !this.props.loadingCustomerComplaints &&
                 this.props.customerComplaints &&
-                this.props.customerComplaints.map((item,i) => {
-                  return  <ConsumerComplaintsItem
+                this.props.customerComplaints.map((item, i) => {
+                  return <ConsumerComplaintsItem
                     //handleClick={this.handleClick}
                     key={i}
                     data={item}
@@ -225,7 +224,7 @@ class ConsumerComplaints extends React.Component {
                 })
               }
               {
-                this.props.loadingCustomerComplaints && 
+                this.props.loadingCustomerComplaints &&
                 (
                   <tr>
                     <td colSpan="9">
@@ -236,7 +235,7 @@ class ConsumerComplaints extends React.Component {
               }
               {
                 !this.props.loadingCustomerComplaints &&
-                this.props.customerComplaints.length === 0 && 
+                this.props.customerComplaints.length === 0 &&
                 (
                   <tr>
                     <td style={{ textAlign: "center" }} colSpan="9">

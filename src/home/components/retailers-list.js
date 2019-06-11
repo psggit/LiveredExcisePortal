@@ -48,10 +48,10 @@ class RetailersList extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "RetailerName")) {
-        this.setState({retailerName: filter.find(item => item.filterby === "RetailerName").value})
+      if (filter.find(item => item.filterby === "RetailerName")) {
+        this.setState({ retailerName: filter.find(item => item.filterby === "RetailerName").value })
       }
       this.props.actions.fetchRetailerList({
         limit: parseInt(queryObj.limit),
@@ -125,7 +125,7 @@ class RetailersList extends React.Component {
    * Clears the applied filter/search and renders all the retailers
    */
   clearSearchResults() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchRetailersList()
       this.props.history.push(`/home/retailers`)
     }
@@ -152,7 +152,7 @@ class RetailersList extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
-    this.setState({filter: [filterObj]})
+    this.setState({ filter: [filterObj] })
     history.pushState(urlParams, "retailer listing", `/home/retailers?${(getQueryUri(urlParams))}`)
   }
 
@@ -163,7 +163,7 @@ class RetailersList extends React.Component {
         <div style={{
           marginBottom: "20px"
         }}
-        > 
+        >
           <Search
             placeholder="Search"
             searchText={this.state.retailerName}
@@ -172,7 +172,6 @@ class RetailersList extends React.Component {
           />
         </div>
         {
-          !this.props.loadingRetailerList && this.props.retailerList.length > 1 &&
           (
             <div style={{ margin: "10px 0" }}>
               <Pagination
@@ -218,7 +217,7 @@ class RetailersList extends React.Component {
                     <span className="info" style={{ position: "relative" }}>
                       <Icon name="info" />
                       <span className="tooltip-text">
-                        Current status of Retailer’s license 
+                        Current status of Retailer’s license
                       </span>
                     </span>
                   </div>
@@ -262,12 +261,12 @@ class RetailersList extends React.Component {
               )}
               {!this.props.loadingRetailerList &&
                 this.props.retailerList.length === 0 && (
-                <tr>
-                  <td style={{ textAlign: "center" }} colSpan="8">
-                    No retailers found
+                  <tr>
+                    <td style={{ textAlign: "center" }} colSpan="8">
+                      No retailers found
                   </td>
-                </tr>
-              )}
+                  </tr>
+                )}
             </tbody>
           </table>
         </div>

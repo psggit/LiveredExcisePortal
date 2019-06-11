@@ -156,6 +156,15 @@ function* fetchUserList(action) {
   }
 }
 
+function* fetchAuditLog(action) {
+  try {
+    const data = yield call(Api.fetchAuditLog, action)
+    yield put({ type: ActionTypes.SUCCESS_FETCH_AUDIT_LOG, data })
+  } catch (err) {
+    err.response.json().then(json => { Notify(json.message, "warning") })
+  }
+}
+
 function* fetchCitiesList(action) {
   //console.log(action)
   try {
@@ -214,6 +223,12 @@ function* watchFetchRules() {
 function* watchFetchUserList() {
   while (true) {
     yield* takeLatest(ActionTypes.REQUEST_FETCH_USERS_LIST, fetchUserList)
+  }
+}
+
+function* watchFetchAuditLog() {
+  while (true) {
+    yield* takeLatest(ActionTypes.REQUEST_FETCH_AUDIT_LOG, fetchAuditLog)
   }
 }
 
@@ -314,6 +329,7 @@ export default function* rootSaga() {
     fork(watchFetchRetailerList),
     fork(watchFetchRetailerDetails),
     fork(watchFetchRules),
+    fork(watchFetchAuditLog),
     fork(watchFetchConsumerList),
     fork(watchFetchConsumerComplaints),
     fork(watchFetchCitiesList),

@@ -8,10 +8,10 @@ import React from 'react'
 const UserPermissionItem = ({ data }) => {
   return (
     <tr>
-      <td>{ data.user }</td>
-      <td>{ data.type }</td>
-      <td>{ data.status ? "Active" : "Inactive" }</td>
-      <td>{ data.authentication }</td>
+      <td>{data.name}</td>
+      <td>{data.designation}</td>
+      <td>{data.roles[0].name}</td>
+      <td>{data.is_active ? "Active" : "Inactive"}</td>
     </tr>
   )
 }

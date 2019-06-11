@@ -372,7 +372,7 @@ class HistoryOrdersList extends React.Component {
           this.state.isFilterApplied &&
           <FilteredParams data={this.state.filter} />
         }
-        {!this.props.loadingHistoryOTTP && this.props.historyOTTPData.length > 1 && (
+        {(
           <div style={{ margin: "10px 0" }}>
             <Pagination
               activePage={this.state.activePage}

@@ -1,10 +1,15 @@
 import { POST, GET } from '@utils/fetch'
 
 // const ipAddress = "192.168.5.84"
-const ottp = "https://fca0bbea.ngrok.io"
-export const dso = "https://007072aa.ngrok.io"
-const credit = "https://df53a98c.ngrok.io"
-const rule = "https://6774026d.ngrok.io"
+// const ottp = "https://fca0bbea.ngrok.io"
+// export const dso = "https://007072aa.ngrok.io"
+// const credit = "https://df53a98c.ngrok.io"
+// const rule = "https://6774026d.ngrok.io"
+
+const ottp = "https://195008c1.ngrok.io"
+const dso = "https://4839cb1e.ngrok.io"
+const credit = "https://d8d0fc08.ngrok.io"
+export const consumer = "https://c87e428a.ngrok.io"
 
 
 export function fetchInProgressOTTP(action) {
@@ -153,7 +158,17 @@ export function fetchPermitDetails(action) {
 
 export function fetchUserList(action) {
   return POST({
-    api: `${ottp}/livered/ottp/ottpOverview`,
+    api: `${dso}/livered/dso/listExciseUsers`,
+    handleError: true,
+    prependBaseUrl: false,
+    data: action.data
+  })
+    .then(json => json)
+}
+
+export function fetchAuditLog(action) {
+  return POST({
+    api: `${ottp}/livered/ottp/listAuditLog`,
     handleError: true,
     prependBaseUrl: false,
     data: action.data

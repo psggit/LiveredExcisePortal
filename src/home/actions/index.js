@@ -87,3 +87,8 @@ export const fetchUsersList = (data) => ({
   type: ActionTypes.REQUEST_FETCH_USERS_LIST,
   data
 })
+
+export const fetchAuditLog = (data) => ({
+  type: ActionTypes.REQUEST_FETCH_AUDIT_LOG,
+  data
+})

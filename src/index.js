@@ -102,6 +102,7 @@ import SupportWithoutForm from "./home/components/supportWithoutForm/"
 import Overview from "./home/components/overview"
 import MyAccount from "./home/components/myaccount"
 import UserPermissions from "./home/components/user-list"
+import AuditLog from "./home/components/audit-log"
 
 const history = createHistory()
 
@@ -236,6 +237,12 @@ class App extends React.Component {
                         exact
                         path="/home/user-permissions"
                         render={props => <UserPermissions {...props} />}
+                      />
+
+                      <Route
+                        exact
+                        path="/home/audit-log"
+                        render={props => <AuditLog {...props} />}
                       />
 
                       {

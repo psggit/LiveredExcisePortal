@@ -64,26 +64,26 @@ class LiveOrdersList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return {text: item.dso_name, value: i}
+        return { text: item.dso_name, value: i }
       })
-      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
-      this.setState({dsoList})
-    } else if(this.props.cityList !== prevProps.cityList) {
+      dsoList = [...dsoList, { text: "All", value: dsoList.length }]
+      this.setState({ dsoList })
+    } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
       let cityList = this.props.cityList.map((item) => {
         if (parseInt(item.id) > max) {
           max = item.id
         }
-        return {text: item.city, value: item.id}
+        return { text: item.city, value: item.id }
       })
-      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
-      this.setState({cityList})
-    } else if(this.props.retailerList !== prevProps.retailerList) {
+      cityList = [...cityList, { text: "All", value: parseInt(max) + 1 }]
+      this.setState({ cityList })
+    } else if (this.props.retailerList !== prevProps.retailerList) {
       let retailerList = this.props.retailerList.map((item, i) => {
-        return {text: item.name, value: i}
+        return { text: item.name, value: i }
       })
-      retailerList = [...retailerList, {text: "All", value: retailerList.length}]
-      this.setState({retailerList})
+      retailerList = [...retailerList, { text: "All", value: retailerList.length }]
+      this.setState({ retailerList })
     }
   }
 
@@ -101,19 +101,19 @@ class LiveOrdersList extends React.Component {
    * Sets the filtered dropdown value on page reload
    */
   setSelectedDropDownValue(item) {
-    switch(item.filterby) {
+    switch (item.filterby) {
       case 'City':
         this.setFilteredFieldState('City', item.idx)
-      break;
+        break;
       case 'Delivery Operator':
         this.setFilteredFieldState('Dso', item.idx)
-      break;
+        break;
       case 'Order Amount':
         this.setFilteredFieldState('OrderAmnt', item.idx)
-      break;
+        break;
       case 'Retailer':
         this.setFilteredFieldState('Retailer', item.idx)
-      break;
+        break;
     }
   }
 
@@ -128,10 +128,10 @@ class LiveOrdersList extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      if(filter.find(item => item.filterby === "OttpId")) {
-        this.setState({OttpId: filter.find(item => item.filterby === "OttpId").value})
+      if (filter.find(item => item.filterby === "OttpId")) {
+        this.setState({ OttpId: filter.find(item => item.filterby === "OttpId").value })
       }
 
       //sets the applied filter option as default value filter dropdown
@@ -139,13 +139,13 @@ class LiveOrdersList extends React.Component {
         this.setSelectedDropDownValue(item)
       })
 
-      this.setState({isFilterApplied: true, filter: JSON.parse(decodeURIComponent(queryObj.filter))})
+      this.setState({ isFilterApplied: true, filter: JSON.parse(decodeURIComponent(queryObj.filter)) })
       this.props.actions.fetchInProgressOTTP({
         limit: parseInt(queryObj.limit),
         offset: queryObj.limit * (queryObj.activePage - 1),
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
-    } 
+    }
     // else {
     //   this.props.actions.fetchInProgressOTTP({
     //     limit: parseInt(queryObj.limit),
@@ -200,7 +200,7 @@ class LiveOrdersList extends React.Component {
       limit: pagerObj.pageSize
     })
 
-    if(queryObj.filter && queryObj.filter.length) {
+    if (queryObj.filter && queryObj.filter.length) {
       queryParamsObj = {
         activePage: pagerObj.activePage,
         limit: pagerObj.pageSize,
@@ -222,7 +222,7 @@ class LiveOrdersList extends React.Component {
         offset
       })
     }
-   
+
     history.pushState(
       queryParamsObj,
       "live orders listing",
@@ -236,7 +236,7 @@ class LiveOrdersList extends React.Component {
   fetchLiveOttps() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       this.props.actions.fetchInProgressOTTP({
         limit: this.state.limit,
         offset: 0,
@@ -277,7 +277,7 @@ class LiveOrdersList extends React.Component {
       offset: 0,
       filter: [filterObj]
     })
-    this.setState({filter: [filterObj]})
+    this.setState({ filter: [filterObj] })
     history.pushState(urlParams, "live orders listing", `/home/live-orders?${(getQueryUri(urlParams))}`)
   }
 
@@ -292,10 +292,10 @@ class LiveOrdersList extends React.Component {
    * Clears the applied filter/search and renders all the live orders
    */
   clearSearchResults() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchLiveOttps()
       this.props.history.push(`/home/live-orders`)
-      this.setState({isFilterApplied: false})
+      this.setState({ isFilterApplied: false })
     }
   }
 
@@ -314,7 +314,7 @@ class LiveOrdersList extends React.Component {
     let filterArr = filter
 
     //If filter already applied, then adds the new filter fields to it
-    if(this.state.filter) {
+    if (this.state.filter) {
       filterArr = this.state.filter
       filter.map((item) => {
         filterArr.push(item)
@@ -322,8 +322,8 @@ class LiveOrdersList extends React.Component {
     }
 
     this.setState({
-      limit: 10, 
-      filter: filterArr, 
+      limit: 10,
+      filter: filterArr,
       isFilterApplied: true
     })
     const queryObj = {
@@ -351,7 +351,7 @@ class LiveOrdersList extends React.Component {
           justifyContent: "space-between",
           alignItems: "center"
         }}
-        > 
+        >
           <Search
             placeholder="Search by permit Id"
             searchText={this.state.OttpId}
@@ -379,17 +379,17 @@ class LiveOrdersList extends React.Component {
               selectedCityIdx={this.state.selectedCityIdx}
               selectedDsoIdx={this.state.selectedDsoIdx}
               selectedOrderAmntIdx={this.state.selectedOrderAmntIdx}
-              //selectedRetailerIdx={this.state.selectedRetailerIdx}
-              //permitStatus={this.permitStatus}
+            //selectedRetailerIdx={this.state.selectedRetailerIdx}
+            //permitStatus={this.permitStatus}
             >
             </Filter>
           </div>
-        </div> 
+        </div>
         {
           this.state.isFilterApplied &&
           <FilteredParams data={this.state.filter} />
         }
-        {!this.props.loadingInProgressOTTP && this.props.inProgressOTTP.length > 1 && (
+        {
           <div style={{ margin: "10px 0" }}>
             <Pagination
               activePage={this.state.activePage}
@@ -398,7 +398,7 @@ class LiveOrdersList extends React.Component {
               onChangePage={this.handlePageChange}
             />
           </div>
-        )}
+        }
         {
           <div>
             <table>
@@ -499,12 +499,12 @@ class LiveOrdersList extends React.Component {
                       <span className="info" style={{ position: "relative" }}>
                         <Icon name="info" />
                         <span className="tooltip-text">
-                          Validity status of a single Permit ID 
+                          Validity status of a single Permit ID
                         </span>
                       </span>
                     </div>
                   </th>
-                  <th/>
+                  <th />
                 </tr>
               </thead>
               <tbody>
@@ -526,12 +526,12 @@ class LiveOrdersList extends React.Component {
                 )}
                 {!this.props.loadingInProgressOTTP &&
                   this.props.inProgressOTTP.length === 0 && (
-                  <tr>
-                    <td style={{ textAlign: "center" }} colSpan="9">
-                      No live orders found
+                    <tr>
+                      <td style={{ textAlign: "center" }} colSpan="9">
+                        No live orders found
                     </td>
-                  </tr>
-                )}
+                    </tr>
+                  )}
               </tbody>
             </table>
           </div>

@@ -8,6 +8,7 @@ const initialState = {
   loadingDSODetail: true,
   loadingRetailerList: true,
   loadingRetailerDetail: true,
+  loadingAuditLog: true,
   loadingCustomerList: true,
   loadingCustomerComplaints: true,
   loadingRules: true,
@@ -19,12 +20,14 @@ const initialState = {
   creatingComplaint: true,
   inProgressCount: 0,
   customerComplaintsCount: 0,
+  auditLogCount: 0,
   historyOTTPCount: 0,
   retailerListCount: 0,
   DSOListCount: 0,
   customerListCount: 0,
   inProgressOTTP: [],
   historyOTTPData: [],
+  auditLog: [],
   cityList: [],
   retailerList: [],
   userList: [],
@@ -65,6 +68,14 @@ const actionsMap = {
     })
   },
 
+  [ActionTypes.SUCCESS_FETCH_AUDIT_LOG]: (state, action) => {
+    return Object.assign({}, state, {
+      loadingAuditLog: false,
+      auditLog: action.data.log,
+      auditLogCount: action.data.count
+    })
+  },
+
   [ActionTypes.SUCCESS_FETCH_CITIES_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingCityList: false,
@@ -72,7 +83,7 @@ const actionsMap = {
       //customerListCount: action.data.count
     })
   },
-  
+
   [ActionTypes.SUCCESS_FETCH_CONSUMER_COMPLAINTS_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingCustomerComplaints: false,
@@ -100,7 +111,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_USERS_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingUserList: false,
-      userList: action.data,
+      userList: action.data.excise_users,
     })
   },
 
@@ -166,9 +177,9 @@ const actionsMap = {
 
   [ActionTypes.SUCCESS_SET_LOADING]: (state, action) => {
     if (action.data) {
-        return Object.assign({}, state, {
-          [action.data]: true
-        })
+      return Object.assign({}, state, {
+        [action.data]: true
+      })
     }
   },
 
@@ -177,7 +188,11 @@ const actionsMap = {
       loadingInProgressOTTP: true,
       loadingHistoryOTTP: true,
       loadingOTTPDetail: true,
-      loadingSquadMembers: true
+      loadingSquadMembers: true,
+      loadingDSOList: true,
+      loadingAuditLog: true,
+      auditLog: [],
+      DSOList: []
     })
   }
 }
