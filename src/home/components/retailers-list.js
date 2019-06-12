@@ -104,7 +104,7 @@ class RetailersList extends React.Component {
     })
 
     this.props.actions.fetchRetailerList({
-      limit: pagerObj.pageSize,
+      limit: parseInt(pagerObj.pageSize),
       offset,
       state_id: this.state_id
     })

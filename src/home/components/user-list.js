@@ -122,7 +122,7 @@ class UserPermissions extends React.Component {
     })
     this.props.actions.setLoadingAll()
     this.fetchUsersList({
-      limit: pagerObj.pageSize,
+      limit: parseInt(pagerObj.pageSize),
       offset: pagerObj.pageSize * (pagerObj.activePage - 1),
       filter: queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)) : this.state.filter
     })

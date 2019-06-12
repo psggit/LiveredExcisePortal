@@ -107,7 +107,7 @@ class DSOList extends React.Component {
     })
 
     this.props.actions.fetchDSOList({
-      limit: pagerObj.pageSize,
+      limit: parseInt(pagerObj.pageSize),
       state_id: this.state_id,
       offset
     })

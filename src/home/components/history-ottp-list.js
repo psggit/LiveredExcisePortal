@@ -200,7 +200,7 @@ class HistoryOrdersList extends React.Component {
         filter: queryObj.filter
       }
       this.props.actions.fetchHistoryOTTP({
-        limit: pagerObj.pageSize,
+        limit: parseInt(pagerObj.pageSize),
         activePage: pagerObj.activePage,
         offset,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
@@ -208,7 +208,7 @@ class HistoryOrdersList extends React.Component {
     } else {
       queryParamsObj = {
         activePage: pagerObj.activePage,
-        limit: pagerObj.pageSize
+        limit: parseInt(pagerObj.pageSize)
       }
       this.props.actions.fetchHistoryOTTP({
         limit: pagerObj.pageSize,

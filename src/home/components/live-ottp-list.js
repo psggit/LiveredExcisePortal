@@ -207,7 +207,7 @@ class LiveOrdersList extends React.Component {
         filter: queryObj.filter
       }
       this.props.actions.fetchInProgressOTTP({
-        limit: pagerObj.pageSize,
+        limit: parseInt(pagerObj.pageSize),
         activePage: pagerObj.activePage,
         offset,
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
@@ -218,7 +218,7 @@ class LiveOrdersList extends React.Component {
         limit: pagerObj.pageSize
       }
       this.props.actions.fetchInProgressOTTP({
-        limit: pagerObj.pageSize,
+        limit: parseInt(pagerObj.pageSize),
         offset
       })
     }
