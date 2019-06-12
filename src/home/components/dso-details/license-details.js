@@ -12,8 +12,8 @@ const LicenseDetails = ({ licenseType, licenseStatus, licenseExpiry }) => (
     <div className="item">
       <p className="label">License Status</p>
       {/* <p className="value">{licenseStatus  ? "Active" : ""}</p> */}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <span style={{ marginRight: '2px' }}>
+      <div style={{ display: 'flex', alignItems: 'baseline' }}>
+        <span style={{ marginRight: '5px' }}>
           {
             licenseStatus
               ? <Icon name="active-indicator" />

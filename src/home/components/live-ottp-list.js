@@ -146,12 +146,12 @@ class LiveOrdersList extends React.Component {
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
     }
-    // else {
-    //   this.props.actions.fetchInProgressOTTP({
-    //     limit: parseInt(queryObj.limit),
-    //     offset: queryObj.limit * (queryObj.activePage - 1)
-    //   })
-    // }   
+    else {
+      this.props.actions.fetchInProgressOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
   }
 
   /**

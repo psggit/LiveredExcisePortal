@@ -157,12 +157,12 @@ class HistoryOrdersList extends React.Component {
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
     }
-    // else {
-    //   this.props.actions.fetchHistoryOTTP({
-    //     limit: parseInt(queryObj.limit),
-    //     offset: queryObj.limit * (queryObj.activePage - 1)
-    //   })
-    // }
+    else {
+      this.props.actions.fetchHistoryOTTP({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
   }
 
   /**
@@ -409,7 +409,17 @@ class HistoryOrdersList extends React.Component {
                       alignItems: 'center',
                     }}
                   >
-                    <span style={{ marginRight: '5px' }}>Time</span>
+                    <span style={{ marginRight: '5px' }}>Date Issued</span>
+                  </div>
+                </th>
+                <th>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <span style={{ marginRight: '5px' }}>Time Issued</span>
                   </div>
                 </th>
                 <th>

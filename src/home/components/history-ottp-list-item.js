@@ -11,7 +11,8 @@ const HistoryOrdersListItem = ({ data, handleClick }) => {
   return (
     <tr onClick={() => { handleClick(data) }} className="clickable">
       <td>{data.ottp_info.ottp_id}</td>
-      <td style={{ width: '100px' }}>{moment(data.ottp_info.issued_at).format("DD/MM/YYYY, h:mm A")}</td>
+      <td style={{ width: '100px' }}>{moment(data.ottp_info.issued_at).format("DD/MM/YYYY")}</td>
+      <td style={{ width: '100px' }}>{moment(data.ottp_info.issued_at).format("h:mm A")}</td>
       <td>{data.dso.name}</td>
       <td>{data.retailer.name}</td>
       <td>{data.consumer.city}</td>

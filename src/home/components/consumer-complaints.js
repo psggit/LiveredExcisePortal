@@ -68,12 +68,12 @@ class ConsumerComplaints extends React.Component {
         filter: JSON.parse(decodeURIComponent(queryObj.filter))
       })
     }
-    // else {
-    //   this.props.actions.fetchConsumerComplaints({
-    //     limit: parseInt(queryObj.limit),
-    //     offset: queryObj.limit * (queryObj.activePage - 1)
-    //   })
-    // }
+    else {
+      this.props.actions.fetchConsumerComplaints({
+        limit: parseInt(queryObj.limit),
+        offset: queryObj.limit * (queryObj.activePage - 1)
+      })
+    }
   }
 
   /**
@@ -150,7 +150,7 @@ class ConsumerComplaints extends React.Component {
       filter: [filterObj]
     })
     this.setState({ filter: [filterObj] })
-    history.pushState(urlParams, "consumer comaplaints listing", `/home/consumer-complaints?${(getQueryUri(urlParams))}`)
+    history.pushState(urlParams, "consumer complaints listing", `/home/consumer-complaints?${(getQueryUri(urlParams))}`)
   }
 
   render() {

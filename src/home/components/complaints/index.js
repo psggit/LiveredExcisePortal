@@ -69,7 +69,7 @@ class Complaints extends React.Component {
   handleSubmit() {
     const { message, ottpId, reason } = this.state
     POST({
-      api: `${consumer}/livered/consumer/createComplaints`,
+      api: `${consumer}/livered/consumers/insertComplaints`,
       //apiBase: "api1",
       handleError: false,
       prependBaseUrl: false,
@@ -102,31 +102,34 @@ class Complaints extends React.Component {
             <p className="sub-title">Ref OTTP ID# {this.state.ottpId}</p>
           </div>
           <div className="content">
-            <div className="form-group">
-              <label>Please select a reason</label>
-              <select id="reason" onChange={() => this.handleChange()}>
-                <option value="" disabled selected>
-                  Choose a reason
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label>Please select a reason</label>
+                <select id="reason" onChange={() => this.handleChange()} required>
+                  <option value="" disabled selected>
+                    Choose a reason
                 </option>
-                {this.reasons.map(item => {
-                  return <option value={item.value}>{item.text}</option>;
-                })}
-              </select>
-            </div>
-            <div className="form-group">
-              <label>Message</label>
-              <div>
-                <textarea
-                  placeholder="Write a message"
-                  value={this.state.message}
-                  onChange={e => this.handleMessageChange(e)}
-                />
-                <p className="os s9"><span id="char_count">{this.state.count}</span> characters {this.state.count < this.characterLimit ? 'remaining' : ''}</p>
+                  {this.reasons.map(item => {
+                    return <option value={item.value}>{item.text}</option>;
+                  })}
+                </select>
               </div>
-            </div>
-            <div className="form-group">
-              <button onClick={() => this.handleSubmit()}>Submit</button>
-            </div>
+              <div className="form-group">
+                <label>Message</label>
+                <div>
+                  <textarea
+                    required
+                    placeholder="Write a message"
+                    value={this.state.message}
+                    onChange={e => this.handleMessageChange(e)}
+                  />
+                  <p className="os s9"><span id="char_count">{this.state.count}</span> characters {this.state.count < this.characterLimit ? 'remaining' : ''}</p>
+                </div>
+              </div>
+              <div className="form-group">
+                <button>Submit</button>
+              </div>
+            </form>
           </div>
           <div className="footer">
             <div>
