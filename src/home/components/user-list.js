@@ -67,7 +67,6 @@ class UserPermissions extends React.Component {
       filterby: "name",
       value: searchQuery
     }
-    console.log("filter", this.state.filter)
     const isSearchAlreadyApplied = this.state.filter ? this.state.filter.find((item) => item.filterby === "name") ? true : false : false
 
     let filter = this.state.filter

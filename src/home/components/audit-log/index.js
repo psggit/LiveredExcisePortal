@@ -41,7 +41,6 @@ class AuditLog extends React.Component {
     Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] })
     })
-    console.log("filter", queryObj.filter, (decodeURI(queryObj.filter)))
     const isSearchAlreadyApplied = queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)).find((item) => item.filterby === "name") ? true : false : false
     if (isSearchAlreadyApplied) {
       this.setState({
@@ -65,7 +64,6 @@ class AuditLog extends React.Component {
       filterby: "name",
       value: searchQuery
     }
-    console.log("filter", this.state.filter)
     const isSearchAlreadyApplied = this.state.filter ? this.state.filter.find((item) => item.filterby === "name") ? true : false : false
 
     let filter = this.state.filter
