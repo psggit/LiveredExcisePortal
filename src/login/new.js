@@ -38,7 +38,8 @@ class Login extends React.Component {
     }
   }
 
-  handleLogin() {
+  handleLogin(e) {
+    e.preventDefault()
     // const { email, password } = this.state
     // const emailErr = validateEmail({
     //   fieldName: "Email ID",
