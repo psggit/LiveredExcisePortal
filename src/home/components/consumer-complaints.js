@@ -102,7 +102,7 @@ class ConsumerComplaints extends React.Component {
     })
 
     this.props.actions.fetchConsumerComplaints({
-      limit: pagerObj.pageSize,
+      limit: parseInt(pagerObj.pageSize),
       offset
     })
 

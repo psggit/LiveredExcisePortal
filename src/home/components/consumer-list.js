@@ -92,8 +92,8 @@ class ConsumerManagement extends React.Component {
     })
 
     this.props.actions.fetchConsumerList({
-      limit: pagerObj.pageSize,
-      offset
+      limit: parseInt(pagerObj.pageSize),
+      offset: parseInt(offset)
     })
 
     const queryParamsObj = {
