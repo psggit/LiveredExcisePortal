@@ -186,7 +186,7 @@ class HistoryOrdersList extends React.Component {
 
     let queryParamsObj = {}
     this.props.actions.setLoadingAll()
-    clearTimeout(this.timeoutId)
+    // clearTimeout(this.timeoutId)
     const offset = pagerObj.pageSize * (pagerObj.activePage - 1)
     this.setState({
       activePage: pagerObj.activePage,
@@ -215,6 +215,11 @@ class HistoryOrdersList extends React.Component {
         offset
       })
     }
+    history.pushState(
+      queryParamsObj,
+      "past order listing",
+      `/home/past-orders?${getQueryUri(queryParamsObj)}`
+    )
   }
 
   /**
@@ -542,7 +547,7 @@ class HistoryOrdersList extends React.Component {
                 ))}
               {this.props.loadingHistoryOTTP && (
                 <tr>
-                  <td colSpan="9">
+                  <td colSpan="10">
                     <Loader />
                   </td>
                 </tr>

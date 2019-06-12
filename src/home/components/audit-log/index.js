@@ -41,6 +41,7 @@ class AuditLog extends React.Component {
     Object.entries(queryObj).forEach((item) => {
       this.setState({ [item[0]]: item[1] })
     })
+    console.log("filter", queryObj.filter, (decodeURI(queryObj.filter)))
     const isSearchAlreadyApplied = queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)).find((item) => item.filterby === "name") ? true : false : false
     if (isSearchAlreadyApplied) {
       this.setState({
@@ -118,6 +119,9 @@ class AuditLog extends React.Component {
   }
 
   handlePageChange(pagerObj) {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
     let queryParamsObj = {}
 
     this.setState({
@@ -125,17 +129,17 @@ class AuditLog extends React.Component {
       limit: pagerObj.pageSize
     })
     this.props.actions.setLoadingAll()
+
     this.fetchAuditLog({
-      limit: pagerObj.pageSize,
+      limit: parseInt(pagerObj.pageSize),
       offset: pagerObj.pageSize * (pagerObj.activePage - 1),
-      filter: this.state.filter
+      filter: queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)) : this.state.filter
     })
 
     queryParamsObj = {
       limit: pagerObj.pageSize,
       activePage: pagerObj.activePage,
-      // offset: pagerObj.pageSize * (pagerObj.activePage - 1),
-      filter: JSON.stringify(this.state.filter)
+      filter: queryObj.filter ? (queryObj.filter) : JSON.stringify(this.state.filter)
     }
 
     history.pushState(
@@ -208,17 +212,8 @@ class AuditLog extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {/* {
-                !this.props.loadingUserList &&
-                this.props.userList &&
-                this.props.userList.map(item => (
-                  <UserPermissionItem
-                    key={item.id}
-                    data={item}
-                  />
-                ))
-              } */}
               {
+                auditLog.length > 0 &&
                 auditLog.map((item, i) => {
                   return (
                     <AuditLogItem
@@ -235,28 +230,17 @@ class AuditLog extends React.Component {
                   </td>
                 </tr>
               )}
-              {/* {!this.props.loadingUserList &&
-                this.props.userList.length === 0 && (
-                <tr>
-                  <td style={{ textAlign: "center" }} colSpan="4">
-                    No users found
+              {!this.props.loadingAuditLog &&
+                this.props.auditLog.length === 0 && (
+                  <tr>
+                    <td style={{ textAlign: "center" }} colSpan="4">
+                      No logs found
                   </td>
-                </tr>
-              )} */}
+                  </tr>
+                )}
             </tbody>
           </table>
         </div>
-        {/* <div style={{
-          marginBottom: "20px"
-        }}
-        > 
-          <Search
-            placeholder="Search"
-            searchText={this.state.retailerName}
-            search={this.handleSearch}
-            clearSearch={this.clearSearchResults}
-          />
-        </div> */}
       </div>
     )
   }

@@ -113,6 +113,8 @@ class UserPermissions extends React.Component {
   }
 
   handlePageChange(pagerObj) {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
     let queryParamsObj = {}
 
     this.setState({
@@ -123,14 +125,14 @@ class UserPermissions extends React.Component {
     this.fetchUsersList({
       limit: pagerObj.pageSize,
       offset: pagerObj.pageSize * (pagerObj.activePage - 1),
-      filter: this.state.filter
+      filter: queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)) : this.state.filter
     })
 
     queryParamsObj = {
       limit: pagerObj.pageSize,
       activePage: pagerObj.activePage,
       // offset: pagerObj.pageSize * (pagerObj.activePage - 1),
-      filter: JSON.stringify(this.state.filter)
+      filter: queryObj.filter ? (queryObj.filter) : JSON.stringify(this.state.filter)
     }
 
     history.pushState(
@@ -210,16 +212,6 @@ class UserPermissions extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {/* {
-                !this.props.loadingUserList &&
-                this.props.userList &&
-                this.props.userList.map(item => (
-                  <UserPermissionItem
-                    key={item.id}
-                    data={item}
-                  />
-                ))
-              } */}
               {
                 this.props.userList.map(item => (
                   <UserPermissionItem

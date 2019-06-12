@@ -22,15 +22,15 @@ class Filter extends React.Component {
   applyFilter() {
     let filterObj = []
     let orderAmount, retailer;
-    if(this.props.filterName !== "overview") {
+    if (this.props.filterName !== "overview") {
       orderAmount = this.orderAmountState.getData().orderAmount
-      retailer = this.retailerState.getData().retailer
+      //retailer = this.retailerState.getData().retailer
     }
-   
+
     const dso = this.dsoListState.getData().dso
     const city = this.cityState.getData().city
-    
-    
+
+
     // if (this.props.filterName !== "pastOrders") {
     //   filterObj.push(orderAmount, dso, city, retailer)
     //   filterObj = filterObj.filter((item) => item.value && item.value !== "All")
@@ -48,27 +48,27 @@ class Filter extends React.Component {
     //   }
     // }
 
-    switch(this.props.filterName) {
+    switch (this.props.filterName) {
       case 'liveOrders':
-        filterObj.push(orderAmount, dso, city, retailer)
+        filterObj.push(orderAmount, dso, city)
         filterObj = filterObj.filter((item) => item.value && item.value !== "All")
-      break;
+        break;
       case 'pastOrders':
         const fromDate = this.fromDateState.getData().fromDate
         const toDate = this.toDateState.getData().toDate
-        filterObj.push(orderAmount, dso, city, retailer)
+        filterObj.push(orderAmount, dso, city)
         filterObj = filterObj.filter((item) => item.value && item.value !== "All")
-        if(fromDate.filterby) {
+        if (fromDate.filterby) {
           filterObj.push(fromDate)
         }
-        if(toDate.filterby) {
+        if (toDate.filterby) {
           filterObj.push(toDate)
         }
-      break;
+        break;
       case 'overview':
         filterObj.push(dso, city)
         filterObj = filterObj.filter((item) => item.value && item.value !== "All")
-      break;
+        break;
     }
     this.props.applyFilter(filterObj)
   }
@@ -82,17 +82,17 @@ class Filter extends React.Component {
           {
             this.props.filterName === "pastOrders" &&
             <div>
-              <FromDate ref={(node) => {this.fromDateState = node}} fromDate={this.props.fromDate} />
-              <ToDate ref={(node) => {this.toDateState = node}} toDate={this.props.toDate} />
+              <FromDate ref={(node) => { this.fromDateState = node }} fromDate={this.props.fromDate} />
+              <ToDate ref={(node) => { this.toDateState = node }} toDate={this.props.toDate} />
             </div>
           }
-          <City 
-            cityList={this.props.cityList}  
+          <City
+            cityList={this.props.cityList}
             ref={(node) => { this.cityState = node }}
             selectedCityIdx={this.props.selectedCityIdx}
           />
-          <DeliveryOperator 
-            dsoList={this.props.dsoList}  
+          <DeliveryOperator
+            dsoList={this.props.dsoList}
             ref={(node) => { this.dsoListState = node }}
             selectedDsoIdx={this.props.selectedDsoIdx}
           />
@@ -104,8 +104,8 @@ class Filter extends React.Component {
                 ref={(node) => { this.retailerState = node }}
                 selectedRetailerIdx={this.props.selectedRetailerIdx}
               /> */}
-              <OrderAmount 
-                orderAmount={this.props.orderAmount}  
+              <OrderAmount
+                orderAmount={this.props.orderAmount}
                 ref={(node) => { this.orderAmountState = node }}
                 selectedOrderAmntIdx={this.props.selectedOrderAmntIdx}
               />
