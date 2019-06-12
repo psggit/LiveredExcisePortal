@@ -66,7 +66,8 @@ class Complaints extends React.Component {
     })
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault()
     const { message, ottpId, reason } = this.state
     POST({
       api: `${consumer}/livered/consumers/insertComplaints`,
