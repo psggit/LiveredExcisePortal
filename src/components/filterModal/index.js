@@ -74,7 +74,7 @@ class Filter extends React.Component {
   }
 
   render() {
-    console.log("parent", this.props.selectedCityIdx)
+    // console.log("parent", this.props.selectedCityIdx)
     return (
       <div className={`filter-container ${this.props.showFilter ? 'show' : 'hide'}`} >
         <p className="title"> Filters </p>

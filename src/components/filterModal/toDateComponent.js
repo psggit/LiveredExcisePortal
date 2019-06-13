@@ -33,18 +33,18 @@ class ToDate extends React.Component {
   }
 
   render() {
-    console.log("props", this.props)
-    return(
-      <div style={{position: 'relative'}} className="input-field">
+    // console.log("props", this.props)
+    return (
+      <div style={{ position: 'relative' }} className="input-field">
         <span className="calendar-icon">
           <Icon name="calendar" />
         </span>
         <Label>
           To
         </Label>
-        <input 
-          type="date" 
-          max="9999-12-31" 
+        <input
+          type="date"
+          max="9999-12-31"
           name="toDate"
           onChange={this.handleChange}
           value={this.props.toDate ? this.props.toDate : this.state.toDate.value}

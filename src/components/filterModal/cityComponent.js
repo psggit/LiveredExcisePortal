@@ -24,7 +24,7 @@ class City extends React.Component {
   }
 
   handleChange(e) {
-    console.log("city change", e.target.value)
+    // console.log("city change", e.target.value)
     const value = e.target.value
     this.setState({
       city: {
@@ -37,16 +37,16 @@ class City extends React.Component {
   }
 
   render() {
-    console.log("value", this.props.selectedCityIdx)
-    return(
+    // console.log("value", this.props.selectedCityIdx)
+    return (
       <div className="city input-field">
         <Label>
           City/Town
         </Label>
-        <Select 
-          options={this.props.cityList} 
-          name="City"  
-          onChange={e => this.handleChange(e)} 
+        <Select
+          options={this.props.cityList}
+          name="City"
+          onChange={e => this.handleChange(e)}
           value={parseInt(this.props.selectedCityIdx)}
         />
       </div>

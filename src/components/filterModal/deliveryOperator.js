@@ -34,16 +34,16 @@ class DeliveryOperator extends React.Component {
   }
 
   render() {
-    console.log("selected dso index", this.props.selectedDsoIdx)
-    return(
+    // console.log("selected dso index", this.props.selectedDsoIdx)
+    return (
       <div className="delivery-operator input-field">
         <Label>
           Delivery Operator
         </Label>
-        <Select 
+        <Select
           options={this.props.dsoList}
-          name="Delivery Operator" 
-          onChange={e => this.handleChange(e)} 
+          name="Delivery Operator"
+          onChange={e => this.handleChange(e)}
           value={this.props.selectedDsoIdx}
         />
       </div>
