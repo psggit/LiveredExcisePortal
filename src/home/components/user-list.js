@@ -63,13 +63,21 @@ class UserPermissions extends React.Component {
   }
 
   handleSearch(searchQuery) {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
     const filterObj = {
       filterby: "name",
       value: searchQuery
     }
-    const isSearchAlreadyApplied = this.state.filter ? this.state.filter.find((item) => item.filterby === "name") ? true : false : false
+    const isSearchAlreadyApplied = queryObj.filter
+      ? JSON.parse(decodeURI(queryObj.filter)).find((item) => item.filterby === "name") ? true : false
+      : false
 
-    let filter = this.state.filter
+    let filter = queryObj.filter
+      ? JSON.parse(decodeURI(queryObj.filter))
+      : this.state.filter
+
     if (isSearchAlreadyApplied) {
       filter.pop()
     }
@@ -84,7 +92,7 @@ class UserPermissions extends React.Component {
     const urlParams = {
       limit: 10,
       activePage: 1,
-      filter: JSON.stringify([...this.state.filter, filterObj])
+      filter: JSON.stringify([...filter, filterObj])
     }
     this.setState(payload)
 
@@ -221,7 +229,7 @@ class UserPermissions extends React.Component {
               }
               {this.props.loadingUserList && (
                 <tr>
-                  <td colSpan="8">
+                  <td colSpan="4">
                     <Loader />
                   </td>
                 </tr>

@@ -14,8 +14,8 @@ class AuditLog extends React.Component {
   constructor() {
     super()
     this.filter = [{
-      filterby: "dso_id",
-      value: "SW123"
+      filterby: "state_id",
+      value: "1"
     }]
     this.state = {
       activeTab: "audit-log",
@@ -60,13 +60,18 @@ class AuditLog extends React.Component {
   }
 
   handleSearch(searchQuery) {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+
     const filterObj = {
       filterby: "name",
       value: searchQuery
     }
-    const isSearchAlreadyApplied = this.state.filter ? this.state.filter.find((item) => item.filterby === "name") ? true : false : false
+    const isSearchAlreadyApplied = queryObj.filter
+      ? JSON.parse(decodeURI(queryObj.filter)).find((item) => item.filterby === "name") ? true : false
+      : false
 
-    let filter = this.state.filter
+    let filter = queryObj.filter ? JSON.parse(decodeURI(queryObj.filter)) : this.state.filter
     if (isSearchAlreadyApplied) {
       filter.pop()
     }
@@ -81,7 +86,7 @@ class AuditLog extends React.Component {
     const urlParams = {
       limit: 10,
       activePage: 1,
-      filter: JSON.stringify([...this.state.filter, filterObj])
+      filter: JSON.stringify([...filter, filterObj])
     }
     this.setState(payload)
 
@@ -223,7 +228,7 @@ class AuditLog extends React.Component {
               }
               {this.props.loadingAuditLog && (
                 <tr>
-                  <td colSpan="8">
+                  <td colSpan="5">
                     <Loader />
                   </td>
                 </tr>
@@ -231,7 +236,7 @@ class AuditLog extends React.Component {
               {!this.props.loadingAuditLog &&
                 this.props.auditLog.length === 0 && (
                   <tr>
-                    <td style={{ textAlign: "center" }} colSpan="4">
+                    <td style={{ textAlign: "center" }} colSpan="5">
                       No logs found
                   </td>
                   </tr>
