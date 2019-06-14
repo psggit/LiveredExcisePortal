@@ -294,19 +294,39 @@ class HistoryOrdersList extends React.Component {
    * Fetches the filtered past orders
    * @param {array of object} filter - Passed form FilterModal component
    */
-  applyFilter(filter) {
-    let filterArr = filter
-
+  applyFilter(newFilter) {
+    let appliedFilter = []
     //If filter already applied, then adds the new filter options to it
     if (this.state.filter) {
-      filterArr = this.state.filter
-      filter.map((item) => {
-        filterArr.push(item)
+      appliedFilter = this.state.filter
+      newFilter.map((item) => {
+        appliedFilter.push(item)
       })
     }
+
+    const uniqueFilter = appliedFilter.reduce((acc, current) => {
+      const isFoundFilter = acc.find(item => item.filterby === current.filterby);
+      if (!isFoundFilter) {
+        return acc.concat([current]);
+      } else {
+        const foundFilterIdx = acc.findIndex(item => item.filterby === current.filterby)
+        acc[foundFilterIdx] = { ...acc[foundFilterIdx], ...current }
+        return acc
+      }
+    }, [])
+
+    const validFilter = uniqueFilter.filter((item) => {
+      if (item.value !== "All") {
+        if (item.filterby === "City") {
+          item.value = item.idx
+        }
+        return item
+      }
+    })
+
     this.setState({
       limit: 10,
-      filter: filterArr,
+      filter: validFilter,
       isFilterApplied: true
     })
 
@@ -314,12 +334,12 @@ class HistoryOrdersList extends React.Component {
       limit: 10,
       offset: 0,
       activePage: 1,
-      filter: JSON.stringify(filterArr)
+      filter: JSON.stringify(validFilter)
     }
     this.props.actions.fetchHistoryOTTP({
       limit: 10,
       offset: 0,
-      filter: filterArr
+      filter: validFilter
     })
     history.pushState(queryObj, "past orders listing", `/home/past-orders?${getQueryUri(queryObj)}`)
     this.mountFilterModal()
@@ -555,7 +575,7 @@ class HistoryOrdersList extends React.Component {
               {!this.props.loadingHistoryOTTP &&
                 this.props.historyOTTPData.length === 0 && (
                   <tr>
-                    <td style={{ textAlign: "center" }} colSpan="9">
+                    <td style={{ textAlign: "center" }} colSpan="10">
                       No orders found
                   </td>
                   </tr>

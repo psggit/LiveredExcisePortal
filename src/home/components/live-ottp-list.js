@@ -310,32 +310,52 @@ class LiveOrdersList extends React.Component {
    * Fetches the filtered live orders
    * @param {array of object} filter - Passed form FilterModal component
    */
-  applyFilter(filter) {
-    let filterArr = filter
-
-    //If filter already applied, then adds the new filter fields to it
+  applyFilter(newFilter) {
+    let appliedFilter = []
+    //If filter already applied, then adds the new filter options to it
     if (this.state.filter) {
-      filterArr = this.state.filter
-      filter.map((item) => {
-        filterArr.push(item)
+      appliedFilter = this.state.filter
+      newFilter.map((item) => {
+        appliedFilter.push(item)
       })
     }
 
+    const uniqueFilter = appliedFilter.reduce((acc, current) => {
+      const isFoundFilter = acc.find(item => item.filterby === current.filterby);
+      if (!isFoundFilter) {
+        return acc.concat([current]);
+      } else {
+        const foundFilterIdx = acc.findIndex(item => item.filterby === current.filterby)
+        acc[foundFilterIdx] = { ...acc[foundFilterIdx], ...current }
+        return acc
+      }
+    }, [])
+
+    const validFilter = uniqueFilter.filter((item) => {
+      if (item.value !== "All") {
+        if (item.filterby === "City") {
+          item.value = item.idx
+        }
+        return item
+      }
+    })
+
     this.setState({
       limit: 10,
-      filter: filterArr,
+      filter: validFilter,
       isFilterApplied: true
     })
+
     const queryObj = {
       limit: 10,
       offset: 0,
       activePage: 1,
-      filter: JSON.stringify(filterArr)
+      filter: JSON.stringify(validFilter)
     }
     this.props.actions.fetchInProgressOTTP({
       limit: 10,
       offset: 0,
-      filter: filterArr
+      filter: validFilter
     })
     history.pushState(queryObj, "live orders listing", `/home/live-orders?${getQueryUri(queryObj)}`)
     this.mountFilterModal()

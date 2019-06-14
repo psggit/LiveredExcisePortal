@@ -29,7 +29,8 @@ class City extends React.Component {
     this.setState({
       city: {
         filterby: e.target.name,
-        value: value.toString(),
+        //value: value.toString(),
+        value: this.props.cityList.find(item => item.value === parseInt(value)).text,
         idx: e.target.value,
         cityName: this.props.cityList.find(item => item.value === parseInt(value)).text
       }

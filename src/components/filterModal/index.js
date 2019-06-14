@@ -51,13 +51,13 @@ class Filter extends React.Component {
     switch (this.props.filterName) {
       case 'liveOrders':
         filterObj.push(orderAmount, dso, city)
-        filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+        filterObj = filterObj.filter((item) => item.filterby && item.filterby.length > 0)
         break;
       case 'pastOrders':
         const fromDate = this.fromDateState.getData().fromDate
         const toDate = this.toDateState.getData().toDate
         filterObj.push(orderAmount, dso, city)
-        filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+        filterObj = filterObj.filter((item) => item.filterby && item.filterby.length > 0)
         if (fromDate.filterby) {
           filterObj.push(fromDate)
         }
@@ -67,7 +67,7 @@ class Filter extends React.Component {
         break;
       case 'overview':
         filterObj.push(dso, city)
-        filterObj = filterObj.filter((item) => item.value && item.value !== "All")
+        filterObj = filterObj.filter((item) => item.filterby && item.filterby.length > 0)
         break;
     }
     this.props.applyFilter(filterObj)
