@@ -27,8 +27,8 @@ class DeliveryOperator extends React.Component {
     this.setState({
       dso: {
         filterby: e.target.name,
-        value: this.props.dsoList.find(item => item.value === parseInt(value)).text,
-        idx: e.target.value
+        value: this.props.dsoList.find(item => item.value === parseInt(value)).dso_id,
+        idx: this.props.dsoList.find(item => item.value === parseInt(value)).value
       }
     })
   }

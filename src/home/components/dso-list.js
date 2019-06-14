@@ -193,7 +193,7 @@ class DSOList extends React.Component {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Head Quaters</th>
+                <th>Head Quarters</th>
                 <th>Locations Servicable</th>
                 <th>
                   <div

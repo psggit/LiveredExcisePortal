@@ -25,7 +25,7 @@ class Overview extends React.Component {
       dsoList: [],
       cityList: [],
       filter: [],
-      filteredPermitLabels:  [
+      filteredPermitLabels: [
         // Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
         // Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY"),
         // Moment("2019-12-10T12:04:05Z").format("DD/MM/YYYY")
@@ -65,7 +65,7 @@ class Overview extends React.Component {
   }
 
   componentDidMount() {
-    if(location.search.length) {
+    if (location.search.length) {
       this.fetchFilterDropDownData()
       this.setQueryParamas()
     } else {
@@ -74,10 +74,10 @@ class Overview extends React.Component {
     }
   }
 
-   /**
-    * Gets the url parameters and fetches the data to be plotted
-    */
-   setQueryParamas() {
+  /**
+   * Gets the url parameters and fetches the data to be plotted
+   */
+  setQueryParamas() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
 
@@ -85,13 +85,13 @@ class Overview extends React.Component {
       this.setState({ [item[0]]: item[1] })
     })
 
-    if(queryObj.filter) {
+    if (queryObj.filter) {
       const filter = JSON.parse(decodeURIComponent(queryObj.filter))
-      this.setState({isFilterApplied: true,  filter: JSON.parse(decodeURIComponent(queryObj.filter))})
+      this.setState({ isFilterApplied: true, filter: JSON.parse(decodeURIComponent(queryObj.filter)) })
       filter.map((item) => {
         this.setSelectedDropDownValue(item)
       })
-      if(queryObj.activeTab === "permits") {
+      if (queryObj.activeTab === "permits") {
         this.props.actions.fetchPermitDetails({
           filter: JSON.parse(decodeURIComponent(queryObj.filter))
         })
@@ -112,31 +112,31 @@ class Overview extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return {text: item.dso_name, value: i}
+        return { text: item.dso_name, value: i, dso_id: item.dso_id }
       })
-      dsoList = [...dsoList, {text: "All", value: dsoList.length}]
-      this.setState({dsoList})
+      dsoList = [...dsoList, { text: "All", value: dsoList.length }]
+      this.setState({ dsoList })
     } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
       let cityList = this.props.cityList.map((item) => {
         if (parseInt(item.id) > max) {
           max = item.id
         }
-        return {text: item.city, value: item.id}
+        return { text: item.city, value: item.id }
       })
-      cityList = [...cityList, {text: "All", value: parseInt(max) + 1}]
-      this.setState({cityList})
+      cityList = [...cityList, { text: "All", value: parseInt(max) + 1 }]
+      this.setState({ cityList })
     } else if (this.props.permitList !== prevProps.permitList) {
       let permitLabels = [], permitValues = []
       this.props.permitList.map((item, i) => {
-        permitLabels[i] = Moment(item.date).format("DD/MM/YYYY") 
+        permitLabels[i] = Moment(item.date).format("DD/MM/YYYY")
         permitValues[i] = parseInt(item.permits)
       })
       this.permitLabels = permitLabels
       this.permitValues = permitValues
       console.log(permitLabels.slice(Math.max(permitLabels.length - this.defaultDays, 0)))
-      this.setState({ 
-        filteredPermitLabels: permitLabels.slice(Math.max(permitLabels.length - this.defaultDays, 0)), 
+      this.setState({
+        filteredPermitLabels: permitLabels.slice(Math.max(permitLabels.length - this.defaultDays, 0)),
         filteredPermitValues: permitValues.slice(Math.max(permitValues.length - this.defaultDays, 0))
       })
     } else if (this.props.revenueList !== prevProps.revenueList) {
@@ -149,7 +149,7 @@ class Overview extends React.Component {
       this.revenueValues = revenueValues
       console.log(revenueLabels.slice(Math.max(revenueLabels.length - this.defaultDays, 0)))
       this.setState({
-        filteredRevenueLabels: revenueLabels.slice(Math.max(revenueLabels.length - this.defaultDays, 0)), 
+        filteredRevenueLabels: revenueLabels.slice(Math.max(revenueLabels.length - this.defaultDays, 0)),
         filteredRevenueValues: revenueValues.slice(Math.max(revenueValues.length - this.defaultDays, 0))
       })
     }
@@ -186,7 +186,7 @@ class Overview extends React.Component {
    * @param {String} activeTabName - Indicates the active tab name
    */
   setActiveTab(activeTab) {
-    if(activeTab === "permits") {
+    if (activeTab === "permits") {
       console.log("permits tab")
       this.props.actions.fetchPermitDetails({
         filter: [
@@ -208,17 +208,17 @@ class Overview extends React.Component {
         ]
       })
     }
-    this.setState({ activeTab})
+    this.setState({ activeTab })
   }
 
   /**
    * Clears the applied filter
    */
   resetFilter() {
-    if(this.state.filter.length > 0) {
+    if (this.state.filter.length > 0) {
       this.fetchDefaultData()
       this.props.history.push(`/home/overview`)
-      this.setState({isFilterApplied: false})
+      this.setState({ isFilterApplied: false })
     }
   }
 
@@ -234,14 +234,14 @@ class Overview extends React.Component {
    * @param {Integer} noOfDays - Used to filter the labels and values
    */
   setLabelsAndValues(noOfDays) {
-    if(this.state.activeTab === "permits") {
-      this.setState({ 
-        filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - noOfDays, 0)), 
+    if (this.state.activeTab === "permits") {
+      this.setState({
+        filteredPermitLabels: this.permitLabels.slice(Math.max(this.permitLabels.length - noOfDays, 0)),
         filteredPermitValues: this.permitValues.slice(Math.max(this.permitValues.length - noOfDays, 0))
       })
     } else {
       this.setState({
-        filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - noOfDays, 0)), 
+        filteredRevenueLabels: this.revenueLabels.slice(Math.max(this.revenueLabels.length - noOfDays, 0)),
         filteredRevenueValues: this.revenueValues.slice(Math.max(this.revenueValues.length - noOfDays, 0))
       })
     }
@@ -261,13 +261,13 @@ class Overview extends React.Component {
    * Sets the filtered dropdown value on page reload
    */
   setSelectedDropDownValue(item) {
-    switch(item.filterby) {
+    switch (item.filterby) {
       case 'City':
         this.setFilteredFieldState('City', item.idx)
-      break;
+        break;
       case 'Delivery Operator':
         this.setFilteredFieldState('Dso', item.idx)
-      break;
+        break;
     }
   }
 
@@ -275,18 +275,18 @@ class Overview extends React.Component {
    * On change of days, sets the filter data
    */
   handleChange(e) {
-    switch(this.options.find((item) => item.value === parseInt(e.target.value)).text) {
+    switch (this.options.find((item) => item.value === parseInt(e.target.value)).text) {
       case 'Last 7 days':
         this.setLabelsAndValues(7)
-      break;
+        break;
 
       case 'Last 14 days':
         this.setLabelsAndValues(14)
-      break;
+        break;
 
       case 'Last 21 days':
         this.setLabelsAndValues(21)
-      break;
+        break;
     }
   }
 
@@ -296,15 +296,15 @@ class Overview extends React.Component {
    */
   applyFilter(filter) {
     let filterArr = filter
-    if(this.state.filter) {
+    if (this.state.filter) {
       filterArr = this.state.filter
       filter.map((item) => {
         filterArr.push(item)
       })
     }
-    
+
     this.setState({
-      filter: filterArr, 
+      filter: filterArr,
       isFilterApplied: true
     })
 
@@ -312,7 +312,7 @@ class Overview extends React.Component {
       filter: JSON.stringify(filterArr),
       activeTab: this.state.activeTab
     }
-    if(this.state.activeTab === "permits") {
+    if (this.state.activeTab === "permits") {
       this.props.actions.fetchPermitDetails({
         filter: filterArr
       })
@@ -321,13 +321,13 @@ class Overview extends React.Component {
         filter: filterArr
       })
     }
- 
+
     history.pushState(queryObj, "overview", `/home/overview?${getQueryUri(queryObj)}`)
     this.mountFilterModal()
   }
 
   render() {
-    const {activeTab} = this.state
+    const { activeTab } = this.state
 
     return (
       <div id="overview">
@@ -337,7 +337,7 @@ class Overview extends React.Component {
           marginBottom: "20px",
           justifyContent: "flex-end"
         }}
-        > 
+        >
           <div>
             <span style={{ marginRight: '10px' }}>
               <Button secondary onClick={this.resetFilter}>
@@ -366,8 +366,8 @@ class Overview extends React.Component {
         }
         <div className="header">
           <ul className="nav">
-            <li 
-              onClick={() => this.setActiveTab("permits")} 
+            <li
+              onClick={() => this.setActiveTab("permits")}
               className={`${activeTab === "permits" ? 'active' : ''}`}
             >
               <a>Permits</a>
@@ -383,9 +383,9 @@ class Overview extends React.Component {
         <div className="chart">
           {
             activeTab === "permits" &&
-            <LineChart 
-              labels={this.state.filteredPermitLabels} 
-              values={this.state.filteredPermitValues} 
+            <LineChart
+              labels={this.state.filteredPermitLabels}
+              values={this.state.filteredPermitValues}
               xLabel="TIME DURATION"
               yLabel="PERMITS (NO.)"
               tooltipText="PERMITS"
@@ -393,9 +393,9 @@ class Overview extends React.Component {
           }
           {
             activeTab === "revenue" &&
-            <LineChart 
-              labels={this.state.filteredRevenueLabels} 
-              values={this.state.filteredRevenueValues} 
+            <LineChart
+              labels={this.state.filteredRevenueLabels}
+              values={this.state.filteredRevenueValues}
               xLabel="TIME DURATION"
               yLabel="REVENUE (IN LAKHS)"
               tooltipText="REVENUE"
@@ -403,10 +403,10 @@ class Overview extends React.Component {
           }
         </div>
         <div className="footer">
-          <Select 
-            options={this.options} 
+          <Select
+            options={this.options}
             //name="interval"  
-            onChange={e => this.handleChange(e)} 
+            onChange={e => this.handleChange(e)}
           />
         </div>
       </div>

@@ -63,7 +63,7 @@ class HistoryOrdersList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return { text: item.dso_name, value: i }
+        return { text: item.dso_name, value: i, dso_id: item.dso_id }
       })
       dsoList = [...dsoList, { text: "All", value: dsoList.length }]
       this.setState({ dsoList })
