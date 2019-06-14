@@ -21,7 +21,7 @@ class DSOList extends React.Component {
       dsoName: "",
       filter: []
     }
-    this.state_id = 1
+    this.state_id = parseInt(localStorage.getItem("state-id"))
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
     this.setQueryParamas = this.setQueryParamas.bind(this)

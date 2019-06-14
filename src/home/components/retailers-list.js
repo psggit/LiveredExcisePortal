@@ -20,7 +20,7 @@ class RetailersList extends React.Component {
       retailerName: "",
       filter: []
     }
-    this.state_id = 1
+    this.state_id = parseInt(localStorage.getItem("state-id"))
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleClick = this.handleClick.bind(this)
     this.fetchRetailersList = this.fetchRetailersList.bind(this)

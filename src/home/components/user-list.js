@@ -18,7 +18,7 @@ class UserPermissions extends React.Component {
     this.filter = [
       {
         filterby: "state_id",
-        value: "1"
+        value: localStorage.getItem("state-id")
       }
     ]
     this.state = {

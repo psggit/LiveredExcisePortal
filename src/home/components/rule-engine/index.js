@@ -36,7 +36,7 @@ class RuleManagement extends React.Component {
    */
   componentDidMount() {
     this.props.actions.fetchRules({
-      state_id: 1
+      state_id: parseInt(localStorage.getItem("state-id"))
     })
   }
 

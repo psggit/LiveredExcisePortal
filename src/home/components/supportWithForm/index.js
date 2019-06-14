@@ -11,7 +11,7 @@ import Button from "@components/button"
 class SupportForm extends React.Component {
 
   constructor() {
-    super() 
+    super()
     this.state = {
       supportFormKey: 0 //used for restting the form fields
     }
@@ -25,7 +25,7 @@ class SupportForm extends React.Component {
     this.props.actions.createExciseComplaints({
       name: formData.name,
       email: formData.email,
-      state_id: 1,
+      state_id: parseInt(localStorage.getItem("state-id")),
       reason: formData.reason,
       urgency: formData.urgencyLevel,
       message: formData.message,
@@ -35,19 +35,19 @@ class SupportForm extends React.Component {
 
   unMountModal() {
     this.props.actions.setLoading('creatingComplaint')
-    this.setState({supportFormKey: this.state.supportFormKey + 1})
+    this.setState({ supportFormKey: this.state.supportFormKey + 1 })
   }
 
   render() {
-    const {creatingComplaint} = this.props
+    const { creatingComplaint } = this.props
     return (
       <div id="supportForm" key={this.state.supportFormKey}>
         <PageHeader pageName="Get in touch" />
         <p className="sub-header">Please share your queries/feedback. Our support team will contact you ASAP</p>
         <div className="main-container">
           <div className="ticket-form">
-            <SupportTicketForm  
-              ref={(node) => { this.supportForm = node }} 
+            <SupportTicketForm
+              ref={(node) => { this.supportForm = node }}
               handleSubmit={this.handleFormSubmit}
             />
           </div>
@@ -76,7 +76,7 @@ class SupportForm extends React.Component {
             actions={[
               <Button onClick={() => this.unMountModal()} secondary>
                 Done
-              </Button>,``
+              </Button>, ``
             ]}
           />
         )}

@@ -14,15 +14,7 @@ class Login extends React.Component {
       email: "",
       password: "",
       isSubmitting: false,
-      showLoginErr: false,
-      // emailErr: {
-      //   value: "",
-      //   status: false
-      // },
-      // passwordErr: {
-      //   value: "",
-      //   status: false
-      // }
+      showLoginErr: false
     }
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -40,6 +32,9 @@ class Login extends React.Component {
 
   handleLogin(e) {
     e.preventDefault()
+    document.cookie = "livered=123;"
+    createSession({ hasura_id: 123, state_id: 1 })
+    window.location.href = "/home/overview"
     // const { email, password } = this.state
     // const emailErr = validateEmail({
     //   fieldName: "Email ID",
@@ -54,24 +49,24 @@ class Login extends React.Component {
     // this.setState({ passwordErr })
 
     //if (!emailErr.status && !passwordErr.status) {
-    this.setState({ isSubmitting: true })
-    POST({
-      api: "/retailer/auth/login",
-      apiBase: "api1",
-      handleError: false,
-      data: { email, password }
-    })
-      .then((json) => {
-        if (json.data) {
-          Notify(JSON.parse(json.data).message, "warning")
-        } else {
-          createSession(json)
-          window.location.href = "/home/overview"
-        }
-      })
-      .catch((error) => {
-        this.setState({ showLoginErr: true })
-      })
+    //this.setState({ isSubmitting: true })
+    // POST({
+    //   api: "/retailer/auth/login",
+    //   apiBase: "api1",
+    //   handleError: false,
+    //   data: { email, password }
+    // })
+    //   .then((json) => {
+    //     if (json.data) {
+    //       Notify(JSON.parse(json.data).message, "warning")
+    //     } else {
+    //       createSession(json)
+    //       window.location.href = "/home/overview"
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     this.setState({ showLoginErr: true })
+    //   })
     //}
   }
 
@@ -107,7 +102,7 @@ class Login extends React.Component {
     // const { emailErr, passwordErr } = this.state
     return (
       <React.Fragment>
-        <Header isLoggedIn={false} />
+        <Header />
         <div
           style={{
             position: "absolute",
@@ -168,7 +163,7 @@ class Login extends React.Component {
                     style={{ width: "100%" }}
                     type="password"
                     name="password"
-                    pattern="^[^-\s][a-zA-Z0-9_\s-#!@]+$"
+                    pattern="^[^-\s][a-zA-Z0-9_\s-]+$"
                     required
                   // className={`${passwordErr.status ? "error" : undefined}`}
                   />
