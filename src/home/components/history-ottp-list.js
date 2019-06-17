@@ -36,7 +36,7 @@ class HistoryOrdersList extends React.Component {
       fromDate: "",
       toDate: ""
     }
-
+    this.state_id = parseInt(localStorage.getItem("state-id"))
     this.handlePageChange = this.handlePageChange.bind(this)
     this.handleRowClick = this.handleRowClick.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
@@ -69,11 +69,11 @@ class HistoryOrdersList extends React.Component {
       this.setState({ dsoList })
     } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
-      let cityList = this.props.cityList.map((item) => {
-        if (parseInt(item.id) > max) {
-          max = item.id
+      let cityList = this.props.cityList[this.state_id].cities.map((item) => {
+        if (parseInt(item.city_id) > max) {
+          max = item.city_id
         }
-        return { text: item.city, value: item.id }
+        return { text: item.city_name, value: item.city_id }
       })
       cityList = [...cityList, { text: "All", value: parseInt(max) + 1 }]
       this.setState({ cityList })

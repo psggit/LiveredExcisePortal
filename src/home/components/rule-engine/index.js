@@ -246,7 +246,7 @@ class RuleManagement extends React.Component {
                       {
                         zoneRestrictions.map((item, i) => {
                           return (
-                            <tr>
+                            <tr key={i}>
                               <td>{item.city ? item.city : item.state}</td>
                               <td>{moment(item.date).format('DD/MM/YYYY')}</td>
                               <td>{moment(item.from_time).format('h:mm a')}</td>

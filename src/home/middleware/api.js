@@ -6,7 +6,7 @@ const ottp = "https://12dac0bb.ngrok.io"
 export const dso = "https://ed85d4f6.ngrok.io"
 const credit = "https://6d61c1eb.ngrok.io"
 export const consumer = "https://b0f8e465.ngrok.io"
-const rule = "https://7d4f4f00.ngrok.io"
+const rule = " https://7d4f4f00.ngrok.io"
 
 export function fetchInProgressOTTP(action) {
   return POST({
@@ -53,7 +53,7 @@ export function fetchDSOList(action) {
 
 export function fetchCitiesList(action) {
   return GET({
-    api: `${ottp}/livered/ottp/listCities`,
+    api: `${ottp}/livered/ottp/getCityAndStates`,
     handleError: true,
     prependBaseUrl: false,
     //data: action.data

@@ -36,6 +36,7 @@ class Overview extends React.Component {
       filteredRevenueValues: []
     }
 
+    this.state_id = parseInt(localStorage.getItem("state-id"))
     // used to filter the graph data
     this.options = [
       {
@@ -118,11 +119,11 @@ class Overview extends React.Component {
       this.setState({ dsoList })
     } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
-      let cityList = this.props.cityList.map((item) => {
-        if (parseInt(item.id) > max) {
-          max = item.id
+      let cityList = this.props.cityList[this.state_id].cities.map((item) => {
+        if (parseInt(item.city_id) > max) {
+          max = item.city_id
         }
-        return { text: item.city, value: item.id }
+        return { text: item.city_name, value: item.city_id }
       })
       cityList = [...cityList, { text: "All", value: parseInt(max) + 1 }]
       this.setState({ cityList })

@@ -80,7 +80,7 @@ const actionsMap = {
   [ActionTypes.SUCCESS_FETCH_CITIES_LIST]: (state, action) => {
     return Object.assign({}, state, {
       loadingCityList: false,
-      cityList: action.data.cities,
+      cityList: action.data.stateCity,
       //customerListCount: action.data.count
     })
   },

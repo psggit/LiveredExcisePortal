@@ -21,15 +21,17 @@ class Filter extends React.Component {
 
   applyFilter() {
     let filterObj = []
-    let orderAmount, retailer;
-    if (this.props.filterName !== "overview") {
+    let orderAmount, dso;
+    if (this.props.filterName !== "overview" && this.props.filterName !== "consumer") {
       orderAmount = this.orderAmountState.getData().orderAmount
       //retailer = this.retailerState.getData().retailer
     }
 
-    const dso = this.dsoListState.getData().dso
-    const city = this.cityState.getData().city
+    if (this.props.filterName !== "consumer") {
+      dso = this.dsoListState.getData().dso
+    }
 
+    const city = this.cityState.getData().city
 
     // if (this.props.filterName !== "pastOrders") {
     //   filterObj.push(orderAmount, dso, city, retailer)
@@ -69,12 +71,15 @@ class Filter extends React.Component {
         filterObj.push(dso, city)
         filterObj = filterObj.filter((item) => item.filterby && item.filterby.length > 0)
         break;
+      case 'consumer':
+        filterObj.push(city)
+        filterObj = filterObj.filter((item) => item.filterby && item.filterby.length > 0)
+        break;
     }
     this.props.applyFilter(filterObj)
   }
 
   render() {
-    // console.log("parent", this.props.selectedCityIdx)
     return (
       <div className={`filter-container ${this.props.showFilter ? 'show' : 'hide'}`} >
         <p className="title"> Filters </p>
@@ -91,13 +96,17 @@ class Filter extends React.Component {
             ref={(node) => { this.cityState = node }}
             selectedCityIdx={this.props.selectedCityIdx}
           />
-          <DeliveryOperator
-            dsoList={this.props.dsoList}
-            ref={(node) => { this.dsoListState = node }}
-            selectedDsoIdx={this.props.selectedDsoIdx}
-          />
           {
-            this.props.filterName !== "overview" &&
+            this.props.filterName !== "consumer" &&
+            <DeliveryOperator
+              dsoList={this.props.dsoList}
+              ref={(node) => { this.dsoListState = node }}
+              selectedDsoIdx={this.props.selectedDsoIdx}
+            />
+          }
+
+          {
+            this.props.filterName !== "overview" && this.props.filterName !== "consumer" &&
             <div>
               {/* <Retailer 
                 retailerList={this.props.retailerList}  
