@@ -294,31 +294,55 @@ class Overview extends React.Component {
    * Fetches the filtered data
    * @param {array of object} filter - Passed form FilterModal component
    */
-  applyFilter(filter) {
-    let filterArr = filter
+  applyFilter(newFilter) {
+    let appliedFilter = []
+    //If filter already applied, then adds the new filter options to it
     if (this.state.filter) {
-      filterArr = this.state.filter
-      filter.map((item) => {
-        filterArr.push(item)
+      appliedFilter = this.state.filter
+      newFilter.map((item) => {
+        appliedFilter.push(item)
       })
     }
 
+    const uniqueFilter = appliedFilter.reduce((acc, current) => {
+      const isFoundFilter = acc.find(item => item.filterby === current.filterby);
+      if (!isFoundFilter) {
+        return acc.concat([current]);
+      } else {
+        const foundFilterIdx = acc.findIndex(item => item.filterby === current.filterby)
+        acc[foundFilterIdx] = { ...acc[foundFilterIdx], ...current }
+        return acc
+      }
+    }, [])
+
+    const validFilter = uniqueFilter.filter((item) => {
+      if (item.value !== "All") {
+        if (item.filterby === "City") {
+          item.value = item.idx
+        }
+        if (item.filterby === "Delivery Operator") {
+          item.value = item.dso_id
+        }
+        return item
+      }
+    })
+
     this.setState({
-      filter: filterArr,
+      filter: validFilter,
       isFilterApplied: true
     })
 
     const queryObj = {
-      filter: JSON.stringify(filterArr),
+      filter: JSON.stringify(validFilter),
       activeTab: this.state.activeTab
     }
     if (this.state.activeTab === "permits") {
       this.props.actions.fetchPermitDetails({
-        filter: filterArr
+        filter: validFilter
       })
     } else {
       this.props.actions.fetchRevenueDetails({
-        filter: filterArr
+        filter: validFilter
       })
     }
 
@@ -338,12 +362,15 @@ class Overview extends React.Component {
           justifyContent: "flex-end"
         }}
         >
-          <div>
-            <span style={{ marginRight: '10px' }}>
-              <Button secondary onClick={this.resetFilter}>
-                <span>Reset Filter</span>
-              </Button>
-            </span>
+          <div style={{ position: 'relative' }}>
+            {
+              this.state.isFilterApplied &&
+              <span style={{ marginRight: '10px' }}>
+                <Button secondary onClick={this.resetFilter}>
+                  <span>Reset Filter</span>
+                </Button>
+              </span>
+            }
             <Button primary onClick={this.mountFilterModal}>
               <Icon name="filter" />
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>

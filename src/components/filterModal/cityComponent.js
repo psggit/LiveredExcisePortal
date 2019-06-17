@@ -3,15 +3,15 @@ import Label from "../label"
 import Select from "../select"
 
 class City extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       city: {
         filterby: "",
         value: "",
         cityName: "",
-        idx: ""
+        idx: props && props.selectedCityIdx ? props.selectedCityIdx : -1
       }
     }
 
@@ -48,7 +48,7 @@ class City extends React.Component {
           options={this.props.cityList}
           name="City"
           onChange={e => this.handleChange(e)}
-          value={parseInt(this.props.selectedCityIdx)}
+          value={this.state.selectedCityIdx}
         />
       </div>
     )

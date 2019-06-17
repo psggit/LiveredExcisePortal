@@ -320,6 +320,9 @@ class HistoryOrdersList extends React.Component {
         if (item.filterby === "City") {
           item.value = item.idx
         }
+        if (item.filterby === "Delivery Operator") {
+          item.value = item.dso_id
+        }
         return item
       }
     })
@@ -366,11 +369,14 @@ class HistoryOrdersList extends React.Component {
             clearSearch={this.clearSearchResults}
           />
           <div style={{ marginLeft: '46px', position: 'relative' }}>
-            <span style={{ marginRight: '10px' }}>
-              <Button secondary onClick={this.resetFilter}>
-                <span>Reset Filter</span>
-              </Button>
-            </span>
+            {
+              this.state.isFilterApplied &&
+              <span style={{ marginRight: '10px' }}>
+                <Button secondary onClick={this.resetFilter}>
+                  <span>Reset Filter</span>
+                </Button>
+              </span>
+            }
             <Button primary onClick={this.mountFilterModal}>
               <Icon name="filter" />
               <span style={{ position: 'relative', top: '-2px', marginLeft: '5px' }}>Filter</span>
