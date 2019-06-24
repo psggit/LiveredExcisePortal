@@ -2,16 +2,15 @@ import { POST, GET } from '@utils/fetch'
 
 // const ipAddress = "192.168.5.84"
 
-const ottp = "https://12dac0bb.ngrok.io"
-export const dso = "https://ed85d4f6.ngrok.io"
-const credit = "https://6d61c1eb.ngrok.io"
-export const consumer = "https://b0f8e465.ngrok.io"
-const rule = " https://7d4f4f00.ngrok.io"
+const ottp = "https://18f05e77.ngrok.io"
+export const dso = "https://c73d106d.ngrok.io"
+const credit = "https://96992765.ngrok.io"
+export const consumer = "https://8ab52381.ngrok.io"
+const rule = "https://8ab52381.ngrok.io"
 
 export function fetchInProgressOTTP(action) {
   return POST({
     api: `${ottp}/livered/ottp/liveOttps`,
-    // apiBase: 'livered',
     handleError: true,
     prependBaseUrl: false,
     data: action.data

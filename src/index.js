@@ -95,8 +95,9 @@ import { createSession } from './login/session'
 import { Provider } from 'react-redux'
 import configureStore from './home/store/configure-store'
 import rootSaga from './home/middleware/saga'
-import ConsumerManagement from "./home/components/consumer-list"
-import ConsumerComplaints from "./home/components/consumer-complaints"
+import ConsumerManagement from './home/components/consumer-management'
+// import ConsumerManagement from "./home/components/consumer-list"
+// import ConsumerComplaints from "./home/components/consumer-complaints"
 import SupportWithForm from "./home/components/supportWithForm/"
 import SupportWithoutForm from "./home/components/supportWithoutForm/"
 import Overview from "./home/components/overview"
@@ -315,6 +316,16 @@ class App extends React.Component {
                         }
                       />
 
+                      {/* <Route
+                        exact
+                        path="/home/consumers"
+                        render={
+                          props => (
+                            <ConsumerManagement {...props} />
+                          )
+                        }
+                      />
+
                       <Route
                         exact
                         path="/home/consumer-complaints"
@@ -323,7 +334,7 @@ class App extends React.Component {
                             <ConsumerComplaints {...props} />
                           )
                         }
-                      />
+                      /> */}
 
                       <Route
                         exact

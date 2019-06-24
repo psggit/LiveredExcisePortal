@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as Actions from './../actions'
+import * as Actions from "./../../actions"
 import ConsumerListItem from './customer-list-item'
 import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import Pagination from '@components/pagination'
@@ -32,7 +32,7 @@ class ConsumerManagement extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this)
     this.setQueryParamas = this.setQueryParamas.bind(this)
     this.fetchConsumerList = this.fetchConsumerList.bind(this)
-    this.setActiveTab = this.setActiveTab.bind(this)
+    // this.setActiveTab = this.setActiveTab.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
     this.applyFilter = this.applyFilter.bind(this)
     this.resetFilter = this.resetFilter.bind(this)
@@ -266,35 +266,10 @@ class ConsumerManagement extends React.Component {
     this.mountFilterModal()
   }
 
-  /**
-   * Used to highlight the active tab
-   * @param {String} activeTabName - Indicates the active tab name
-   */
-  setActiveTab(activeTabName) {
-    this.setState({ activeTab: activeTabName })
-  }
-
   render() {
     const { activeTab } = this.state
     return (
       <Fragment>
-        <PageHeader pageName="Consumer Complaints" />
-        <div style={{ display: 'flex', marginBottom: '40px', marginTop: '4px' }}>
-          <ul className="nav">
-            <li
-              onClick={() => this.setActiveTab("consumers")}
-              className={`${activeTab === "consumers" ? 'active' : ''}`}
-            >
-              <a href="/home/consumers">Consumer Log</a>
-            </li>
-            <li
-              onClick={() => this.setActiveTab("consumer-complaints")}
-              className={`${activeTab === "consumer-complaints" ? 'active' : ''}`}
-            >
-              <a href="/home/consumer-complaints">Consumer Complaints</a>
-            </li>
-          </ul>
-        </div>
         <div style={{
           marginBottom: "20px",
           marginTop: "26px",

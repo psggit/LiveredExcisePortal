@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as Actions from './../actions'
+import * as Actions from "./../../actions"
 import { getQueryObj, getQueryUri } from "@utils/url-utils"
 import Pagination from '@components/pagination'
 import Loader from '@components/loader'
@@ -24,7 +24,7 @@ class ConsumerComplaints extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this)
     this.setQueryParamas = this.setQueryParamas.bind(this)
     this.fetchConsumerComplaintList = this.fetchConsumerComplaintList.bind(this)
-    this.setActiveTab = this.setActiveTab.bind(this)
+    // this.setActiveTab = this.setActiveTab.bind(this)
     this.clearSearchResults = this.clearSearchResults.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
   }
@@ -42,9 +42,9 @@ class ConsumerComplaints extends React.Component {
    * Used to highlight the active tab
    * @param {String} activeTabName - Indicates the active tab name
    */
-  setActiveTab(activeTabName) {
-    this.setState({ activeTab: activeTabName })
-  }
+  // setActiveTab(activeTabName) {
+  //   this.setState({ activeTab: activeTabName })
+  // }
 
   /**
     * Gets the url parameters and fetches consumer complaints list
@@ -157,23 +157,6 @@ class ConsumerComplaints extends React.Component {
     const { activeTab } = this.state
     return (
       <Fragment>
-        <PageHeader pageName="Consumer Complaints" />
-        <div style={{ display: 'flex', marginBottom: '20px' }}>
-          <ul className="nav">
-            <li
-              onClick={() => this.setActiveTab("consumer")}
-              className={`${activeTab === "consumers" ? 'active' : ''}`}
-            >
-              <a href="/home/consumers">Consumer Log</a>
-            </li>
-            <li
-              onClick={() => this.setActiveTab("consumer-complaints")}
-              className={`${activeTab === "consumer-complaints" ? 'active' : ''}`}
-            >
-              <a href="/home/consumer-complaints">Consumer Complaints</a>
-            </li>
-          </ul>
-        </div>
         <div style={{
           marginBottom: "20px",
           marginTop: "26px"
