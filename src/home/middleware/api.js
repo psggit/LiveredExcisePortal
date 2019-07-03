@@ -2,11 +2,11 @@ import { POST, GET } from '@utils/fetch'
 
 // const ipAddress = "192.168.5.84"
 
-const ottp = "https://18f05e77.ngrok.io"
-export const dso = "https://c73d106d.ngrok.io"
-const credit = "https://96992765.ngrok.io"
-export const consumer = "https://8ab52381.ngrok.io"
-const rule = "https://8ab52381.ngrok.io"
+const ottp = "https://7b5d80c6.ngrok.io"
+export const dso = "http://192.168.5.63:3002"
+const credit = "https://0df929f5.ngrok.io"
+export const consumer = "https://ca05b468.ngrok.io"
+const rule = "https://b51b955c.ngrok.io"
 
 export function fetchInProgressOTTP(action) {
   return POST({

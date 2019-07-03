@@ -18,7 +18,7 @@ class OTTPDetail extends Component {
     // this.openGmap = this.openGmap.bind(this)
     // this.unmountOrderDetail = this.unmountOrderDetail.bind(this)
   }
-  
+
   componentDidMount() {
     this.fetchOrderDetails()
   }
@@ -49,9 +49,8 @@ class OTTPDetail extends Component {
                 <p style={{ fontSize: '12px', marginBottom: '5px' }}>PERMIT ID</p>
                 <h3 style={{ color: '#3d70b2', borderBottom: '2px solid #3d70b2' }}>{data.ottp_info.ottp_id}</h3>
               </div>
-
               <div>
-                {data.ottp_info.ottp_status === "closed" ? <Icon name="expired" /> : <Icon name="active-indicator" />}
+                {data.ottp_info.status === "closed" ? <Icon name="expired" /> : <Icon name="active-indicator" />}
                 <span style={{ display: 'inline-block', fontSize: '14px', marginLeft: '5px', marginBottom: '20px', textTransform: 'uppercase' }}>{data.ottp_info.status}</span>
                 <p style={{ fontSize: '12px' }}>
                   Issued on {moment(data.ottp_info.issued_at).format("DD/MM/YYYY")} at {moment(data.ottp_info.issued_at).format("h:mm A")}
