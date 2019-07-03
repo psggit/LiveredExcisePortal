@@ -10,6 +10,7 @@ import { Api } from './../config'
  */
 
 const getToken = () => ({
+  'x-user-id': "1"
   // 'x-hasura-role': `${localStorage.getItem('x-hasura-role')}`
 })
 
@@ -25,7 +26,7 @@ function getHeaders(type) {
     case 'Public':
       return Object.assign({}, json_headers)
     case 'RSS':
-      return Object.assign({}, {'Accept': 'application/xml', 'Content-Type': 'application/xml'})
+      return Object.assign({}, { 'Accept': 'application/xml', 'Content-Type': 'application/xml' })
     default:
       return Object.assign({}, json_headers, getToken())
   }
@@ -76,20 +77,20 @@ export function constructFetchUtility(options) {
   }
 
   //if (cookie === undefined) fetchOptions.credentials = 'include'
-  if(cors) fetchOptions.mode = 'cors'
+  if (cors) fetchOptions.mode = 'cors'
   // add data to request
   if (data) {
-    fetchOptions.body = constructBody({type, data})
+    fetchOptions.body = constructBody({ type, data })
   }
 
 
   // return window.fetch instance
   return (options.handleError)
-       ? fetch(url, fetchOptions)
-         .then(checkStatus)
-         .then(parseJSON)
-       : fetch(url, fetchOptions)
-         .then(parseJSON)
+    ? fetch(url, fetchOptions)
+      .then(checkStatus)
+      .then(parseJSON)
+    : fetch(url, fetchOptions)
+      .then(parseJSON)
 }
 
 function parseJSON(response) {
