@@ -317,7 +317,7 @@ class HistoryOrdersList extends React.Component {
     }, [])
 
     const validFilter = uniqueFilter.filter((item) => {
-      if (item.value !== "All") {
+      if (item.value !== "All" && item.value.trim().length !== 0) {
         if (item.filterby === "City") {
           item.value = item.idx
         }
