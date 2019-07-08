@@ -129,6 +129,7 @@ class DSOList extends React.Component {
    */
   clearSearchResults() {
     if (this.state.filter.length > 0) {
+      this.props.actions.setLoadingAll()
       this.fetchDsoList()
       this.props.history.push(`/home/delivery-operators`)
     }

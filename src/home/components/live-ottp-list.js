@@ -294,6 +294,7 @@ class LiveOrdersList extends React.Component {
    */
   clearSearchResults() {
     if (this.state.filter.length > 0) {
+      this.props.actions.setLoadingAll()
       this.fetchLiveOttps()
       this.props.history.push(`/home/live-orders`)
       this.setState({ isFilterApplied: false })
@@ -369,7 +370,6 @@ class LiveOrdersList extends React.Component {
     return (
       <Fragment>
         <PageHeader pageName="Live Orders" />
-        <button>hello</button>
         <div style={{
           display: "flex",
           marginBottom: "20px",

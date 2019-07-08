@@ -44,11 +44,11 @@ class Consumer extends React.Component {
         </div>
         {
           activeTab === "consumer-log" &&
-          <ConsumerLog />
+          <ConsumerLog activePage={1} limit={10} />
         }
         {
           activeTab === "consumer-complaints" &&
-          <ConsumerComplaints />
+          <ConsumerComplaints history={this.props.history} activePage={1} limit={10} />
         }
       </React.Fragment>
     )

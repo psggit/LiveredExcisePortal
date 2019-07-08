@@ -124,6 +124,7 @@ class App extends React.Component {
   componentDidMount() {
     this.checkUserLoggedIn()
     history.listen((loction) => {
+      console.log("location", location)
       const newRoute = location.pathname.split('/')[2]
       const { key } = this.state
       this.setState({ key: key + 1, currentRoute: newRoute })

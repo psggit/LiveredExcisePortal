@@ -284,6 +284,7 @@ class HistoryOrdersList extends React.Component {
    */
   clearSearchResults() {
     if (this.state.filter.length > 0) {
+      this.props.actions.setLoadingAll()
       this.fetchHistoryOttps()
       this.props.history.push(`/home/past-orders`)
       this.setState({ isFilterApplied: false })

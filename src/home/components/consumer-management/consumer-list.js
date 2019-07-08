@@ -80,9 +80,10 @@ class ConsumerManagement extends React.Component {
   setQueryParamas() {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
-
     Object.entries(queryObj).forEach((item) => {
-      this.setState({ [item[0]]: item[1] })
+      if (this.props && !this.props.activePage && !this.props.limit) {
+        this.setState({ [item[0]]: item[1] })
+      }
     })
 
     if (queryObj.filter) {
@@ -268,6 +269,7 @@ class ConsumerManagement extends React.Component {
 
   render() {
     const { activeTab } = this.state
+    console.log("list", this.state)
     return (
       <Fragment>
         <div style={{

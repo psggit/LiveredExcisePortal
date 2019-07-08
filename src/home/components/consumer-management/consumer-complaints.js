@@ -15,8 +15,8 @@ class ConsumerComplaints extends React.Component {
     super()
 
     this.state = {
-      activePage: 1,
-      limit: 10,
+      activePage: this.props ? this.props.activePage : 1,
+      limit: this.props ? this.props.limit : 10,
       activeTab: 'consumer-complaints',
       reason: "",
       filter: []
@@ -98,7 +98,7 @@ class ConsumerComplaints extends React.Component {
 
     this.setState({
       activePage: pagerObj.activePage,
-      limit: pagerObj.pageSize
+      limit: pagerObj.pageSize,
     })
 
     this.props.actions.fetchConsumerComplaints({
@@ -108,13 +108,13 @@ class ConsumerComplaints extends React.Component {
 
     const queryParamsObj = {
       activePage: pagerObj.activePage,
-      limit: pagerObj.pageSize
+      limit: pagerObj.pageSize,
     }
 
     history.pushState(
       queryParamsObj,
       "consumer complaints listing",
-      `/home/consumer-complaints?${getQueryUri(queryParamsObj)}`
+      `/home/consumers?${getQueryUri(queryParamsObj)}`
     )
   }
 
@@ -124,7 +124,7 @@ class ConsumerComplaints extends React.Component {
   clearSearchResults() {
     if (this.state.filter.length > 0) {
       this.fetchConsumerComplaintList()
-      this.props.history.push(`/home/consumer-complaints`)
+      this.props.history.push(`/home/consumers`)
     }
   }
 
@@ -150,7 +150,7 @@ class ConsumerComplaints extends React.Component {
       filter: [filterObj]
     })
     this.setState({ filter: [filterObj] })
-    history.pushState(urlParams, "consumer complaints listing", `/home/consumer-complaints?${(getQueryUri(urlParams))}`)
+    history.pushState(urlParams, "consumer complaints listing", `/home/consumers?${(getQueryUri(urlParams))}`)
   }
 
   render() {
