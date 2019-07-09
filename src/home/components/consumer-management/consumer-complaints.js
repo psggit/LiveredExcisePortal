@@ -30,7 +30,7 @@ class ConsumerComplaints extends React.Component {
   }
 
   componentDidMount() {
-    if (location.search.length > 1) {
+    if (location.search.length) {
       this.setQueryParamas()
     } else {
       this.fetchConsumerComplaintList()
@@ -54,9 +54,7 @@ class ConsumerComplaints extends React.Component {
     const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
-      // if (this.props && !this.props.activePage && !this.props.limit) {
       this.setState({ [item[0]]: item[1] })
-      //}
     })
 
     if (queryObj.filter) {
