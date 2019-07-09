@@ -203,7 +203,7 @@ class RuleManagement extends React.Component {
                       style={{ margin: '10px 20px 10px 0' }}
                       className="small" type="text"
                       disabled={true}
-                      value={moment(item.start_time).format('h:mm a')}
+                      value={(item.start_time).substring(11, 16)}
                     />
                     <p>to</p>
                     <input
@@ -211,7 +211,7 @@ class RuleManagement extends React.Component {
                       className="small"
                       type="text"
                       disabled={true}
-                      value={moment(item.end_time).format('h:mm a')}
+                      value={(item.end_time).substring(11, 16)}
                     />
                   </div>
                 })
@@ -249,8 +249,10 @@ class RuleManagement extends React.Component {
                             <tr key={i}>
                               <td>{item.city ? item.city : item.state}</td>
                               <td>{moment(item.date).format('DD/MM/YYYY')}</td>
-                              <td>{moment(item.from_time).format('h:mm a')}</td>
-                              <td>{moment(item.to_time).format('h:mm a')}</td>
+                              {/* <td>{moment(item.from_time).format('h:mm a')}</td> */}
+                              <td>{item.from_time ? (item.from_time).substring(11, 16) : (item.start_time).substring(11, 16)}</td>
+                              {/* <td>{moment(item.to_time).format('h:mm a')}</td> */}
+                              <td>{item.to_time ? (item.to_time).substring(11, 16) : (item.end_time).substring(11, 16)}</td>
                               <td>{item.is_repeat ? 'Yearly' : 'No'}</td>
                               <td>{item.reason}</td>
                             </tr>

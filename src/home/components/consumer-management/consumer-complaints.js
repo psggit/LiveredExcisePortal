@@ -30,7 +30,7 @@ class ConsumerComplaints extends React.Component {
   }
 
   componentDidMount() {
-    if (location.search.length) {
+    if (location.search.length > 1) {
       this.setQueryParamas()
     } else {
       this.fetchConsumerComplaintList()
@@ -54,7 +54,9 @@ class ConsumerComplaints extends React.Component {
     const queryObj = getQueryObj(queryUri)
 
     Object.entries(queryObj).forEach((item) => {
+      // if (this.props && !this.props.activePage && !this.props.limit) {
       this.setState({ [item[0]]: item[1] })
+      //}
     })
 
     if (queryObj.filter) {
@@ -109,6 +111,7 @@ class ConsumerComplaints extends React.Component {
     const queryParamsObj = {
       activePage: pagerObj.activePage,
       limit: pagerObj.pageSize,
+      activeTab: "consumer-complaints"
     }
 
     history.pushState(
@@ -124,7 +127,7 @@ class ConsumerComplaints extends React.Component {
   clearSearchResults() {
     if (this.state.filter.length > 0) {
       this.fetchConsumerComplaintList()
-      this.props.history.push(`/home/consumers`)
+      this.props.history.push(`/home/consumers?activeTab=consumer-complaints&activePage=1&limit=10`)
     }
   }
 
@@ -142,7 +145,8 @@ class ConsumerComplaints extends React.Component {
     const urlParams = {
       limit: 10,
       activePage: 1,
-      filter: JSON.stringify([filterObj])
+      filter: JSON.stringify([filterObj]),
+      activeTab: "consumer-complaints"
     }
     this.props.actions.fetchConsumerComplaints({
       limit: 10,

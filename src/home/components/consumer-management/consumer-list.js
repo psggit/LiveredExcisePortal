@@ -81,9 +81,9 @@ class ConsumerManagement extends React.Component {
     const queryUri = location.search.slice(1)
     const queryObj = getQueryObj(queryUri)
     Object.entries(queryObj).forEach((item) => {
-      if (this.props && !this.props.activePage && !this.props.limit) {
-        this.setState({ [item[0]]: item[1] })
-      }
+      // if (this.props && !this.props.activePage && !this.props.limit) {
+      this.setState({ [item[0]]: item[1] })
+      //}
     })
 
     if (queryObj.filter) {
@@ -165,7 +165,8 @@ class ConsumerManagement extends React.Component {
 
     const queryParamsObj = {
       activePage: pagerObj.activePage,
-      limit: pagerObj.pageSize
+      limit: pagerObj.pageSize,
+      activeTab: "consumer-log"
     }
 
     history.pushState(

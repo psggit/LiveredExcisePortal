@@ -2,6 +2,7 @@ import React from "react"
 import ConsumerLog from "./consumer-list"
 import ConsumerComplaints from "./consumer-complaints"
 import PageHeader from '@components/pageheader'
+import { getQueryObj, getQueryUri } from "@utils/url-utils"
 
 class Consumer extends React.Component {
   constructor() {
@@ -13,12 +14,21 @@ class Consumer extends React.Component {
     this.setActiveTab = this.setActiveTab.bind(this)
   }
 
+  componentDidMount() {
+    const queryUri = location.search.slice(1)
+    const queryObj = getQueryObj(queryUri)
+    Object.entries(queryObj).forEach((item) => {
+      this.setState({ [item[0]]: item[1] })
+    })
+  }
+
   /**
   * Used to highlight the active tab
   * @param {String} activeTabName - Indicates the active tab name
   */
   setActiveTab(activeTabName) {
     this.setState({ activeTab: activeTabName })
+    this.props.history.push(`/home/consumers?activeTab=${activeTabName}&activePage=1&limit=10`)
   }
 
   render() {
