@@ -10,7 +10,7 @@ const DSOListItem = ({ data, handleClick }) => {
     <tr onClick={() => { handleClick(data) }} className="clickable">
       <td>{data.dso_name}</td>
       <td>{data.head_office.city}</td>
-      <td>{data.cities.substring(0, data.cities.trim().length - 1)}</td>
+      <td>{data.cities ? data.cities.substring(0, data.cities.trim().length - 1) : ""}</td>
       <td>{data.is_validated ? "Validated" : "Not Validated"}</td>
       <td>{data.is_active ? 'Enabled' : 'Disabled'}</td>
     </tr>

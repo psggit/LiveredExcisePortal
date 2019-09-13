@@ -3,18 +3,18 @@ import { POST, GET } from '@utils/fetch'
 // const ipAddress = "192.168.5.84"
 
 //dev
-// const ottp = "https://79bd647f.ngrok.io"
-// export const dso = "http://192.168.5.84:3002"
-// const credit = "https://23fff800.ngrok.io"
-// export const consumer = "https://9800b602.ngrok.io"
-// const rule = "https://d429cc52.ngrok.io"
+const ottp = "http://192.168.5.84:3000"
+export const dso = "http://192.168.5.84:3002"
+const credit = "http://192.168.5.84:3004"
+export const consumer = "http://192.168.5.84:3003"
+const rule = "http://192.168.5.84:3005"
 
 //prod
-const ottp = "https://ottp-livered.hipbar-dev.com"
-export const dso = "https://dsomanagement-livered.hipbar-dev.com"
-const credit = "https://credit-livered.hipbar-dev.com"
-export const consumer = "https://consumer-livered.hipbar-dev.com"
-const rule = "https://ruleengine-livered.hipbar-dev.com"
+// const ottp = "https://ottp-livered.hipbar-dev.com"
+// export const dso = "https://dsomanagement-livered.hipbar-dev.com"
+// const credit = "https://credit-livered.hipbar-dev.com"
+// export const consumer = "https://consumer-livered.hipbar-dev.com"
+// const rule = "https://ruleengine-livered.hipbar-dev.com"
 
 export function fetchInProgressOTTP(action) {
   return POST({
