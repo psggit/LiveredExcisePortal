@@ -8,6 +8,7 @@ export const dso = "http://192.168.5.84:3002"
 const credit = "http://192.168.5.84:3004"
 export const consumer = "http://192.168.5.84:3003"
 const rule = "http://192.168.5.84:3005"
+const fence = "http://192.168.5.84:3006"
 
 //prod
 // const ottp = "https://ottp-livered.hipbar-dev.com"
@@ -60,7 +61,7 @@ export function fetchDSOList(action) {
 
 export function fetchCitiesList(action) {
   return GET({
-    api: `${ottp}/livered/ottp/getCityAndStates`,
+    api: `${fence}/liveredFence/getStore`,
     handleError: true,
     prependBaseUrl: false,
     //data: action.data
