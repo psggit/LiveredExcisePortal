@@ -3,7 +3,7 @@ This is your saga file, which containes generator functions.
 This is a side-effect container. Do all your side-effect here only.
 */
 
-import { takeLatest } from 'redux-saga'
+import { takeLatest } from 'redux-saga/effects'
 import { call, fork, put, all } from 'redux-saga/effects'
 import * as ActionTypes from './../constants/actions'
 import * as Api from './api'
@@ -203,122 +203,84 @@ function* setLoadingAll() {
 }
 
 function* watchFetchInProgressOTTP() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_IN_PROGRESS_OTTP, fetchInProgressOTTP)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_IN_PROGRESS_OTTP, fetchInProgressOTTP)
 }
 
 function* watchFetchHistoryOTTP() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_HISTORY_OTTP, fetchHistoryOTTP)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_HISTORY_OTTP, fetchHistoryOTTP)
 }
 
 function* watchFetchRules() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_RULES, fetchRules)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_RULES, fetchRules)
 }
 
 function* watchFetchUserList() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_USERS_LIST, fetchUserList)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_USERS_LIST, fetchUserList)
 }
 
 function* watchFetchAuditLog() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_AUDIT_LOG, fetchAuditLog)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_AUDIT_LOG, fetchAuditLog)
 }
 
 function* watchFetchConsumerList() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_CONSUMER_LIST, fetchConsumerList)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_CONSUMER_LIST, fetchConsumerList)
 }
 
 function* watchFetchConsumerComplaints() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_CONSUMER_COMPLAINTS_LIST, fetchConsumerComplaints)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_CONSUMER_COMPLAINTS_LIST, fetchConsumerComplaints)
 }
 
 function* watchFetchDSOList() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_DSO_LIST, fetchDSOList)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_DSO_LIST, fetchDSOList)
 }
 
 function* watchFetchDSODetails() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_DSO_DETAILS, fetchDSODetails)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_DSO_DETAILS, fetchDSODetails)
 }
 
 function* watchFetchRevenueDetails() {
   //console.log("hello")
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_REVENUE_LIST, fetchRevenueDetails)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_REVENUE_LIST, fetchRevenueDetails)
 }
 
 function* watchFetchPermitDetails() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_PERMIT_LIST, fetchPermitDetails)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_PERMIT_LIST, fetchPermitDetails)
 }
 function* watchFetchOutletList() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_OUTLETS_LIST, fetchOutletList)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_OUTLETS_LIST, fetchOutletList)
 }
 
 function* watchFetchRetailerList() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_LIST, fetchRetailerList)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_LIST, fetchRetailerList)
 }
 
 function* watchFetchRetailerDetails() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_DETAILS, fetchRetailerDetails)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_RETAILER_DETAILS, fetchRetailerDetails)
 }
 
 function* watchCreateComplaints() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_CREATE_COMPLAINTS, createComplaints)
-  }
+    yield takeLatest(ActionTypes.REQUEST_CREATE_COMPLAINTS, createComplaints)
 }
 
 function* watchFetchOTTPDetail() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_OTTP_DETAIL, fetchOTTPDetail)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_OTTP_DETAIL, fetchOTTPDetail)
 }
 
 function* watchFetchCitiesList() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_FETCH_CITIES_LIST, fetchCitiesList)
-  }
+    yield takeLatest(ActionTypes.REQUEST_FETCH_CITIES_LIST, fetchCitiesList)
 }
 
 function* watchSetLoading() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_SET_LOADING, setLoading)
-  }
+    yield takeLatest(ActionTypes.REQUEST_SET_LOADING, setLoading)
 }
 
 function* watchSetLoadingAll() {
-  while (true) {
-    yield* takeLatest(ActionTypes.REQUEST_SET_LOADING_ALL, setLoadingAll)
-  }
+    yield takeLatest(ActionTypes.REQUEST_SET_LOADING_ALL, setLoadingAll)
 }
 
 
 export default function* rootSaga() {
-  yield [
+  yield all([
     fork(watchFetchInProgressOTTP),
     fork(watchFetchHistoryOTTP),
     fork(watchFetchOTTPDetail),
@@ -338,5 +300,5 @@ export default function* rootSaga() {
     fork(watchFetchPermitDetails),
     fork(watchCreateComplaints),
     fork(watchFetchUserList)
-  ]
+  ])
 }
