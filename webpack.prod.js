@@ -21,10 +21,10 @@ module.exports = merge(common, {
   plugins: [
     new CompressionPlugin({
       test: /\.js$|\.css$/,
-      asset: '[path].gz[query]',
+      filename: '[path].gz[query]',
       exclude: /node_modules/,
-      algortithm: 'gzip',
-      threshhold: 10240,
+      algorithm: 'gzip',
+      threshold: 10240,
       minRatio: 0.8
     }),
     new MiniCssExtractPlugin({

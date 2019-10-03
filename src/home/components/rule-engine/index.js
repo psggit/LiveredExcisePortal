@@ -50,6 +50,7 @@ class RuleManagement extends React.Component {
    * Map's weekday_id and get weekday_label and initializes state
    */
   formatResponse() {
+    console.log("data", this.props.rulesData)
     const timeRestrictions = this.props.rulesData.time_restrictions.map((item) => {
       return { ...item, weekday_name: this.days.find(dayItem => dayItem.value === item.weekday_id).label }
     })

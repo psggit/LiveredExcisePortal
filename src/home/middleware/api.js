@@ -68,7 +68,7 @@ export function fetchDSOList(action) {
 
 export function fetchCitiesList(action) {
   return GET({
-    api: `${fence}/liveredFence/getStore`,
+    api: `${fence}/liveredFence/getCityAndState`,
     handleError: true,
     prependBaseUrl: false,
     //data: action.data

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack --config webpack.prod.js",
     "watch": "webpack --watch --config webpack.dev.js",
-    "start:local": "BASE_URL=hipbar-dev.com NODE_ENV=development webpack-dev-server --config webpack.dev.js --disable-host-check",
+    "start:local": "BASE_URL=hipbar-dev.com NODE_ENV=development webpack-dev-server --config webpack.dev.js --disable-host-check --history-api-fallback",
     "start:dev": "BASE_URL=hipbar-dev.com NODE_ENV=development webpack-dev-server --config webpack.dev.js --host 0.0.0.0 --history-api-fallback",
     "dev-server": "NODE_ENV=production node server.js",
     "start": "NODE_ENV=production babel-node --presets es2015 server.js",

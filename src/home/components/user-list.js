@@ -213,9 +213,9 @@ class UserPermissions extends React.Component {
             <thead>
               <tr>
                 <th>User Name</th>
-                <th>Type</th>
+                <th>Designation</th>
+                <th>Role</th>
                 <th>Status</th>
-                <th>Authentication</th>
               </tr>
             </thead>
             <tbody>
