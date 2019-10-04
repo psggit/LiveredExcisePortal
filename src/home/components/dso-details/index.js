@@ -77,9 +77,9 @@ class DSODetails extends React.Component {
                   address={data.head_office.address}
                 />
                 <HeadOfficeContactDetails
-                  name={data.state_details[0].reg_office_contact_name}
-                  email={data.state_details[0].reg_office_contact_email}
-                  mobile={data.state_details[0].reg_office_contact_phone}
+                  name={data.head_office.contact.name}
+                  email={data.head_office.contact.email}
+                  mobile={data.head_office.reg_office_contact_phone}
                 />
               </div>
               <LocationAndRegionalDetails locations={data.state_details} />
