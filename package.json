@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "BASE_URL=hipbar-dev.com webpack --config webpack.prod.js",
     "watch": "webpack --watch --config webpack.dev.js",
     "start:local": "BASE_URL=hipbar-dev.com NODE_ENV=development webpack-dev-server --config webpack.dev.js --disable-host-check --history-api-fallback",
     "start:dev": "BASE_URL=hipbar-dev.com NODE_ENV=development webpack-dev-server --config webpack.dev.js --host 0.0.0.0 --history-api-fallback",
     "dev-server": "NODE_ENV=production node server.js",
-    "start": "NODE_ENV=production node server.js",
+    "start": "node server.js",
     "storybook": "start-storybook -p 6006 -c .storybook",
     "build-storybook": "build-storybook",
     "prettier": "prettier \"**/*.js\" --write"

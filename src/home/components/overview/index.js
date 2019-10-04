@@ -111,6 +111,7 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    console.log("cityList", this.props.cityList)
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
         return { text: item.dso_name, value: i, dso_id: item.dso_id }
