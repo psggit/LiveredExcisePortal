@@ -4,18 +4,26 @@ import Icon from "../icon"
 import Moment from "moment"
 
 class ToDate extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       toDate: {
         filterby: "",
-        value: ""
+        value: this.props.toDate ? this.props.toDate : ""
       }
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.getData = this.getData.bind(this)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.toDate !== this.props.toDate) {
+      this.setState({
+        toDate: { ...this.state.toDate, value: this.props.toDate ? this.props.toDate : "" }
+      })
+    }
   }
 
   getData() {
@@ -47,7 +55,7 @@ class ToDate extends React.Component {
           max="9999-12-31"
           name="toDate"
           onChange={this.handleChange}
-          value={this.props.toDate ? this.props.toDate : this.state.toDate.value}
+          value={this.state.toDate.value}
         />
       </div>
     )

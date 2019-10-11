@@ -5,13 +5,12 @@ import Select from "../select"
 class City extends React.Component {
   constructor(props) {
     super(props)
-    console.log("city props", props)
     this.state = {
       city: {
         filterby: "",
         value: "",
         cityName: "",
-        idx: props && props.selectedCityIdx ? props.selectedCityIdx : -1
+        idx: props && props.selectedCityIdx ? props.selectedCityIdx : 0
       }
     }
 
@@ -19,17 +18,23 @@ class City extends React.Component {
     this.getData = this.getData.bind(this)
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.selectedCityIdx !== this.props.selectedCityIdx) {
+      this.setState({
+        city: { ...this.state.city, idx: this.props.selectedCityIdx ? this.props.selectedCityIdx : 0 }
+      })
+    }
+  }
+
   getData() {
     return this.state
   }
 
   handleChange(e) {
-    // console.log("city change", e.target.value)
     const value = e.target.value
     this.setState({
       city: {
         filterby: e.target.name,
-        //value: value.toString(),
         value: this.props.cityList.find(item => item.value === parseInt(value)).text,
         idx: e.target.value,
         cityName: this.props.cityList.find(item => item.value === parseInt(value)).text
@@ -47,7 +52,7 @@ class City extends React.Component {
           options={this.props.cityList}
           name="City"
           onChange={e => this.handleChange(e)}
-          value={this.props.selectedCityIdx}
+          value={this.state.city.idx}
         />
       </div>
     )

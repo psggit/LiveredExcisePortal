@@ -65,9 +65,9 @@ class LiveOrdersList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return { text: item.dso_name, value: i, dso_id: item.dso_id }
+        return { text: item.dso_name, value: i+1, dso_id: item.dso_id }
       })
-      dsoList = [...dsoList, { text: "All", value: dsoList.length }]
+      dsoList = [...dsoList, { text: "All", value: dsoList.length+1 }]
       this.setState({ dsoList })
     } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0

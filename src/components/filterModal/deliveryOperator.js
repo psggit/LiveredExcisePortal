@@ -3,19 +3,27 @@ import Label from "../label"
 import Select from "../select"
 
 class DeliveryOperator extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       dso: {
         filterby: "",
         value: "",
-        idx: ""
+        idx: this.props.selectedDsoIdx ? this.props.selectedDsoIdx : 0 
       }
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.getData = this.getData.bind(this)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedDsoIdx !== this.props.selectedDsoIdx) {
+      this.setState({
+        dso: {...this.state.dso, idx: this.props.selectedDsoIdx ? this.props.selectedDsoIdx : 0} 
+      })
+    }
   }
 
   getData() {
@@ -35,7 +43,7 @@ class DeliveryOperator extends React.Component {
   }
 
   render() {
-    // console.log("selected dso index", this.props.selectedDsoIdx)
+    console.log("dsp", this.props.dsoList, this.state.dso)
     return (
       <div className="delivery-operator input-field">
         <Label>
@@ -45,7 +53,7 @@ class DeliveryOperator extends React.Component {
           options={this.props.dsoList}
           name="Delivery Operator"
           onChange={e => this.handleChange(e)}
-          value={this.props.selectedDsoIdx}
+          value={this.state.dso.idx}
         />
       </div>
     )

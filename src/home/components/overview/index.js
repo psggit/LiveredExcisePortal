@@ -114,9 +114,9 @@ class Overview extends React.Component {
     console.log("cityList", this.props.cityList)
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return { text: item.dso_name, value: i, dso_id: item.dso_id }
+        return { text: item.dso_name, value: i+1, dso_id: item.dso_id }
       })
-      dsoList = [...dsoList, { text: "All", value: dsoList.length }]
+      dsoList = [...dsoList, { text: "All", value: dsoList.length+1 }]
       this.setState({ dsoList })
     } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
@@ -200,7 +200,7 @@ class Overview extends React.Component {
       })
     } else {
       console.log("revenue tab")
-      history.pushState(null, "Revenue", "/home/overview")
+      //history.pushState(null, "Revenue", "/home/overview")
       this.props.actions.fetchRevenueDetails({
         filter: [
           {
@@ -210,7 +210,9 @@ class Overview extends React.Component {
         ]
       })
     }
-    this.setState({ activeTab })
+    //history.pushState(null, "Revenue", "/home/overview")
+    this.props.history.push(`/home/overview?activeTab=${activeTab}`)
+    this.setState({ activeTab, isFilterApplied: false })
   }
 
   /**

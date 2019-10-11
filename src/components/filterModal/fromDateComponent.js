@@ -4,18 +4,26 @@ import Icon from "../icon"
 import Moment from "moment"
 
 class FromDate extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
 
     this.state = {
       fromDate: {
         filterby: "",
-        value: ""
+        value: this.props.fromDate ? this.props.fromDate : ""
       }
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.getData = this.getData.bind(this)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.fromDate !== this.props.fromDate) {
+      this.setState({
+        fromDate: { ...this.state.fromDate, value: this.props.fromDate ? this.props.fromDate : "" }
+      })
+    }
   }
 
   getData() {
@@ -46,7 +54,7 @@ class FromDate extends React.Component {
           max="9999-12-31" 
           name="fromDate"
           onChange={this.handleChange}
-          value={this.props.fromDate ? this.props.fromDate : this.state.fromDate.value}
+          value={ this.state.fromDate.value}
         />
       </div>
     )

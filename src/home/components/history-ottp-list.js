@@ -63,9 +63,9 @@ class HistoryOrdersList extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.DSOList !== prevProps.DSOList) {
       let dsoList = this.props.DSOList.map((item, i) => {
-        return { text: item.dso_name, value: i, dso_id: item.dso_id }
+        return { text: item.dso_name, value: i+1, dso_id: item.dso_id }
       })
-      dsoList = [...dsoList, { text: "All", value: dsoList.length }]
+      dsoList = [...dsoList, { text: "All", value: dsoList.length+1 }]
       this.setState({ dsoList })
     } else if (this.props.cityList !== prevProps.cityList) {
       let max = 0
@@ -211,7 +211,7 @@ class HistoryOrdersList extends React.Component {
         limit: parseInt(pagerObj.pageSize)
       }
       this.props.actions.fetchHistoryOTTP({
-        limit: pagerObj.pageSize,
+        limit: parseInt(pagerObj.pageSize),
         offset
       })
     }
@@ -227,7 +227,7 @@ class HistoryOrdersList extends React.Component {
    */
   fetchHistoryOttps() {
     this.props.actions.fetchHistoryOTTP({
-      limit: this.state.limit,
+      limit: parseInt(this.state.limit),
       offset: 0
     })
   }
@@ -317,6 +317,7 @@ class HistoryOrdersList extends React.Component {
     }, [])
 
     const validFilter = uniqueFilter.filter((item) => {
+      console.log("item", item)
       if (item.value !== "All" && item.value.trim().length !== 0) {
         if (item.filterby === "City") {
           item.value = item.idx
